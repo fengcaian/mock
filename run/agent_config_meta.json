@@ -1,0 +1,428 @@
+{
+  "siteFile": {
+    "/favicon.ico": "D:\\test-pro\\node\\mock\\config\\config.default.js"
+  },
+  "vuessr": {
+    "layout": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+    "injectCss": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+    "doctype": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "manifest": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "injectHeadRegex": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "injectBodyRegex": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "injectJs": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "injectRes": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "crossorigin": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "mergeLocals": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "fallbackToClient": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "viewEngine": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+    "cache": {
+      "max": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js",
+      "maxAge": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js"
+    },
+    "renderOptions": {
+      "runInNewContext": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js"
+    },
+    "afterRender": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js"
+  },
+  "logger": {
+    "consoleLevel": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+    "dir": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+    "encoding": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "env": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "level": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "disableConsoleAfterReady": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "outputJSON": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "buffer": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "appLogName": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "coreLogName": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "agentLogName": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "errorLogName": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "coreLogger": {
+      "consoleLevel": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.local.js"
+    },
+    "allowDebugAtProd": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+  },
+  "static": {
+    "prefix": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+    "dir": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+    "maxAge": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+    "dynamic": "D:\\test-pro\\node\\mock\\node_modules\\egg-static\\config\\config.default.js",
+    "preload": "D:\\test-pro\\node\\mock\\node_modules\\egg-static\\config\\config.default.js",
+    "buffer": "D:\\test-pro\\node\\mock\\node_modules\\egg-static\\config\\config.default.js",
+    "maxFiles": "D:\\test-pro\\node\\mock\\node_modules\\egg-static\\config\\config.default.js"
+  },
+  "keys": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+  "middleware": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+  "security": {
+    "csrf": {
+      "ignoreJSON": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+      "cookieName": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "type": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "useSession": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "sessionName": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "headerName": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "bodyName": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "queryName": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "refererWhiteList": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "xframe": {
+      "enable": "D:\\test-pro\\node\\mock\\config\\config.default.js",
+      "value": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "domainWhiteList": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+    "protocolWhiteList": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+    "defaultMiddleware": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+    "hsts": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.local.js",
+      "maxAge": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "includeSubdomains": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "dta": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "methodnoallow": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "noopen": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "nosniff": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "referrerPolicy": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "value": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "xssProtection": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "value": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "csp": {
+      "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "policy": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    },
+    "ssrf": {
+      "ipBlackList": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js",
+      "checkAddress": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+    }
+  },
+  "view": {
+    "cache": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+    "root": "D:\\test-pro\\node\\mock\\node_modules\\egg-view\\config\\config.default.js",
+    "defaultExtension": "D:\\test-pro\\node\\mock\\node_modules\\egg-view\\config\\config.default.js",
+    "defaultViewEngine": "D:\\test-pro\\node\\mock\\node_modules\\egg-view\\config\\config.default.js",
+    "mapping": {
+      ".js": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr\\config\\config.default.js"
+    }
+  },
+  "development": {
+    "watchDirs": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+    "ignoreDirs": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+    "fastReady": "D:\\test-pro\\node\\mock\\node_modules\\egg-development\\config\\config.default.js",
+    "reloadOnDebug": "D:\\test-pro\\node\\mock\\node_modules\\egg-development\\config\\config.default.js",
+    "overrideDefault": "D:\\test-pro\\node\\mock\\node_modules\\egg-development\\config\\config.default.js"
+  },
+  "logview": {
+    "dir": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+    "prefix": "D:\\test-pro\\node\\mock\\node_modules\\egg-logview\\config\\config.default.js",
+    "staticHost": "D:\\test-pro\\node\\mock\\node_modules\\egg-logview\\config\\config.default.js"
+  },
+  "webpack": {
+    "webpackConfigList": {
+      "context": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+      "entry": {
+        "admin": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+      },
+      "output": {
+        "filename": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "chunkFilename": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "path": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "publicPath": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+      },
+      "resolve": {
+        "extensions": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "alias": {
+          "vue": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "asset": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "component": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "framework": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "@": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+        }
+      },
+      "externals": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+      "resolveLoader": {
+        "modules": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+      },
+      "mode": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+      "devtool": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+      "target": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+      "node": {
+        "console": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "Buffer": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "setImmediate": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+      },
+      "module": {
+        "rules": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+      },
+      "plugins": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+      "optimization": {
+        "namedModules": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "namedChunks": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+        "runtimeChunk": {
+          "name": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+        },
+        "splitChunks": {
+          "name": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "chunks": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "minSize": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "minChunks": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+          "cacheGroups": {
+            "default": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+            "vendors": {
+              "name": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "chunks": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "minChunks": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "test": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+            },
+            "styles": {
+              "name": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "chunks": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "minChunks": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "test": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "enforce": "D:\\test-pro\\node\\mock\\config\\config.local.js",
+              "priority": "D:\\test-pro\\node\\mock\\config\\config.local.js"
+            }
+          }
+        }
+      }
+    },
+    "port": "D:\\test-pro\\node\\mock\\node_modules\\egg-webpack\\config\\config.default.js",
+    "proxy": {
+      "host": "D:\\test-pro\\node\\mock\\node_modules\\egg-webpack\\config\\config.default.js",
+      "match": "D:\\test-pro\\node\\mock\\node_modules\\egg-webpack\\config\\config.default.js"
+    }
+  },
+  "session": {
+    "maxAge": "D:\\test-pro\\node\\mock\\node_modules\\egg-session\\config\\config.default.js",
+    "key": "D:\\test-pro\\node\\mock\\node_modules\\egg-session\\config\\config.default.js",
+    "httpOnly": "D:\\test-pro\\node\\mock\\node_modules\\egg-session\\config\\config.default.js",
+    "encrypt": "D:\\test-pro\\node\\mock\\node_modules\\egg-session\\config\\config.default.js"
+  },
+  "helper": {
+    "shtml": "D:\\test-pro\\node\\mock\\node_modules\\egg-security\\config\\config.default.js"
+  },
+  "jsonp": {
+    "limit": "D:\\test-pro\\node\\mock\\node_modules\\egg-jsonp\\config\\config.default.js",
+    "callback": "D:\\test-pro\\node\\mock\\node_modules\\egg-jsonp\\config\\config.default.js",
+    "csrf": "D:\\test-pro\\node\\mock\\node_modules\\egg-jsonp\\config\\config.default.js"
+  },
+  "onerror": {
+    "errorPageUrl": "D:\\test-pro\\node\\mock\\node_modules\\egg-onerror\\config\\config.default.js",
+    "appErrorFilter": "D:\\test-pro\\node\\mock\\node_modules\\egg-onerror\\config\\config.default.js",
+    "templatePath": "D:\\test-pro\\node\\mock\\node_modules\\egg-onerror\\config\\config.default.js"
+  },
+  "i18n": {
+    "defaultLocale": "D:\\test-pro\\node\\mock\\node_modules\\egg-i18n\\config\\config.default.js",
+    "dirs": "D:\\test-pro\\node\\mock\\node_modules\\egg-i18n\\config\\config.default.js",
+    "queryField": "D:\\test-pro\\node\\mock\\node_modules\\egg-i18n\\config\\config.default.js",
+    "cookieField": "D:\\test-pro\\node\\mock\\node_modules\\egg-i18n\\config\\config.default.js",
+    "cookieDomain": "D:\\test-pro\\node\\mock\\node_modules\\egg-i18n\\config\\config.default.js",
+    "cookieMaxAge": "D:\\test-pro\\node\\mock\\node_modules\\egg-i18n\\config\\config.default.js"
+  },
+  "watcher": {
+    "type": "D:\\test-pro\\node\\mock\\node_modules\\egg-watcher\\config\\config.local.js",
+    "eventSources": {
+      "default": "D:\\test-pro\\node\\mock\\node_modules\\egg-watcher\\config\\config.default.js",
+      "development": "D:\\test-pro\\node\\mock\\node_modules\\egg-watcher\\config\\config.default.js"
+    }
+  },
+  "customLogger": {
+    "scheduleLogger": {
+      "consoleLevel": "D:\\test-pro\\node\\mock\\node_modules\\egg-schedule\\config\\config.default.js",
+      "file": "D:\\test-pro\\node\\mock\\node_modules\\egg-schedule\\config\\config.default.js"
+    }
+  },
+  "schedule": {
+    "directory": "D:\\test-pro\\node\\mock\\node_modules\\egg-schedule\\config\\config.default.js"
+  },
+  "multipart": {
+    "mode": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "autoFields": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "defaultCharset": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fieldNameSize": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fieldSize": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fields": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fileSize": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "files": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fileExtensions": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "whitelist": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "tmpdir": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js",
+    "cleanSchedule": {
+      "cron": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart\\config\\config.default.js"
+    }
+  },
+  "logrotator": {
+    "filesRotateByHour": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "hourDelimiter": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "filesRotateBySize": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "maxFileSize": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "maxFiles": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "rotateDuration": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "maxDays": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator\\config\\config.default.js"
+  },
+  "cors": "D:\\test-pro\\node\\mock\\node_modules\\egg-cors\\config\\config.default.js",
+  "env": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "name": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "proxy": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "maxProxyCount": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "protocolHeaders": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "ipHeaders": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "hostHeaders": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "pkg": {
+    "name": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "version": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "description": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "scripts": {
+      "dev": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "start": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "debug": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "clean": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "build": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "lint": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "fix": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "ii": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "dependencies": {
+      "axios": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "cross-env": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-bin": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-cors": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-logger": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-scripts": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-validate": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-view-vue-ssr": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "element-ui": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "extend": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "font-awesome": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "lodash": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "lodash-id": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "lowdb": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "mockjs": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "moment": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "shortid": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "showdown": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "simplemde": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "vue": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "vue-hot-reload-api": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "vue-i18n": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "vue-material-input": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "vue-router": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "vuex": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "vuex-router-sync": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "webpack-tool": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "devDependencies": {
+      "autod-egg": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "easywebpack-cli": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "easywebpack-vue": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-logview": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-webpack": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "egg-webpack-vue": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "eslint": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "eslint-config-egg": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "eslint-plugin-vue": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "ip": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "node-sass": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "sass-loader": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "engines": {
+      "node": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "ci": {
+      "version": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "repository": {
+      "type": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "url": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "author": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "license": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "homepage": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "webpack": {
+      "loaders": {
+        "scss": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+      }
+    }
+  },
+  "baseDir": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "HOME": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "rundir": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "dump": {
+    "ignore": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+  },
+  "confusedConfigurations": {
+    "bodyparser": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "notFound": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "sitefile": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "middlewares": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "httpClient": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+  },
+  "notfound": {
+    "pageUrl": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+  },
+  "bodyParser": {
+    "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "encoding": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "formLimit": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "jsonLimit": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "textLimit": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "strict": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "queryString": {
+      "arrayLimit": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "depth": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "parameterLimit": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "onerror": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+  },
+  "httpclient": {
+    "enableDNSCache": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "dnsCacheLookupInterval": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "dnsCacheMaxLength": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "request": {
+      "timeout": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "httpAgent": {
+      "keepAlive": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "freeSocketTimeout": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "maxSockets": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "maxFreeSockets": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    },
+    "httpsAgent": {
+      "keepAlive": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "freeSocketTimeout": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "maxSockets": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "maxFreeSockets": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    }
+  },
+  "meta": {
+    "enable": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "logging": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+  },
+  "coreMiddleware": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "workerStartTimeout": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "serverTimeout": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+  "cluster": {
+    "listen": {
+      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "port": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+      "hostname": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+    }
+  },
+  "clusterClient": {
+    "maxWaitTime": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js",
+    "responseTimeout": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+  },
+  "onClientError": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\config.default.js"
+}
