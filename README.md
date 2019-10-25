@@ -1,4 +1,4 @@
-# easy-element-admin
+# mock系统
 
 基于 Egg + Vue + Webpack ＋ Element 单页面管理系统骨架
 
@@ -7,8 +7,8 @@
 - Auto Building, Hot Reload, Code Splitting, High Speed, Performance Optimization
 - 统一 fetchApi 请求，内置国际化支持
 
-
-![截图](https://github.com/easy-team/egg-vue-webpack-boilerplate/blob/element-admin/docs/egg-element-admin.png?raw=true)
+开发环境的请求可以接入mock服务，在后端服务未启动的情况下，mock服务将会根据请求到的swagger中的接口进行数据模拟，模拟的数据存入mongoDB，
+支持对模拟的数据进行自定义，用开关的方式控制开发环境中的接口是使用真实的后端数据还是mock系统模拟的数据
 
 ## 使用
 
@@ -42,19 +42,6 @@ npm start
 ```
 
 详细打包部署请见： http://hubcarl.github.io/easywebpack/vue/dev/
-
-## 文档
-
-- https://www.yuque.com/easy-team/egg-vue
-- https://zhuanlan.zhihu.com/easywebpack
-
-## 插件
-
-- [easywebpack](https://github.com/easy-team/easywebpack) ^4.x.x
-- [easywebpack-vue](https://github.com/easy-team/easywebpack) ^4.x.x
-- [egg-view-vue-ssr](https://github.com/easy-team/egg-view-vue-ssr) ^3.x.x
-- [egg-webpack](https://github.com/easy-team/egg-webpack) ^4.x.x
-- [egg-webpack-vue](https://github.com/easy-team/egg-webpack-vue) ^2.x.x
 
 ## 命令行
 
