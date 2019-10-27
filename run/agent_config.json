@@ -10,13 +10,13 @@
       "domainWhiteList": [
         "http://localhost:7001",
         "http://127.0.0.1:7001",
-        "http://192.168.6.98:7001",
+        "http://192.168.1.102:7001",
         "http://localhost:9000",
         "http://127.0.0.1:9000",
-        "http://192.168.6.98:9000",
+        "http://192.168.1.102:9000",
         "http://localhost:9001",
         "http://127.0.0.1:9001",
-        "http://192.168.6.98:9001"
+        "http://192.168.1.102:9001"
       ],
       "protocolWhiteList": [],
       "defaultMiddleware": "csrf,hsts,methodnoallow,noopen,nosniff,csp,xssProtection,xframe,dta",
@@ -85,7 +85,7 @@
     "onerror": {
       "errorPageUrl": "",
       "appErrorFilter": null,
-      "templatePath": "D:\\test-pro\\node\\mock\\node_modules\\egg-onerror\\lib\\onerror_page.mustache"
+      "templatePath": "D:\\git\\nodeJS\\mock\\node_modules\\egg-onerror\\lib\\onerror_page.mustache"
     },
     "i18n": {
       "defaultLocale": "en_US",
@@ -98,8 +98,8 @@
     "watcher": {
       "type": "development",
       "eventSources": {
-        "default": "D:\\test-pro\\node\\mock\\node_modules\\egg-watcher\\lib\\event-sources\\default",
-        "development": "D:\\test-pro\\node\\mock\\node_modules\\egg-watcher\\lib\\event-sources\\development"
+        "default": "D:\\git\\nodeJS\\mock\\node_modules\\egg-watcher\\lib\\event-sources\\default",
+        "development": "D:\\git\\nodeJS\\mock\\node_modules\\egg-watcher\\lib\\event-sources\\development"
       }
     },
     "customLogger": {
@@ -149,7 +149,7 @@
     },
     "static": {
       "prefix": "/public/",
-      "dir": "D:\\test-pro\\node\\mock\\public",
+      "dir": "D:\\git\\nodeJS\\mock\\public",
       "dynamic": true,
       "preload": false,
       "buffer": false,
@@ -157,7 +157,7 @@
       "maxAge": 0
     },
     "view": {
-      "root": "D:\\test-pro\\node\\mock\\app\\view",
+      "root": "D:\\git\\nodeJS\\mock\\app\\view",
       "cache": false,
       "defaultExtension": ".html",
       "defaultViewEngine": "",
@@ -167,8 +167,8 @@
     },
     "vuessr": {
       "doctype": "<!doctype html>",
-      "layout": "D:\\test-pro\\node\\mock\\app\\web\\view\\layout.html",
-      "manifest": "D:\\test-pro\\node\\mock\\config\\manifest.json",
+      "layout": "D:\\git\\nodeJS\\mock\\app\\web\\view\\layout.html",
+      "manifest": "D:\\git\\nodeJS\\mock\\config\\manifest.json",
       "injectHeadRegex": "/(<\\/head>)/i",
       "injectBodyRegex": "/(<\\/body>)/i",
       "injectCss": true,
@@ -187,6 +187,20 @@
       },
       "afterRender": "<Function afterRender>"
     },
+    "mongoose": {
+      "url": "",
+      "options": {},
+      "plugins": [],
+      "loadModel": true,
+      "app": true,
+      "agent": false,
+      "client": {
+        "url": "mongodb://localhost/mock",
+        "options": {
+          "useNewUrlParser": true
+        }
+      }
+    },
     "cors": {},
     "webpack": {
       "port": 9000,
@@ -195,17 +209,17 @@
         "match": "/^\\/public\\//"
       },
       "webpackConfigList": {
-        "context": "D:\\test-pro\\node\\mock",
+        "context": "D:\\git\\nodeJS\\mock",
         "entry": {
           "admin": [
-            "D:\\test-pro\\node\\mock\\node_modules\\webpack-hot-middleware/client?path=http://127.0.0.1:9001/__webpack_hmr&noInfo=false&reload=false&quiet=false",
-            "D:\\test-pro\\node\\mock\\app\\web\\page\\admin\\index.js"
+            "D:\\git\\nodeJS\\mock\\node_modules\\webpack-hot-middleware/client?path=http://127.0.0.1:9000/__webpack_hmr&noInfo=false&reload=false&quiet=false",
+            "D:\\git\\nodeJS\\mock\\app\\web\\page\\admin\\index.js"
           ]
         },
         "output": {
           "filename": "js/[name].js",
           "chunkFilename": "js/chunk/[name].js",
-          "path": "D:\\test-pro\\node\\mock\\public",
+          "path": "D:\\git\\nodeJS\\mock\\public",
           "publicPath": "/public/"
         },
         "resolve": {
@@ -215,18 +229,18 @@
           ],
           "alias": {
             "vue": "vue/dist/vue.common.js",
-            "asset": "D:\\test-pro\\node\\mock\\app\\web\\asset",
-            "component": "D:\\test-pro\\node\\mock\\app\\web\\component",
-            "framework": "D:\\test-pro\\node\\mock\\app\\web\\framework",
-            "@": "D:\\test-pro\\node\\mock"
+            "asset": "D:\\git\\nodeJS\\mock\\app\\web\\asset",
+            "component": "D:\\git\\nodeJS\\mock\\app\\web\\component",
+            "framework": "D:\\git\\nodeJS\\mock\\app\\web\\framework",
+            "@": "D:\\git\\nodeJS\\mock"
           }
         },
         "externals": [],
         "resolveLoader": {
           "modules": [
-            "D:\\test-pro\\node\\mock\\node_modules",
-            "D:\\test-pro\\node\\mock\\node_modules\\easywebpack\\lib\\node_modules",
-            "D:\\test-pro\\node\\mock\\node_modules\\easywebpack-vue\\node_modules"
+            "D:\\git\\nodeJS\\mock\\node_modules",
+            "D:\\git\\nodeJS\\mock\\node_modules\\easywebpack\\lib\\node_modules",
+            "D:\\git\\nodeJS\\mock\\node_modules\\easywebpack-vue\\node_modules"
           ]
         },
         "mode": "development",
@@ -258,7 +272,7 @@
             {
               "test": {},
               "use": [
-                "D:\\test-pro\\node\\mock\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+                "D:\\git\\nodeJS\\mock\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
                 {
                   "options": {
                     "sourceMap": true
@@ -271,7 +285,7 @@
                     "sourceMap": true,
                     "ident": "postcss",
                     "config": {
-                      "path": "D:\\test-pro\\node\\mock\\node_modules\\easywebpack\\config"
+                      "path": "D:\\git\\nodeJS\\mock\\node_modules\\easywebpack\\config"
                     }
                   }
                 }
@@ -280,7 +294,7 @@
             {
               "test": {},
               "use": [
-                "D:\\test-pro\\node\\mock\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+                "D:\\git\\nodeJS\\mock\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
                 {
                   "options": {
                     "sourceMap": true
@@ -293,7 +307,7 @@
                     "sourceMap": true,
                     "ident": "postcss",
                     "config": {
-                      "path": "D:\\test-pro\\node\\mock\\node_modules\\easywebpack\\config"
+                      "path": "D:\\git\\nodeJS\\mock\\node_modules\\easywebpack\\config"
                     }
                   }
                 },
@@ -386,7 +400,7 @@
               "EASY_ENV_IS_NODE": false,
               "EASY_ENV_LOCAL_PUBLIC_PATH": "\"/public/\"",
               "EASY_ENV_PUBLIC_PATH": "\"/public/\"",
-              "EASY_ENV_HOST_URL": "\"http://127.0.0.1:9001\""
+              "EASY_ENV_HOST_URL": "\"http://127.0.0.1:9000\""
             },
             "__plugin__": "DefinePlugin",
             "__lable__": "define"
@@ -409,15 +423,15 @@
               "map": null,
               "generate": null,
               "sort": null,
-              "baseDir": "D:\\test-pro\\node\\mock",
-              "host": "http://127.0.0.1:9001",
+              "baseDir": "D:\\git\\nodeJS\\mock",
+              "host": "http://127.0.0.1:9000",
               "proxy": true,
-              "buildPath": "D:\\test-pro\\node\\mock\\public",
+              "buildPath": "D:\\git\\nodeJS\\mock\\public",
               "publicPath": "/public/",
               "localPublicPath": "/public/",
               "assets": false,
               "dllDir": "C:\\Users\\ADMINI\\x7e1\\AppData\\Local\\Temp\\easywebpack\\mock\\dev\\dll",
-              "filepath": "D:\\test-pro\\node\\mock\\config\\manifest.json",
+              "filepath": "D:\\git\\nodeJS\\mock\\config\\manifest.json",
               "dllConfig": [
                 {
                   "name": "vendor",
@@ -463,7 +477,15 @@
             "__plugin__": "webpack-manifest-resource-plugin",
             "__lable__": "manifest"
           },
-          null,
+          {
+            "profile": false,
+            "modulesCount": 500,
+            "showEntries": false,
+            "showModules": true,
+            "showActiveModules": true,
+            "__plugin__": "progress-bar-webpack-plugin",
+            "__lable__": "progress"
+          },
           {
             "options": {
               "filename": "css/[name].css",
@@ -508,7 +530,7 @@
           },
           {
             "options": {
-              "context": "D:\\test-pro\\node\\mock",
+              "context": "D:\\git\\nodeJS\\mock",
               "manifest": {
                 "name": "vendor",
                 "content": {
@@ -813,7 +835,7 @@
     "logview": {
       "prefix": "__logs",
       "staticHost": "https://unpkg.cnpmjs.org",
-      "dir": "D:\\test-pro\\node\\mock\\logs"
+      "dir": "D:\\git\\nodeJS\\mock\\logs"
     },
     "env": "local",
     "name": "mock",
@@ -844,6 +866,7 @@
         "egg-bin": "^4.3.7",
         "egg-cors": "^2.0.0",
         "egg-logger": "^1.5.0",
+        "egg-mongoose": "^3.2.0",
         "egg-scripts": "^2.5.1",
         "egg-validate": "^1.0.0",
         "egg-view-vue-ssr": "^3.0.5",
@@ -900,9 +923,9 @@
         }
       }
     },
-    "baseDir": "D:\\test-pro\\node\\mock",
+    "baseDir": "D:\\git\\nodeJS\\mock",
     "HOME": "C:\\Users\\Administrator",
-    "rundir": "D:\\test-pro\\node\\mock\\run",
+    "rundir": "D:\\git\\nodeJS\\mock\\run",
     "dump": {
       "ignore": "<Set>"
     },
@@ -934,7 +957,7 @@
       "onerror": "<Function onerror>"
     },
     "logger": {
-      "dir": "D:\\test-pro\\node\\mock\\logs",
+      "dir": "D:\\git\\nodeJS\\mock\\logs",
       "encoding": "utf8",
       "env": "local",
       "level": "INFO",
@@ -1013,8 +1036,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-session",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-session",
       "version": "3.1.0"
     },
     "security": {
@@ -1026,8 +1049,8 @@
         "session"
       ],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-security",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-security",
       "version": "2.7.0"
     },
     "jsonp": {
@@ -1039,8 +1062,8 @@
         "security"
       ],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-jsonp",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-jsonp",
       "version": "2.0.0"
     },
     "onerror": {
@@ -1052,8 +1075,8 @@
         "jsonp"
       ],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-onerror",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-onerror",
       "version": "2.1.0"
     },
     "i18n": {
@@ -1063,8 +1086,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-i18n",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-i18n",
       "version": "2.1.1"
     },
     "watcher": {
@@ -1074,8 +1097,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-watcher",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-watcher",
       "version": "3.1.0"
     },
     "schedule": {
@@ -1085,8 +1108,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-schedule",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-schedule",
       "version": "3.6.4"
     },
     "multipart": {
@@ -1098,8 +1121,8 @@
         "schedule"
       ],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-multipart",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-multipart",
       "version": "2.9.0"
     },
     "development": {
@@ -1113,8 +1136,8 @@
       "env": [
         "local"
       ],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-development",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-development",
       "version": "2.4.3"
     },
     "logrotator": {
@@ -1126,8 +1149,8 @@
       ],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-logrotator",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-logrotator",
       "version": "3.1.0"
     },
     "static": {
@@ -1137,8 +1160,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-static",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-static",
       "version": "2.2.0"
     },
     "view": {
@@ -1148,8 +1171,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\node_modules\\egg\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-view",
+      "from": "D:\\git\\nodeJS\\mock\\node_modules\\egg\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-view",
       "version": "2.1.2"
     },
     "vuessr": {
@@ -1159,9 +1182,20 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\config\\plugin.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-view-vue-ssr",
+      "from": "D:\\git\\nodeJS\\mock\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-view-vue-ssr",
       "version": "3.3.1"
+    },
+    "mongoose": {
+      "enable": true,
+      "package": "egg-mongoose",
+      "name": "mongoose",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\git\\nodeJS\\mock\\config\\plugin.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-mongoose",
+      "version": "3.2.0"
     },
     "cors": {
       "enable": true,
@@ -1170,8 +1204,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "D:\\test-pro\\node\\mock\\config\\plugin.local.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-cors",
+      "from": "D:\\git\\nodeJS\\mock\\config\\plugin.local.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-cors",
       "version": "2.2.1"
     },
     "webpack": {
@@ -1183,8 +1217,8 @@
       "env": [
         "local"
       ],
-      "from": "D:\\test-pro\\node\\mock\\config\\plugin.local.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-webpack",
+      "from": "D:\\git\\nodeJS\\mock\\config\\plugin.local.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-webpack",
       "version": "4.5.2"
     },
     "webpackvue": {
@@ -1196,8 +1230,8 @@
       "env": [
         "local"
       ],
-      "from": "D:\\test-pro\\node\\mock\\config\\plugin.local.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-webpack-vue",
+      "from": "D:\\git\\nodeJS\\mock\\config\\plugin.local.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-webpack-vue",
       "version": "2.0.2"
     },
     "logview": {
@@ -1209,8 +1243,8 @@
       "name": "logview",
       "dependencies": [],
       "optionalDependencies": [],
-      "from": "D:\\test-pro\\node\\mock\\config\\plugin.local.js",
-      "path": "D:\\test-pro\\node\\mock\\node_modules\\egg-logview",
+      "from": "D:\\git\\nodeJS\\mock\\config\\plugin.local.js",
+      "path": "D:\\git\\nodeJS\\mock\\node_modules\\egg-logview",
       "version": "1.0.1"
     }
   }

@@ -336,3 +336,16 @@
 2019-10-25 17:19:49,622 INFO 20176 [egg:core] dump config after load, 21ms
 2019-10-25 17:19:49,735 INFO 20176 [egg-watcher:application] watcher start success
 2019-10-25 17:19:49,814 INFO 20176 [egg:core] dump config after ready, 37ms
+2019-10-27 09:33:58,757 INFO 5824 [egg:logger] init all loggers with options: {"dir":"D:\\git\\nodeJS\\mock\\logs","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"DEBUG","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"mock-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-10-27 09:33:58,789 INFO 5824 [egg-multipart] stream mode enable
+2019-10-27 09:33:59,148 INFO 5824 [egg-static] starting static serve /public/ -> D:\git\nodeJS\mock\public
+2019-10-27 09:33:59,151 INFO 5824 [egg-security] use csrf middleware
+2019-10-27 09:33:59,151 INFO 5824 [egg-security] use methodnoallow middleware
+2019-10-27 09:33:59,152 INFO 5824 [egg-security] use noopen middleware
+2019-10-27 09:33:59,152 INFO 5824 [egg-security] use nosniff middleware
+2019-10-27 09:33:59,153 INFO 5824 [egg-security] use xssProtection middleware
+2019-10-27 09:33:59,153 INFO 5824 [egg-security] use dta middleware
+2019-10-27 09:33:59,153 INFO 5824 [egg-security] compose 6 middlewares into one security middleware
+2019-10-27 09:33:59,209 INFO 5824 [egg:core] dump config after load, 6ms
+2019-10-27 09:33:59,236 INFO 5824 [egg-watcher:application] watcher start success
+2019-10-27 09:33:59,244 INFO 5824 [egg:core] dump config after ready, 6ms

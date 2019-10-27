@@ -41,5 +41,16 @@ module.exports = app => {
     },
   };
 
+  //config中配置mongose连接mongodb数据库
+  //Mongodb://eggadmin:123456@localhost:27017 //有用户名密码的情况
+  exports.mongoose = {
+    client: {
+      url: 'mongodb://localhost/mock',  //你的数据库地址，不要端口
+      options: {
+        useNewUrlParser: true,
+      },
+    }
+  };
+
   return exports;
 };

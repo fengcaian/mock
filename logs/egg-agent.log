@@ -1718,3 +1718,65 @@
 2019-10-25 17:19:42,799 INFO 18296 [egg-watcher] Recieved a change event from eventSource: {"event":"rename","path":"D:\\test-pro\\node\\mock\\app\\controller\\urlManage.js___jb_old___","remove":true,"isDirectory":false,"isFile":false}
 2019-10-25 17:19:43,002 WARN 18296 [agent:development] reload worker because D:\test-pro\node\mock\app\controller\urlManage.js___jb_old___ rename
 2019-10-25 17:19:49,886 WARN 18296 [ClusterClient:Connection] socket is closed by other side while there were still unhandled data in the socket buffer
+2019-10-27 09:33:54,011 INFO 23676 [egg:logger] init all loggers with options: {"dir":"D:\\git\\nodeJS\\mock\\logs","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"DEBUG","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"mock-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-27 09:33:54,024 INFO 23676 [egg:core] dump config after load, 5ms
+2019-10-27 09:33:54,124 INFO 23676 [egg-watcher] Start watching: ["D:\\git\\nodeJS\\mock\\app","D:\\git\\nodeJS\\mock\\config","D:\\git\\nodeJS\\mock\\mocks","D:\\git\\nodeJS\\mock\\mocks_proxy","D:\\git\\nodeJS\\mock\\app.js"]
+2019-10-27 09:33:54,124 INFO 23676 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app"
+2019-10-27 09:33:54,125 INFO 23676 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\config"
+2019-10-27 09:33:54,125 INFO 23676 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks"
+2019-10-27 09:33:54,125 INFO 23676 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks_proxy"
+2019-10-27 09:33:54,125 INFO 23676 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app.js"
+2019-10-27 09:33:54,125 INFO 23676 [egg-watcher:agent] watcher start success
+2019-10-27 09:33:54,148 INFO 23676 [egg:core] dump config after ready, 6ms
+2019-10-27 09:34:24,600 INFO 23676 [egg-watcher] Recieved a change event from eventSource: {"event":"change","path":"D:\\git\\nodeJS\\mock\\config\\manifest.json","stat":{"dev":4071497272,"mode":33206,"nlink":1,"uid":0,"gid":0,"rdev":0,"ino":1125899907593413,"size":925,"atimeMs":1572138607405.16,"mtimeMs":1572140064101.9014,"ctimeMs":1572140064101.9014,"birthtimeMs":1572138607405.16,"atime":"2019-10-27T01:10:07.405Z","mtime":"2019-10-27T01:34:24.102Z","ctime":"2019-10-27T01:34:24.102Z","birthtime":"2019-10-27T01:10:07.405Z"},"remove":false,"isDirectory":false,"isFile":true}
+2019-10-27 09:34:24,624 INFO 23676 [egg-watcher] Recieved a change event from eventSource: {"event":"change","path":"D:\\git\\nodeJS\\mock\\config\\manifest.json","stat":{"dev":4071497272,"mode":33206,"nlink":1,"uid":0,"gid":0,"rdev":0,"ino":1125899907593413,"size":925,"atimeMs":1572138607405.16,"mtimeMs":1572140064101.9014,"ctimeMs":1572140064101.9014,"birthtimeMs":1572138607405.16,"atime":"2019-10-27T01:10:07.405Z","mtime":"2019-10-27T01:34:24.102Z","ctime":"2019-10-27T01:34:24.102Z","birthtime":"2019-10-27T01:10:07.405Z"},"remove":false,"isDirectory":false,"isFile":true}
+2019-10-27 16:28:35,743 INFO 34520 [egg:logger] init all loggers with options: {"dir":"D:\\git\\nodeJS\\mock\\logs","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"DEBUG","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"mock-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-27 16:28:35,795 INFO 34520 [egg:core] dump config after load, 44ms
+2019-10-27 16:28:36,160 INFO 34520 [egg-watcher] Start watching: ["D:\\git\\nodeJS\\mock\\app","D:\\git\\nodeJS\\mock\\config","D:\\git\\nodeJS\\mock\\mocks","D:\\git\\nodeJS\\mock\\mocks_proxy","D:\\git\\nodeJS\\mock\\app.js"]
+2019-10-27 16:28:36,160 INFO 34520 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app"
+2019-10-27 16:28:36,161 INFO 34520 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\config"
+2019-10-27 16:28:36,161 INFO 34520 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks"
+2019-10-27 16:28:36,161 INFO 34520 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks_proxy"
+2019-10-27 16:28:36,161 INFO 34520 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app.js"
+2019-10-27 16:28:36,162 INFO 34520 [egg-watcher:agent] watcher start success
+2019-10-27 16:28:36,192 INFO 34520 [egg:core] dump config after ready, 12ms
+2019-10-27 16:46:33,388 INFO 32204 [egg:logger] init all loggers with options: {"dir":"D:\\git\\nodeJS\\mock\\logs","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"DEBUG","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"mock-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-27 16:46:33,401 INFO 32204 [egg:core] dump config after load, 5ms
+2019-10-27 16:46:33,501 INFO 32204 [egg-watcher] Start watching: ["D:\\git\\nodeJS\\mock\\app","D:\\git\\nodeJS\\mock\\config","D:\\git\\nodeJS\\mock\\mocks","D:\\git\\nodeJS\\mock\\mocks_proxy","D:\\git\\nodeJS\\mock\\app.js"]
+2019-10-27 16:46:33,501 INFO 32204 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app"
+2019-10-27 16:46:33,501 INFO 32204 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\config"
+2019-10-27 16:46:33,501 INFO 32204 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks"
+2019-10-27 16:46:33,501 INFO 32204 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks_proxy"
+2019-10-27 16:46:33,501 INFO 32204 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app.js"
+2019-10-27 16:46:33,502 INFO 32204 [egg-watcher:agent] watcher start success
+2019-10-27 16:46:33,530 INFO 32204 [egg:core] dump config after ready, 11ms
+2019-10-27 16:48:06,256 INFO 34412 [egg:logger] init all loggers with options: {"dir":"D:\\git\\nodeJS\\mock\\logs","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"DEBUG","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"mock-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-27 16:48:06,270 INFO 34412 [egg:core] dump config after load, 6ms
+2019-10-27 16:48:06,322 INFO 34412 [egg-watcher] Start watching: ["D:\\git\\nodeJS\\mock\\app","D:\\git\\nodeJS\\mock\\config","D:\\git\\nodeJS\\mock\\mocks","D:\\git\\nodeJS\\mock\\mocks_proxy","D:\\git\\nodeJS\\mock\\app.js"]
+2019-10-27 16:48:06,322 INFO 34412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app"
+2019-10-27 16:48:06,322 INFO 34412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\config"
+2019-10-27 16:48:06,322 INFO 34412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks"
+2019-10-27 16:48:06,322 INFO 34412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks_proxy"
+2019-10-27 16:48:06,323 INFO 34412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app.js"
+2019-10-27 16:48:06,323 INFO 34412 [egg-watcher:agent] watcher start success
+2019-10-27 16:48:06,341 INFO 34412 [egg:core] dump config after ready, 10ms
+2019-10-27 16:49:52,820 INFO 34876 [egg:logger] init all loggers with options: {"dir":"D:\\git\\nodeJS\\mock\\logs","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"DEBUG","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"mock-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-27 16:49:52,832 INFO 34876 [egg:core] dump config after load, 5ms
+2019-10-27 16:49:52,887 INFO 34876 [egg-watcher] Start watching: ["D:\\git\\nodeJS\\mock\\app","D:\\git\\nodeJS\\mock\\config","D:\\git\\nodeJS\\mock\\mocks","D:\\git\\nodeJS\\mock\\mocks_proxy","D:\\git\\nodeJS\\mock\\app.js"]
+2019-10-27 16:49:52,887 INFO 34876 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app"
+2019-10-27 16:49:52,888 INFO 34876 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\config"
+2019-10-27 16:49:52,888 INFO 34876 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks"
+2019-10-27 16:49:52,888 INFO 34876 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks_proxy"
+2019-10-27 16:49:52,888 INFO 34876 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app.js"
+2019-10-27 16:49:52,888 INFO 34876 [egg-watcher:agent] watcher start success
+2019-10-27 16:49:52,904 INFO 34876 [egg:core] dump config after ready, 9ms
+2019-10-27 17:45:28,532 INFO 32412 [egg:logger] init all loggers with options: {"dir":"D:\\git\\nodeJS\\mock\\logs","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"DEBUG","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"mock-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-27 17:45:28,549 INFO 32412 [egg:core] dump config after load, 10ms
+2019-10-27 17:45:28,598 INFO 32412 [egg-watcher] Start watching: ["D:\\git\\nodeJS\\mock\\app","D:\\git\\nodeJS\\mock\\config","D:\\git\\nodeJS\\mock\\mocks","D:\\git\\nodeJS\\mock\\mocks_proxy","D:\\git\\nodeJS\\mock\\app.js"]
+2019-10-27 17:45:28,599 INFO 32412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app"
+2019-10-27 17:45:28,599 INFO 32412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\config"
+2019-10-27 17:45:28,599 INFO 32412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks"
+2019-10-27 17:45:28,599 INFO 32412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\mocks_proxy"
+2019-10-27 17:45:28,599 INFO 32412 [egg-watcher] Start watching: "D:\\git\\nodeJS\\mock\\app.js"
+2019-10-27 17:45:28,600 INFO 32412 [egg-watcher:agent] watcher start success
+2019-10-27 17:45:28,617 INFO 32412 [egg:core] dump config after ready, 10ms
