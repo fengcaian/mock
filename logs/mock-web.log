@@ -663,3 +663,32 @@ hostname: LC-0031
 2019-10-28 17:33:51,590 INFO 34156 [-/127.0.0.1/-/48ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 46 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
 2019-10-28 17:33:52,693 INFO 34156 [-/127.0.0.1/-/8ms GET /public/fd43d98cd55add255225.hot-update.json] [access] 127.0.0.1: - GET /public/fd43d98cd55add255225.hot-update.json HTTP/404 - http://127.0.0.1:7001/mock/url/list 0 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
 2019-10-28 17:34:01,337 INFO 34156 [-/127.0.0.1/-/3217ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 3214 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-28 21:14:48,923 INFO 9760 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:15:20,020 INFO 9760 [-/127.0.0.1/-/35ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 26 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:17:21,321 INFO 9760 [-/127.0.0.1/-/2626ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 2625 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:21:24,984 INFO 10192 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:21:39,772 INFO 10192 [-/127.0.0.1/-/553ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 544 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:26:12,259 INFO 8328 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:26:50,394 ERROR 8328 [-/127.0.0.1/-/6437ms POST /mock/api/url/swagger] 接口：/v2/api-docs catch到的错误信息：ResponseTimeoutError: Response timeout for 5000ms, GET https://fatdingding.szlcsc.com/v2/api-docs -1 (connected: true, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+2019-10-28 21:26:50,436 ERROR 8328 [-/127.0.0.1/-/6479ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot destructure property `data` of 'undefined' or 'null'.
+    at UrlService.getUrlAllList (D:\git\nodeJS\mock\app\service\url.js:16:22)
+
+pid: 8328
+hostname: PC-20190929LWEZ
+
+2019-10-28 21:26:50,437 INFO 8328 [-/127.0.0.1/-/6483ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/404 - http://127.0.0.1:7001/ 6474 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:30:18,005 INFO 8328 [-/127.0.0.1/-/351ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 349 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:31:39,789 INFO 5472 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:31:47,431 INFO 5472 [-/127.0.0.1/-/56ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 42 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:32:34,173 INFO 5472 [-/127.0.0.1/-/315ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 313 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:36:03,773 INFO 10100 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:36:07,928 INFO 9060 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:36:39,996 INFO 9060 [-/127.0.0.1/-/3384ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 3375 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:39:26,924 INFO 4616 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:39:50,537 INFO 10736 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:39:58,162 INFO 10736 [-/127.0.0.1/-/54ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 44 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:40:03,389 INFO 10736 [-/127.0.0.1/-/434ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 431 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+2019-10-28 21:41:21,038 INFO 8796 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:41:31,019 INFO 5788 [egg-logview] mount log D:\git\nodeJS\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-28 21:41:44,333 INFO 5788 [-/127.0.0.1/-/375ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 9769 http://127.0.0.1:7001/ 366 - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36

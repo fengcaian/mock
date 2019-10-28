@@ -225,3 +225,11 @@ hostname: LC-0031
 pid: 32408
 hostname: LC-0031
 
+2019-10-28 21:26:50,391 ERROR 8328 [-/127.0.0.1/-/6437ms POST /mock/api/url/swagger] 接口：/v2/api-docs catch到的错误信息：ResponseTimeoutError: Response timeout for 5000ms, GET https://fatdingding.szlcsc.com/v2/api-docs -1 (connected: true, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+2019-10-28 21:26:50,434 ERROR 8328 [-/127.0.0.1/-/6479ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot destructure property `data` of 'undefined' or 'null'.
+    at UrlService.getUrlAllList (D:\git\nodeJS\mock\app\service\url.js:16:22)
+
+pid: 8328
+hostname: PC-20190929LWEZ
+

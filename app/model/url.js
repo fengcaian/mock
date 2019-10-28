@@ -24,17 +24,16 @@ module.exports = app => {
             type: Boolean,
         },
         operationId: {
-            type: Boolean,
+            type: String,
         },
-        parameters: {
-            type: [{
-                description: String,
-                in: String,
-                name: String,
-                required: Boolean,
-                type: String,
-            }],
-        },
+        // parameters: [{
+        //     description: String,
+        //     format: String,
+        //     in: String,
+        //     name: String,
+        //     required: Boolean,
+        //     type: String,
+        // }],
         produces: {
             type: [String],
         },

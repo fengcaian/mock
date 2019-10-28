@@ -505,3 +505,42 @@
 2019-10-28 17:33:34,434 INFO 29572 [Timer] D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 39385571ms at 2019-10-29 04:30:00.005
 2019-10-28 17:33:34,434 INFO 29572 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 23185566ms at 2019-10-29 00:00:00.000
 2019-10-28 17:33:34,434 INFO 29572 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 23186566ms at 2019-10-29 00:00:01.000
+2019-10-28 21:14:43,278 INFO 9760 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:14:43,278 INFO 9760 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:14:43,278 INFO 9760 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:14:50,056 INFO 10880 [Timer] D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 26109962ms at 2019-10-29 04:30:00.018
+2019-10-28 21:14:50,057 INFO 10880 [Timer] D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 9909943ms at 2019-10-29 00:00:00.000
+2019-10-28 21:14:50,057 INFO 10880 [Timer] D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 9910943ms at 2019-10-29 00:00:01.000
+2019-10-28 21:21:24,602 INFO 10192 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:21:24,602 INFO 10192 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:21:24,602 INFO 10192 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:26:11,884 INFO 8328 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:26:11,884 INFO 8328 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:26:11,884 INFO 8328 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:31:39,433 INFO 5472 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:31:39,433 INFO 5472 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:31:39,433 INFO 5472 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:31:40,861 INFO 9832 [Timer] D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 25099142ms at 2019-10-29 04:30:00.003
+2019-10-28 21:31:40,861 INFO 9832 [Timer] D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 8899139ms at 2019-10-29 00:00:00.000
+2019-10-28 21:31:40,862 INFO 9832 [Timer] D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 8900139ms at 2019-10-29 00:00:01.001
+2019-10-28 21:36:03,325 INFO 10100 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:36:03,325 INFO 10100 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:36:03,325 INFO 10100 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:36:07,434 INFO 9060 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:36:07,434 INFO 9060 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:36:07,434 INFO 9060 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:39:26,560 INFO 4616 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:39:26,560 INFO 4616 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:39:26,560 INFO 4616 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:39:50,176 INFO 10736 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:39:50,176 INFO 10736 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:39:50,176 INFO 10736 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:39:51,616 INFO 10696 [Timer] D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 24608387ms at 2019-10-29 04:30:00.003
+2019-10-28 21:39:51,616 INFO 10696 [Timer] D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 8408384ms at 2019-10-29 00:00:00.000
+2019-10-28 21:39:51,617 INFO 10696 [Timer] D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 8409384ms at 2019-10-29 00:00:01.001
+2019-10-28 21:41:20,668 INFO 8796 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:41:20,668 INFO 8796 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:41:20,668 INFO 8796 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-28 21:41:30,629 INFO 5788 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-28 21:41:30,629 INFO 5788 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-28 21:41:30,629 INFO 5788 [egg-schedule]: register schedule D:\git\nodeJS\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
