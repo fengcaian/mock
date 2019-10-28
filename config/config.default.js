@@ -48,9 +48,12 @@ module.exports = app => {
       url: 'mongodb://localhost/mock',  //你的数据库地址，不要端口
       options: {
         useNewUrlParser: true,
+        useUnifiedTopology: true,
       },
     }
   };
+
+  exports.apiUrl = 'https://fatdingding.szlcsc.com';
 
   return exports;
 };

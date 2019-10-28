@@ -14,6 +14,7 @@ export default {
   },
   header: {
     profile: '个人中心',
-    logout: '退出系统'
+    logout: '退出系统',
+    refreshSwagger: '刷新swagger',
   }
 };

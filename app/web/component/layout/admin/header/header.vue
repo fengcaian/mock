@@ -33,6 +33,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>{{$t('header.profile')}}</el-dropdown-item>
             <el-dropdown-item @click.native="logout">{{$t('header.logout')}}</el-dropdown-item>
+            <el-dropdown-item @click.native="refreshSwagger">{{$t('header.refreshSwagger')}}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -41,7 +42,8 @@
   </div>
 </template>
 <style></style>
-<script type="babel">
+<script type="jsx">
+import request from '../../../../framework/network/request';
 import "./header.css";
 import LeftMenu from "../menu/index.vue";
 export default {
@@ -74,7 +76,13 @@ export default {
     },
     switchLang(lang) {
       window.location.href = `/mock?locale=${lang}`;
-    }
+    },
+    refreshSwagger() {
+      request.post('/mock/api/url/swagger')
+        .then(({ data }) => {
+            console.log(data);
+        });
+    },
   },
   mounted: function() {
     if (!this.collapse) {

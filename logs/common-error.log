@@ -1,0 +1,227 @@
+2019-10-28 09:49:31,325 ERROR 11204 nodejs.unhandledExceptionError: read ECONNRESET
+    at TCP.onStreamRead (internal/stream_base_commons.js:111:27)
+errno: "ECONNRESET"
+code: "ECONNRESET"
+syscall: "read"
+name: "unhandledExceptionError"
+pid: 11204
+hostname: LC-0031
+
+2019-10-28 09:55:41,402 ERROR 10556 nodejs.unhandledExceptionError: read ECONNRESET
+    at TCP.onStreamRead (internal/stream_base_commons.js:111:27)
+errno: "ECONNRESET"
+code: "ECONNRESET"
+syscall: "read"
+name: "unhandledExceptionError"
+pid: 10556
+hostname: LC-0031
+
+2019-10-28 13:50:52,897 ERROR 22016 [-/127.0.0.1/-/12ms POST /mock/api/url/swagger] nodejs.TypeError: this.doCurl is not a function
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:12:12)
+    at UrlManageController.swaggerUrlList (D:\test-pro\node\mock\app\controller\urlManage.js:11:45)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\egg-core\lib\utils\index.js:44:21)
+    at Object.classControllerMiddleware (D:\test-pro\node\mock\node_modules\egg-core\lib\loader\mixin\controller.js:87:20)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\utils.js:12:21)
+    at wrappedController (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\egg_router.js:322:18)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at next (D:\test-pro\node\mock\node_modules\koa-compose\index.js:45:18)
+    at D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:190:18
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at D:\test-pro\node\mock\node_modules\koa-compose\index.js:36:12
+    at dispatch (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:195:33)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa\node_modules\koa-compose\index.js:42:32)
+    at createGenerator (D:\test-pro\node\mock\node_modules\koa-convert\index.js:24:16)
+    at createGenerator.next (<anonymous>)
+    at Object.<anonymous> (D:\test-pro\node\mock\app\middleware\access.js:9:5)
+    at Generator.next (<anonymous>)
+    at onFulfilled (D:\test-pro\node\mock\node_modules\co\index.js:65:19)
+    at D:\test-pro\node\mock\node_modules\co\index.js:54:5
+    at new Promise (<anonymous>)
+    at Object.co (D:\test-pro\node\mock\node_modules\co\index.js:50:10)
+    at converted (D:\test-pro\node\mock\node_modules\koa-convert\index.js:17:15)
+
+pid: 22016
+hostname: LC-0031
+
+2019-10-28 13:51:05,619 ERROR 22016 [-/127.0.0.1/-/2ms POST /mock/api/url/swagger] nodejs.TypeError: this.doCurl is not a function
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:12:12)
+    at UrlManageController.swaggerUrlList (D:\test-pro\node\mock\app\controller\urlManage.js:11:45)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\egg-core\lib\utils\index.js:44:21)
+    at Object.classControllerMiddleware (D:\test-pro\node\mock\node_modules\egg-core\lib\loader\mixin\controller.js:87:20)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\utils.js:12:21)
+    at wrappedController (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\egg_router.js:322:18)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at next (D:\test-pro\node\mock\node_modules\koa-compose\index.js:45:18)
+    at D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:190:18
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at D:\test-pro\node\mock\node_modules\koa-compose\index.js:36:12
+    at dispatch (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:195:33)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa\node_modules\koa-compose\index.js:42:32)
+    at createGenerator (D:\test-pro\node\mock\node_modules\koa-convert\index.js:24:16)
+    at createGenerator.next (<anonymous>)
+    at Object.<anonymous> (D:\test-pro\node\mock\app\middleware\access.js:9:5)
+    at Generator.next (<anonymous>)
+    at onFulfilled (D:\test-pro\node\mock\node_modules\co\index.js:65:19)
+    at D:\test-pro\node\mock\node_modules\co\index.js:54:5
+    at new Promise (<anonymous>)
+    at Object.co (D:\test-pro\node\mock\node_modules\co\index.js:50:10)
+    at converted (D:\test-pro\node\mock\node_modules\koa-convert\index.js:17:15)
+
+pid: 22016
+hostname: LC-0031
+
+2019-10-28 13:51:19,507 ERROR 22016 [-/127.0.0.1/-/2ms POST /mock/api/url/swagger] nodejs.TypeError: this.doCurl is not a function
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:12:12)
+    at UrlManageController.swaggerUrlList (D:\test-pro\node\mock\app\controller\urlManage.js:11:45)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\egg-core\lib\utils\index.js:44:21)
+    at Object.classControllerMiddleware (D:\test-pro\node\mock\node_modules\egg-core\lib\loader\mixin\controller.js:87:20)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\utils.js:12:21)
+    at wrappedController (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\egg_router.js:322:18)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at next (D:\test-pro\node\mock\node_modules\koa-compose\index.js:45:18)
+    at D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:190:18
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at D:\test-pro\node\mock\node_modules\koa-compose\index.js:36:12
+    at dispatch (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:195:33)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa\node_modules\koa-compose\index.js:42:32)
+    at createGenerator (D:\test-pro\node\mock\node_modules\koa-convert\index.js:24:16)
+    at createGenerator.next (<anonymous>)
+    at Object.<anonymous> (D:\test-pro\node\mock\app\middleware\access.js:9:5)
+    at Generator.next (<anonymous>)
+    at onFulfilled (D:\test-pro\node\mock\node_modules\co\index.js:65:19)
+    at D:\test-pro\node\mock\node_modules\co\index.js:54:5
+    at new Promise (<anonymous>)
+    at Object.co (D:\test-pro\node\mock\node_modules\co\index.js:50:10)
+    at converted (D:\test-pro\node\mock\node_modules\koa-convert\index.js:17:15)
+
+pid: 22016
+hostname: LC-0031
+
+2019-10-28 14:24:25,251 ERROR 21980 [-/127.0.0.1/-/297ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property '200' of undefined
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:35:37)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 21980
+hostname: LC-0031
+
+2019-10-28 14:26:24,408 ERROR 21000 [-/127.0.0.1/-/259ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property '200' of undefined
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:35:37)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 21000
+hostname: LC-0031
+
+2019-10-28 14:27:12,679 ERROR 21000 [-/127.0.0.1/-/280ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property '200' of undefined
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:35:37)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 21000
+hostname: LC-0031
+
+2019-10-28 15:34:56,053 ERROR 26096 [egg-mongoose] mongodb://localhost/mock disconnected
+2019-10-28 16:02:10,867 ERROR 28168 [-/127.0.0.1/-/284ms POST /mock/api/url/swagger] nodejs.ReferenceError: $ref is not defined
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:36:20)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 28168
+hostname: LC-0031
+
+2019-10-28 16:03:36,394 ERROR 28292 [-/127.0.0.1/-/1213ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property '$ref' of undefined
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:35:20)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 28292
+hostname: LC-0031
+
+2019-10-28 16:03:59,600 ERROR 28292 [-/127.0.0.1/-/56ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property '$ref' of undefined
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:35:20)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 28292
+hostname: LC-0031
+
+2019-10-28 16:23:41,952 ERROR 24672 [-/127.0.0.1/-/394ms POST /mock/api/url/swagger] nodejs.TypeError: result.$ref.slice is not a function
+    at _analysisDefinitions (D:\test-pro\node\mock\app\service\url.js:47:69)
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:36:51)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 24672
+hostname: LC-0031
+
+2019-10-28 16:25:21,153 ERROR 30088 [-/127.0.0.1/-/309ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property '$ref' of undefined
+    at _analysisDefinitions (D:\test-pro\node\mock\app\service\url.js:46:31)
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:36:51)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 30088
+hostname: LC-0031
+
+2019-10-28 16:28:56,819 ERROR 29220 [-/127.0.0.1/-/296ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property '$ref' of undefined
+    at _analysisDefinitions (D:\test-pro\node\mock\app\service\url.js:46:31)
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:36:51)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 29220
+hostname: LC-0031
+
+2019-10-28 16:29:42,155 ERROR 25864 [-/127.0.0.1/-/388ms POST /mock/api/url/swagger] nodejs.TypeError: result.$ref.slice is not a function
+    at _analysisDefinitions (D:\test-pro\node\mock\app\service\url.js:47:69)
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:36:51)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 25864
+hostname: LC-0031
+
+2019-10-28 17:04:03,786 ERROR 26900 nodejs.unhandledExceptionError: read ECONNRESET
+    at TCP.onStreamRead (internal/stream_base_commons.js:111:27)
+errno: "ECONNRESET"
+code: "ECONNRESET"
+syscall: "read"
+name: "unhandledExceptionError"
+pid: 26900
+hostname: LC-0031
+
+2019-10-28 17:05:43,355 ERROR 32460 [-/127.0.0.1/-/1246ms POST /mock/api/url/swagger] nodejs.TypeError: Cannot read property 'create' of undefined
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:53:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 32460
+hostname: LC-0031
+
+2019-10-28 17:07:05,818 ERROR 26464 nodejs.unhandledExceptionError: read ECONNRESET
+    at TCP.onStreamRead (internal/stream_base_commons.js:111:27)
+errno: "ECONNRESET"
+code: "ECONNRESET"
+syscall: "read"
+name: "unhandledExceptionError"
+pid: 26464
+hostname: LC-0031
+
+2019-10-28 17:08:27,883 ERROR 32132 [-/127.0.0.1/-/926ms POST /mock/api/url/swagger] nodejs.ReferenceError: post is not defined
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:53:31)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 32132
+hostname: LC-0031
+
+2019-10-28 17:10:48,899 ERROR 32408 [-/127.0.0.1/-/901ms POST /mock/api/url/swagger] nodejs.ReferenceError: callback is not defined
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:53:40)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 32408
+hostname: LC-0031
+

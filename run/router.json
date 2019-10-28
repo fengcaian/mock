@@ -111,12 +111,11 @@
   {
     "name": null,
     "methods": [
-      "HEAD",
-      "GET"
+      "POST"
     ],
     "paramNames": [],
-    "path": "",
-    "regexp": "/^(?:\\/(?=$))?$/",
+    "path": "/mock/api/url/swagger",
+    "regexp": "/^\\/mock\\/api\\/url\\/swagger(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]
@@ -129,6 +128,19 @@
     "paramNames": [],
     "path": "/api/url/list",
     "regexp": "/^\\/api\\/url\\/list(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "",
+    "regexp": "/^(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]

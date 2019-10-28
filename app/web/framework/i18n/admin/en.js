@@ -11,6 +11,7 @@ export default {
   },
   header: {
     profile: 'Profile',
-    logout: 'Logout'
+    logout: 'Logout',
+    refreshSwagger: 'RefreshSwagger',
   }
 };
