@@ -6,17 +6,6 @@ module.exports = app => {
         uid: {
             type: String,
         },
-        type: {
-            type: String,
-        },
-        url: {
-            type: String,
-        },
-        tags: [
-            {
-                type: String,
-            }
-        ],
         consumes: {
             type: [String],
         },
@@ -26,27 +15,23 @@ module.exports = app => {
         operationId: {
             type: String,
         },
-        // parameters: [{
-        //     description: String,
-        //     format: String,
-        //     in: String,
-        //     name: String,
-        //     required: Boolean,
-        //     type: String,
-        // }],
+        parameters: [{}],
         produces: {
             type: [String],
         },
-        responses: [
+        responses: {},
+        summary: {
+            type: String,
+        },
+        tags: [
             {
-                200: {
-                    type: {
-                        description: String,
-                    },
-                },
+                type: String,
             }
         ],
-        summary: {
+        type: {
+            type: String,
+        },
+        url: {
             type: String,
         },
         columnId: {

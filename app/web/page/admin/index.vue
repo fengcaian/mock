@@ -8,7 +8,7 @@
 
 <script type="jsx">
 import Vue from 'vue';
-// import '@/app/web/framework/network';
+import '@/app/web/framework/network';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import AdminLayout from 'component/layout/admin/index.vue';

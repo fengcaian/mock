@@ -233,3 +233,50 @@ headers: {}
 pid: 8328
 hostname: PC-20190929LWEZ
 
+2019-10-29 10:55:46,035 ERROR 20704 [-/127.0.0.1/-/52ms GET /mock/api/url/list?currentPage=1&pageSize=10] nodejs.TypeError: Cannot read property 'count' of undefined
+    at UrlService.getUrlList (D:\test-pro\node\mock\app\service\url.js:65:30)
+    at UrlManageController.list (D:\test-pro\node\mock\app\controller\urlManage.js:7:43)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\egg-core\lib\utils\index.js:44:21)
+    at Object.classControllerMiddleware (D:\test-pro\node\mock\node_modules\egg-core\lib\loader\mixin\controller.js:87:20)
+    at Object.callFn (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\utils.js:12:21)
+    at wrappedController (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\egg_router.js:322:18)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at next (D:\test-pro\node\mock\node_modules\koa-compose\index.js:45:18)
+    at D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:190:18
+    at dispatch (D:\test-pro\node\mock\node_modules\koa-compose\index.js:44:32)
+    at D:\test-pro\node\mock\node_modules\koa-compose\index.js:36:12
+    at dispatch (D:\test-pro\node\mock\node_modules\@eggjs\router\lib\router.js:195:33)
+    at dispatch (D:\test-pro\node\mock\node_modules\koa\node_modules\koa-compose\index.js:42:32)
+    at createGenerator (D:\test-pro\node\mock\node_modules\koa-convert\index.js:24:16)
+    at createGenerator.next (<anonymous>)
+    at Object.<anonymous> (D:\test-pro\node\mock\app\middleware\access.js:9:5)
+    at Generator.next (<anonymous>)
+    at onFulfilled (D:\test-pro\node\mock\node_modules\co\index.js:65:19)
+    at D:\test-pro\node\mock\node_modules\co\index.js:54:5
+    at new Promise (<anonymous>)
+    at Object.co (D:\test-pro\node\mock\node_modules\co\index.js:50:10)
+    at converted (D:\test-pro\node\mock\node_modules\koa-convert\index.js:17:15)
+
+pid: 20704
+hostname: LC-0031
+
+2019-10-29 15:17:16,414 ERROR 55604 [-/127.0.0.1/-/2238ms POST /mock/api/url/swagger] nodejs.TypeError: resultRefStr.indexOf is not a function
+    at _analysisResult (D:\test-pro\node\mock\app\service\url.js:54:30)
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:36:51)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 55604
+hostname: LC-0031
+
+2019-10-29 15:26:47,152 ERROR 57260 [-/127.0.0.1/-/287ms POST /mock/api/url/swagger] nodejs.TypeError: resultRefStr.indexOf is not a function
+    at _analysisResult (D:\test-pro\node\mock\app\service\url.js:54:30)
+    at Object.keys.forEach.key (D:\test-pro\node\mock\app\service\url.js:36:51)
+    at Array.forEach (<anonymous>)
+    at UrlService.getUrlAllList (D:\test-pro\node\mock\app\service\url.js:20:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+pid: 57260
+hostname: LC-0031
+

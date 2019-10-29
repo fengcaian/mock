@@ -87,6 +87,55 @@
   {
     "name": null,
     "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/swagger",
+    "regexp": "/^\\/mock\\/api\\/url\\/swagger(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/delete",
+    "regexp": "/^\\/mock\\/api\\/url\\/delete(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/batch/delete",
+    "regexp": "/^\\/mock\\/api\\/url\\/batch\\/delete(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/list",
+    "regexp": "/^\\/mock\\/api\\/url\\/list(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
       "HEAD",
       "GET"
     ],
@@ -104,30 +153,6 @@
     ],
     "path": "/mock(/.+)?",
     "regexp": "/^\\/mock(?:((?:\\/.+)))?(?:\\/(?=$))?$/",
-    "stack": [
-      "wrappedController"
-    ]
-  },
-  {
-    "name": null,
-    "methods": [
-      "POST"
-    ],
-    "paramNames": [],
-    "path": "/mock/api/url/swagger",
-    "regexp": "/^\\/mock\\/api\\/url\\/swagger(?:\\/(?=$))?$/",
-    "stack": [
-      "wrappedController"
-    ]
-  },
-  {
-    "name": null,
-    "methods": [
-      "POST"
-    ],
-    "paramNames": [],
-    "path": "/api/url/list",
-    "regexp": "/^\\/api\\/url\\/list(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]

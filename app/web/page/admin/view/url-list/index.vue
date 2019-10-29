@@ -2,22 +2,22 @@
     <div>
         <div class="search">
             <el-row class="clear">
-                <label> 标题:</label><el-input class="search-input" clearable v-model="q.title" placeholder="关键字"></el-input>
-                <label> 分类:</label><el-select  v-model="q.categoryId" placeholder="分类">
+                <label> 标题:</label><el-input class="search-input" clearable v-model="searchParams.title" placeholder="关键字"></el-input>
+                <label> 分类:</label><el-select  v-model="searchParams.categoryId" placeholder="分类">
                 <el-option v-for="item in categories"
                            :key="item.id"
                            :label="item.name"
                            :value="item.categoryId">
                 </el-option>
             </el-select>
-                <label> 状态:</label><el-select  v-model="q.status" placeholder="状态">
+                <label> 状态:</label><el-select  v-model="searchParams.status" placeholder="状态">
                 <el-option v-for="item in status"
                            :key="item.id"
                            :label="item.name"
                            :value="item.status">
                 </el-option>
             </el-select>
-                <el-button class="search-button" type="primary" @click="query()">查询</el-button>
+                <el-button class="search-button" type="primary" @click="search">查询</el-button>
                 <el-button class="add-button" type="success" @click="write()">写文章</el-button>
             </el-row>
         </div>
@@ -41,14 +41,10 @@
                 </template>
             </el-table-column>
             <el-table-column prop="url" label="url"></el-table-column>
-            <el-table-column prop="type" label="类型"></el-table-column>
-            <el-table-column prop="status" label="状态">
+            <el-table-column prop="type" label="类型" width="80"></el-table-column>
+            <el-table-column label="操作" width="250">
                 <template slot-scope="props">
-                    <span v-text="props.row.status == 1 ? '已发布' : '草稿'"></span>
-                </template>
-            </el-table-column>
-            <el-table-column label="操作" width="180">
-                <template slot-scope="props">
+                    <el-button type="success" size="small" icon="delete" @click="generateRandomData(props.$index, props.row)">生成随机数据</el-button>
                     <router-link :to="{params: {id: props.row.id}}" tag="span">
                         <el-button type="info" size="small" icon="edit" @click="handleEdit(props.$index, props.row)">修改</el-button>
                     </router-link>
@@ -72,9 +68,9 @@
                 <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
-                        :current-page="q.pageIndex"
+                        :current-page="searchParams.currentPage"
                         :page-sizes="[10, 15, 20, 50]"
-                        :page-size="q.pageSize"
+                        :page-size="searchParams.pageSize"
                         layout="total, sizes, prev, pager, next, jumper"
                         :total="total">
                 </el-pagination>
@@ -88,16 +84,15 @@
 <script type="jsx">
 import request from '../../../../framework/network/request';
 import * as API from '../../../../framework/network/api';
-import { SET_ARTICLE_LIST, DELETE_ARTICLE } from '../../store/mutation-type';
 export default {
     components: {},
     data() {
         return {
-            q: {
+            searchParams: {
                 title: undefined,
                 categoryId: undefined,
                 statusId: undefined,
-                pageIndex: 1,
+                currentPage: 1,
                 pageSize: 10
             },
             //请求时的loading效果
@@ -105,13 +100,31 @@ export default {
             //批量选择数组
             batchSelectArray: [],
             dataList: [],
+            total: 0,
         };
     },
-    methods: {
-        fetchApi({ $store, $router }, json) {
-            return $store.dispatch(SET_ARTICLE_LIST, json);
+    computed: {
+        status() {
+            return [
+                { status: undefined, name: "--请选择--" },
+                { status: 1, name: "已发布" },
+                { status: 2, name: "草稿" }
+            ];
         },
-        query() {
+        categories() {
+            return [
+                { categoryId: 0, name: "--请选择--" },
+                { categoryId: 1, name: "Nodejs" },
+                { categoryId: 2, name: "Webpack" },
+                { categoryId: 3, name: "Egg" }
+            ];
+        },
+        articleList() {
+            return this.$store.state.articleList;
+        }
+    },
+    methods: {
+        query1() {
             this.dataList = [];
             request.get(API.getSwaggerData)
                 .then(({ data }) => {
@@ -135,6 +148,17 @@ export default {
                     console.log(this.dataList);
                 });
         },
+        search() {
+            this.searchParams.currentPage = 1;
+            this.getList();
+        },
+        getList() {
+            request.get('/mock/api/url/list', this.searchParams)
+                .then(({ result }) => {
+                    this.dataList = result.dataList;
+                    this.total = result.totalRow;
+                });
+        },
         write() {
             this.$router.push("/article/add");
         },
@@ -143,20 +167,34 @@ export default {
         },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
-            this.q.pageSize = val;
-            this.fetchApi(this, this.q);
+            this.searchParams.pageSize = val;
+            this.getList();
         },
         handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
-            this.q.pageIndex = val;
-            this.fetchApi(this, this.q);
+            this.searchParams.currentPage = val;
+            this.getList();
         },
         handleEdit(index, row) {
             this.$message(`你点击了编辑操作 index:${index}, id:${row.id}`);
         },
         handleDelete(index, row) {
-            this.$store.dispatch(DELETE_ARTICLE, { id: row.id });
-            this.$message(`删除[${row.title}]成功!`);
+            this.$confirm('将删除选择的url, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.loading = true;
+                request.post('/mock/api/url/delete', { _id: row._id })
+                    .then(() => {
+                        this.$message({
+                            message: '批量删除成功！',
+                            type: 'success',
+                        });
+                        this.getList();
+                    });
+                this.loading = false;
+            });
         },
         //批量选择
         batchSelect(val) {
@@ -164,39 +202,24 @@ export default {
         },
         //批量删除
         batchDel() {
-            this.$confirm("将批量删除选择文章, 是否继续?", "提示", {
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                type: "warning"
+            this.$confirm('将批量删除选择url, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
             }).then(() => {
                 this.loading = true;
-                this.$message.success(msg);
+                request.post('/mock/api/url/batch/delete')
+                    .then(() => {
+                        this.$message({
+                            message: '批量删除成功！',
+                            type: 'success',
+                        });
+                        this.getList();
+                    });
                 this.loading = false;
             });
-        }
+        },
+        generateRandomData() {},
     },
-    computed: {
-        status() {
-            return [
-                { status: undefined, name: "--请选择--" },
-                { status: 1, name: "已发布" },
-                { status: 2, name: "草稿" }
-            ];
-        },
-        categories() {
-            return [
-                { categoryId: 0, name: "--请选择--" },
-                { categoryId: 1, name: "Nodejs" },
-                { categoryId: 2, name: "Webpack" },
-                { categoryId: 3, name: "Egg" }
-            ];
-        },
-        total() {
-            return this.$store.state.articleTotal;
-        },
-        articleList() {
-            return this.$store.state.articleList;
-        }
-    }
 };
 </script>

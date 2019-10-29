@@ -8,7 +8,7 @@ export default {
   post(url, json) {
     return axios.post(url, json);
   },
-  get(url) {
-    return axios.get(url);
+  get(url, params) {
+    return axios.get(url, { params });
   }
 };
