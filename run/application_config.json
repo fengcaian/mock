@@ -251,7 +251,7 @@
         "context": "D:\\test-pro\\node\\mock",
         "entry": {
           "admin": [
-            "D:\\test-pro\\node\\mock\\node_modules\\webpack-hot-middleware/client?path=http://127.0.0.1:9000/__webpack_hmr&noInfo=false&reload=false&quiet=false",
+            "D:\\test-pro\\node\\mock\\node_modules\\webpack-hot-middleware/client?path=http://127.0.0.1:9001/__webpack_hmr&noInfo=false&reload=false&quiet=false",
             "D:\\test-pro\\node\\mock\\app\\web\\page\\admin\\index.js"
           ]
         },
@@ -439,7 +439,7 @@
               "EASY_ENV_IS_NODE": false,
               "EASY_ENV_LOCAL_PUBLIC_PATH": "\"/public/\"",
               "EASY_ENV_PUBLIC_PATH": "\"/public/\"",
-              "EASY_ENV_HOST_URL": "\"http://127.0.0.1:9000\""
+              "EASY_ENV_HOST_URL": "\"http://127.0.0.1:9001\""
             },
             "__plugin__": "DefinePlugin",
             "__lable__": "define"
@@ -463,7 +463,7 @@
               "generate": null,
               "sort": null,
               "baseDir": "D:\\test-pro\\node\\mock",
-              "host": "http://127.0.0.1:9000",
+              "host": "http://127.0.0.1:9001",
               "proxy": true,
               "buildPath": "D:\\test-pro\\node\\mock\\public",
               "publicPath": "/public/",

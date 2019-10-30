@@ -22,12 +22,12 @@
             </el-row>
         </div>
         <el-table
-                :data="dataList"
-                v-loading="loading"
-                element-loading-text="拼命加载中"
-                border
-                @selection-change="batchSelect"
-                style="width: 100%;">
+            :data="dataList"
+            v-loading="loading"
+            element-loading-text="拼命加载中"
+            border
+            @selection-change="batchSelect"
+            style="width: 100%;">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="hits" label="所属系统"></el-table-column>
             <el-table-column prop="hits" label="所属分组">
@@ -36,19 +36,20 @@
                 </template>
             </el-table-column>
             <el-table-column label="url名称">
-                <template slot-scope="props">
-                    <router-link :to="'/article/detail/'+ props.row.id">{{props.row.summary}}</router-link>
+                <template slot-scope="scope">
+                    <el-button type="primary" size="mini" @click="lookUrlDetail(scope.row)">查看url详情</el-button>
+                    <router-link :to="'/url/detail/'+ scope.row.operationId">{{scope.row.summary}}</router-link>
                 </template>
             </el-table-column>
             <el-table-column prop="url" label="url"></el-table-column>
             <el-table-column prop="type" label="类型" width="80"></el-table-column>
             <el-table-column label="操作" width="250">
-                <template slot-scope="props">
-                    <el-button type="success" size="small" icon="delete" @click="generateRandomData(props.$index, props.row)">生成随机数据</el-button>
-                    <router-link :to="{params: {id: props.row.id}}" tag="span">
-                        <el-button type="info" size="small" icon="edit" @click="handleEdit(props.$index, props.row)">修改</el-button>
+                <template slot-scope="scope">
+                    <el-button type="success" size="small" icon="delete" @click="generateRandomData(scope.$index, scope.row)">生成随机数据</el-button>
+                    <router-link :to="{params: {id: scope.row.id}}" tag="span">
+                        <el-button type="info" size="small" icon="edit" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
                     </router-link>
-                    <el-button type="danger" size="small" icon="delete" @click="handleDelete(props.$index, props.row)">删除</el-button>
+                    <el-button type="danger" size="small" icon="delete" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -76,6 +77,12 @@
                 </el-pagination>
             </div>
         </div>
+        <dialog-url-detail
+            v-if="isShowUrlDetailDialog"
+            :dialogVisible="isShowUrlDetailDialog"
+            :urlData="row"
+            @urlDetailDialogCb="urlDetailDialogCb">
+        </dialog-url-detail>
     </div>
 </template>
 <style>
@@ -84,8 +91,12 @@
 <script type="jsx">
 import request from '../../../../framework/network/request';
 import * as API from '../../../../framework/network/api';
+
+import dialogUrlDetail from './components/dialog-url-detail';
 export default {
-    components: {},
+    components: {
+        dialogUrlDetail,
+    },
     data() {
         return {
             searchParams: {
@@ -101,6 +112,8 @@ export default {
             batchSelectArray: [],
             dataList: [],
             total: 0,
+            row: {},
+            isShowUrlDetailDialog: false,
         };
     },
     computed: {
@@ -122,6 +135,9 @@ export default {
         articleList() {
             return this.$store.state.articleList;
         }
+    },
+    created() {
+        this.search();
     },
     methods: {
         query1() {
@@ -220,6 +236,13 @@ export default {
             });
         },
         generateRandomData() {},
+        lookUrlDetail(row) {
+            this.row = row;
+            this.isShowUrlDetailDialog = true;
+        },
+        urlDetailDialogCb() {
+            this.isShowUrlDetailDialog = false;
+        }
     },
 };
 </script>

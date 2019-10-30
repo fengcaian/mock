@@ -6,8 +6,7 @@ module.exports = class UrlService extends egg.Service {
     super(ctx);
     this.ctx = ctx;
   }
-  async getUrlAllList(json = {}) {
-    const { title, categoryId, status, pageIndex, pageSize } = json;
+  async getUrlAllList(body = {}) {
     const [ result ] = await Promise.all([
       this.ctx.doCurl('/v2/api-docs', {
           data: this.query,
@@ -33,69 +32,120 @@ module.exports = class UrlService extends egg.Service {
         });
         const { $ref } = urlObj.responses['200'].schema;
         if ($ref) {
-            urlObj.responses['200'].schema.$ref = _analysisResult(definitions[$ref.slice(14)]);
+            const def = {};
+            _analysisRef(definitions[$ref.slice(14)], def);
+            urlObj.responses['200'].schema.$ref = def;
         }
         dataList.push(urlObj);
     });
 
-    function _analysisResult(obj) {
-        // Object.keys(obj).forEach((key) => {
-        //     if (key === '$ref' && obj[key].startsWith('#/definitions/')) {
-        //         obj[key] = definitions[obj[key].slice(14)];
-        //         if (obj[key] && typeof obj[key] === 'object') {
-        //             _analysisDefinitions(obj[key]);
-        //         }
-        //     }
-        // });
-        const { result } = obj.properties;
-        let voStr = '';
-        if (result && typeof result.$ref === 'string') {
-            console.log(result.$ref);
-            const resultRefStr = result.$ref;
-            if (resultRefStr.indexOf('«') === -1) {
-                obj.properties.result.$ref = definitions[resultRefStr.slice(14)];
-            } else if (resultRefStr.indexOf('List') === -1 && resultRefStr.indexOf('Map') === -1) {
-                voStr = resultRefStr.match(new RegExp(/(?<=«).*?(?=»)/))[0];
-                console.log(voStr);
-                obj.properties.result.$ref = definitions[voStr];
-            } else if (resultRefStr.indexOf('List') !== -1) {
-                voStr = resultRefStr.match(new RegExp(/(?<=List«).*?(?=»)/))[0];
-                obj.properties.result.$ref = definitions[voStr];
+    function _analysisRef(o, result) {
+        Object.keys(o).forEach(key => {
+            if (typeof o[key] === 'object') {
+                result[key] = {};
+                _analysisRef(o[key], result[key]);
+            } else if (key === '$ref') {
+                result[key] = _analysisDefinitions(o[key]);
+            } else {
+                result[key] = o[key];
             }
-        }
-        return obj;
+        });
     }
+
+    function _analysisDefinitions($refStr) {
+        let def = {};
+        if ($refStr.indexOf('«') === -1) {
+            def = definitions[$refStr.slice(14)];
+        } else if ($refStr.indexOf('List') === -1 && $refStr.indexOf('Map') === -1) {
+            const str = $refStr.match(new RegExp(/(?<=«).*?(?=»)/))[0];
+            def = definitions[str];
+        } else if ($refStr.indexOf('List') !== -1) {
+            const str = $refStr.match(new RegExp(/(?<=List«).*?(?=»)/))[0];
+            def = definitions[str];
+        }
+        return def;
+    }
+
     this.ctx.model.Url.create(dataList);
     return dataList;
   }
-  async getUrlList(body = {}) {
+  async getUrlList(query = {}) {
       const result = await Promise.all([
           this.ctx.model.Url.count(true),
           this.ctx.model.Url.find()
               .sort({ id: -1 })
-              .skip((Number(body.currentPage) - 1) * Number(body.pageSize))
-              .limit(Number(body.pageSize)),
+              .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
+              .limit(Number(query.pageSize)),
       ]);
       return {
           totalRow: result[0],
           dataList: result[1],
       };
   }
-  async delete(json = {}) {
-      console.log(json);
+  async delete(body = {}) {
+      console.log(body);
       let result = null;
-      await this.ctx.model.Url.remove({ _id: json._id }, (msg) => {
+      await this.ctx.model.Url.remove({ _id: body._id }, (msg) => {
           console.log(msg);
           result = msg;
       });
       return result;
   }
-  async batchDelete(json = {}) {
+  async batchDelete(body = {}) {
       let result = null;
       await this.ctx.model.Url.remove(null, (msg) => {
           console.log(msg);
           result = msg;
       });
       return result;
+  }
+  async mockData(body = {}) {
+    const bodyLocal = {
+        "type": "object",
+        "properties": {
+            "code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "状态码"
+            },
+            "msg": {
+                "type": "string",
+                "description": "返回消息"
+            },
+            "result": {
+                "description": "返回结果",
+                "$ref": {
+                    "type": "object",
+                    "properties": {
+                        "dingUserId": {
+                            "type": "string",
+                            "description": "钉钉用户id"
+                        },
+                        "dingUserName": {
+                            "type": "string",
+                            "description": "钉钉用户姓名"
+                        },
+                        "erpUserId": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "erp用户id"
+                        },
+                        "userId": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "主键"
+                        },
+                        "workNumber": {
+                            "type": "string",
+                            "description": "工号"
+                        }
+                    },
+                    "title": "UserModel"
+                }
+            }
+        },
+        "title": "ResultVO«UserModel»",
+        "description": "通用返回结果VO"
+    };
   }
 };

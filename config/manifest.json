@@ -13,11 +13,9 @@
   "font/index.css": "/public/font/element-icons.woff",
   "font/font-awesome.min.css": "/public/font/fontawesome-webfont.woff2",
   "img/font-awesome.min.css": "/public/img/fontawesome-webfont.svg",
-  "vendor.js": "/public/js/vendor.js",
   "deps": {
     "admin.js": {
       "js": [
-        "/public/js/vendor.js",
         "/public/js/runtime.js",
         "/public/js/chunk/admin.js"
       ],

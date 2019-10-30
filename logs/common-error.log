@@ -280,3 +280,27 @@ hostname: LC-0031
 pid: 57260
 hostname: LC-0031
 
+2019-10-30 15:39:25,024 ERROR 72244 [-/undefined/-/120073ms GET /public/css/1.css] nodejs.ECONNRESETError: socket hang up
+    at createHangUpError (_http_client.js:322:15)
+    at Socket.socketOnEnd (_http_client.js:425:23)
+    at Socket.emit (events.js:187:15)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+code: "ECONNRESET"
+headerSent: true
+name: "ECONNRESETError"
+pid: 72244
+hostname: LC-0031
+
+2019-10-30 15:39:25,579 ERROR 72244 [-/undefined/-/120623ms GET /public/js/chunk/1.js] nodejs.ECONNRESETError: socket hang up
+    at createHangUpError (_http_client.js:322:15)
+    at Socket.socketOnEnd (_http_client.js:425:23)
+    at Socket.emit (events.js:187:15)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+code: "ECONNRESET"
+headerSent: true
+name: "ECONNRESETError"
+pid: 72244
+hostname: LC-0031
+

@@ -997,3 +997,73 @@ hostname: LC-0031
 2019-10-29 16:09:32,391 INFO 55616 [-/127.0.0.1/-/1641ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 11980 http://127.0.0.1:7001/mock/url/list 1641 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
 2019-10-29 16:09:35,571 INFO 55616 [-/127.0.0.1/-/2098ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 11421 http://127.0.0.1:7001/mock/url/list 2089 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
 2019-10-29 16:09:44,944 INFO 55616 [-/127.0.0.1/-/41ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 11421 http://127.0.0.1:7001/mock/url/list 37 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 10:54:20,729 INFO 68468 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 10:54:53,000 INFO 68468 [-/127.0.0.1/-/103ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 73 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 10:57:00,904 INFO 68756 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 11:01:50,828 INFO 68720 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 11:02:11,346 INFO 59616 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 11:03:59,244 INFO 68760 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 11:08:03,986 INFO 57872 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 11:18:10,665 INFO 54396 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 11:38:10,944 INFO 69412 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 11:41:24,576 INFO 68500 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 13:48:45,973 INFO 70524 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 13:49:30,108 INFO 68620 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 13:49:59,363 INFO 68620 [-/127.0.0.1/-/108ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 92 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 13:55:36,172 INFO 68620 [-/127.0.0.1/-/1032ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 10113 http://127.0.0.1:7001/ 1027 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 14:57:09,462 INFO 70844 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 14:57:40,703 INFO 70844 [-/127.0.0.1/-/99ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 88 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 14:58:04,475 INFO 70844 [-/127.0.0.1/-/1072ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 11421 http://127.0.0.1:7001/mock/url/list 1065 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 14:58:08,891 INFO 70844 [-/127.0.0.1/-/51ms POST /mock/api/url/batch/delete] [access] 127.0.0.1: - POST /mock/api/url/batch/delete HTTP/200 37 http://127.0.0.1:7001/mock/url/list 49 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 14:58:09,001 INFO 70844 [-/127.0.0.1/-/6ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 93 http://127.0.0.1:7001/mock/url/list 5 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 14:58:12,040 INFO 70844 [-/127.0.0.1/-/370ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 10113 http://127.0.0.1:7001/mock/url/list 369 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 14:58:16,458 INFO 70844 [-/127.0.0.1/-/27ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 9532 http://127.0.0.1:7001/mock/url/list 21 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:02:24,918 INFO 71948 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 15:02:40,991 INFO 73348 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 15:05:10,368 INFO 72244 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 15:05:31,479 INFO 72244 [-/127.0.0.1/-/96ms GET /] [access] 127.0.0.1: - GET / HTTP/200 835 - 94 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:05:39,726 INFO 72244 [-/127.0.0.1/-/1067ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 9532 http://127.0.0.1:7001/mock/url/list 1064 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:05:42,683 INFO 72244 [-/127.0.0.1/-/25ms POST /mock/api/url/batch/delete] [access] 127.0.0.1: - POST /mock/api/url/batch/delete HTTP/200 37 http://127.0.0.1:7001/mock/url/list 23 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:05:42,714 INFO 72244 [-/127.0.0.1/-/9ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 93 http://127.0.0.1:7001/mock/url/list 8 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:05:46,143 INFO 72244 [-/127.0.0.1/-/259ms POST /mock/api/url/swagger] [access] 127.0.0.1: - POST /mock/api/url/swagger HTTP/200 12574 http://127.0.0.1:7001/mock/url/list 257 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:06:11,824 INFO 72244 [-/127.0.0.1/-/32ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 12015 http://127.0.0.1:7001/mock/url/list 18 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:35:11,514 INFO 72244 [-/127.0.0.1/-/10ms GET /mock?locale=en] [access] 127.0.0.1: - GET /mock?locale=en HTTP/200 839 http://127.0.0.1:7001/mock/url/list 6 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:35:21,515 INFO 72244 [-/127.0.0.1/-/3ms GET /mock?locale=cn] [access] 127.0.0.1: - GET /mock?locale=cn HTTP/200 839 http://127.0.0.1:7001/mock?locale=en 1 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:35:34,093 INFO 72244 [-/127.0.0.1/-/21ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 12015 http://127.0.0.1:7001/mock/url/list 19 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:36:27,984 INFO 72244 [-/127.0.0.1/-/16ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 12015 http://127.0.0.1:7001/mock/url/list 16 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 15:39:25,577 ERROR 72244 [-/undefined/-/120073ms GET /public/css/1.css] nodejs.ECONNRESETError: socket hang up
+    at createHangUpError (_http_client.js:322:15)
+    at Socket.socketOnEnd (_http_client.js:425:23)
+    at Socket.emit (events.js:187:15)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+code: "ECONNRESET"
+headerSent: true
+name: "ECONNRESETError"
+pid: 72244
+hostname: LC-0031
+
+2019-10-30 15:39:25,607 ERROR 72244 [-/undefined/-/120623ms GET /public/js/chunk/1.js] nodejs.ECONNRESETError: socket hang up
+    at createHangUpError (_http_client.js:322:15)
+    at Socket.socketOnEnd (_http_client.js:425:23)
+    at Socket.emit (events.js:187:15)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+code: "ECONNRESET"
+headerSent: true
+name: "ECONNRESETError"
+pid: 72244
+hostname: LC-0031
+
+2019-10-30 16:23:56,804 INFO 69972 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 16:24:42,344 INFO 75332 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 16:25:03,363 INFO 75196 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 16:44:39,457 INFO 65044 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 16:45:07,751 INFO 65044 [-/127.0.0.1/-/100ms GET /] [access] 127.0.0.1: - GET / HTTP/200 768 - 84 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 16:46:56,123 INFO 65044 [-/127.0.0.1/-/9ms GET /] [access] 127.0.0.1: - GET / HTTP/200 768 - 8 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 16:47:00,808 INFO 65044 [-/127.0.0.1/-/1172ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 12015 http://127.0.0.1:7001/mock/url/list 1166 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 16:47:01,073 INFO 65044 [-/127.0.0.1/-/20ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 12015 http://127.0.0.1:7001/mock/url/list 14 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 16:54:52,396 INFO 77488 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 16:56:20,528 INFO 77616 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs
+2019-10-30 16:57:01,976 INFO 77616 [-/127.0.0.1/-/1087ms GET /mock/api/url/list?currentPage=1&pageSize=10] [access] 127.0.0.1: - GET /mock/api/url/list?currentPage=1&pageSize=10 HTTP/200 12015 http://127.0.0.1:7001/mock/url/list 1079 - Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+2019-10-30 17:05:38,386 INFO 72720 [egg-logview] mount log D:\test-pro\node\mock\logs at http://127.0.0.1:7001/__logs

@@ -10,6 +10,7 @@ module.exports = app => {
   router.post('/mock/api/url/delete', controller.urlManage.delete);
   router.post('/mock/api/url/batch/delete', controller.urlManage.batchDelete);
   router.get('/mock/api/url/list', controller.urlManage.list);
+  router.post('/mock/api/url/mock/data', controller.urlManage.mockData);
   router.get('/mock(/.+)?', controller.admin.home);
   router.get('', controller.urlForward.forward);
 };

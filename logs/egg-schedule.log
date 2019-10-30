@@ -757,3 +757,84 @@
 2019-10-29 16:02:35,920 INFO 58336 [Timer] D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 44844088ms at 2019-10-30 04:30:00.008
 2019-10-29 16:02:35,921 INFO 58336 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 28644080ms at 2019-10-30 00:00:00.001
 2019-10-29 16:02:35,921 INFO 58336 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 28645079ms at 2019-10-30 00:00:01.000
+2019-10-30 10:54:17,628 INFO 68468 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 10:54:17,628 INFO 68468 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 10:54:17,628 INFO 68468 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 10:54:22,040 INFO 68588 [Timer] D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 63337985ms at 2019-10-31 04:30:00.025
+2019-10-30 10:54:22,041 INFO 68588 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 47137960ms at 2019-10-31 00:00:00.001
+2019-10-30 10:54:22,042 INFO 68588 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 47138959ms at 2019-10-31 00:00:01.000
+2019-10-30 10:56:59,995 INFO 68756 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 10:56:59,995 INFO 68756 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 10:56:59,995 INFO 68756 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 11:01:49,784 INFO 68720 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 11:01:49,784 INFO 68720 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 11:01:49,784 INFO 68720 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 11:02:10,234 INFO 59616 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 11:02:10,234 INFO 59616 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 11:02:10,234 INFO 59616 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 11:03:58,337 INFO 68760 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 11:03:58,337 INFO 68760 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 11:03:58,337 INFO 68760 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 11:08:03,027 INFO 57872 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 11:08:03,027 INFO 57872 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 11:08:03,030 INFO 57872 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 11:18:09,718 INFO 54396 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 11:18:09,718 INFO 54396 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 11:18:09,718 INFO 54396 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 11:38:10,076 INFO 69412 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 11:38:10,076 INFO 69412 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 11:38:10,076 INFO 69412 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 11:41:23,576 INFO 68500 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 11:41:23,576 INFO 68500 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 11:41:23,576 INFO 68500 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 13:48:43,432 INFO 70524 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 13:48:43,432 INFO 70524 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 13:48:43,432 INFO 70524 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 13:49:28,561 INFO 68620 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 13:49:28,561 INFO 68620 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 13:49:28,561 INFO 68620 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 13:49:31,514 INFO 67700 [Timer] D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 52828527ms at 2019-10-31 04:30:00.041
+2019-10-30 13:49:31,515 INFO 67700 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 36628485ms at 2019-10-31 00:00:00.000
+2019-10-30 13:49:31,515 INFO 67700 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 36629485ms at 2019-10-31 00:00:01.000
+2019-10-30 14:57:07,140 INFO 70844 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 14:57:07,140 INFO 70844 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 14:57:07,141 INFO 70844 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 14:57:10,757 INFO 72536 [Timer] D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 48769260ms at 2019-10-31 04:30:00.017
+2019-10-30 14:57:10,757 INFO 72536 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 32569243ms at 2019-10-31 00:00:00.000
+2019-10-30 14:57:10,757 INFO 72536 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 32570243ms at 2019-10-31 00:00:01.000
+2019-10-30 15:02:23,780 INFO 71948 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 15:02:23,780 INFO 71948 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 15:02:23,780 INFO 71948 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 15:02:40,085 INFO 73348 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 15:02:40,085 INFO 73348 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 15:02:40,085 INFO 73348 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 15:05:09,508 INFO 72244 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 15:05:09,508 INFO 72244 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 15:05:09,508 INFO 72244 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 15:05:11,631 INFO 73352 [Timer] D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 48288376ms at 2019-10-31 04:30:00.007
+2019-10-30 15:05:11,632 INFO 73352 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 32088369ms at 2019-10-31 00:00:00.001
+2019-10-30 15:05:11,632 INFO 73352 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 32089368ms at 2019-10-31 00:00:01.000
+2019-10-30 16:23:54,336 INFO 69972 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 16:23:54,336 INFO 69972 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 16:23:54,336 INFO 69972 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 16:24:41,407 INFO 75332 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 16:24:41,407 INFO 75332 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 16:24:41,407 INFO 75332 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 16:25:02,320 INFO 75196 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 16:25:02,320 INFO 75196 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 16:25:02,320 INFO 75196 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 16:44:38,432 INFO 65044 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 16:44:38,433 INFO 65044 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 16:44:38,433 INFO 65044 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 16:44:40,752 INFO 71224 [Timer] D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 42319283ms at 2019-10-31 04:30:00.033
+2019-10-30 16:44:40,753 INFO 71224 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 26119248ms at 2019-10-31 00:00:00.001
+2019-10-30 16:44:40,754 INFO 71224 [Timer] D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 26120247ms at 2019-10-31 00:00:01.001
+2019-10-30 16:54:51,429 INFO 77488 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 16:54:51,429 INFO 77488 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 16:54:51,429 INFO 77488 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 16:56:19,485 INFO 77616 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 16:56:19,485 INFO 77616 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 16:56:19,485 INFO 77616 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-10-30 17:05:37,395 INFO 72720 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2019-10-30 17:05:37,395 INFO 72720 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-10-30 17:05:37,395 INFO 72720 [egg-schedule]: register schedule D:\test-pro\node\mock\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
