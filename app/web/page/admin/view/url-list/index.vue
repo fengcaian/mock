@@ -38,14 +38,14 @@
             <el-table-column label="url名称">
                 <template slot-scope="scope">
                     <el-button type="primary" size="mini" @click="lookUrlDetail(scope.row)">查看url详情</el-button>
-                    <router-link :to="'/url/detail/'+ scope.row.operationId">{{scope.row.summary}}</router-link>
+                    <el-button type="text" size="mini" @click="goToDetail(scope.row)">{{scope.row.summary}}</el-button>
                 </template>
             </el-table-column>
             <el-table-column prop="url" label="url"></el-table-column>
             <el-table-column prop="type" label="类型" width="80"></el-table-column>
             <el-table-column label="操作" width="250">
                 <template slot-scope="scope">
-                    <el-button type="success" size="small" icon="delete" @click="generateRandomData(scope.$index, scope.row)">生成随机数据</el-button>
+                    <el-button type="success" size="small" icon="delete" @click="generateRandomData(scope.row)">生成随机数据</el-button>
                     <router-link :to="{params: {id: scope.row.id}}" tag="span">
                         <el-button type="info" size="small" icon="edit" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
                     </router-link>
@@ -140,30 +140,6 @@ export default {
         this.search();
     },
     methods: {
-        query1() {
-            this.dataList = [];
-            request.get(API.getSwaggerData)
-                .then(({ data }) => {
-                    let obj = {}; // { url: '', [post/get/delete...]: {} }
-                    Object.keys(data.paths).forEach(key => {
-                        obj = Object.assign({}, data.paths[key]);
-                        obj.url = key;
-                        const urlObj = {}; // { url: '', type: 'post/get', ...{} }
-                        Object.keys(obj).forEach(key => {
-                            if (typeof obj[key] !== 'string') { // post或者get或者其他类型参数对象
-                                urlObj['type'] = key;
-                                Object.keys(obj[key]).forEach(k => {
-                                    urlObj[k] = obj[key][k];
-                                });
-                            } else { // url
-                                urlObj[key] = obj[key];
-                            }
-                        });
-                        this.dataList.push(urlObj);
-                    });
-                    console.log(this.dataList);
-                });
-        },
         search() {
             this.searchParams.currentPage = 1;
             this.getList();
@@ -235,14 +211,24 @@ export default {
                 this.loading = false;
             });
         },
-        generateRandomData() {},
+        generateRandomData(row) {
+            console.log(row);
+            request.post('/mock/api/url/mock/data', row)
+                .then((res) => {
+                    console.log(res);
+                });
+        },
         lookUrlDetail(row) {
             this.row = row;
             this.isShowUrlDetailDialog = true;
         },
         urlDetailDialogCb() {
             this.isShowUrlDetailDialog = false;
-        }
+        },
+        goToDetail(row) {
+          console.log(row);
+          this.$router.push(`/url/detail?id=${row._id}`);
+        },
     },
 };
 </script>

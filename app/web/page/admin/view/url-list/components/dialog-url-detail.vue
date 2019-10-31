@@ -4,7 +4,9 @@
         :visible.sync="dialogShow"
         width="500px"
         :before-close="close">
-        <span>{{urlJSON}}</span>
+        <pre class="dialog-height" v-high-light>
+          <code class="json" spellcheck="false">{{urlData}}</code>
+        </pre>
     </el-dialog>
 </template>
 
@@ -19,7 +21,7 @@ export default {
     },
     created() {
         this.dialogShow = this.dialogVisible;
-        this.urlJSON = JSON.stringify(this.urlData);
+        this.urlJSON = JSON.stringify(this.urlData, null, 2);
     },
     methods: {
         close() {
@@ -30,5 +32,7 @@ export default {
 </script>
 
 <style scoped>
-
+.dialog-height{
+    max-height: 650px;
+}
 </style>

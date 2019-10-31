@@ -1,7 +1,7 @@
 <template>
     <div class="width-percent-100">
         <el-row type="flex" justify="space-around">
-            <el-col :span="12">
+            <el-col :span="24">
                 <el-button size="mini" icon="el-icon-back" type="info" @click="back"></el-button>
             </el-col>
         </el-row>
@@ -26,26 +26,26 @@
 
 <script type="jsx">
 export default {
-    data() {
-        return {
-            searchParam: {
-                dataType: ['mock数据', '后端数据'],
-            },
-            dataList: [],
-            operationId: '',
-        };
+  data() {
+    return {
+      searchParam: {
+        dataType: ['mock数据', '后端数据'],
+      },
+      dataList: [],
+      id: '',
+    };
+  },
+  created() {
+    this.id = this.$route.query.id;
+    this.getDataList();
+  },
+  methods: {
+    checkboxChanged() {},
+    getDataList() {},
+    back() {
+      this.$router.push({ path: '/url/list' });
     },
-    created() {
-        this.operationId = this.$route.query.operationId;
-        this.getDataList();
-    },
-    methods: {
-        checkboxChanged() {},
-        getDataList() {},
-        back() {
-            this.$router.push({ path: '/url/list' });
-        },
-    },
+  },
 }
 </script>
 
