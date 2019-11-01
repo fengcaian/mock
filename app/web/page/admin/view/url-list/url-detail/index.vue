@@ -25,23 +25,41 @@
 </template>
 
 <script type="jsx">
+import request from '@/app/web/framework/network/request';
+
 export default {
   data() {
     return {
       searchParam: {
         dataType: ['mock数据', '后端数据'],
+        currentPage: 1,
+        pageSize: 20,
+        urlId: '',
       },
       dataList: [],
       id: '',
     };
   },
   created() {
-    this.id = this.$route.query.id;
+    this.searchParam.urlId = this.$route.query.id;
     this.getDataList();
   },
   methods: {
     checkboxChanged() {},
-    getDataList() {},
+    getDataList() {
+      const params = {};
+      Object.keys(this.searchParams).forEach(key => {
+        if (key !== 'dataType') {
+          params[key] = this.searchParams[key];
+        } else {
+          params[key] = this.searchParams[key].join('');
+        }
+      });
+      request.get('/mock/api/url/response/list', params)
+        .then((res) => {
+          console.log(res);
+        });
+    },
     back() {
       this.$router.push({ path: '/url/list' });
     },

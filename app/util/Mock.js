@@ -1,7 +1,7 @@
 'use strict';
 
 const { type, dateFormat } = require('./common');
-const { letter } = require('./constant');
+const { LETTER } = require('./constant');
 
 module.exports = class Mock {
   constructor() {}
@@ -47,7 +47,7 @@ module.exports = class Mock {
   getRandomLetterStr(length = 10) {
     let str = '';
     for (let i = 0; i < length; i += 1) {
-      str += letter[Math.floor(Math.random() * 26)];
+      str += LETTER[Math.floor(Math.random() * 26)];
     }
     return str;
   }
