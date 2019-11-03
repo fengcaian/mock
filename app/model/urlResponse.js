@@ -19,6 +19,9 @@ module.exports = app => {
             type: String,
         },
         result: {},
+        dataType: {
+            type: String,
+        },
         columnId: {
             type: Schema.Types.ObjectId,
         },

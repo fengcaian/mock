@@ -14,6 +14,7 @@ module.exports = class UrlResponseManageController extends egg.Controller {
   }
   async getUrlResponseList(ctx) {
     try {
+      console.log(22222);
       const result = await ctx.service.urlResponse.getUrlResponseList(ctx.query);
       this.ctx.body = new Response(200, null, result.dataList, result.totalRow, ctx.query.pageSize, ctx.query.currentPage);
     } catch (e) {

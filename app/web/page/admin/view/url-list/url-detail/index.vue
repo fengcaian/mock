@@ -16,18 +16,37 @@
         <el-table :data="dataList" style="width: 100%">
             <el-table-column label="类型" width="180">
                 <template slot-scope="scope">
-                    <span>{{scope.row.mock === 'mock' ? 'mock数据' : '后端数据'}}</span>
+                    <span>{{scope.row.mock === 'mock_data' ? 'mock数据' : '后端数据'}}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="address" label="地址"></el-table-column>
+            <el-table-column label="详情">
+                <template slot-scope="scope">
+                    <el-button type="text" size="mini" @click="showDetail(scope.row)">{{JSON.stringify(scope.row)}}</el-button>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button type="warning" size="mini" @click="edit">编辑</el-button>
+                </template>
+            </el-table-column>
         </el-table>
+        <dialog-url-response-detail
+            v-if="isShowUrlResponseDetailDialog"
+            :urlResponseDetailDialogVisible="isShowUrlResponseDetailDialog"
+            :urlResponseData="urlResponseData"
+            @urlResponseDetailDialogCb="urlResponseDetailDialogCb">
+        </dialog-url-response-detail>
     </div>
 </template>
 
 <script type="jsx">
 import request from '@/app/web/framework/network/request';
+import dialogUrlResponseDetail from '../components/dialog-url-response-detail';
 
 export default {
+  components: {
+    dialogUrlResponseDetail,
+  },
   data() {
     return {
       searchParam: {
@@ -38,6 +57,8 @@ export default {
       },
       dataList: [],
       id: '',
+      urlResponseData: {},
+      isShowUrlResponseDetailDialog: false,
     };
   },
   created() {
@@ -45,21 +66,31 @@ export default {
     this.getDataList();
   },
   methods: {
-    checkboxChanged() {},
+    checkboxChanged() {
+        this.getDataList();
+    },
     getDataList() {
       const params = {};
-      Object.keys(this.searchParams).forEach(key => {
+      Object.keys(this.searchParam).forEach(key => {
         if (key !== 'dataType') {
-          params[key] = this.searchParams[key];
+          params[key] = this.searchParam[key];
         } else {
-          params[key] = this.searchParams[key].join('');
+          params[key] = this.searchParam[key].join(',');
         }
       });
       request.get('/mock/api/url/response/list', params)
         .then((res) => {
-          console.log(res);
+          this.dataList = res.result.dataList;
         });
     },
+    showDetail(row) {
+      this.urlResponseData = row;
+      this.isShowUrlResponseDetailDialog = true;
+    },
+    urlResponseDetailDialogCb() {
+      this.isShowUrlResponseDetailDialog = false;
+    },
+    edit() {},
     back() {
       this.$router.push({ path: '/url/list' });
     },

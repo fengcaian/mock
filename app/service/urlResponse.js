@@ -18,16 +18,20 @@ module.exports = class UrlResponseService extends egg.Service {
     return mockData;
   }
   async getUrlResponseList(query = {}) {
-    const dataType = query.dataType.split(',');
-    let queryParams = {};
-    if (dataType.length) {
+    console.log(query);
+    let queryParams = {
+      urlId: query.urlId,
+    };
+    if (query.dataType) {
+      const dataType = query.dataType.split(',');
       queryParams.dataType = {
         $in: dataType.map(dt => DATA_TYPE.find(item => item.name === dt).code),
       };
     }
+    console.log(queryParams);
     const result = await Promise.all([
-      this.ctx.model.Url.count(true),
-      this.ctx.model.Url
+      this.ctx.model.UrlResponse.count(true),
+      this.ctx.model.UrlResponse
         .find(queryParams)
         .sort({ id: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
