@@ -11,4 +11,6 @@ const DATA_TYPE = [
   }
 ];
 
-module.exports = { LETTER, DATA_TYPE };
+const URL_RESPONSE_MONGODB_PROP = ['_id', 'url', 'urlId', 'dataType', '__v'];
+
+module.exports = { LETTER, DATA_TYPE, URL_RESPONSE_MONGODB_PROP };

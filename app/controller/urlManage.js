@@ -31,4 +31,12 @@ module.exports = class UrlManageController extends egg.Controller {
       ctx.logger.error(e);
     }
   }
+  async requestTargetSwitch(ctx) {
+    try {
+      const result = await ctx.service.url.requestTargetSwitch(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
 };

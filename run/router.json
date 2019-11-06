@@ -123,6 +123,18 @@
   {
     "name": null,
     "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/request/target/switch",
+    "regexp": "/^\\/mock\\/api\\/url\\/request\\/target\\/switch(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
       "HEAD",
       "GET"
     ],
@@ -154,6 +166,18 @@
     "paramNames": [],
     "path": "/mock/api/url/response/list",
     "regexp": "/^\\/mock\\/api\\/url\\/response\\/list(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/response/edit",
+    "regexp": "/^\\/mock\\/api\\/url\\/response\\/edit(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]

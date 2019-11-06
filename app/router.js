@@ -9,9 +9,11 @@ module.exports = app => {
   router.post('/mock/api/url/swagger', controller.urlManage.swaggerUrlList);
   router.post('/mock/api/url/delete', controller.urlManage.delete);
   router.post('/mock/api/url/batch/delete', controller.urlManage.batchDelete);
+  router.post('/mock/api/url/request/target/switch', controller.urlManage.requestTargetSwitch);
   router.get('/mock/api/url/list', controller.urlManage.list);
   router.post('/mock/api/url/mock/data', controller.urlResponseManage.mockData);
   router.get('/mock/api/url/response/list', controller.urlResponseManage.getUrlResponseList);
+  router.post('/mock/api/url/response/edit', controller.urlResponseManage.editUrlResponse);
   router.get('/mock(/.+)?', controller.admin.home);
   router.get('', controller.urlForward.forwardGet);
   router.post('', controller.urlForward.forwardPost);

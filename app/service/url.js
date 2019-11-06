@@ -36,6 +36,7 @@ module.exports = class UrlService extends egg.Service {
         _analysisRef(definitions[$ref.slice(14)], def);
         urlObj.responses['200'].schema.$ref = def;
       }
+      urlObj.requestTarget = 'backend';
       dataList.push(urlObj);
     });
 
@@ -83,10 +84,8 @@ module.exports = class UrlService extends egg.Service {
     };
   }
   async delete(body = {}) {
-    console.log(body);
     let result = null;
     await this.ctx.model.Url.remove({ _id: body._id }, (msg) => {
-      console.log(msg);
       result = msg;
     });
     return result;
@@ -98,5 +97,15 @@ module.exports = class UrlService extends egg.Service {
       result = msg;
     });
     return result;
+  }
+  async requestTargetSwitch(body = {}) {
+    const post = {
+      requestTarget: body.requestTarget,
+    };
+    try{
+      await this.ctx.model.Url.update({ _id: body._id }, post);
+    } catch (e) {
+      this.ctx.logger.error(e);
+    }
   }
 };

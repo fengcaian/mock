@@ -3,9 +3,6 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   const UrlSchema = new Schema({
-    uid: {
-      type: String,
-    },
     consumes: {
       type: [String],
     },
@@ -34,9 +31,9 @@ module.exports = app => {
     url: {
       type: String,
     },
-    columnId: {
-      type: Schema.Types.ObjectId,
+    requestTarget: {
+      type: String,
     },
-});
-return mongoose.model('Url', UrlSchema);
+  });
+  return mongoose.model('Url', UrlSchema);
 };
