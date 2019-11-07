@@ -35,6 +35,9 @@ const actions = {
         commit(Type.DELETE_ARTICLE, { id });
       });
   },
+  SetShareData: (context, shareData) => {
+    context.commit('SET_SHARE_DATA', shareData);
+}
 };
 
 export default actions;

@@ -213,8 +213,10 @@
       "GET"
     ],
     "paramNames": [],
-    "path": "",
-    "regexp": "/^(?:\\/(?=$))?$/",
+    "path": {
+      "keys": []
+    },
+    "regexp": "/[a-z]+/",
     "stack": [
       "wrappedController"
     ]
@@ -225,8 +227,10 @@
       "POST"
     ],
     "paramNames": [],
-    "path": "",
-    "regexp": "/^(?:\\/(?=$))?$/",
+    "path": {
+      "keys": []
+    },
+    "regexp": "/[a-z]+/",
     "stack": [
       "wrappedController"
     ]

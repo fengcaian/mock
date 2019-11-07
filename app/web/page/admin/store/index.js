@@ -13,6 +13,7 @@ export default function createStore(initState) {
     articleTotal: 0,
     articleList: [],
     article: {},
+    shareData: {},
     ...initState
   };
   return new Vuex.Store({

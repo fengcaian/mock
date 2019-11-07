@@ -12,7 +12,8 @@
                     <el-checkbox label="后端数据"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
-            <el-button type="success" size="mini" @click="generateRandomData">生成随机数据</el-button>
+            <el-button type="success" size="mini" @click="generateMockData">生成模拟数据</el-button>
+            <el-button type="primary" size="mini" @click="doRequest">发送请求</el-button>
         </el-form>
         <el-table :data="dataList" style="width: 100%">
             <el-table-column label="类型" width="180" align="center">
@@ -69,10 +70,13 @@ export default {
       urlResponseData: {},
       isShowUrlResponseDetailDialog: false,
       isShowUrlResponseEditDialog: false,
+      urlObject: {},
     };
   },
   created() {
     this.searchParam.urlId = this.$route.query.id;
+    this.urlObject = this.$store.state.shareData;
+    console.log(this.urlObject);
     this.getDataList();
   },
   methods: {
@@ -93,12 +97,25 @@ export default {
           this.dataList = res.result.dataList;
         });
     },
-    generateRandomData() {
+    generateMockData() {
       request.post('/mock/api/url/mock/data', { _id: this.$route.query.id })
         .then((res) => {
           console.log(res);
           this.getDataList();
         });
+    },
+    doRequest() {
+      if (this.urlObject.type === 'post') {
+        request.post('/xxxx', this.urlObject)
+          .then((res) => {
+            console.log(res);
+          });
+      } else if (this.urlObject.type === 'get') {
+        request.get('/xxxx', { params: this.urlObject })
+          .then((res) => {
+            console.log(res);
+          });
+      }
     },
     showDetail(row) {
       this.urlResponseData = row;

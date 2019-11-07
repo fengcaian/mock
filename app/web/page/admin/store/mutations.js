@@ -24,6 +24,9 @@ const mutations = {
     state.articleList = state.articleList.filter(item => {
       return item.id !== id;
     });
+  },
+  SET_SHARE_DATA(state, shareData) {
+    state.shareData = shareData;
   }
 };
 export default mutations;

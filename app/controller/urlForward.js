@@ -5,10 +5,10 @@ const egg = require('egg');
 module.exports = class UrlController extends egg.Controller {
   async forwardGet(ctx) {
     try {
-      console.log(1111);
+      console.log(ctx);
       const url = ctx.url.indexOf('?') === -1 ? ctx.url : ctx.url.split('?')[0];
       const [ result ] = await Promise.all([
-        ctx.doCurl(url, {
+        ctx.doCurl(`${ctx.origin}${ctx.url}`, {
           data: ctx.query,
         }),
       ]);
@@ -18,9 +18,10 @@ module.exports = class UrlController extends egg.Controller {
     }
   }
   async forwardPost(ctx) {
+    console.log(ctx);
     try {
       const [ result ] = await Promise.all([
-        ctx.doCurl(ctx.url, {
+        ctx.doCurl(`${ctx.origin}${ctx.url}`, {
           data: ctx.request.body,
         }),
       ]);

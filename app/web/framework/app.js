@@ -46,4 +46,8 @@ export default class App {
       store
     };
   }
+
+  serverDidReady() {
+    console.log('egg server is closed');
+  }
 }
