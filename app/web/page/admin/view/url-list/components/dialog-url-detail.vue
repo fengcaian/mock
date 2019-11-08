@@ -18,7 +18,7 @@
         <el-col class="th" :span="10">Description</el-col>
       </el-row>
       <el-form ref="form" label-width="140px" :model="form">
-        <el-row v-for="parameter in parameterList">
+        <el-row v-for="parameter in parameterList" :key="parameter.name">
           <el-col :span="14">
             <el-form-item  :label="parameter.name">
               <el-input class="width-200" size="mini" v-model="form[parameter.name]"></el-input>
@@ -30,6 +30,20 @@
         </el-row>
       </el-form>
     </div>
+    <el-row class="title">Responses</el-row>
+    <div class="request" :class="{ 'green': urlObject.type === 'post', 'blue': urlObject.type === 'get' }">
+      <tabs :tabs="tabs" :activeTabClass="activeTabStyle" :tabScrollStyle="tabScrollStyle" @tabClick="tabClick"></tabs>
+      <el-row class="tbody" type="flex" justify="center">
+        <el-col class="th" :span="14">Code</el-col>
+        <el-col class="th" :span="10">Description</el-col>
+      </el-row>
+      <el-row v-for="response in responseList" :key="response.code">
+        <el-col :span="12">{{response.code}}</el-col>
+        <el-col :span="12">
+          <div>response</div>
+        </el-col>
+      </el-row>
+    </div>
         <pre class="dialog-height" v-high-light>
           <code class="json" spellcheck="false">{{urlData}}</code>
         </pre>
@@ -37,15 +51,31 @@
 </template>
 
 <script>
+import tabs from '@/app/web/component/layout/tabs';
 export default {
   props: ['dialogVisible', 'urlData'],
+  components: {
+    tabs,
+  },
   data() {
     return {
       dialogShow: false,
       form: {},
       parameterList: [],
+      responseList: [],
       urlJSON: '',
       urlObject: {},
+      tabs: [
+        {
+          label: 'Model',
+          name: 'Model',
+        },
+        {
+          label: 'Example Value'
+        }
+      ],
+      activeTabClass: {},
+      tabScrollStyle: {},
     };
   },
   created() {
@@ -56,8 +86,22 @@ export default {
     this.parameterList.forEach(item => {
       this.form[item.key] = '';
     });
+    Object.keys(this.urlObject.responses).forEach(key => {
+      const res = this.urlObject.responses[key];
+      res.code = key;
+      this.responseList.push(res);
+    });
+    this.activeTabStyle = {
+      color: this.urlObject.type === 'post' ? '#49CC90' : '61AFFE',
+    };
+    this.tabScrollStyle = {
+      background: this.urlObject.type === 'post' ? '#E8F6F0' : '61AFFE',
+    }
   },
   methods: {
+    tabClick(tab) {
+      console.log(tab);
+    },
     close() {
       this.$emit('urlDetailDialogCb');
     },
@@ -126,5 +170,16 @@ export default {
   }
   .request {
     border-radius: 4px;
+  }
+  .tabs {
+    background: #E8F6F0;
+  }
+  .tab {
+    border-radius: 4px;
+  }
+</style>
+<style>
+  #url-detail-response-tabs .el-tabs__header is-top{
+    background: #E8F6F0;
   }
 </style>
