@@ -31,6 +31,17 @@ const menu = {
       },
     },
   },
+  system: {
+    name: 'menu.systemmanage',
+    icon: 'el-icon-document',
+    children: {
+      list: {
+        name: 'menu.systemquery',
+        icon: 'el-icon-edit-outline',
+        path: '/system/list'
+      },
+    },
+  },
 };
 
 export default menu;

@@ -1,0 +1,122 @@
+<template>
+  <div>
+    <el-table
+      border
+      :data="dataList"
+      v-loading="loading"
+      element-loading-text="拼命加载中"
+      style="width: 100%;">
+      <el-table-column prop="systemName" label="系统名称" align="center" width="200"></el-table-column>
+      <el-table-column prop="systemUrl" label="url" align="center"></el-table-column>
+      <el-table-column label="操作" width="350" align="center">
+        <template slot="header">
+          操作
+          <el-button type="success" size="mini" icon="el-icon-plus" @click="addSystem"></el-button>
+        </template>
+        <template slot-scope="scope">
+          <router-link :to="{params: {id: scope.row.id}}" tag="span">
+            <el-button type="info" size="small" icon="edit" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+          </router-link>
+          <el-button type="danger" size="small" icon="delete" @click="handleDelete(scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div style="float:right">
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="searchParams.currentPage"
+          :page-sizes="[10, 15, 20, 50]"
+          :page-size="searchParams.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total">
+      </el-pagination>
+    </div>
+    <dialog-add-system
+      v-if="isShowAddSystemDialog"
+      :addSystemDialogVisible="isShowAddSystemDialog"
+      @addSystemDialogCb="addSystemDialogCb">
+    </dialog-add-system>
+  </div>
+</template>
+
+<script>
+import request from '@/app/web/framework/network/request';
+import dialogAddSystem from './components/dialog-add-system';
+
+export default {
+  components: {
+    dialogAddSystem,
+  },
+  data() {
+    return {
+      searchParams: {
+        currentPage: 1,
+        pageSize: 10
+      },
+      dataList: [],
+      total: 0,
+      loading: false,
+      isShowAddSystemDialog: false,
+    };
+  },
+  created() {
+    this.search();
+  },
+  methods: {
+    search() {
+      this.searchParams.currentPage = 1;
+      this.getList();
+    },
+    getList() {
+      request.get('/mock/api/system/list', this.searchParams)
+        .then(({ result }) => {
+          this.dataList = result.dataList;
+          this.total = result.totalRow;
+        });
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.searchParams.pageSize = val;
+      this.getList();
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.searchParams.currentPage = val;
+      this.getList();
+    },
+    addSystem() {
+      this.isShowAddSystemDialog = true;
+    },
+    addSystemDialogCb(obj) {
+      if (obj.isRefresh) {
+        this.getList();
+      }
+      this.isShowAddSystemDialog = false;
+    },
+    handleEdit() {},
+    handleDelete(row) {
+      this.$confirm('将删除该system, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.loading = true;
+        request.post('/mock/api/system/delete', { _id: row._id })
+          .then(() => {
+            this.$message({
+              message: '批量删除成功！',
+              type: 'success',
+            });
+            this.getList();
+          });
+        this.loading = false;
+      });
+    },
+  },
+}
+</script>
+
+<style scoped>
+
+</style>

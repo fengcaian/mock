@@ -11,7 +11,12 @@
         <div class="desc">{{urlObject.summary}}</div>
       </div>
     </el-row>
-    <el-row class="title">Parameters</el-row>
+    <el-row class="title">
+      <el-col :span="12" class="left">Parameters</el-col>
+      <el-col :span="12" class="right">
+        <el-button size="mini" @click="execute">execute</el-button>
+      </el-col>
+    </el-row>
     <div class="request" :class="{ 'green': urlObject.type === 'post', 'blue': urlObject.type === 'get' }">
       <el-row class="tbody" type="flex" justify="center">
         <el-col class="th" :span="14">Name</el-col>
@@ -20,7 +25,9 @@
       <el-form ref="form" label-width="140px" :model="form">
         <el-row v-for="parameter in parameterList" :key="parameter.name">
           <el-col :span="14">
-            <el-form-item  :label="parameter.name">
+            <el-form-item  :label="parameter.name" :prop="parameter.name" :rules="[
+              { required: parameter.required, message: '请输入有效值', trigger: 'blur' }
+            ]">
               <el-input class="width-200" size="mini" v-model="form[parameter.name]"></el-input>
               <span>{{parameter.type}}{{parameter.format ? `（${parameter.format}）` : ''}}</span>
               <span class="red" v-if="parameter.required">*required</span>
@@ -30,13 +37,17 @@
         </el-row>
       </el-form>
     </div>
-    <el-row class="title">Responses</el-row>
+    <el-row class="title">
+      <el-col :span="24" class="left">Responses</el-col>
+    </el-row>
     <div class="request" :class="{ 'green': urlObject.type === 'post', 'blue': urlObject.type === 'get' }">
-      <tabs :tabs="tabs" :activeTabClass="activeTabStyle" :tabScrollStyle="tabScrollStyle" @tabClick="tabClick"></tabs>
+      <tabs :tabs="tabs" :activeTabStyle="activeTabStyle" :tabScrollStyle="tabScrollStyle" @tabClick="tabClick"></tabs>
       <el-row class="tbody" type="flex" justify="center">
         <el-col class="th" :span="14">Code</el-col>
         <el-col class="th" :span="10">Description</el-col>
       </el-row>
+      <div v-if="isModelTabActive"></div>
+      <div v-else></div>
       <el-row v-for="response in responseList" :key="response.code">
         <el-col :span="12">{{response.code}}</el-col>
         <el-col :span="12">
@@ -51,6 +62,7 @@
 </template>
 
 <script>
+import request from '@/app/web/framework/network/request';
 import tabs from '@/app/web/component/layout/tabs';
 export default {
   props: ['dialogVisible', 'urlData'],
@@ -74,8 +86,9 @@ export default {
           label: 'Example Value'
         }
       ],
-      activeTabClass: {},
       tabScrollStyle: {},
+      activeTabStyle: {},
+      isModelTabActive: true,
     };
   },
   created() {
@@ -83,24 +96,35 @@ export default {
     this.urlJSON = JSON.stringify(this.urlData, null, 2);
     this.urlObject = JSON.parse(this.urlJSON);
     this.parameterList = this.urlObject.parameters;
-    this.parameterList.forEach(item => {
-      this.form[item.key] = '';
-    });
     Object.keys(this.urlObject.responses).forEach(key => {
       const res = this.urlObject.responses[key];
       res.code = key;
       this.responseList.push(res);
     });
     this.activeTabStyle = {
-      color: this.urlObject.type === 'post' ? '#49CC90' : '61AFFE',
+      color: this.urlObject.type === 'post' ? '#49CC90' : '#61AFFE',
     };
     this.tabScrollStyle = {
-      background: this.urlObject.type === 'post' ? '#E8F6F0' : '61AFFE',
+      background: this.urlObject.type === 'post' ? '#E8F6F0' : '#EFF7FF',
     }
   },
   methods: {
     tabClick(tab) {
       console.log(tab);
+    },
+    execute() {
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          request.post(this.urlObject.url, this.form)
+            .then(() => {
+              this.$message({
+                message: '执行成功',
+                showClose: true,
+                type: 'success',
+              });
+            });
+        }
+      });
     },
     close() {
       this.$emit('urlDetailDialogCb');
@@ -126,7 +150,7 @@ export default {
     border: 1px solid #49CC90;
   }
   .blue {
-    background: rgba(97,175,254,.1);
+    background: #EFF7FF;
     border: 1px solid #61AFFE;
   }
   .green-square {
@@ -176,6 +200,12 @@ export default {
   }
   .tab {
     border-radius: 4px;
+  }
+  .left {
+    line-height: 28px;
+  }
+  .right {
+    text-align: right;
   }
 </style>
 <style>

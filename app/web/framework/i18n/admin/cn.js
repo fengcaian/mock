@@ -5,6 +5,8 @@ export default {
     articlemanage: '文章管理',
     articlequery: '文章查询',
     articleadd: '添加文章',
+    systemmanage: '系统管理',
+    systemquery: '系统查询',
     urlmanage: 'URL',
     urlquery: 'URL查询',
   },

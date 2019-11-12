@@ -34,6 +34,9 @@ module.exports = app => {
     requestTarget: {
       type: String,
     },
+    host: {
+      type: String,
+    },
   });
   return mongoose.model('Url', UrlSchema);
 };

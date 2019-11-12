@@ -24,7 +24,7 @@ module.exports = {
       }
 
       try {
-          const result = await this.curl(`${this.app.config.apiUrl}${url}`, Object.assign(defaultOptions, options));
+          const result = await this.curl(url, Object.assign(defaultOptions, options));
           return result || null;
       } catch (e) {
           this.logger.error(`接口：${url} catch到的错误信息：${e}`);

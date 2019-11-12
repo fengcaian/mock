@@ -21,16 +21,16 @@ export default {
       type: Array,
     },
     tabClass: {
-      default: {},
       type: Object,
+      default: () => {},
     },
     activeTabStyle: {
-      default: {},
       type: Object,
+      default: () => {},
     },
     tabScrollStyle: {
-      default: {},
       type: Object,
+      default: () => {},
     },
   },
   data() {
@@ -43,7 +43,8 @@ export default {
     if (this.tabs.length) {
       this.active_tab = this.tabs[0].label;
     }
-    console.log(this.activeTabClass);
+    console.log(this.activeTabStyle);
+    console.log(this.tabScrollStyle);
   },
   methods: {
     customerActiveTabStyle(t) {

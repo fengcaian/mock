@@ -14,7 +14,10 @@ module.exports = app => {
   router.post('/mock/api/url/mock/data', controller.urlResponseManage.mockData);
   router.get('/mock/api/url/response/list', controller.urlResponseManage.getUrlResponseList);
   router.post('/mock/api/url/response/edit', controller.urlResponseManage.editUrlResponse);
+  router.get('/mock/api/system/list', controller.systemManage.list);
+  router.post('/mock/api/system/add', controller.systemManage.add);
+  router.post('/mock/api/system/delete', controller.systemManage.delete);
   router.get('/mock(/.+)?', controller.admin.home);
-  router.get(/[a-z]+/, controller.urlForward.forwardGet);
-  router.post(/[a-z]+/, controller.urlForward.forwardPost);
+  router.get(/[a-z]+/, controller.urlForward.forward);
+  router.post(/[a-z]+/, controller.urlForward.forward);
 };

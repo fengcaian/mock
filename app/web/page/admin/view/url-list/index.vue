@@ -29,8 +29,8 @@
             @selection-change="batchSelect"
             style="width: 100%;">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="hits" label="所属系统" width="200"></el-table-column>
-            <el-table-column prop="hits" label="所属分组">
+            <el-table-column prop="host" label="所属系统" width="200"></el-table-column>
+            <el-table-column label="所属分组">
                 <template slot-scope="scope">
                     <span>{{scope.row.tags[0]}}</span>
                 </template>
@@ -74,13 +74,13 @@
             </div>
             <div style="float:right">
                 <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="searchParams.currentPage"
-                        :page-sizes="[10, 15, 20, 50]"
-                        :page-size="searchParams.pageSize"
-                        layout="total, sizes, prev, pager, next, jumper"
-                        :total="total">
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="searchParams.currentPage"
+                    :page-sizes="[10, 15, 20, 50]"
+                    :page-size="searchParams.pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
                 </el-pagination>
             </div>
         </div>

@@ -3,6 +3,8 @@ export default {
     home: 'Home',
     articlemanage: 'Article Manage',
     articlequery: 'Article Query',
+    systemmanage: 'system Manage',
+    systemquery: 'system Query',
     articleadd: 'Article Add'
   },
   lang: {

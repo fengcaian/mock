@@ -5,6 +5,7 @@ import Dashboard from '../view/dashboard/index.vue';
 import ArticleList from '../view/list.vue';
 import UrlList from '../view/url-list';
 import UrlDetail from '../view/url-list/url-detail';
+import SystemList from '../view/system-list';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,10 @@ export default function createRouter() {
       {
         path: '/url/detail',
         component: UrlDetail
+      },
+      {
+        path: '/system/list',
+        component: SystemList
       },
     ]
   });

@@ -188,6 +188,43 @@
       "HEAD",
       "GET"
     ],
+    "paramNames": [],
+    "path": "/mock/api/system/list",
+    "regexp": "/^\\/mock\\/api\\/system\\/list(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/system/add",
+    "regexp": "/^\\/mock\\/api\\/system\\/add(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/system/delete",
+    "regexp": "/^\\/mock\\/api\\/system\\/delete(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
     "paramNames": [
       {
         "name": 0,

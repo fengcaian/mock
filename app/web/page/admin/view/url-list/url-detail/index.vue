@@ -105,13 +105,22 @@ export default {
         });
     },
     doRequest() {
+      const parameter = {};
+      const parameterList = this.urlObject.parameters;
+      parameterList.forEach(item => {
+        parameter[item.key] = '';
+      });
+      let params = null;
+      if (Object.keys(parameter) > 0) {
+        params = parameter;
+      }
       if (this.urlObject.type === 'post') {
-        request.post('/xxxx', this.urlObject)
+        request.post(this.urlObject.url, params)
           .then((res) => {
             console.log(res);
           });
       } else if (this.urlObject.type === 'get') {
-        request.get('/xxxx', { params: this.urlObject })
+        request.get(this.urlObject.url, { params })
           .then((res) => {
             console.log(res);
           });
