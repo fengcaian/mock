@@ -13,11 +13,12 @@ module.exports = app => {
   router.get('/mock/api/url/list', controller.urlManage.list);
   router.post('/mock/api/url/mock/data', controller.urlResponseManage.mockData);
   router.get('/mock/api/url/response/list', controller.urlResponseManage.getUrlResponseList);
+  router.get('/mock/api/url/response/by/params', controller.urlResponseManage.getUrlResponseByParams);
   router.post('/mock/api/url/response/edit', controller.urlResponseManage.editUrlResponse);
   router.get('/mock/api/system/list', controller.systemManage.list);
   router.post('/mock/api/system/add', controller.systemManage.add);
   router.post('/mock/api/system/delete', controller.systemManage.delete);
-  router.get('/mock(/.+)?', controller.admin.home);
+  router.get('/mock(/.+)?', controller.admin.notFound);
   router.get(/[a-z]+/, controller.urlForward.forward);
   router.post(/[a-z]+/, controller.urlForward.forward);
 };

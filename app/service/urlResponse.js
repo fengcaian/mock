@@ -45,6 +45,19 @@ module.exports = class UrlResponseService extends egg.Service {
       dataList: result[1],
     };
   }
+  async getUrlResponseByParams(query = {}) {
+    let result = await this.ctx.model.UrlResponse.findOne({ url: query.url });
+    if (result) {
+      return result;
+    }
+    const urlObj = await this.ctx.model.Url.findOne({ _id: query._id });
+    if (urlObj) {
+      const mockData = new Mock().mock(urlObj.responses['200'].schema.$ref);
+      await this.ctx.model.UrlResponse.create(mockData);
+      return mockData;
+    }
+    return 'url不存在！';
+  }
   async editUrlResponse(body = {}) {
     const post = {};
     Object.keys(body).forEach(key => {

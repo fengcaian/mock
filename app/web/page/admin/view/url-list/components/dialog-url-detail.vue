@@ -80,10 +80,11 @@ export default {
       tabs: [
         {
           label: 'Model',
-          name: 'Model',
+          name: 'model',
         },
         {
-          label: 'Example Value'
+          label: 'Example Value',
+          name: 'example-value',
         }
       ],
       tabScrollStyle: {},
@@ -111,6 +112,12 @@ export default {
   methods: {
     tabClick(tab) {
       console.log(tab);
+      if (tab.name === 'example-value') {
+        request.get('/mock/api/url/response/by/params', { _id: this.urlObject._id })
+          .then((res) => {
+            console.log(res);
+          });
+      }
     },
     execute() {
       this.$refs.form.validate((valid) => {

@@ -98,7 +98,7 @@ export default {
         });
     },
     generateMockData() {
-      request.post('/mock/api/url/mock/data', { _id: this.$route.query.id })
+      request.post('/mock/api/url/mock/data', { _id: this.$route.query.id, url: this.$store.state.shareData.url })
         .then((res) => {
           console.log(res);
           this.getDataList();

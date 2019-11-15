@@ -1,5 +1,7 @@
 'use strict';
 const egg = require('egg');
+const Response = require('../util/Response');
+
 module.exports = class AdminController extends egg.Controller {
   async home(ctx) {
     const url = ctx.url.replace(/\/mock/, '');
@@ -18,5 +20,8 @@ module.exports = class AdminController extends egg.Controller {
   async detail(ctx) {
     const { id } = ctx.params;
     ctx.body = await ctx.service.article.query({ id: Number(id) });
+  }
+  async notFound() {
+    this.ctx.body = new Response(404, null, '资源找不到');
   }
 };
