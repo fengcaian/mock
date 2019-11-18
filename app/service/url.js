@@ -1,5 +1,6 @@
 'use strict';
 const egg = require('egg');
+const { type } = require('../util/common');
 
 module.exports = class UrlService extends egg.Service {
   constructor(ctx) {
@@ -40,17 +41,61 @@ module.exports = class UrlService extends egg.Service {
             urlObj[key] = obj[key];
           }
         });
-        const { $ref } = urlObj.responses['200'].schema;
-        if ($ref) {
-          const def = {};
-          _analysisRef(definitions[$ref.slice(14)], def, definitions);
-          urlObj.responses['200'].schema.$ref = def;
+        // analyse(urlObj.responses['200'], {});
+        const { schema } = urlObj.responses['200'];
+        if (schema) {
+          const { $ref } = schema;
+          if ($ref) {
+            const def = {};
+            recursiveObject(definitions[$ref.slice(14)], def, definitions);
+            // _analysisRef(definitions[$ref.slice(14)], def, definitions);
+            urlObj.responses['200'].schema.$ref = def;
+          }
         }
         urlObj.requestTarget = 'backend';
         urlObj.host = host;
         dataList.push(urlObj);
       });
     });
+
+    function analyse(res, result, definitions) {
+      Object.keys(res).forEach((key) => {
+        if (typeof res[key] === 'object') {
+          result[key] = {};
+          analyse(res[key], result[key]);
+        } else if (key === '$ref') {
+          const def = {};
+          analysisDefinitions(res[key], def, definitions);
+          result[key] = def;
+        } else {
+          result[key] = res[key];
+        }
+      });
+    }
+    function analysisDefinitions($refStr, def, definitions) {
+      let defStr = $refStr.slice(14);
+      if (type(definitions[defStr]) === 'Object') {
+        Object.keys(definitions[defStr]).forEach((key) => {
+          def[key] = {};
+          analysisDefinitions(definitions[defStr][key], def[key]);
+        });
+      }
+    }
+
+    function recursiveObject(object, result, definitions) {
+      Object.keys(object).forEach((key) => {
+        if (type(object[key]) === 'Object') {
+          result[key] = {};
+          recursiveObject(object[key], result[key], definitions);
+        } else if (key === '$ref') {
+          const def = definitions[object[key].slice(14)];
+          result[key] = {};
+          recursiveObject(def, result[key], definitions);
+        } else {
+          result[key] = object[key];
+        }
+      });
+    }
 
     function _analysisRef(o, result, definitions) {
       Object.keys(o).forEach(key => {
@@ -70,7 +115,7 @@ module.exports = class UrlService extends egg.Service {
       if ($refStr.indexOf('«') === -1) {
         def = definitions[$refStr.slice(14)];
       } else if ($refStr.indexOf('List') === -1 && $refStr.indexOf('Map') === -1) {
-          const str = $refStr.match(new RegExp(/(?<=«).*?(?=»)/))[0];
+        const str = $refStr.match(new RegExp(/(?<=«).*?(?=»)/))[0];
         def = definitions[str];
       } else if ($refStr.indexOf('List') !== -1) {
         const str = $refStr.match(new RegExp(/(?<=List«).*?(?=»)/))[0];
