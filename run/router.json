@@ -262,11 +262,33 @@
       "HEAD",
       "GET"
     ],
-    "paramNames": [],
+    "paramNames": [
+      {
+        "name": 0,
+        "prefix": null,
+        "delimiter": null,
+        "optional": false,
+        "repeat": false,
+        "partial": false,
+        "asterisk": false,
+        "pattern": null
+      }
+    ],
     "path": {
-      "keys": []
+      "keys": [
+        {
+          "name": 0,
+          "prefix": null,
+          "delimiter": null,
+          "optional": false,
+          "repeat": false,
+          "partial": false,
+          "asterisk": false,
+          "pattern": null
+        }
+      ]
     },
-    "regexp": "/[a-z]+/",
+    "regexp": "/([a-z]+)/",
     "stack": [
       "wrappedController"
     ]
@@ -276,11 +298,33 @@
     "methods": [
       "POST"
     ],
-    "paramNames": [],
+    "paramNames": [
+      {
+        "name": 0,
+        "prefix": null,
+        "delimiter": null,
+        "optional": false,
+        "repeat": false,
+        "partial": false,
+        "asterisk": false,
+        "pattern": null
+      }
+    ],
     "path": {
-      "keys": []
+      "keys": [
+        {
+          "name": 0,
+          "prefix": null,
+          "delimiter": null,
+          "optional": false,
+          "repeat": false,
+          "partial": false,
+          "asterisk": false,
+          "pattern": null
+        }
+      ]
     },
-    "regexp": "/[a-z]+/",
+    "regexp": "/([a-z]+)/",
     "stack": [
       "wrappedController"
     ]

@@ -19,6 +19,6 @@ module.exports = app => {
   router.post('/mock/api/system/add', controller.systemManage.add);
   router.post('/mock/api/system/delete', controller.systemManage.delete);
   router.get('/mock(/.+)?', controller.admin.notFound);
-  router.get(/[a-z]+/, controller.urlForward.forward);
-  router.post(/[a-z]+/, controller.urlForward.forward);
+  router.get(/([a-z]+)/, controller.urlForward.forward);
+  router.post(/([a-z]+)/, controller.urlForward.forward);
 };

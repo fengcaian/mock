@@ -33,17 +33,18 @@ module.exports = class UrlController extends egg.Controller {
   async forward(ctx) {
     console.log(ctx);
     console.log(ctx.origin);
+    console.log(`${ctx.origin}${ctx.url}`);
     try {
       if (ctx.request.method === 'GET') {
         const [ result ] = await Promise.all([
-          ctx.doCurl(`https://fatdingding.szlcsc.com${ctx.url}`, {
+          ctx.doCurl(`${ctx.origin}${ctx.url}`, {
             data: ctx.query,
           }),
         ]);
         this.ctx.body = result;
       } else if (ctx.request.method === 'POST') {
         const [ result ] = await Promise.all([
-          ctx.doCurl(`https://fatdingding.szlcsc.com${ctx.url}`, {
+          ctx.doCurl(`${ctx.origin}${ctx.url}`, {
             data: ctx.request.body,
           }),
         ]);
