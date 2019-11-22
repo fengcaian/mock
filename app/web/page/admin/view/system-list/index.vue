@@ -14,6 +14,14 @@
           <el-button type="success" size="mini" icon="el-icon-plus" @click="addSystem"></el-button>
         </template>
         <template slot-scope="scope">
+          <el-switch
+              v-model="scope.row.isEnabled"
+              :active-value="true"
+              :inactive-value="false"
+              active-text="关闭"
+              inactive-text="启用"
+              @change="isEnabledChanged(scope.row)">
+          </el-switch>
           <router-link :to="{params: {id: scope.row.id}}" tag="span">
             <el-button type="info" size="small" icon="edit" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
           </router-link>
@@ -95,6 +103,15 @@ export default {
       this.isShowAddSystemDialog = false;
     },
     handleEdit() {},
+    isEnabledChanged(row) {
+      request.post('/mock/api/system/enable', row)
+        .then((res) => {
+          this.$message({
+            message: res.msg || '切换成功！',
+            type: 'success',
+          });
+        });
+    },
     handleDelete(row) {
       this.$confirm('将删除该system, 是否继续?', '提示', {
         confirmButtonText: '确定',

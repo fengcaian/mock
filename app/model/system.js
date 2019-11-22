@@ -9,6 +9,9 @@ module.exports = app => {
     systemName: {
       type: String,
     },
+    isEnabled: {
+      type: Boolean,
+    },
   });
   return mongoose.model('System', SystemSchema);
 };

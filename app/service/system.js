@@ -27,4 +27,11 @@ module.exports = class systemService extends egg.Service {
     });
     return result;
   }
+  async enableSwitch(body = {}) {
+    let result = null;
+    await this.ctx.model.System.update({ _id: body._id }, body, (msg) => {
+      result = msg;
+    });
+    return result;
+  }
 };

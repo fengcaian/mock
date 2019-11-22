@@ -24,4 +24,12 @@ module.exports = class systemManageController extends egg.Controller {
       ctx.logger.error(e);
     }
   }
+  async enableSwitch(ctx) {
+    try {
+      const result = await ctx.service.system.enableSwitch(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
 };
