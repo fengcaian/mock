@@ -18,7 +18,7 @@
         <el-table :data="dataList" style="width: 100%">
             <el-table-column label="类型" width="180" align="center">
                 <template slot-scope="scope">
-                    <span>{{scope.row.mock === 'mock_data' ? 'mock数据' : '后端数据'}}</span>
+                    <span>{{scope.row.dataType === 'mock_data' ? 'mock数据' : '后端数据'}}</span>
                 </template>
             </el-table-column>
             <el-table-column label="详情" align="center">

@@ -11,6 +11,12 @@
       <el-form-item label="url" prop="systemUrl">
         <el-input class="width-200" v-model="form.systemUrl"></el-input>
       </el-form-item>
+      <el-form-item label="是否启用">
+        <el-radio-group v-model="form.isEnabled">
+          <el-radio :label="true">是</el-radio>
+          <el-radio :label="false">否</el-radio>
+        </el-radio-group>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button size="mini" @click="close">取 消</el-button>
@@ -30,6 +36,7 @@ export default {
       form: {
         systemName: '',
         systemUrl: '',
+        isEnabled: false,
       },
       rules: {
         systemName: [

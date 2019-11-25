@@ -12,7 +12,7 @@ module.exports = class UrlResponseService extends egg.Service {
   async mockData(body = {}) {
     try {
       const urlObj = await this.ctx.model.Url.findOne({ _id: body._id });
-      const mockData = new Mock().mock(urlObj.responses['200'].schema.$ref);
+      const mockData = new Mock().mock(urlObj.responses['200']);
       mockData.url = body.url;
       mockData.urlId = body._id;
       mockData.dataType = 'mock_data';

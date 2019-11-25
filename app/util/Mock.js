@@ -6,20 +6,16 @@ const { LETTER } = require('./constant');
 module.exports = class Mock {
   constructor() {}
   mock(dataModel) {
-    const { properties } = dataModel;
     let obj = {
       code: 200,
       msg: 'success',
     };
-    if (properties.result && type(properties.result) === 'Object' && properties.result.$ref) {
-      const { $ref } = properties.result;
-      if ($ref.type === 'object') {
-        obj.result = this.getObjectData($ref.properties);
-      } else if ($ref.type === 'array') {
-        obj.result = [this.getObjectData($ref.properties)];
-      }
-    } else if (type(properties.result) === 'Object') {
-      obj.result = this.getObjectData(properties.result);
+    if (type(dataModel.result) === 'Object') {
+      obj.result = this.getObjectData(dataModel.result);
+    } else if (type(dataModel.result) === 'Array') {
+      obj.result = [this.getObjectData(dataModel.result)];
+    } else {
+      obj.result = undefined;
     }
     return obj;
   }

@@ -2,23 +2,22 @@
     <div>
         <div class="search">
             <el-row class="clear">
-                <label> 标题:</label><el-input class="search-input" clearable v-model="searchParams.title" placeholder="关键字"></el-input>
-                <label> 分类:</label><el-select  v-model="searchParams.categoryId" placeholder="分类">
+                <label> 标题:</label><el-input class="search-input" size="mini" clearable v-model="searchParams.title" placeholder="关键字"></el-input>
+                <label> 分类:</label><el-select size="mini" v-model="searchParams.categoryId" placeholder="分类">
                 <el-option v-for="item in categories"
                            :key="item.id"
                            :label="item.name"
                            :value="item.categoryId">
                 </el-option>
             </el-select>
-                <label> 状态:</label><el-select  v-model="searchParams.status" placeholder="状态">
+                <label> 状态:</label><el-select size="mini" v-model="searchParams.status" placeholder="状态">
                 <el-option v-for="item in status"
                            :key="item.id"
                            :label="item.name"
                            :value="item.status">
                 </el-option>
             </el-select>
-                <el-button class="search-button" type="primary" @click="search">查询</el-button>
-                <el-button class="add-button" type="success" @click="write()">写文章</el-button>
+                <el-button class="search-button" size="mini" type="primary" @click="search">查询</el-button>
             </el-row>
         </div>
         <el-table
@@ -157,9 +156,6 @@ export default {
           this.total = result.totalRow;
         });
     },
-    write() {
-      this.$router.push("/article/add");
-    },
     handleSelectionChange(val) {
       console.log("handleSelectionChange", val);
     },
@@ -230,7 +226,6 @@ export default {
       this.$router.push(`/url/detail?id=${row._id}`);
     },
     requestTargetChanged(row) {
-      console.log(row);
       request.post('/mock/api/url/request/target/switch', row)
         .then((res) => {
           this.$message({

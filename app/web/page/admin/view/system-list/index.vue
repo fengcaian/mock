@@ -18,8 +18,8 @@
               v-model="scope.row.isEnabled"
               :active-value="true"
               :inactive-value="false"
-              active-text="关闭"
-              inactive-text="启用"
+              active-text="启用"
+              inactive-text="关闭"
               @change="isEnabledChanged(scope.row)">
           </el-switch>
           <router-link :to="{params: {id: scope.row.id}}" tag="span">
