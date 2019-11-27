@@ -16,6 +16,14 @@ module.exports = class systemManageController extends egg.Controller {
       ctx.logger.error(e);
     }
   }
+  async update(ctx) {
+    try {
+      const result = await ctx.service.system.update(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
   async delete(ctx) {
     try {
       const result = await ctx.service.system.delete(ctx.request.body);

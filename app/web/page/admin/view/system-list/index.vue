@@ -22,10 +22,8 @@
               inactive-text="关闭"
               @change="isEnabledChanged(scope.row)">
           </el-switch>
-          <router-link :to="{params: {id: scope.row.id}}" tag="span">
-            <el-button type="info" size="small" icon="edit" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-          </router-link>
-          <el-button type="danger" size="small" icon="delete" @click="handleDelete(scope.row)">删除</el-button>
+          <el-button type="info" size="mini" icon="edit" @click="modifySystem(scope.row)">修改</el-button>
+          <el-button type="danger" size="mini" icon="delete" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -45,16 +43,24 @@
       :addSystemDialogVisible="isShowAddSystemDialog"
       @addSystemDialogCb="addSystemDialogCb">
     </dialog-add-system>
+    <dialog-modify-system
+      v-if="isShowModifySystemDialog"
+      :modifySystemDialogVisible="isShowModifySystemDialog"
+      :system="systemObj"
+      @modifySystemDialogCb="modifySystemDialogCb">
+    </dialog-modify-system>
   </div>
 </template>
 
 <script>
 import request from '@/app/web/framework/network/request';
 import dialogAddSystem from './components/dialog-add-system';
+import dialogModifySystem from './components/dialog-modify-system';
 
 export default {
   components: {
     dialogAddSystem,
+    dialogModifySystem,
   },
   data() {
     return {
@@ -66,6 +72,8 @@ export default {
       total: 0,
       loading: false,
       isShowAddSystemDialog: false,
+      isShowModifySystemDialog: false,
+      systemObj: null,
     };
   },
   created() {
@@ -102,7 +110,16 @@ export default {
       }
       this.isShowAddSystemDialog = false;
     },
-    handleEdit() {},
+    modifySystem(row) {
+      this.systemObj = row;
+      this.isShowModifySystemDialog = true;
+    },
+    modifySystemDialogCb(obj) {
+      if (obj.isRefresh) {
+        this.getList();
+      }
+      this.isShowModifySystemDialog = false;
+    },
     isEnabledChanged(row) {
       request.post('/mock/api/system/enable', row)
         .then((res) => {

@@ -20,6 +20,13 @@ module.exports = class systemService extends egg.Service {
     console.log(body);
     await this.ctx.model.System.create(body);
   }
+  async update(body = {}) {
+    let result = null;
+    await this.ctx.model.System.update({ _id: body._id }, body, (msg) => {
+      result = msg;
+    });
+    return result;
+  }
   async delete(body = {}) {
     let result = null;
     await this.ctx.model.System.remove({ _id: body._id }, (msg) => {

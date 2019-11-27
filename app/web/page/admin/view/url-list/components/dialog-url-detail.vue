@@ -63,6 +63,7 @@
 
 <script>
 import request from '@/app/web/framework/network/request';
+import { swaggerDefineHttpColor } from '@/app/web/framework/constants';
 import tabs from '@/app/web/component/layout/tabs';
 export default {
   props: ['dialogVisible', 'urlData'],
@@ -87,10 +88,38 @@ export default {
           name: 'example-value',
         }
       ],
-      tabScrollStyle: {},
-      activeTabStyle: {},
+      // tabScrollStyle: {},
+      // activeTabStyle: {},
       isModelTabActive: true,
     };
+  },
+  computed: {
+    httpMethodObj() {
+      if (this.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
+        return this.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type);
+      }
+      return {};
+    },
+    activeTabStyle() {
+      if (this.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
+        return {
+          color: this.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type).color
+        };
+      }
+      return {
+        color: '',
+      };
+    },
+    tabScrollStyle() {
+      if (this.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
+        return {
+          background: this.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type).lightColor
+        };
+      }
+      return {
+        background: this.httpMethodObj.lightColor,
+      }
+    }
   },
   created() {
     this.dialogShow = this.dialogVisible;
@@ -102,12 +131,12 @@ export default {
       res.code = key;
       this.responseList.push(res);
     });
-    this.activeTabStyle = {
-      color: this.urlObject.type === 'post' ? '#49CC90' : '#61AFFE',
-    };
-    this.tabScrollStyle = {
-      background: this.urlObject.type === 'post' ? '#E8F6F0' : '#EFF7FF',
-    }
+    // this.activeTabStyle = {
+    //   color: this.httpMethodObj.color,
+    // };
+    // this.tabScrollStyle = {
+    //   background: this.httpMethodObj.lightColor,
+    // }
   },
   methods: {
     tabClick(tab) {
