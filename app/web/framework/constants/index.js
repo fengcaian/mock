@@ -1,6 +1,6 @@
-const httpMethods = ['get', 'head', 'post', 'put', 'delete', 'connect', 'options', 'trace', 'patch'];
+export const httpMethods = ['get', 'head', 'post', 'put', 'delete', 'connect', 'options', 'trace', 'patch'];
 
-const swaggerDefineHttpColor = [
+export const swaggerDefineHttpColor = [
   {
     code: 'get',
     color: '#61AFFE',
@@ -12,5 +12,3 @@ const swaggerDefineHttpColor = [
     lightColor: '#E8F6F0',
   },
 ];
-
-module.exports = { httpMethods, swaggerDefineHttpColor };

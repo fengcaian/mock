@@ -63,7 +63,7 @@
 
 <script>
 import request from '@/app/web/framework/network/request';
-import { swaggerDefineHttpColor } from '@/app/web/framework/constants';
+import * as constants from '@/app/web/framework/constants';
 import tabs from '@/app/web/component/layout/tabs';
 export default {
   props: ['dialogVisible', 'urlData'],
@@ -95,29 +95,31 @@ export default {
   },
   computed: {
     httpMethodObj() {
-      if (this.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
-        return this.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type);
+      if (constants.swaggerDefineHttpColor && typeof this.urlData.type === 'string') {
+        return constants.swaggerDefineHttpColor.find(item => item.code === this.urlData.type);
       }
       return {};
     },
     activeTabStyle() {
-      if (this.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
+      if (constants.swaggerDefineHttpColor && typeof this.urlData.type === 'string') {
         return {
-          color: this.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type).color
+          color: constants.swaggerDefineHttpColor.find(item => item.code === this.urlData.type).color
         };
       }
+      console.log(constants.swaggerDefineHttpColor);
+      console.log(typeof this.urlData.type);
       return {
         color: '',
       };
     },
     tabScrollStyle() {
-      if (this.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
+      if (constants.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
         return {
-          background: this.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type).lightColor
+          background: constants.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type).lightColor
         };
       }
       return {
-        background: this.httpMethodObj.lightColor,
+        background: '',
       }
     }
   },
