@@ -21,15 +21,16 @@
             </el-row>
         </div>
         <el-table
+            border
             :data="dataList"
+            :row-style="rowStyle"
             v-loading="loading"
             element-loading-text="拼命加载中"
-            border
             @selection-change="batchSelect"
             style="width: 100%;">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="host" label="所属系统" width="200"></el-table-column>
-            <el-table-column label="所属分组">
+            <el-table-column prop="host" label="所属系统"></el-table-column>
+            <el-table-column label="所属分组" width="200">
                 <template slot-scope="scope">
                     <span>{{scope.row.tags[0]}}</span>
                 </template>
@@ -62,12 +63,12 @@
         <div style="margin-top: 16px">
             <div style="float:left">
                 <el-button
-                        type="danger"
-                        icon="delete"
-                        size="small"
-                        :disabled="batchSelectArray.length === 0"
-                        @click="batchDel"
-                        slot="handler">
+                    type="danger"
+                    icon="delete"
+                    size="small"
+                    :disabled="batchSelectArray.length === 0"
+                    @click="batchDel"
+                    slot="handler">
                     <span>批量删除</span>
                 </el-button>
             </div>
@@ -91,13 +92,13 @@
         </dialog-url-detail>
     </div>
 </template>
-<style>
 
-</style>
 <script type="jsx">
 import request from '@/app/web/framework/network/request';
+import * as constants from '@/app/web/framework/constants';
 
 import dialogUrlDetail from './components/dialog-url-detail';
+
 export default {
   components: {
     dialogUrlDetail,
@@ -233,6 +234,9 @@ export default {
             type: 'success',
           });
         });
+    },
+    rowStyle({ row }) {
+      return `background: ${constants.swaggerDefineHttpColor.find(item => item.code === row.type).lightColor}`;
     },
   },
 };

@@ -5,8 +5,8 @@
     :visible.sync="dialogShow"
     :before-close="close">
     <el-row>
-      <div class="head" :class="{ 'green': urlObject.type === 'post', 'blue': urlObject.type === 'get' }">
-        <div class="type" :class="{ 'green-square': urlObject.type === 'post', 'blue-square': urlObject.type === 'get' }">{{urlObject.type}}</div>
+      <div class="head" :style="{background: httpMethodColor.lightColor, border: `1px solid ${httpMethodColor.color}`}">
+        <div class="type" :style="{background: httpMethodColor.color}">{{urlObject.type}}</div>
         <div class="url">{{urlObject.url}}</div>
         <div class="desc">{{urlObject.summary}}</div>
       </div>
@@ -17,7 +17,7 @@
         <el-button size="mini" @click="execute">execute</el-button>
       </el-col>
     </el-row>
-    <div class="request" :class="{ 'green': urlObject.type === 'post', 'blue': urlObject.type === 'get' }">
+    <div class="request" :style="{background: httpMethodColor.lightColor, border: `1px solid ${httpMethodColor.color}`}">
       <el-row class="tbody" type="flex" justify="center">
         <el-col class="th" :span="14">Name</el-col>
         <el-col class="th" :span="10">Description</el-col>
@@ -40,24 +40,29 @@
     <el-row class="title">
       <el-col :span="24" class="left">Responses</el-col>
     </el-row>
-    <div class="request" :class="{ 'green': urlObject.type === 'post', 'blue': urlObject.type === 'get' }">
+    <div class="request" :style="{background: httpMethodColor.lightColor, border: `1px solid ${httpMethodColor.color}`}">
       <tabs :tabs="tabs" :activeTabStyle="activeTabStyle" :tabScrollStyle="tabScrollStyle" @tabClick="tabClick"></tabs>
       <el-row class="tbody" type="flex" justify="center">
         <el-col class="th" :span="14">Code</el-col>
         <el-col class="th" :span="10">Description</el-col>
       </el-row>
-      <div v-if="isModelTabActive"></div>
+      <div v-if="isModelTabActive">
+        <el-row v-for="response in responseList" :key="response.code">
+          <el-col :span="4">{{response.code}}</el-col>
+          <el-col :span="20">
+            <div>
+              <pre style="background: initial" class="dialog-height" v-high-light>
+                <code class="json" spellcheck="false">{{response}}</code>
+              </pre>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
       <div v-else></div>
-      <el-row v-for="response in responseList" :key="response.code">
-        <el-col :span="12">{{response.code}}</el-col>
-        <el-col :span="12">
-          <div>response</div>
-        </el-col>
-      </el-row>
     </div>
-        <pre class="dialog-height" v-high-light>
-          <code class="json" spellcheck="false">{{urlData}}</code>
-        </pre>
+        <!--<pre class="dialog-height" v-high-light>-->
+          <!--<code class="json" spellcheck="false">{{urlData}}</code>-->
+        <!--</pre>-->
   </el-dialog>
 </template>
 
@@ -88,26 +93,22 @@ export default {
           name: 'example-value',
         }
       ],
-      // tabScrollStyle: {},
-      // activeTabStyle: {},
       isModelTabActive: true,
     };
   },
   computed: {
-    httpMethodObj() {
+    httpMethodColor() {
       if (constants.swaggerDefineHttpColor && typeof this.urlData.type === 'string') {
         return constants.swaggerDefineHttpColor.find(item => item.code === this.urlData.type);
       }
-      return {};
+      return '';
     },
     activeTabStyle() {
       if (constants.swaggerDefineHttpColor && typeof this.urlData.type === 'string') {
         return {
-          color: constants.swaggerDefineHttpColor.find(item => item.code === this.urlData.type).color
+          color: constants.swaggerDefineHttpColor.find(item => item.code === this.urlData.type).color,
         };
       }
-      console.log(constants.swaggerDefineHttpColor);
-      console.log(typeof this.urlData.type);
       return {
         color: '',
       };
@@ -115,7 +116,7 @@ export default {
     tabScrollStyle() {
       if (constants.swaggerDefineHttpColor && typeof this.urlObject.type === 'string') {
         return {
-          background: constants.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type).lightColor
+          background: constants.swaggerDefineHttpColor.find(item => item.code === this.urlObject.type).lightColor,
         };
       }
       return {
@@ -133,14 +134,11 @@ export default {
       res.code = key;
       this.responseList.push(res);
     });
-    // this.activeTabStyle = {
-    //   color: this.httpMethodObj.color,
-    // };
-    // this.tabScrollStyle = {
-    //   background: this.httpMethodObj.lightColor,
-    // }
   },
   methods: {
+    getColorBoolean(color) {
+
+    },
     tabClick(tab) {
       console.log(tab);
       if (tab.name === 'example-value') {
@@ -173,7 +171,7 @@ export default {
 
 <style scoped>
   .dialog-height {
-      max-height: 650px;
+    max-height: 650px;
   }
   .head {
     height: 43px;
