@@ -9,16 +9,10 @@ module.exports = app => {
     urlId: {
         type: String,
     },
-    code: {
-        type: Number,
-    },
-    msg: {
-        type: String,
-    },
     dataType: {
       type: String,
     },
-    result: {},
+    response: {},
   });
   return mongoose.model('UrlResponse', UrlResponseSchema);
 };

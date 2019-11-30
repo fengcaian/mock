@@ -12,10 +12,13 @@ module.exports = class UrlResponseService extends egg.Service {
   async mockData(body = {}) {
     try {
       const urlObj = await this.ctx.model.Url.findOne({ _id: body._id });
-      const mockData = new Mock().mock(urlObj.responses['200']);
-      mockData.url = body.url;
-      mockData.urlId = body._id;
-      mockData.dataType = 'mock_data';
+      const response = new Mock().mock(urlObj.responses['200']);
+      const mockData = {
+        url: body.url,
+        urlId: body._id,
+        dataType: 'mock_data',
+        response,
+      };
       await this.ctx.model.UrlResponse.create(mockData);
       return mockData;
     } catch (e) {
@@ -52,7 +55,7 @@ module.exports = class UrlResponseService extends egg.Service {
     }
     const urlObj = await this.ctx.model.Url.findOne({ _id: query._id });
     if (urlObj) {
-      const mockData = new Mock().mock(urlObj.responses['200'].schema.$ref);
+      const mockData = new Mock().mock(urlObj.responses['200']);
       await this.ctx.model.UrlResponse.create(mockData);
       return mockData;
     }

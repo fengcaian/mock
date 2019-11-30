@@ -4,7 +4,7 @@
         width="500px"
         :visible.sync="dialogShow"
         :before-close="close">
-        <el-input type="textarea" :rows="20" :autosize="{ minRows: 4 }" v-model="responseJSON"></el-input>
+        <el-input type="textarea" :rows="20" :autosize="{ minRows: 4 }" v-model="response"></el-input>
         <span slot="footer" class="dialog-footer">
             <el-button size="mini" @click="close">取 消</el-button>
             <el-button size="mini" type="primary" @click="confirm">保 存</el-button>
@@ -20,26 +20,21 @@ export default {
   data() {
     return {
       dialogShow: false,
-      response: {},
-      responseJSON: '',
-      notExistProps: ['_id', 'url', 'urlId', 'dataType', '__v'],
+      responseForm: {
+        response: null,
+      },
+      response: '',
     };
   },
   created() {
     this.dialogShow = this.editUrlResponseDialogVisible;
-    const resData = JSON.parse(JSON.stringify(this.urlResponseData));
-    Object.keys(resData).forEach(key => {
-      if (this.notExistProps.indexOf(key) === -1) {
-        this.response[key] = resData[key];
-      }
-    });
-    this.responseJSON = JSON.stringify(this.response, null, 2);
+    this.responseForm = JSON.parse(JSON.stringify(this.urlResponseData));
+    this.response = JSON.stringify(this.responseForm.response, null, 2);
   },
   methods: {
     confirm() {
-      const params = JSON.parse(this.responseJSON);
-      params._id = this.urlResponseData._id;
-      request.post('/mock/api/url/response/edit', params)
+      this.responseForm.response = JSON.parse(this.response);
+      request.post('/mock/api/url/response/edit', this.responseForm)
         .then(() => {
           this.$message({
             message: '保存成功！',

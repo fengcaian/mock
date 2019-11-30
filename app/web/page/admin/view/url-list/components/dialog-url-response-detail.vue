@@ -5,7 +5,7 @@
         :visible.sync="dialogShow"
         :before-close="close">
         <pre class="dialog-height" v-high-light>
-          <code class="json" spellcheck="false">{{[urlResponseData]}}</code>
+          <code class="json" spellcheck="false">{{response}}</code>
         </pre>
     </el-dialog>
 </template>
@@ -16,11 +16,13 @@ export default {
   data() {
     return {
       dialogShow: false,
+      response: null,
     };
   },
   created() {
-    console.log(this.urlResponseData);
+    console.log(this.urlResponseData.response);
     this.dialogShow = this.urlResponseDetailDialogVisible;
+    this.response = this.urlResponseData.response;
   },
   methods: {
     close() {

@@ -128,6 +128,7 @@ export default {
     },
     showDetail(row) {
       this.urlResponseData = row;
+      console.log(row);
       this.isShowUrlResponseDetailDialog = true;
     },
     urlResponseDetailDialogCb() {
