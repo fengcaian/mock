@@ -7,7 +7,6 @@ module.exports = class Mock {
   constructor() {}
   mock(dataModel) {
     console.log(dataModel);
-    const that = this;
     function recursiveObject(o) {
       if (type(o) === 'Object' && o.type === undefined) { //有type属性的认为是最底层的数据节点
         let newO = {};
@@ -22,27 +21,27 @@ module.exports = class Mock {
             if (type(o) === 'Array' || type(o) === 'Object' && o.type === undefined) {
               newArr[i] = recursiveObject(item);
             } else {
-              newArr[i] = that.randomValue(item);
+              newArr[i] = Mock.randomValue(item);
             }
           });
         }
         return newArr;
       } else if (type(o) === 'Object') {
-        return that.randomValue(o);
+        return Mock.randomValue(o);
       } else {
         return 200;
       }
     }
     return recursiveObject(dataModel);
   }
-  randomValue(obj) {
+  static randomValue(obj) {
     let s = '';
     switch (obj.type) {
       case 'string':
         if (obj.format === 'date-time') {
           s = dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss');
         } else {
-          s = this.getRandomLetterStr(12);
+          s = Mock.getRandomLetterStr(12);
         }
         break;
       case 'integer':
@@ -54,7 +53,7 @@ module.exports = class Mock {
     }
     return s;
   }
-  getRandomLetterStr(length = 10) {
+  static getRandomLetterStr(length = 10) {
     let str = '';
     for (let i = 0; i < length; i += 1) {
       str += LETTER[Math.floor(Math.random() * 26)];

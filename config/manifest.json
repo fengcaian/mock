@@ -1,18 +1,9 @@
 {
-  "chunk/0.css": "/public/css/0.css",
   "chunk/0.js": "/public/js/chunk/0.js",
-  "chunk/1.css": "/public/css/1.css",
-  "chunk/1.js": "/public/js/chunk/1.js",
-  "chunk/2.css": "/public/css/2.css",
-  "chunk/2.js": "/public/js/chunk/2.js",
-  "chunk/3.js": "/public/js/chunk/3.js",
-  "chunk/4.js": "/public/js/chunk/4.js",
   "admin.css": "/public/css/admin.css",
   "admin.js": "/public/js/chunk/admin.js",
   "runtime.js": "/public/js/runtime.js",
   "font/index.css": "/public/font/element-icons.woff",
-  "font/font-awesome.min.css": "/public/font/fontawesome-webfont.woff2",
-  "img/font-awesome.min.css": "/public/img/fontawesome-webfont.svg",
   "vendor.js": "/public/js/vendor.js",
   "deps": {
     "admin.js": {

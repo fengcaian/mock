@@ -41,4 +41,7 @@ module.exports = class systemService extends egg.Service {
     });
     return result;
   }
+  async reloadSwaggerAPI(body = {}) {
+
+  }
 };

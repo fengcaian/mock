@@ -24,6 +24,7 @@
           </el-switch>
           <el-button type="info" size="mini" icon="edit" @click="modifySystem(scope.row)">修改</el-button>
           <el-button type="danger" size="mini" icon="delete" @click="handleDelete(scope.row)">删除</el-button>
+          <el-button type="danger" size="mini" icon="delete" @click="reloadAPI(scope.row)">重新加载swagger接口</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -146,6 +147,20 @@ export default {
           });
         this.loading = false;
       });
+    },
+    reloadAPI(row) {
+      request.post('/mock/api/system/swagger/api/reload', { _id: row._id })
+        .then(() => {
+          this.$message({
+            message: '已重新加载该系统所有swagger接口！',
+            type: 'success',
+          });
+        }, () => {
+          this.$message({
+            message: '该系统swagger服务可能未启动，更新失败！',
+            type: 'warning',
+          });
+        });
     },
   },
 }

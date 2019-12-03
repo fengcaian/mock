@@ -18,6 +18,7 @@ module.exports = app => {
   router.get('/mock/api/system/list', controller.systemManage.list);
   router.post('/mock/api/system/add', controller.systemManage.add);
   router.post('/mock/api/system/update', controller.systemManage.update);
+  router.post('/mock/api/system/swagger/api/reload', controller.systemManage.reloadSwaggerAPI);
   router.post('/mock/api/system/delete', controller.systemManage.delete);
   router.post('/mock/api/system/enable', controller.systemManage.enableSwitch);
   router.get('/mock(/.+)?', controller.admin.notFound);
