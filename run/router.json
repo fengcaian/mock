@@ -238,6 +238,18 @@
       "POST"
     ],
     "paramNames": [],
+    "path": "/mock/api/system/add/ipaddress",
+    "regexp": "/^\\/mock\\/api\\/system\\/add\\/ipaddress(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
     "path": "/mock/api/system/swagger/api/reload",
     "regexp": "/^\\/mock\\/api\\/system\\/swagger\\/api\\/reload(?:\\/(?=$))?$/",
     "stack": [

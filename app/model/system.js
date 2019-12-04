@@ -12,6 +12,7 @@ module.exports = app => {
     isEnabled: {
       type: Boolean,
     },
+    ipAddressList: [],
   });
   return mongoose.model('System', SystemSchema);
 };

@@ -41,6 +41,13 @@ module.exports = class systemService extends egg.Service {
     });
     return result;
   }
+  async addIpAddress(body = {}) {
+    let result = null;
+    await this.ctx.model.System.update({ _id: body._id }, { $set: { ipAddressList: body.ipAddressList } }, (msg) => {
+      result = msg;
+    });
+    return result;
+  }
   async reloadSwaggerAPI(body = {}) {
 
   }

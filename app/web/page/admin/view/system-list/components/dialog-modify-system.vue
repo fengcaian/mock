@@ -66,7 +66,7 @@ export default {
               this.$emit('modifySystemDialogCb', { isRefresh: true });
             });
         }
-      })
+      });
     },
     close() {
       this.$emit('modifySystemDialogCb', { isRefresh: false });

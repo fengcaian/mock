@@ -7,8 +7,12 @@
       element-loading-text="拼命加载中"
       style="width: 100%;">
       <el-table-column prop="systemName" label="系统名称" align="center" width="200"></el-table-column>
-      <el-table-column prop="systemUrl" label="url" align="center"></el-table-column>
-      <el-table-column label="操作" width="350" align="center">
+      <el-table-column label="url" align="center">
+        <template slot-scope="scope">
+          <el-button type="text" size="mini" @click="showSystemIpMap">{{scope.row.systemUrl}}</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" align="center">
         <template slot="header">
           操作
           <el-button type="success" size="mini" icon="el-icon-plus" @click="addSystem"></el-button>
@@ -24,7 +28,7 @@
           </el-switch>
           <el-button type="info" size="mini" icon="edit" @click="modifySystem(scope.row)">修改</el-button>
           <el-button type="danger" size="mini" icon="delete" @click="handleDelete(scope.row)">删除</el-button>
-          <el-button type="danger" size="mini" icon="delete" @click="reloadAPI(scope.row)">重新加载swagger接口</el-button>
+          <el-button type="primary" size="mini" icon="delete" @click="reloadAPI(scope.row)">重新加载swagger接口</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -50,6 +54,12 @@
       :system="systemObj"
       @modifySystemDialogCb="modifySystemDialogCb">
     </dialog-modify-system>
+    <dialog-system-ip-map
+      v-if="isShowSystemIpMapDialog"
+      :systemIpMapDialogVisible="isShowSystemIpMapDialog"
+      :system="systemObj"
+      @systemIpMapDialogCb="systemIpMapDialogCb">
+    </dialog-system-ip-map>
   </div>
 </template>
 
@@ -57,11 +67,13 @@
 import request from '@/app/web/framework/network/request';
 import dialogAddSystem from './components/dialog-add-system';
 import dialogModifySystem from './components/dialog-modify-system';
+import dialogSystemIpMap from './components/dialog-system-ip-map';
 
 export default {
   components: {
     dialogAddSystem,
     dialogModifySystem,
+    dialogSystemIpMap,
   },
   data() {
     return {
@@ -74,6 +86,7 @@ export default {
       loading: false,
       isShowAddSystemDialog: false,
       isShowModifySystemDialog: false,
+      isShowSystemIpMapDialog: false,
       systemObj: null,
     };
   },
@@ -161,6 +174,12 @@ export default {
             type: 'warning',
           });
         });
+    },
+    showSystemIpMap() {
+      this.isShowSystemIpMapDialog = true;
+    },
+    systemIpMapDialogCb() {
+      this.isShowSystemIpMapDialog = false;
     },
   },
 }
