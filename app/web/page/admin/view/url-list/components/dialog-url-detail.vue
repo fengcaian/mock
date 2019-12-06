@@ -69,7 +69,7 @@
 <script>
 import request from '@/app/web/framework/network/request';
 import * as constants from '@/app/web/framework/constants';
-import tabs from '@/app/web/component/layout/tabs';
+import tabs from '@/app/web/component/layout/Tabs';
 export default {
   props: ['dialogVisible', 'urlData'],
   components: {

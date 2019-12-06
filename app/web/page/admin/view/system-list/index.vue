@@ -9,7 +9,7 @@
       <el-table-column prop="systemName" label="系统名称" align="center" width="200"></el-table-column>
       <el-table-column label="url" align="center">
         <template slot-scope="scope">
-          <el-button type="text" size="mini" @click="showSystemIpMap">{{scope.row.systemUrl}}</el-button>
+          <el-button type="text" size="mini" @click="showSystemIpMap(scope.row)">{{scope.row.systemUrl}}</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center">
@@ -175,10 +175,14 @@ export default {
           });
         });
     },
-    showSystemIpMap() {
+    showSystemIpMap(row) {
+      this.systemObj = row;
       this.isShowSystemIpMapDialog = true;
     },
-    systemIpMapDialogCb() {
+    systemIpMapDialogCb(obj) {
+      if (obj.isRefresh) {
+        this.getList();
+      }
       this.isShowSystemIpMapDialog = false;
     },
   },

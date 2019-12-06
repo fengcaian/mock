@@ -9,29 +9,41 @@ import SystemList from '../view/system-list';
 Vue.use(VueRouter);
 
 export default function createRouter() {
-  return new VueRouter({
+  const router =  new VueRouter({
     mode: 'history',
     base: '/mock/',
     routes: [
       {
         path: '/',
+        meta: { title: '统计面板' },
         component: Dashboard
       },
       {
-        path: '*', component: () => import('../view/notfound.vue')
+        path: '*', component: () => import('../view/notfound.vue'),
+        meta: { title: '404 not found' },
       },
       {
         path: '/url/list',
+        meta: { title: 'URL查询' },
         component: UrlList
       },
       {
         path: '/url/detail',
+        meta: { title: 'URL详情' },
         component: UrlDetail
       },
       {
         path: '/system/list',
+        meta: { title: '系统查询' },
         component: SystemList
       },
     ]
   });
+  router.beforeEach((to, from, next) => {
+    if (to.meta.title) {
+      document.title = to.meta.title;
+    }
+    next();
+  });
+  return router;
 }
