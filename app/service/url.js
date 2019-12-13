@@ -23,6 +23,9 @@ module.exports = class UrlService extends egg.Service {
       return;
     }
     const dataList = [];
+    if (!result[0].data) {
+      return;
+    }
     result.forEach(item => {
       const { data } = item;
       const { paths, definitions, host } = data;
@@ -56,10 +59,19 @@ module.exports = class UrlService extends egg.Service {
 
     function recursiveObject(o, definitions) {
       let result = {};
+      if (!o) {
+        return result;
+      }
       let object = o;
       const { $ref } = o;
-      if (type($ref) === 'String') {
+      if (!$ref) {
+        return result;
+      }
+      if (type($ref) === 'String' && definitions[$ref.slice(14)]) {
         object = definitions[$ref.slice(14)].properties;
+      }
+      if (!object) {
+        return;
       }
       Object.keys(object).forEach((key) => {
         let value = object[key];

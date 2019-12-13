@@ -12,6 +12,7 @@ module.exports = class UrlResponseService extends egg.Service {
   async mockData(body = {}) {
     try {
       const urlObj = await this.ctx.model.Url.findOne({ _id: body._id });
+      console.log(JSON.stringify(urlObj.responses));
       const response = new Mock().mock(urlObj.responses['200']);
       const mockData = {
         url: body.url,

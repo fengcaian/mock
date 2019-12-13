@@ -4,10 +4,13 @@ module.exports = {
     return this.app.db;
   },
   async doCurl(url, options, callback) {
+
       const defaultOptions = {
           timeout: this.app.config.curlTimeout,
           dataType: 'json',
           method: 'GET',
+          strictSSL: false, // solve 'unable to verify the first certificate' problem
+          rejectUnauthorized: false,
       };
       defaultOptions.headers = {
           'x-token': this.req.headers['x-token'],

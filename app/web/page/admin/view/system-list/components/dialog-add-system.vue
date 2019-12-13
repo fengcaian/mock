@@ -4,12 +4,17 @@
     width="600px"
     :visible.sync="dialogShow"
     :before-close="close">
-    <el-form ref="form" label-width="120px" size="mini" :model="form" :rules="rules">
+    <el-form ref="form" label-width="100px" size="mini" :model="form" :rules="rules">
       <el-form-item label="系统名称" prop="systemName">
         <el-input class="width-200" v-model="form.systemName"></el-input>
       </el-form-item>
       <el-form-item label="url" prop="systemUrl">
         <el-input class="width-200" v-model="form.systemUrl"></el-input>
+      </el-form-item>
+      <el-form-item label="api" prop="systemApi">
+        <el-input class="width-350" v-model="form.systemApi">
+          <template slot="append">默认为/v2/api-docs</template>
+        </el-input>
       </el-form-item>
       <el-form-item label="是否启用">
         <el-radio-group v-model="form.isEnabled">
@@ -44,6 +49,7 @@ export default {
       form: {
         systemName: '',
         systemUrl: '',
+        systemApi: '/v2/api-docs',
         isEnabled: false,
         ipAddress: '',
       },
@@ -93,6 +99,9 @@ export default {
 </script>
 
 <style scoped>
+  .width-350 {
+    width: 350px;
+  }
   .width-200 {
     width: 200px;
   }

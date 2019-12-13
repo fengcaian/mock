@@ -6,6 +6,9 @@ module.exports = app => {
     systemUrl: {
       type: String,
     },
+    systemApi: {
+      type: String,
+    },
     systemName: {
       type: String,
     },
