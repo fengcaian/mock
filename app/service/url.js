@@ -9,14 +9,16 @@ module.exports = class UrlService extends egg.Service {
   }
   async getUrlAllList(body = {}) {
     const [systemList] = await Promise.all([
-      this.ctx.model.System.find()
+      this.ctx.model.System.find({ isEnabled: true })
     ]);
     const promises = [];
     if (!systemList.length) {
       return;
     }
-    systemList.filter(system => system.isEnabled).forEach((item) => {
-      promises.push(this.ctx.doCurl(`${item.systemUrl}/v2/api-docs`));
+    systemList.forEach((item) => {
+      if (item.systemUrl && item.systemApi) {
+        promises.push(this.ctx.doCurl(`${item.systemUrl}${item.systemApi}`));
+      }
     });
     const result = await Promise.all(promises);
     if (!result.length) {
@@ -26,7 +28,7 @@ module.exports = class UrlService extends egg.Service {
     if (!result[0].data) {
       return;
     }
-    result.forEach(item => {
+    result.forEach((item, index) => {
       const { data } = item;
       const { paths, definitions, host } = data;
       let obj = {}; // { url: '', [post/get/delete...]: {} }
@@ -52,7 +54,8 @@ module.exports = class UrlService extends egg.Service {
           }
         }
         urlObj.requestTarget = 'backend';
-        urlObj.host = `${item.res.requestUrls[0].split('//')[0]}//${host}`;
+        urlObj.host = `${item.headers['access-control-allow-origin']}`;
+        urlObj.hostIp = systemList[index].ipAddressList[0].value;
         dataList.push(urlObj);
       });
     });
@@ -64,9 +67,6 @@ module.exports = class UrlService extends egg.Service {
       }
       let object = o;
       const { $ref } = o;
-      if (!$ref) {
-        return result;
-      }
       if (type($ref) === 'String' && definitions[$ref.slice(14)]) {
         object = definitions[$ref.slice(14)].properties;
       }
@@ -132,6 +132,13 @@ module.exports = class UrlService extends egg.Service {
     };
     try{
       await this.ctx.model.Url.update({ _id: body._id }, post);
+    } catch (e) {
+      this.ctx.logger.error(e);
+    }
+  }
+  async getUrlSingle(host, url, type) {
+    try {
+      return await this.ctx.model.Url.findOne({ host, url, type });
     } catch (e) {
       this.ctx.logger.error(e);
     }

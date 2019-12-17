@@ -12,6 +12,9 @@ module.exports = app => {
     dataType: {
       type: String,
     },
+    isPriority: {
+      type: Boolean,
+    },
     response: {},
   });
   return mongoose.model('UrlResponse', UrlResponseSchema);

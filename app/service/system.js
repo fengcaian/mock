@@ -16,6 +16,13 @@ module.exports = class systemService extends egg.Service {
       dataList: result[1],
     };
   }
+  async getSystemSingle(systemUrl) {
+    try {
+      return await this.ctx.model.System.findOne({ systemUrl });
+    } catch (e) {
+      this.ctx.logger.error(e);
+    }
+  }
   async add(body = {}) {
     console.log(body);
     await this.ctx.model.System.create(body);

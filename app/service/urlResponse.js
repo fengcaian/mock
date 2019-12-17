@@ -75,4 +75,11 @@ module.exports = class UrlResponseService extends egg.Service {
       this.ctx.logger.error(e);
     }
   }
+  async setPriority(body = {}) {
+    let result = null;
+    await this.ctx.model.UrlResponse.update({ _id: body._id }, { $set: { isPriority: body.isPriority } }, (msg) => {
+      result = msg;
+    });
+    return result;
+  }
 };

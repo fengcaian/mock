@@ -36,4 +36,12 @@ module.exports = class UrlResponseManageController extends egg.Controller {
       ctx.logger.error(e);
     }
   }
+  async setPriority(ctx) {
+    try {
+      const result  = await ctx.service.urlResponse.setPriority(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
 };

@@ -50,7 +50,7 @@ export default {
         _id: '',
         systemName: '',
         systemUrl: '',
-        systemApi: '/v2/api-docs',
+        systemApi: '',
         isEnabled: false,
         ipAddress: '',
       },
@@ -68,6 +68,7 @@ export default {
     this.form._id = this.system._id;
     this.form.systemName = this.system.systemName;
     this.form.systemUrl = this.system.systemUrl;
+    this.form.systemApi = this.system.systemApi;
     this.form.isEnabled = this.system.isEnabled;
     this.form.ipAddress = this.system.ipAddressList.length ? this.system.ipAddressList[0].value : '';
     this.dialogShow = this.modifySystemDialogVisible;
@@ -83,6 +84,7 @@ export default {
             _id: this.form._id,
             systemName: this.form.systemName,
             systemUrl: this.form.systemUrl,
+            systemApi: this.form.systemApi,
             isEnabled: false,
             ipAddressList: [{ label: 'IP地址1', value: this.form.ipAddress }],
           };

@@ -198,6 +198,18 @@
   {
     "name": null,
     "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/response/set/priority",
+    "regexp": "/^\\/mock\\/api\\/url\\/response\\/set\\/priority(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
       "HEAD",
       "GET"
     ],

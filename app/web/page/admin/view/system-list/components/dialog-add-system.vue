@@ -76,6 +76,7 @@ export default {
           const params = {
             systemName: this.form.systemName,
             systemUrl: this.form.systemUrl,
+            systemApi: this.form.systemApi,
             isEnabled: false,
             ipAddressList: [{ label: 'IP地址1', value: this.form.ipAddress }],
           };

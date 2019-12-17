@@ -15,7 +15,7 @@
             <el-button type="success" size="mini" @click="generateMockData">生成模拟数据</el-button>
             <el-button type="primary" size="mini" @click="doRequest">发送请求</el-button>
         </el-form>
-        <el-table :data="dataList" style="width: 100%">
+        <el-table border :data="dataList" style="width: 100%">
             <el-table-column label="类型" width="180" align="center">
                 <template slot-scope="scope">
                     <span>{{scope.row.dataType === 'mock_data' ? 'mock数据' : '后端数据'}}</span>
@@ -26,7 +26,19 @@
                     <el-button type="text" size="mini" @click="showDetail(scope.row)">{{JSON.stringify(scope.row)}}</el-button>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" align="center">
+            <el-table-column label="是否设为优先数据" align="center" width="200">
+                <template slot-scope="scope">
+                    <el-switch
+                        v-model="scope.row.isPriority"
+                        active-color="#13ce66"
+                        inactive-color="#ff4949"
+                        :active-value="true"
+                        :inactive-value="false"
+                        @change="setPriority(scope.row)">
+                    </el-switch>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" align="center" width="200">
                 <template slot-scope="scope">
                     <el-button type="warning" size="mini" @click="edit(scope.row)">编辑</el-button>
                 </template>
@@ -143,6 +155,12 @@ export default {
       if (obj.isRefresh) {
         this.getDataList();
       }
+    },
+    setPriority(row) {
+      request.post('/mock/api/url/response/set/priority', row)
+        .then(() => {
+          this.getDataList();
+        });
     },
     back() {
       this.$router.push({ path: '/url/list' });
