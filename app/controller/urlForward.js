@@ -62,7 +62,12 @@ module.exports = class UrlController extends egg.Controller {
           ]);
         }
       }
-      this.ctx.body = result;
+      ctx.set('Access-Control-Expose-Headers', 'Set-Cookie');
+      ctx.set('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Referer,User-Agent,TOKEN');
+      ctx.set('Access-Control-Allow-Credentials', 'true');
+      ctx.set('Access-Control-Allow-Methods', 'POST, GET');
+      ctx.set('Access-Control-Allow-Origin', 'https://deverp.szlcsc.com');
+      ctx.body = result[0].data;
     } catch (e) {
       ctx.logger.error(e);
     }
