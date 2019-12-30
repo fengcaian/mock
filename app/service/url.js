@@ -17,7 +17,7 @@ module.exports = class UrlService extends egg.Service {
     }
     systemList.forEach((item) => {
       if (item.systemUrl && item.systemApi) {
-        promises.push(this.ctx.doCurl(`${item.systemUrl}${item.systemApi}`));
+        promises.push(this.ctx.doCurl(`https://${item.ipAddressList[0].value}:5013${item.systemApi}`, { method: 'GET' }));
       }
     });
     const result = await Promise.all(promises);
@@ -92,9 +92,16 @@ module.exports = class UrlService extends egg.Service {
     return dataList;
   }
   async getUrlList(query = {}) {
+    const params = {};
+    if (query.url) {
+      params.url = query.url;
+    }
+    if (query.system) {
+      params.host = query.system;
+    }
     const list = await Promise.all([
       this.ctx.model.Url.count(true),
-      this.ctx.model.Url.find()
+      this.ctx.model.Url.find(params)
         .sort({ id: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
         .limit(Number(query.pageSize)),

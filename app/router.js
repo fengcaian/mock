@@ -25,5 +25,6 @@ module.exports = app => {
   router.post('/mock/api/system/enable', controller.systemManage.enableSwitch);
   router.get('/mock(/.+)?', controller.admin.notFound);
   router.get(/([a-z]+)/, controller.urlForward.forward);
+  router.options(/([a-z]+)/, controller.urlForward.forward);
   router.post(/([a-z]+)/, controller.urlForward.forward);
 };

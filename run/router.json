@@ -356,6 +356,42 @@
   {
     "name": null,
     "methods": [
+      "OPTIONS"
+    ],
+    "paramNames": [
+      {
+        "name": 0,
+        "prefix": null,
+        "delimiter": null,
+        "optional": false,
+        "repeat": false,
+        "partial": false,
+        "asterisk": false,
+        "pattern": null
+      }
+    ],
+    "path": {
+      "keys": [
+        {
+          "name": 0,
+          "prefix": null,
+          "delimiter": null,
+          "optional": false,
+          "repeat": false,
+          "partial": false,
+          "asterisk": false,
+          "pattern": null
+        }
+      ]
+    },
+    "regexp": "/([a-z]+)/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
       "POST"
     ],
     "paramNames": [

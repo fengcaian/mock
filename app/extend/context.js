@@ -8,7 +8,7 @@ module.exports = {
       const defaultOptions = {
           timeout: this.app.config.curlTimeout,
           dataType: 'json',
-          method: 'GET',
+          method: options.method,
           strictSSL: false, // solve 'unable to verify the first certificate' problem
           rejectUnauthorized: false,
       };
@@ -18,6 +18,7 @@ module.exports = {
           'x-customer-code': this.req.headers['x-customer-code'],
           'user-agent': this.req.headers['user-agent'],
           'x-req-url': this.req.url,
+          'Content-Type': options.contentType,
           origin: this.req.headers.origin,
           cookie: this.req.headers.cookie,
           referer: this.req.headers.referer,
@@ -27,10 +28,11 @@ module.exports = {
       }
 
       try {
-          const result = await this.curl(url, Object.assign(defaultOptions, options));
-          return result || null;
+        Object.assign(defaultOptions, options)
+        const result = await this.curl(url, defaultOptions);
+        return result || null;
       } catch (e) {
-          this.logger.error(`接口：${url} catch到的错误信息：${e}`);
+        this.logger.error(`接口：${url} catch到的错误信息：${e}`);
       }
     },
 };

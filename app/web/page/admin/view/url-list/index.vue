@@ -1,25 +1,16 @@
 <template>
     <div>
-        <div class="search">
-            <el-row class="clear">
-                <label> 标题:</label><el-input class="search-input" size="mini" clearable v-model="searchParams.title" placeholder="关键字"></el-input>
-                <label> 分类:</label><el-select size="mini" v-model="searchParams.categoryId" placeholder="分类">
-                <el-option v-for="item in categories"
-                           :key="item.id"
-                           :label="item.name"
-                           :value="item.categoryId">
-                </el-option>
-            </el-select>
-                <label> 状态:</label><el-select size="mini" v-model="searchParams.status" placeholder="状态">
-                <el-option v-for="item in status"
-                           :key="item.id"
-                           :label="item.name"
-                           :value="item.status">
-                </el-option>
-            </el-select>
+        <el-form size="mini" :inline="true" :model="searchParams">
+            <el-form-item label="系统：">
+                <el-input class="search-input" size="mini" clearable v-model="searchParams.system" placeholder="系统"></el-input>
+            </el-form-item>
+            <el-form-item label="url：">
+                <el-input class="search-input" size="mini" clearable v-model="searchParams.url" placeholder="url"></el-input>
+            </el-form-item>
+            <el-form-item>
                 <el-button class="search-button" size="mini" type="primary" @click="search">查询</el-button>
-            </el-row>
-        </div>
+            </el-form-item>
+        </el-form>
         <el-table
             border
             :data="dataList"
@@ -106,9 +97,8 @@ export default {
   data() {
     return {
       searchParams: {
-        title: undefined,
-        categoryId: undefined,
-        statusId: undefined,
+        system: '',
+        url: '',
         currentPage: 1,
         pageSize: 10
       },
@@ -122,26 +112,7 @@ export default {
       isShowUrlDetailDialog: false,
     };
   },
-  computed: {
-    status() {
-      return [
-        { status: undefined, name: "--请选择--" },
-        { status: 1, name: "已发布" },
-        { status: 2, name: "草稿" }
-      ];
-    },
-    categories() {
-      return [
-        { categoryId: 0, name: "--请选择--" },
-        { categoryId: 1, name: "Nodejs" },
-        { categoryId: 2, name: "Webpack" },
-        { categoryId: 3, name: "Egg" }
-      ];
-    },
-    articleList() {
-      return this.$store.state.articleList;
-    }
-  },
+  computed: {},
   created() {
     this.search();
   },
@@ -151,7 +122,13 @@ export default {
       this.getList();
     },
     getList() {
-      request.get('/mock/api/url/list', this.searchParams)
+      const params = {};
+      Object.keys(this.searchParams).forEach((key) => {
+        if (this.searchParams[key] !== '') {
+          params[key] = this.searchParams[key];
+        }
+      });
+      request.get('/mock/api/url/list', params)
         .then(({ result }) => {
           this.dataList = result.dataList;
           this.total = result.totalRow;
