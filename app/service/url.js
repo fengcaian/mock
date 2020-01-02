@@ -125,6 +125,16 @@ module.exports = class UrlService extends egg.Service {
     });
     return result;
   }
+  async update(body = {}) {
+    let result = null;
+    const params = JSON.parse(JSON.stringify(body));
+    delete params._id;
+    console.log(params);
+    await this.ctx.model.Url.update({ _id: body._id }, { $set: params }, (msg) => {
+      result = msg;
+    });
+    return result;
+  }
   async batchDelete(body = {}) {
     let result = null;
     await this.ctx.model.Url.remove(null, (msg) => {
@@ -145,7 +155,8 @@ module.exports = class UrlService extends egg.Service {
   }
   async getUrlSingle(host, url, type) {
     try {
-      return await this.ctx.model.Url.findOne({ host, url, type });
+      const result = await this.ctx.model.Url.find({ url, type });
+      return result.length ? result[0] : {};
     } catch (e) {
       this.ctx.logger.error(e);
     }

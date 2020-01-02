@@ -82,4 +82,21 @@ module.exports = class UrlResponseService extends egg.Service {
     });
     return result;
   }
+  async getResponse(query = {}) {
+    try {
+      let result = await this.ctx.model.UrlResponse.find({ url: query.url, isPriority: true });
+      if (result.length) {
+        return [
+          {
+            data: result[0].response,
+          },
+        ];
+      }
+      const mockData = this.mockData(query);
+      result = [mockData];
+      return result;
+    } catch (e) {
+      this.ctx.logger.error(e);
+    }
+  }
 };

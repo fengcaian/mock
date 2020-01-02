@@ -31,10 +31,8 @@ module.exports = class UrlController extends egg.Controller {
     }
   }
   async forward(ctx) {
-    console.log(ctx);
-    console.log(ctx.origin);
-    console.log(`${ctx.origin}${ctx.url}`);
     try {
+      const url = ctx.url.split('?')[0];
       let params, result = {};
       let ipAddress = '';
       let port = ctx.request.headers['x-forwarded-port'];
@@ -45,8 +43,9 @@ module.exports = class UrlController extends egg.Controller {
       }
       const urlObj = await ctx.service.url.getUrlSingle(
         `${ctx.request.headers['x-scheme']}://${ctx.request.headers.host}`,
-        ctx.url,
-        ctx.request.method.toLowerCase());
+        url,
+        ctx.request.method.toLowerCase() === 'options' ? 'post': ctx.request.method.toLowerCase(),
+      );
       if (urlObj.requestTarget === 'backend') {
         ipAddress = urlObj && urlObj.hostIp;
         if (!ipAddress) {
@@ -59,6 +58,7 @@ module.exports = class UrlController extends egg.Controller {
             }
           ];
         } else {
+          console.log(params);
           result = await Promise.all([
             ctx.doCurl(`${ctx.request.headers['x-scheme']}://${ipAddress}${port ? `:${port}`: ''}${ctx.url}`, {
               data: params,
@@ -74,8 +74,9 @@ module.exports = class UrlController extends egg.Controller {
           };
           await this.ctx.model.UrlResponse.create(urlResponse);
         }
-      } else {
-
+      }
+      if (urlObj.requestTarget === 'mock') {
+        result = ctx.service.urlResponse.getResponse(urlObj);
       }
       ctx.set('Access-Control-Expose-Headers', 'Set-Cookie');
       ctx.set('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Referer,User-Agent,TOKEN');

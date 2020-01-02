@@ -45,9 +45,9 @@
                         @change="requestTargetChanged(scope.row)">
                     </el-switch>
                     <router-link :to="{params: {id: scope.row.id}}" tag="span">
-                        <el-button type="info" size="small" icon="edit" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                        <el-button type="info" size="mini" icon="edit" @click="handleEdit(scope.row)">修改</el-button>
                     </router-link>
-                    <el-button type="danger" size="small" icon="delete" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                    <el-button type="danger" size="mini" icon="delete" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -81,6 +81,12 @@
             :urlData="row"
             @urlDetailDialogCb="urlDetailDialogCb">
         </dialog-url-detail>
+        <dialog-url-edit
+            v-if="isShowUrlEditDialog"
+            :dialogVisible="isShowUrlEditDialog"
+            :urlData="row"
+            @urlEditDialogCb="urlEditDialogCb">
+        </dialog-url-edit>
     </div>
 </template>
 
@@ -89,10 +95,12 @@ import request from '@/app/web/framework/network/request';
 import * as constants from '@/app/web/framework/constants';
 
 import dialogUrlDetail from './components/dialog-url-detail';
+import dialogUrlEdit from './components/dialog-url-edit';
 
 export default {
   components: {
     dialogUrlDetail,
+    dialogUrlEdit,
   },
   data() {
     return {
@@ -110,6 +118,7 @@ export default {
       total: 0,
       row: {},
       isShowUrlDetailDialog: false,
+      isShowUrlEditDialog: false,
     };
   },
   computed: {},
@@ -147,8 +156,15 @@ export default {
       this.searchParams.currentPage = val;
       this.getList();
     },
-    handleEdit(index, row) {
-      this.$message(`你点击了编辑操作 index:${index}, id:${row.id}`);
+    handleEdit(row) {
+      this.row = row;
+      this.isShowUrlEditDialog = true;
+    },
+    urlEditDialogCb(obj) {
+      if (obj.isRefresh) {
+        this.getList();
+      }
+      this.isShowUrlEditDialog = false;
     },
     handleDelete(index, row) {
       this.$confirm('将删除选择的url, 是否继续?', '提示', {
