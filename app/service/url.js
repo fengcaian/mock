@@ -8,22 +8,18 @@ module.exports = class UrlService extends egg.Service {
     this.ctx = ctx;
   }
   async getUrlAllList(body = {}) {
-    const [systemList] = await Promise.all([
-      this.ctx.model.System.find({ isEnabled: true })
-    ]);
-    const promises = [];
-    if (!systemList.length) {
-      return;
+    const ip = body.ipAddressList[0].value;
+    if (!body.systemUrl || !body.systemApi || !ip) {
+      return 'ip地址或api不存在！';
     }
-    systemList.forEach((item) => {
-      if (item.systemUrl && item.systemApi) {
-        promises.push(this.ctx.doCurl(`https://${item.ipAddressList[0].value}:5013${item.systemApi}`, { method: 'GET' }));
-      }
-    });
-    const result = await Promise.all(promises);
+    const protocol = body.systemUrl.split(':')[0];
+    const result = await Promise.all([this.ctx.doCurl(`${body.systemUrl}${body.systemApi}`, { method: 'GET' })]);
     if (!result.length) {
       return;
     }
+    console.log(`${body.systemUrl}${body.systemApi}`);
+    console.log(`${protocol}://${ip}${body.systemApi}`);
+    console.log(result);
     const dataList = [];
     if (!result[0].data) {
       return;
@@ -54,8 +50,8 @@ module.exports = class UrlService extends egg.Service {
           }
         }
         urlObj.requestTarget = 'backend';
-        urlObj.host = `${item.headers['access-control-allow-origin']}`;
-        urlObj.hostIp = systemList[index].ipAddressList[0].value;
+        urlObj.host = body.systemUrl;
+        urlObj.hostIp = ip;
         dataList.push(urlObj);
       });
     });
@@ -87,7 +83,10 @@ module.exports = class UrlService extends egg.Service {
       });
       return result;
     }
-
+    if (dataList.length) {
+      await this.ctx.model.Url.remove({ host: body.systemUrl });
+    }
+    console.log(body.systemUrl);
     this.ctx.model.Url.create(dataList);
     return dataList;
   }

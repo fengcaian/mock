@@ -13,7 +13,7 @@
                 </el-checkbox-group>
             </el-form-item>
             <el-button type="success" size="mini" @click="generateMockData">生成模拟数据</el-button>
-            <el-button type="primary" size="mini" @click="doRequest">发送请求</el-button>
+            <el-button type="primary" size="mini" disabled @click="doRequest">发送请求</el-button>
         </el-form>
         <el-table border :data="dataList" style="width: 100%">
             <el-table-column label="类型" width="180" align="center">
@@ -23,7 +23,7 @@
             </el-table-column>
             <el-table-column label="详情" align="center">
                 <template slot-scope="scope">
-                    <el-button type="text" size="mini" @click="showDetail(scope.row)">{{JSON.stringify(scope.row)}}</el-button>
+                    <el-button type="text" size="mini" @click="showDetail(scope.row)">{{JSON.stringify(scope.row.response)}}</el-button>
                 </template>
             </el-table-column>
             <el-table-column label="是否设为优先数据" align="center" width="200">
@@ -75,7 +75,9 @@ export default {
         dataType: ['mock数据', '后端数据'],
         currentPage: 1,
         pageSize: 20,
-        urlId: '',
+        system: '',
+        url: '',
+        type: '',
       },
       dataList: [],
       id: '',
@@ -86,8 +88,10 @@ export default {
     };
   },
   created() {
-    this.searchParam.urlId = this.$route.query.id;
     this.urlObject = this.$store.state.shareData;
+    this.searchParam.system = this.urlObject.host;
+    this.searchParam.url = this.urlObject.url;
+    this.searchParam.type = this.urlObject.type;
     console.log(this.urlObject);
     this.getDataList();
   },
@@ -110,7 +114,7 @@ export default {
         });
     },
     generateMockData() {
-      request.post('/mock/api/url/mock/data', { _id: this.$route.query.id, url: this.$store.state.shareData.url })
+      request.post('/mock/api/url/mock/data', { _id: this.$route.query._id, url: this.$store.state.shareData.url })
         .then((res) => {
           console.log(res);
           this.getDataList();

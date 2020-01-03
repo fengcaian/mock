@@ -33,7 +33,15 @@ export default {
   },
   methods: {
     confirm() {
-      this.responseForm.response = JSON.parse(this.response);
+      try {
+        this.responseForm.response = JSON.parse(this.response);
+      } catch (e) {
+        this.$message({
+          message: 'JSON格式不正确，请修改为正确的JSON格式！',
+          type: 'warning',
+        });
+        return;
+      }
       request.post('/mock/api/url/response/edit', this.responseForm)
         .then(() => {
           this.$message({

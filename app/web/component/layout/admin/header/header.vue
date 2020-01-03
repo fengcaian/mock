@@ -33,7 +33,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>{{$t('header.profile')}}</el-dropdown-item>
             <el-dropdown-item @click.native="logout">{{$t('header.logout')}}</el-dropdown-item>
-            <el-dropdown-item @click.native="refreshSwagger">{{$t('header.refreshSwagger')}}</el-dropdown-item>
+            <!--<el-dropdown-item @click.native="refreshSwagger">{{$t('header.refreshSwagger')}}</el-dropdown-item>-->
           </el-dropdown-menu>
         </el-dropdown>
       </div>

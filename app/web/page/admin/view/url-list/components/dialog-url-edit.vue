@@ -6,7 +6,7 @@
       :before-close="close">
     <el-form ref="form" label-width="140px" size="mini" :model="form">
       <el-form-item label="url:">{{form.url}}</el-form-item>
-      <el-form-item label="ip地址">
+      <el-form-item label="ip地址:">
         <ip-address-input :value="form.hostIp" :inline="true" @ipAddressInputCb="ipAddressInputCb"></ip-address-input>
       </el-form-item>
     </el-form>

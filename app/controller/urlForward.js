@@ -36,7 +36,7 @@ module.exports = class UrlController extends egg.Controller {
       let params, result = {};
       let ipAddress = '';
       let port = ctx.request.headers['x-forwarded-port'];
-      if (['GET', 'OPTIONS'.indexOf(ctx.request.method) !== -1]) {
+      if (['GET', 'OPTIONS'].indexOf(ctx.request.method) !== -1) {
         params = {};
       } else if (ctx.request.method === 'POST') {
         params = ctx.request.headers['x-content-type'] === 'application/json;charset=UTF-8' ? JSON.stringify(ctx.request.body) : ctx.request.body;
@@ -67,8 +67,9 @@ module.exports = class UrlController extends egg.Controller {
             }),
           ]);
           const urlResponse = {
+            system: urlObj.host,
             url: urlObj.url,
-            urlId: urlObj._id,
+            type: urlObj.type,
             dataType: 'backend_data',
             response: result[0].data,
           };

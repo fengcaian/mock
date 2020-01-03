@@ -28,7 +28,7 @@
           </el-switch>
           <el-button type="info" size="mini" icon="edit" @click="modifySystem(scope.row)">修改</el-button>
           <el-button type="danger" size="mini" icon="delete" @click="handleDelete(scope.row)">删除</el-button>
-          <el-button type="primary" size="mini" icon="delete" @click="reloadAPI(scope.row)">重新加载swagger接口</el-button>
+          <el-button type="primary" size="mini" icon="delete" @click="loadAPI(scope.row)">加载swagger接口</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -161,16 +161,20 @@ export default {
         this.loading = false;
       });
     },
-    reloadAPI(row) {
-      request.post('/mock/api/system/swagger/api/reload', { _id: row._id })
+    loadAPI(row) {
+      this.$confirm('该系统下存在的所有接口将被加载替换，确认加载？', '操作提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(() => request.post('/mock/api/url/swagger', row), () => {})
         .then(() => {
           this.$message({
-            message: '已重新加载该系统所有swagger接口！',
+            message: '已加载该系统swagger接口！',
             type: 'success',
           });
-        }, () => {
+        }, (e) => {
           this.$message({
-            message: '该系统swagger服务可能未启动，更新失败！',
+            message: e || '该系统swagger服务可能未启动，更新失败！',
             type: 'warning',
           });
         });

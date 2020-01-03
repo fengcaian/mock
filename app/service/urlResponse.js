@@ -12,11 +12,13 @@ module.exports = class UrlResponseService extends egg.Service {
   async mockData(body = {}) {
     try {
       const urlObj = await this.ctx.model.Url.findOne({ _id: body._id });
+      console.log(JSON.stringify(body._id));
       console.log(JSON.stringify(urlObj.responses));
       const response = new Mock().mock(urlObj.responses['200']);
       const mockData = {
-        url: body.url,
-        urlId: body._id,
+        system: urlObj.host,
+        url: urlObj.url,
+        type: urlObj.type,
         dataType: 'mock_data',
         response,
       };
@@ -28,7 +30,9 @@ module.exports = class UrlResponseService extends egg.Service {
   }
   async getUrlResponseList(query = {}) {
     let queryParams = {
-      urlId: query.urlId,
+      system: query.system,
+      url: query.url,
+      type: query.type,
     };
     if (query.dataType) {
       const dataType = query.dataType.split(',');
@@ -36,6 +40,7 @@ module.exports = class UrlResponseService extends egg.Service {
         $in: dataType.map(dt => DATA_TYPE.find(item => item.name === dt).code),
       };
     }
+    console.log(queryParams);
     const result = await Promise.all([
       this.ctx.model.UrlResponse.count(true),
       this.ctx.model.UrlResponse

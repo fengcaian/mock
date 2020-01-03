@@ -217,7 +217,7 @@ export default {
     goToDetail(row) {
       console.log(row);
       this.$store.dispatch('SetShareData', row);
-      this.$router.push(`/url/detail?id=${row._id}`);
+      this.$router.push(`/url/detail?_id=${row._id}`);
     },
     requestTargetChanged(row) {
       request.post('/mock/api/url/request/target/switch', row)

@@ -1,6 +1,7 @@
 'use strict';
 module.exports = app => {
   const { router, controller } = app;
+  router.get('/', controller.admin.home);
   router.post('/mock/api/url/swagger', controller.urlManage.swaggerUrlList);
   router.post('/mock/api/url/delete', controller.urlManage.delete);
   router.post('/mock/api/url/update', controller.urlManage.update);

@@ -1,10 +1,10 @@
 <template>
   <el-dialog
-    title="添加系统"
+    title="编辑系统"
     width="600px"
     :visible.sync="dialogShow"
     :before-close="close">
-    <el-form ref="form" label-width="100px" size="mini" :model="form" :rules="rules">
+    <el-form ref="form" label-width="105px" size="mini" :model="form" :rules="rules">
       <el-form-item label="系统名称" prop="systemName">
         <el-input class="width-200" v-model="form.systemName"></el-input>
       </el-form-item>
@@ -24,6 +24,13 @@
       </el-form-item>
       <el-form-item label="ip地址">
         <ip-address-input :value="form.ipAddress" :inline="true" @ipAddressInputCb="ipAddressInputCb"></ip-address-input>
+      </el-form-item>
+      <el-form-item label="是否应用到url">
+        <el-radio-group v-model="form.isUpdateUrlIp">
+          <el-radio :label="true">是</el-radio>
+          <el-radio :label="false">否</el-radio>
+        </el-radio-group>
+        <div class="red">说明：该选项选中是则会将改动的ip更新到已加载的该系统所有url中</div>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -53,6 +60,7 @@ export default {
         systemApi: '',
         isEnabled: false,
         ipAddress: '',
+        isUpdateUrlIp: false,
       },
       rules: {
         systemName: [
@@ -60,6 +68,9 @@ export default {
         ],
         systemUrl: [
           { required: true, message: '请填写系统url', trigger: 'blur' },
+        ],
+        systemApi: [
+          { required: true, message: '请填写系统api', trigger: 'blur' },
         ],
       },
     };
@@ -78,6 +89,14 @@ export default {
       this.form.ipAddress = v;
     },
     confirm() {
+      if (!this.form.ipAddress) {
+        this.$message({
+          message: '请填写IP地址！',
+          showClose: true,
+          type: 'warning',
+        });
+        return;
+      }
       this.$refs.form.validate((valid) => {
         if (valid) {
           const params = {
@@ -86,6 +105,7 @@ export default {
             systemUrl: this.form.systemUrl,
             systemApi: this.form.systemApi,
             isEnabled: false,
+            isUpdateUrlIp: this.form.isUpdateUrlIp,
             ipAddressList: [{ label: 'IP地址1', value: this.form.ipAddress }],
           };
           request.post('/mock/api/system/update', params)
@@ -113,5 +133,8 @@ export default {
   }
   .width-350 {
     width: 350px;
+  }
+  .red {
+    color: red;
   }
 </style>

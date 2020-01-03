@@ -6,7 +6,12 @@ const Response = require('../util/Response');
 module.exports = class UrlManageController extends egg.Controller {
   async swaggerUrlList(ctx) {
     try {
-      this.ctx.body = await ctx.service.url.getUrlAllList(ctx.request.body);
+      const result = await ctx.service.url.getUrlAllList(ctx.request.body);
+      if (Array.isArray(result)) {
+        this.ctx.body = new Response(200, null, result);
+      } else {
+        this.ctx.body = new Response(402, null, result);
+      }
     } catch (e) {
       ctx.logger.error(e);
     }

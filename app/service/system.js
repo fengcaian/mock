@@ -29,9 +29,13 @@ module.exports = class systemService extends egg.Service {
   }
   async update(body = {}) {
     let result = null;
-    await this.ctx.model.System.update({ _id: body._id }, body, (msg) => {
-      result = msg;
-    });
+    await this.ctx.model.System.update({ _id: body._id }, body);
+    console.log(body.isUpdateUrlIp);
+    console.log(body.systemUrl);
+    console.log(body.ipAddressList[0].value);
+    if (body.isUpdateUrlIp) {
+      await this.ctx.model.Url.updateMany({ host: body.systemUrl }, { $set: { hostIp: body.ipAddressList[0].value } });
+    }
     return result;
   }
   async delete(body = {}) {

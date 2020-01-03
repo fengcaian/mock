@@ -3,11 +3,14 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   const UrlResponseSchema = new Schema({
-    url: {
-        type: String,
+    system: {
+      type: String,
     },
-    urlId: {
-        type: String,
+    url: {
+      type: String,
+    },
+    type: {
+      type: String,
     },
     dataType: {
       type: String,
