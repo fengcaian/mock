@@ -13,6 +13,7 @@
                 </el-checkbox-group>
             </el-form-item>
             <el-button type="success" size="mini" @click="generateMockData">生成模拟数据</el-button>
+            <el-button type="success" size="mini" @click="addUrlResponseByHand">手动添加</el-button>
             <el-button type="primary" size="mini" disabled @click="doRequest">发送请求</el-button>
         </el-form>
         <el-table border :data="dataList" style="width: 100%">
@@ -56,6 +57,12 @@
             :urlResponseData="urlResponseData"
             @editUrlResponseDialogCb="editUrlResponseDialogCb">
         </dialog-edit-url-response>
+        <dialog-url-response-add-by-hand
+            v-if="isShowUrlResponseAddByHandDialog"
+            :urlResponseAddByHandDialogVisible="isShowUrlResponseAddByHandDialog"
+            :urlResponseData="urlResponseData"
+            @addUrlResponseByHandDialogCb="addUrlResponseByHandDialogCb">
+        </dialog-url-response-add-by-hand>
     </div>
 </template>
 
@@ -63,11 +70,13 @@
 import request from '@/app/web/framework/network/request';
 import dialogUrlResponseDetail from '../components/dialog-url-response-detail';
 import dialogEditUrlResponse from '../components/dialog-edit-url-response';
+import dialogUrlResponseAddByHand from '../components/dialog-url-response-add-by-hand';
 
 export default {
   components: {
     dialogUrlResponseDetail,
     dialogEditUrlResponse,
+    dialogUrlResponseAddByHand,
   },
   data() {
     return {
@@ -84,6 +93,7 @@ export default {
       urlResponseData: {},
       isShowUrlResponseDetailDialog: false,
       isShowUrlResponseEditDialog: false,
+      isShowUrlResponseAddByHandDialog: false,
       urlObject: {},
     };
   },
@@ -119,6 +129,15 @@ export default {
           console.log(res);
           this.getDataList();
         });
+    },
+    addUrlResponseByHand() {
+      this.isShowUrlResponseAddByHandDialog = true;
+    },
+    addUrlResponseByHandDialogCb(obj) {
+      this.isShowUrlResponseAddByHandDialog = false;
+      if (obj.isRefresh) {
+        this.getDataList();
+      }
     },
     doRequest() {
       const parameter = {};

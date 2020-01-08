@@ -40,6 +40,9 @@ module.exports = app => {
     hostIp: {
       type: String,
     },
+    source: { // swagger|byHand（手动添加）
+      type: String,
+    },
   });
   return mongoose.model('Url', UrlSchema);
 };

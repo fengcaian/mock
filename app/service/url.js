@@ -52,6 +52,7 @@ module.exports = class UrlService extends egg.Service {
         urlObj.requestTarget = 'backend';
         urlObj.host = body.systemUrl;
         urlObj.hostIp = ip;
+        urlObj.source = 'swagger';
         dataList.push(urlObj);
       });
     });

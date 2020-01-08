@@ -9,6 +9,7 @@
             </el-form-item>
             <el-form-item>
                 <el-button class="search-button" size="mini" type="primary" @click="search">查询</el-button>
+                <el-button class="search-button" size="mini" type="primary" @click="addUrlByHand">手动新增url</el-button>
             </el-form-item>
         </el-form>
         <el-table
@@ -94,10 +95,13 @@
 import request from '@/app/web/framework/network/request';
 import * as constants from '@/app/web/framework/constants';
 
+import keep from '@/app/web/framework/utils/mixin/keep';
+
 import dialogUrlDetail from './components/dialog-url-detail';
 import dialogUrlEdit from './components/dialog-url-edit';
 
 export default {
+  mixins: [keep],
   components: {
     dialogUrlDetail,
     dialogUrlEdit,
@@ -227,6 +231,9 @@ export default {
             type: 'success',
           });
         });
+    },
+    addUrlByHand() {
+      this.$router.push('/url/add-url-by-hand');
     },
     rowStyle({ row }) {
       return `background: ${constants.swaggerDefineHttpColor.find(item => item.code === row.type).lightColor}`;

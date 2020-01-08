@@ -77,7 +77,7 @@ module.exports = class UrlController extends egg.Controller {
         }
       }
       if (urlObj.requestTarget === 'mock') {
-        result = ctx.service.urlResponse.getResponse(urlObj);
+        result = await ctx.service.urlResponse.getResponse(urlObj);
       }
       ctx.set('Access-Control-Expose-Headers', 'Set-Cookie');
       ctx.set('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Referer,User-Agent,TOKEN');

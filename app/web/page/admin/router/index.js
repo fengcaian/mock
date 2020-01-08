@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import Dashboard from '../view/dashboard/index.vue';
 import UrlList from '../view/url-list';
 import UrlDetail from '../view/url-list/url-detail';
+import AddUrlByHand from '../view/url-list/add-url-by-hand';
 import SystemList from '../view/system-list';
 
 Vue.use(VueRouter);
@@ -31,6 +32,11 @@ export default function createRouter() {
         path: '/url/detail',
         meta: { title: 'URL详情' },
         component: UrlDetail
+      },
+      {
+        path: '/url/add-url-by-hand',
+        meta: { title: '手动新增url' },
+        component: AddUrlByHand,
       },
       {
         path: '/system/list',
