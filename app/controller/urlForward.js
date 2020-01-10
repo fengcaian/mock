@@ -1,6 +1,7 @@
 'use strict';
 
 const egg = require('egg');
+const Response = require('../util/Response');
 
 module.exports = class UrlController extends egg.Controller {
   async forwardGet(ctx) {
@@ -84,7 +85,11 @@ module.exports = class UrlController extends egg.Controller {
       ctx.set('Access-Control-Allow-Credentials', 'true');
       ctx.set('Access-Control-Allow-Methods', '*');
       ctx.set('Access-Control-Allow-Origin', 'https://deverp.szlcsc.com');
-      ctx.body = result[0].data;
+      if (Array.isArray(result)) {
+        ctx.body = result[0].data;
+      } else {
+        ctx.body = new Response(402, result, null);
+      }
     } catch (e) {
       ctx.logger.error(e);
     }

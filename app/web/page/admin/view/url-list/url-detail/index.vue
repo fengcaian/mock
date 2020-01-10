@@ -12,7 +12,7 @@
                     <el-checkbox label="后端数据"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
-            <el-button type="success" size="mini" @click="generateMockData">生成模拟数据</el-button>
+            <el-button type="success" size="mini" v-if="urlObject.source === 'swagger'" @click="generateMockData">生成模拟数据</el-button>
             <el-button type="success" size="mini" @click="addUrlResponseByHand">手动添加</el-button>
             <el-button type="primary" size="mini" disabled @click="doRequest">发送请求</el-button>
         </el-form>
@@ -45,6 +45,17 @@
                 </template>
             </el-table-column>
         </el-table>
+        <div style="margin-top: 16px; text-align: center">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="searchParam.currentPage"
+                :page-sizes="[10, 15, 20, 50]"
+                :page-size="searchParam.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total">
+            </el-pagination>
+        </div>
         <dialog-url-response-detail
             v-if="isShowUrlResponseDetailDialog"
             :urlResponseDetailDialogVisible="isShowUrlResponseDetailDialog"
@@ -60,7 +71,7 @@
         <dialog-url-response-add-by-hand
             v-if="isShowUrlResponseAddByHandDialog"
             :urlResponseAddByHandDialogVisible="isShowUrlResponseAddByHandDialog"
-            :urlResponseData="urlResponseData"
+            :urlObject="urlObject"
             @addUrlResponseByHandDialogCb="addUrlResponseByHandDialogCb">
         </dialog-url-response-add-by-hand>
     </div>
@@ -89,6 +100,7 @@ export default {
         type: '',
       },
       dataList: [],
+      total: 0,
       id: '',
       urlResponseData: {},
       isShowUrlResponseDetailDialog: false,
@@ -121,7 +133,16 @@ export default {
       request.get('/mock/api/url/response/list', params)
         .then((res) => {
           this.dataList = res.result.dataList;
+          this.total = res.result.totalRow;
         });
+    },
+    handleSizeChange(val) {
+      this.searchParam.pageSize = val;
+      this.getDataList();
+    },
+    handleCurrentChange(val) {
+      this.searchParam.currentPage = val;
+      this.getDataList();
     },
     generateMockData() {
       request.post('/mock/api/url/mock/data', { _id: this.$route.query._id, url: this.$store.state.shareData.url })

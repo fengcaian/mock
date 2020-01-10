@@ -13,6 +13,12 @@ module.exports = class UrlService extends egg.Service {
       return 'ip地址或api不存在！';
     }
     const protocol = body.systemUrl.split(':')[0];
+    const portList = body.systemUrl.match(/(?<=:)\d+/);
+    let port = '';
+    if (portList && portList.length) {
+      port = portList[0];
+    }
+    // const result = await Promise.all([this.ctx.doCurl(`${protocol}://${ip}${port ? `:${port}` : ''}${body.systemApi}`, { method: 'GET' })]);
     const result = await Promise.all([this.ctx.doCurl(`${body.systemUrl}${body.systemApi}`, { method: 'GET' })]);
     if (!result.length) {
       return;
@@ -99,10 +105,13 @@ module.exports = class UrlService extends egg.Service {
     if (query.system) {
       params.host = query.system;
     }
+    if (query.summary) {
+      params.summary = new RegExp(query.summary, 'i');
+    }
     const list = await Promise.all([
-      this.ctx.model.Url.count(true),
+      this.ctx.model.Url.count(params),
       this.ctx.model.Url.find(params)
-        .sort({ id: -1 })
+        .sort({ createTime: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
         .limit(Number(query.pageSize)),
     ]);
@@ -157,6 +166,18 @@ module.exports = class UrlService extends egg.Service {
     try {
       const result = await this.ctx.model.Url.find({ url, type });
       return result.length ? result[0] : {};
+    } catch (e) {
+      this.ctx.logger.error(e);
+    }
+  }
+  async urlAddByHand(body = {}) {
+    const url = {
+      requestTarget: 'mock',
+      source: 'byHand',
+    };
+    Object.assign(url, body);
+    try {
+      await this.ctx.model.Url.create(url);
     } catch (e) {
       this.ctx.logger.error(e);
     }

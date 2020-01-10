@@ -91,6 +91,18 @@
       "POST"
     ],
     "paramNames": [],
+    "path": "/mock/api/url/add/by/hand",
+    "regexp": "/^\\/mock\\/api\\/url\\/add\\/by\\/hand(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
     "path": "/mock/api/url/mock/data",
     "regexp": "/^\\/mock\\/api\\/url\\/mock\\/data(?:\\/(?=$))?$/",
     "stack": [
@@ -143,6 +155,18 @@
     "paramNames": [],
     "path": "/mock/api/url/response/set/priority",
     "regexp": "/^\\/mock\\/api\\/url\\/response\\/set\\/priority(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/mock/api/url/response/add",
+    "regexp": "/^\\/mock\\/api\\/url\\/response\\/add(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]

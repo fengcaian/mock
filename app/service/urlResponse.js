@@ -42,7 +42,7 @@ module.exports = class UrlResponseService extends egg.Service {
     }
     console.log(queryParams);
     const result = await Promise.all([
-      this.ctx.model.UrlResponse.count(true),
+      this.ctx.model.UrlResponse.count(queryParams),
       this.ctx.model.UrlResponse
         .find(queryParams)
         .sort({ id: -1 })
@@ -97,8 +97,12 @@ module.exports = class UrlResponseService extends egg.Service {
           },
         ];
       }
-      const mockData = this.mockData(query);
-      result = [mockData];
+      if (query.source === 'swagger') {
+        const mockData = this.mockData(query);
+        result = [mockData];
+      } else {
+        result = '请模拟或手动添加一条返回值';
+      }
       return result;
     } catch (e) {
       this.ctx.logger.error(e);

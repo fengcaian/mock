@@ -5,8 +5,8 @@
       :visible.sync="dialogShow"
       :before-close="close">
     <el-form ref="form" label-width="100px" :model="form" :rules="rules">
-      <el-form-item label="response" prop="response">
-        <el-input type="textarea" :rows="20" :autosize="{ minRows: 4 }" v-model="form.response"></el-input>
+      <el-form-item label="接口返回值:" prop="response">
+        <el-input type="textarea" :rows="20" :autosize="{ minRows: 10 }" v-model="form.response"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -20,7 +20,7 @@
 import request from '@/app/web/framework/network/request';
 
 export default {
-  props: ['urlResponseAddByHandDialogVisible', 'urlResponseData'],
+  props: ['urlResponseAddByHandDialogVisible', 'urlObject'],
   data() {
     return {
       dialogShow: false,
@@ -52,7 +52,14 @@ export default {
     confirm() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          request.post('/mock/api/url/response/add', this.form)
+          const params = {
+            system: this.urlObject.host,
+            url: this.urlObject.url,
+            type: this.urlObject.type,
+            dataType: 'mock_data',
+            response: JSON.parse(this.form.response),
+          };
+          request.post('/mock/api/url/response/add', params)
             .then(() => {
               this.$message({
                 message: '新增成功！',

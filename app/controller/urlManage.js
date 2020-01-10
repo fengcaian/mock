@@ -10,7 +10,7 @@ module.exports = class UrlManageController extends egg.Controller {
       if (Array.isArray(result)) {
         this.ctx.body = new Response(200, null, result);
       } else {
-        this.ctx.body = new Response(402, null, result);
+        this.ctx.body = new Response(402, result, null);
       }
     } catch (e) {
       ctx.logger.error(e);
@@ -47,6 +47,14 @@ module.exports = class UrlManageController extends egg.Controller {
   async requestTargetSwitch(ctx) {
     try {
       const result = await ctx.service.url.requestTargetSwitch(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
+  async urlAddByHand(ctx) {
+    try {
+      const result = await ctx.service.url.urlAddByHand(ctx.request.body);
       this.ctx.body = new Response(200, null, result);
     } catch (e) {
       ctx.logger.error(e);

@@ -8,11 +8,13 @@ module.exports = app => {
   router.post('/mock/api/url/batch/delete', controller.urlManage.batchDelete);
   router.post('/mock/api/url/request/target/switch', controller.urlManage.requestTargetSwitch);
   router.get('/mock/api/url/list', controller.urlManage.list);
+  router.post('/mock/api/url/add/by/hand', controller.urlManage.urlAddByHand);
   router.post('/mock/api/url/mock/data', controller.urlResponseManage.mockData);
   router.get('/mock/api/url/response/list', controller.urlResponseManage.getUrlResponseList);
   router.get('/mock/api/url/response/by/params', controller.urlResponseManage.getUrlResponseByParams);
   router.post('/mock/api/url/response/edit', controller.urlResponseManage.editUrlResponse);
   router.post('/mock/api/url/response/set/priority', controller.urlResponseManage.setPriority);
+  router.post('/mock/api/url/response/add', controller.urlResponseManage.add);
   router.get('/mock/api/system/list', controller.systemManage.list);
   router.post('/mock/api/system/add', controller.systemManage.add);
   router.post('/mock/api/system/update', controller.systemManage.update);

@@ -44,4 +44,14 @@ module.exports = class UrlResponseManageController extends egg.Controller {
       ctx.logger.error(e);
     }
   }
+  async add(ctx) {
+    try {
+      console.log(ctx.request.body);
+      console.log(typeof ctx.request.body);
+      const result  = await ctx.model.UrlResponse.create(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
 };

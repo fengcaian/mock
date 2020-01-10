@@ -43,6 +43,9 @@ module.exports = app => {
     source: { // swagger|byHand（手动添加）
       type: String,
     },
+    createTime: {
+      type: String,
+    },
   });
   return mongoose.model('Url', UrlSchema);
 };

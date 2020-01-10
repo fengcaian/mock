@@ -7,6 +7,9 @@
             <el-form-item label="url：">
                 <el-input class="search-input" size="mini" clearable v-model="searchParams.url" placeholder="url"></el-input>
             </el-form-item>
+            <el-form-item label="url名称：">
+                <el-input class="search-input" size="mini" clearable v-model="searchParams.summary" placeholder="url"></el-input>
+            </el-form-item>
             <el-form-item>
                 <el-button class="search-button" size="mini" type="primary" @click="search">查询</el-button>
                 <el-button class="search-button" size="mini" type="primary" @click="addUrlByHand">手动新增url</el-button>
@@ -111,6 +114,7 @@ export default {
       searchParams: {
         system: '',
         url: '',
+        summary: '',
         currentPage: 1,
         pageSize: 10
       },
@@ -151,12 +155,10 @@ export default {
       console.log("handleSelectionChange", val);
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.searchParams.pageSize = val;
       this.getList();
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.searchParams.currentPage = val;
       this.getList();
     },
