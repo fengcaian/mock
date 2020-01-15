@@ -24,12 +24,12 @@
 <script>
 import request from '@/app/web/framework/network/request';
 
-import IpAddressInput from '@/app/web/component/layout/IpAddressInput';
+import ipAddressInput from '@/app/web/component/ip-address-input';
 
 export default {
   props: ['system', 'systemIpMapDialogVisible'],
   components: {
-    IpAddressInput,
+    ipAddressInput,
   },
   data() {
     return {

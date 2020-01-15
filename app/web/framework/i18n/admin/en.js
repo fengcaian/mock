@@ -1,11 +1,12 @@
 export default {
   menu: {
     home: 'Home',
-    // articlemanage: 'Article Manage',
-    // articlequery: 'Article Query',
+    mockSwagger: 'mock-swagger',
+    modelDatabaseCheck: 'model-database Check',
     systemmanage: 'system Manage',
     systemquery: 'system Query',
-    articleadd: 'Article Add'
+    articleadd: 'Article Add',
+    synthesizemanage: 'Synthesize Manage'
   },
   lang: {
     href: '/mock?locale=cn',

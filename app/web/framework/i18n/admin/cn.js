@@ -2,13 +2,16 @@
 export default {
   menu: {
     home: '首页',
-    // articlemanage: '文章管理',
-    // articlequery: '文章查询',
-    // articleadd: '添加文章',
-    systemmanage: '系统管理',
-    systemquery: '系统查询',
+    mockSwagger: 'mock-swagger',
     urlmanage: 'URL',
     urlquery: 'URL查询',
+    systemmanage: '系统管理',
+    systemquery: '系统查询',
+    synthesizemanage: '综合管理',
+    synthesizeset: '综合设置',
+    modelDatabaseCheck: '建模-数据库核查',
+    checkList: '核查列表',
+    check: '核查',
   },
   lang: {
     href: '/mock?locale=en',

@@ -23,6 +23,7 @@ module.exports = app => {
   router.post('/mock/api/system/delete', controller.systemManage.delete);
   router.post('/mock/api/system/enable', controller.systemManage.enableSwitch);
   router.get('/mock(/.+)?', controller.admin.notFound);
+  router.post('/model/file/analyse', controller.fileManage.analyse);
   router.get(/([a-z]+)/, controller.urlForward.forward);
   router.options(/([a-z]+)/, controller.urlForward.forward);
   router.post(/([a-z]+)/, controller.urlForward.forward);

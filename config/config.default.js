@@ -8,6 +8,11 @@ module.exports = app => {
     '/favicon.ico': fs.readFileSync(path.join(app.baseDir, 'app/web/asset/images/favicon.ico'))
   };
 
+  exports.multipart = {
+    // mode: 'file',
+    fileExtensions: [ '.xlsx', '.xls', '.csv' ] // 增加对额外扩展名的文件支持
+  };
+
   exports.vuessr = {
     layout: path.join(app.baseDir, 'app/web/view/layout.html')
   };

@@ -22,6 +22,7 @@ module.exports = class AdminController extends egg.Controller {
     ctx.body = await ctx.service.article.query({ id: Number(id) });
   }
   async notFound() {
-    this.ctx.body = new Response(404, null, '资源找不到');
+    const url = ctx.url.replace(/\/mock/, '');
+    await ctx.renderClient('admin.js', { ctx, url });
   }
 };

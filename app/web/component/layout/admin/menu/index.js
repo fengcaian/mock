@@ -4,27 +4,42 @@ const menu = {
     path: '/',
     icon: 'el-icon-menu',
   },
-  url: {
-    name: 'menu.urlmanage',
+  mockSwagger: {
+    name: 'menu.mockSwagger',
     icon: 'el-icon-document',
-    children: {
-      list: {
+    children: [
+      {
         name: 'menu.urlquery',
         icon: 'el-icon-edit-outline',
-        path: '/url/list'
+        path: '/mock/url/list'
       },
-    },
-  },
-  system: {
-    name: 'menu.systemmanage',
-    icon: 'el-icon-document',
-    children: {
-      list: {
+      {
         name: 'menu.systemquery',
         icon: 'el-icon-edit-outline',
-        path: '/system/list'
+        path: '/mock/system/list'
       },
-    },
+      {
+        name: 'menu.synthesizeset',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/synthesize/set'
+      }
+    ],
+  },
+  modelDatabaseCheck: {
+    name: 'menu.modelDatabaseCheck',
+    icon: 'el-icon-document',
+    children: [
+      {
+        name: 'menu.checkList',
+        icon: 'el-icon-edit-outline',
+        path: '/model/database/check/list'
+      },
+      {
+        name: 'menu.check',
+        icon: 'el-icon-edit-outline',
+        path: '/model/database/check'
+      },
+    ],
   },
 };
 

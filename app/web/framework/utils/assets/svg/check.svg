@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>login_icon_selected</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="公众号h5" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.3登录1" transform="translate(-153.000000, -1035.000000)">
+            <g id="Group-5" transform="translate(153.000000, 1034.000000)">
+                <g id="login_icon_selected" transform="translate(0.000000, 1.000000)">
+                    <circle id="Oval-7" fill="#6595F4" cx="17" cy="17" r="17"></circle>
+                    <path d="M7.90249783,15.3824978 L7.90249783,15.3824978 C7.33916739,15.9458283 7.33916739,16.8591674 7.90249783,17.4224978 L14.3624978,23.8824978 L25.5824978,12.6624978 C26.1458283,12.0991674 26.1458283,11.1858283 25.5824978,10.6224978 L25.5824978,10.6224978 C25.0191674,10.0591674 24.1058283,10.0591674 23.5424978,10.6224978 L14.3624978,19.8024978 L9.94249783,15.3824978 C9.37916739,14.8191674 8.46582828,14.8191674 7.90249783,15.3824978 Z" id="Path-2" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

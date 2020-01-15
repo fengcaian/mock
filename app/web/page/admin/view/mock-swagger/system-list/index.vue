@@ -18,14 +18,14 @@
           <el-button type="success" size="mini" icon="el-icon-plus" @click="addSystem"></el-button>
         </template>
         <template slot-scope="scope">
-          <el-switch
-              v-model="scope.row.isEnabled"
-              :active-value="true"
-              :inactive-value="false"
-              active-text="启用"
-              inactive-text="关闭"
-              @change="isEnabledChanged(scope.row)">
-          </el-switch>
+          <!--<el-switch-->
+              <!--v-model="scope.row.isEnabled"-->
+              <!--:active-value="true"-->
+              <!--:inactive-value="false"-->
+              <!--active-text="启用"-->
+              <!--inactive-text="关闭"-->
+              <!--@change="isEnabledChanged(scope.row)">-->
+          <!--</el-switch>-->
           <el-button type="info" size="mini" icon="edit" @click="modifySystem(scope.row)">修改</el-button>
           <el-button type="danger" size="mini" icon="delete" @click="handleDelete(scope.row)">删除</el-button>
           <el-button type="primary" size="mini" icon="delete" @click="loadAPI(scope.row)">加载swagger接口</el-button>
