@@ -32,12 +32,12 @@ const menu = {
       {
         name: 'menu.checkList',
         icon: 'el-icon-edit-outline',
-        path: '/model/database/check/list'
+        path: '/mock/model/database/check/list'
       },
       {
         name: 'menu.check',
         icon: 'el-icon-edit-outline',
-        path: '/model/database/check'
+        path: '/mock/model/database/check'
       },
     ],
   },

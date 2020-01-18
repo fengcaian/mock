@@ -1,7 +1,6 @@
 'use strict'
 
 const egg = require('egg');
-// const sendToWormhole = require('stream-wormhole');
 const XLSX = require('xlsx');
 const Response = require('../util/Response');
 

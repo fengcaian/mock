@@ -12,7 +12,7 @@ import Check from '../view/model-database-check/check';
 
 Vue.use(VueRouter);
 
-export default function createRouter() {
+export default function createRouter() { // 所有前端路由必须以mock开头，不能与后端api重名,否则浏览器刷新功能失效
   const router =  new VueRouter({
     mode: 'history',
     base: '/',
@@ -52,12 +52,12 @@ export default function createRouter() {
         component: SynthesizeSet
       },
       {
-        path: '/model/database/check/list',
+        path: '/mock/model/database/check/list',
         meta: { title: '核查列表' },
         component: CheckList,
       },
       {
-        path: '/model/database/check',
+        path: '/mock/model/database/check',
         meta: { title: '核查' },
         component: Check,
       },

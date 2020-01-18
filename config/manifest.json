@@ -4,11 +4,6 @@
   "admin.js": "/public/js/chunk/admin.js",
   "runtime.js": "/public/js/runtime.js",
   "font/index.css": "/public/font/element-icons.woff",
-  "img/check.svg": "/public/img/check.svg",
-  "img/lock.svg": "/public/img/lock.svg",
-  "img/quickResponse.svg": "/public/img/quickResponse.svg",
-  "img/setting.svg": "/public/img/setting.svg",
-  "img/wrong.svg": "/public/img/wrong.svg",
   "vendor.js": "/public/js/vendor.js",
   "deps": {
     "admin.js": {

@@ -1,65 +1,75 @@
 <template>
-  <div class="wrap">
-    <el-upload
-        class="upload"
-        v-if="initStatus"
-        drag
-        multiple
-        action="/model/file/analyse"
-        accept=".xlsx,.xls,.csv"
-        :with-credentials="true"
-        :headers="headers"
-        :data="{sss: 456}"
-        :on-success="onSuccess"
-        :on-error="onError">
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">只能上传xls/xlsx/csv文件，且不超过500kb</div>
-    </el-upload>
-    <el-table
-      v-else
-      border
-      :data="dataList"
-      :span-method="objectSpanMethod"
-      :cell-style="cellStyleMethod">
-      <el-table-column label="模型" align="center">
-        <el-table-column width="55" align="center">
-          <template slot-scope="scope">
-            <span>{{scope.$index + 1}}</span>
-          </template>
+  <div>
+    <div class="wrap">
+      <el-upload
+          class="upload"
+          v-if="initStatus"
+          drag
+          multiple
+          action="/model/file/analyse"
+          accept=".xlsx,.xls,.csv"
+          :with-credentials="true"
+          :headers="headers"
+          :data="{sss: 456}"
+          :on-success="onSuccess"
+          :on-error="onError">
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__tip" slot="tip">只能上传xls/xlsx/csv文件，且不超过500kb</div>
+      </el-upload>
+      <el-table
+          v-else
+          border
+          :data="dataList"
+          :span-method="objectSpanMethod"
+          :cell-style="cellStyleMethod">
+        <el-table-column label="模型" align="center">
+          <el-table-column width="55" align="center">
+            <template slot-scope="scope">
+              <span>{{scope.$index + 1}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="modelField" label="字段名" align="center"></el-table-column>
+          <el-table-column prop="modelType" label="类型" align="center"></el-table-column>
+          <el-table-column prop="modelLength" label="长度" align="center"></el-table-column>
         </el-table-column>
-        <el-table-column prop="modelField" label="字段名" align="center"></el-table-column>
-        <el-table-column prop="modelType" label="类型" align="center"></el-table-column>
-        <el-table-column prop="modelLength" label="长度" align="center"></el-table-column>
-      </el-table-column>
-      <el-table-column label="数据库" align="center">
-        <el-table-column prop="databaseField" label="字段名" align="center">
-          <template slot-scope="scope">
-            <span>{{scope.row.databaseField}}</span>
-            <svg-icon class="icon" icon-class="wrong"></svg-icon>
-          </template>
+        <el-table-column label="数据库" align="center">
+          <el-table-column prop="databaseField" label="字段名" align="center">
+            <template slot-scope="scope">
+              <span>{{scope.row.databaseField}}</span>
+              <svg-icon v-if="scope.row.databaseField && scope.row.databaseField !== scope.row.modelField" class="icon" icon-class="wrong"></svg-icon>
+            </template>
+          </el-table-column>
+          <el-table-column prop="databaseType" label="类型" align="center">
+            <template slot-scope="scope">
+              <span>{{scope.row.databaseType}}</span>
+              <svg-icon v-if="scope.row.databaseType && scope.row.databaseType !== scope.row.modelType" class="icon" icon-class="wrong"></svg-icon>
+            </template>
+          </el-table-column>
+          <el-table-column prop="databaseLength" label="长度" align="center">
+            <template slot-scope="scope">
+              <span>{{scope.row.databaseLength}}</span>
+              <svg-icon v-if="scope.row.databaseLength && scope.row.databaseLength !== scope.row.modelLength" class="icon" icon-class="wrong"></svg-icon>
+            </template>
+          </el-table-column>
         </el-table-column>
-        <el-table-column prop="databaseType" label="类型" align="center">
-          <template slot-scope="scope">
-            <span>{{scope.row.databaseType}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="databaseLength" label="长度" align="center">
-          <template slot-scope="scope">
-            <span>{{scope.row.databaseLength}}</span>
-          </template>
-        </el-table-column>
-      </el-table-column>
-    </el-table>
-    123123
-    <svg-icon class="icon" icon-class="wrong"></svg-icon>
-    5555
+      </el-table>
+    </div>
+    <div>
+      <drawer title="核查详情" :size="350">
+        <div>this is a drawer</div>
+      </drawer>
+    </div>
   </div>
 </template>
 
 <script>
-import '@/app/web/asset/svg/wrong.svg';
+import drawer from '@/app/web/component/drawer';
+
 export default {
+  components: {
+    drawer,
+  },
   data() {
     return {
       dataList: [{
@@ -108,6 +118,13 @@ export default {
     this.headers['x-csrf-token'] = cookieObj['csrfToken'];
   },
   methods: {
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
     onSuccess(data) {
       console.log(data);
       let list = [];

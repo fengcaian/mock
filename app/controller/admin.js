@@ -21,7 +21,7 @@ module.exports = class AdminController extends egg.Controller {
     const { id } = ctx.params;
     ctx.body = await ctx.service.article.query({ id: Number(id) });
   }
-  async notFound() {
+  async frontRouterForward(ctx) {
     const url = ctx.url.replace(/\/mock/, '');
     await ctx.renderClient('admin.js', { ctx, url });
   }
