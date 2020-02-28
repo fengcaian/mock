@@ -41,6 +41,17 @@ const menu = {
       },
     ],
   },
+  flowManage: {
+    name: 'menu.flowmanage',
+    icon: 'el-icon-document',
+    children: [
+      {
+        name: 'menu.flowList',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/flow/list',
+      },
+    ],
+  },
 };
 
 export default menu;

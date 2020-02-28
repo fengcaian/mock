@@ -5,6 +5,6 @@ import createRouter from './router';
 import '@/app/web/framework/utils/common/icons';
 import index from './index.vue';
 
-new App({ index, createI18n, createRouter, createStore }).bootstrap();
+new App({ index, createI18n, createRouter, createStore, testParams: 666 }).bootstrap();
 
 

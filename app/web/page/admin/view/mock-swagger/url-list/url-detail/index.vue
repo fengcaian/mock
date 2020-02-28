@@ -207,7 +207,7 @@ export default {
         });
     },
     back() {
-      this.$router.push({ path: '/url/list' });
+      this.$router.push({ path: '/mock/url/list' });
     },
   },
 }

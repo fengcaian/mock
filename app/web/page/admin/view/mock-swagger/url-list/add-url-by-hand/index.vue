@@ -91,7 +91,7 @@ export default {
       this.urlForm.hostIp = v;
     },
     back() {
-      this.$router.push({ path: '/url/list' });
+      this.$router.push({ path: '/mock/url/list' });
     },
     save() {
       this.$refs.form.validate((valid) => {

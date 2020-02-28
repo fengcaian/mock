@@ -9,6 +9,8 @@ import SystemList from '../view/mock-swagger/system-list';
 import SynthesizeSet from '../view/mock-swagger/system-list';
 import CheckList from '../view/model-database-check/check-list';
 import Check from '../view/model-database-check/check';
+import FlowList from '../view/flow/flow-list';
+import FlowView from '../view/flow/flow-list/flow-view';
 
 Vue.use(VueRouter);
 
@@ -61,6 +63,16 @@ export default function createRouter() { // 所有前端路由必须以mock开�
         meta: { title: '核查' },
         component: Check,
       },
+      {
+        path: '/mock/flow/list',
+        meta: { title: '流程列表' },
+        component: FlowList,
+      },
+      {
+        path: '/mock/flow/view',
+        meta: { title: '流程' },
+        component: FlowView,
+      }
     ]
   });
   router.beforeEach((to, from, next) => {

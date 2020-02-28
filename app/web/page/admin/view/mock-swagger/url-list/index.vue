@@ -223,7 +223,7 @@ export default {
     goToDetail(row) {
       console.log(row);
       this.$store.dispatch('SetShareData', row);
-      this.$router.push(`/url/detail?_id=${row._id}`);
+      this.$router.push(`/mock/url/detail?_id=${row._id}`);
     },
     requestTargetChanged(row) {
       request.post('/mock/api/url/request/target/switch', row)
@@ -235,7 +235,7 @@ export default {
         });
     },
     addUrlByHand() {
-      this.$router.push('/url/add-url-by-hand');
+      this.$router.push('/mock/url/add-url-by-hand');
     },
     rowStyle({ row }) {
       return `background: ${constants.swaggerDefineHttpColor.find(item => item.code === row.type).lightColor}`;

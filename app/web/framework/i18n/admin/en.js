@@ -6,7 +6,9 @@ export default {
     systemmanage: 'system Manage',
     systemquery: 'system Query',
     articleadd: 'Article Add',
-    synthesizemanage: 'Synthesize Manage'
+    synthesizemanage: 'Synthesize Manage',
+    flowmanage: 'Flow Manage',
+    flowList: 'Flow',
   },
   lang: {
     href: '/mock?locale=cn',

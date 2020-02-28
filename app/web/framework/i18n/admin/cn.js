@@ -12,6 +12,8 @@ export default {
     modelDatabaseCheck: '建模-数据库核查',
     checkList: '核查列表',
     check: '核查',
+    flowmanage: '流程管理',
+    flowList: '流程',
   },
   lang: {
     href: '/mock?locale=en',
