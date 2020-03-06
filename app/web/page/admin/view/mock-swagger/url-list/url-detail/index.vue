@@ -16,7 +16,7 @@
             <el-button type="success" size="mini" @click="addUrlResponseByHand">手动添加</el-button>
             <el-button type="primary" size="mini" disabled @click="doRequest">发送请求</el-button>
         </el-form>
-        <el-table border :data="dataList" style="width: 100%">
+        <el-table border size="mini" :data="dataList" style="width: 100%">
             <el-table-column label="类型" width="180" align="center">
                 <template slot-scope="scope">
                     <span>{{scope.row.dataType === 'mock_data' ? 'mock数据' : '后端数据'}}</span>
@@ -27,7 +27,8 @@
                     <el-button type="text" size="mini" @click="showDetail(scope.row)">{{JSON.stringify(scope.row.response)}}</el-button>
                 </template>
             </el-table-column>
-            <el-table-column label="是否设为优先数据" align="center" width="200">
+            <el-table-column prop="createTime" label="生成时间" align="center" width="140"></el-table-column>
+            <el-table-column label="是否设为优先数据" align="center" width="140">
                 <template slot-scope="scope">
                     <el-switch
                         v-model="scope.row.isPriority"
@@ -42,6 +43,7 @@
             <el-table-column label="操作" align="center" width="200">
                 <template slot-scope="scope">
                     <el-button type="warning" size="mini" @click="edit(scope.row)">编辑</el-button>
+                    <el-button type="danger" size="mini" @click="deleteRow(scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -203,6 +205,17 @@ export default {
     setPriority(row) {
       request.post('/mock/api/url/response/set/priority', row)
         .then(() => {
+          this.getDataList();
+        });
+    },
+    deleteRow(row) {
+      request.post('/mock/api/url/mock/data/delete/single', row)
+        .then(() => {
+          this.$message({
+            message: '删除成功！',
+            showClose: true,
+            type: 'success',
+          });
           this.getDataList();
         });
     },

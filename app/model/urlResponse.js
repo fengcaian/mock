@@ -18,6 +18,9 @@ module.exports = app => {
     isPriority: {
       type: Boolean,
     },
+    createTime: {
+      type: String,
+    },
     response: {},
   });
   return mongoose.model('UrlResponse', UrlResponseSchema);

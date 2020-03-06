@@ -9,7 +9,18 @@
           baseProfile="full"
           xmlns="http://www.w3.org/2000/svg"
           style="width: 100%; height: 100vh"
-          @mousemove="!isActive && mousemoveSvg($event)">
+          @contextmenu="preventRightClick"
+          @mousemove="!isActive && mousemoveSvg($event)"
+          @click="installSvg">
+          <defs>
+            <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+              <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#CCCCCC" stroke-width="0.5"/>
+            </pattern>
+            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <rect width="80" height="80" fill="url(#smallGrid)"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
         <!--<svg-line :position="{x: 250, y: 250}" :length="50" direction="right" :arrow="true"></svg-line>-->
         <!--<svg-line :position="{x: 250, y: 250}" :length="150" direction="left" :arrow="true"></svg-line>-->
         <!--<svg-line :position="{x: 250, y: 250}" :length="150" direction="up" :arrow="true"></svg-line>-->
@@ -21,6 +32,12 @@
         </g>
         <g @click="inductorClick">
           <svg-inductor v-if="isShowInductor" :cycle="inductorArea"></svg-inductor>
+        </g>
+        <g>
+          <svg-line v-if="activeSvg === 'line-up'" :position="mousePosition" :length="40" direction="up" :arrow="true"></svg-line>
+          <svg-line v-if="activeSvg === 'line-right'" :position="mousePosition" :length="40" direction="right" :arrow="true"></svg-line>
+          <svg-line v-if="activeSvg === 'line-down'" :position="mousePosition" :length="40" direction="down" :arrow="true"></svg-line>
+          <svg-line v-if="activeSvg === 'line-left'" :position="mousePosition" :length="40" direction="left" :arrow="true"></svg-line>
         </g>
       </svg>
     </div>
@@ -49,12 +66,17 @@ export default {
   },
   data() {
     return {
-      isShowToolBar: false,
+      isShowToolBar: true,
       isShowInductor: false,
       isActive: false,
       scaleX: 1,
       scaleY: 1,
       svgHeight: 1,
+      activeSvg: '',
+      mousePosition: {
+        x: 0,
+        y: 0,
+      },
       chainArray: [
         {
           type: 'line',
@@ -134,6 +156,10 @@ export default {
   },
   methods: {
     mousemoveSvg(e) {
+      this.mousePosition = {
+        x: e.offsetX,
+        y: e.offsetY,
+      };
       const inductorArea = this.getInductorArea(e.offsetX, e.offsetY);
       if (inductorArea) {
         this.isShowInductor = true;
@@ -145,18 +171,31 @@ export default {
       }
     },
     inductorClick() {
-      this.isShowToolBar = true;
+      // this.isShowToolBar = true;
       // this.isShowInductor = true;
       this.isActive = true;
     },
-    graphSelect(graphType) {
-      this.isShowToolBar = false;
+    graphSelect(graphId) {
+      // this.isShowToolBar = false;
       this.isActive = false;
-      this.chainArray.push(this.getGraph(graphType));
+      this.activeSvg = graphId;
+    },
+    installSvg() {
+      if (this.activeSvg) {
+        this.chainArray.push(this.getGraph(this.activeSvg));
+      }
+      console.log(this.chainArray);
     },
     getGraph(params) {
-      const type = '';
-      const graph = JSON.parse(JSON.stringify(this.graphics));
+      let type = '';
+      if (/^(line).*/.test(params)) {
+        type = 'line';
+      }
+      if (/^(rect).*/.test(params)) {
+        type = 'rect';
+      }
+      const graph = JSON.parse(JSON.stringify(this.graphics[type]));
+      return graph;
     },
     getInductorArea(x, y) {
       if (!this.inductorArea.positionList.length) {
@@ -196,6 +235,10 @@ export default {
       });
       return list;
     },
+    preventRightClick(e) {
+      e.preventDefault();
+      this.activeSvg = '';
+    },
     zoomIn() {
       this.scaleX /= 0.9;
       this.scaleY /= 0.9;
@@ -219,4 +262,4 @@ export default {
     right: 5%;
     bottom: 75px;
   }
-</style>dui
+</style>

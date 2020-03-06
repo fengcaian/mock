@@ -1,9 +1,7 @@
 <template>
-  <g>
-    <g class="pointer">
-      <path class="line" :d="lineAttr"/>
-      <path class="arrow" v-if="arrow" :d="arrowAttr"/>
-    </g>
+  <g class="pointer">
+    <path class="line" :d="lineAttr"/>
+    <path class="arrow" v-if="arrow" :d="arrowAttr"/>
   </g>
 </template>
 

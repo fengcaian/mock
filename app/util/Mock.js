@@ -6,7 +6,6 @@ const { LETTER } = require('./constant');
 module.exports = class Mock {
   constructor() {}
   mock(dataModel) {
-    console.log(dataModel);
     function recursiveObject(o) {
       if (type(o) === 'Object' && o.type === undefined) { //有type属性的认为是最底层的数据节点
         let newO = {};

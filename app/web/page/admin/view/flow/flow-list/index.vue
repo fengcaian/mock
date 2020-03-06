@@ -10,6 +10,7 @@
     </el-form>
     <el-table
         border
+        size="mini"
         :data="dataList"
         v-loading="loading"
         element-loading-text="拼命加载中"

@@ -3,6 +3,7 @@
 const egg = require('egg');
 const Mock = require('../util/Mock');
 const { DATA_TYPE, URL_RESPONSE_MONGODB_PROP } = require('../util/constant');
+const { dateFormat } = require('../util/common');
 
 module.exports = class UrlResponseService extends egg.Service {
   constructor(ctx) {
@@ -20,6 +21,7 @@ module.exports = class UrlResponseService extends egg.Service {
         url: urlObj.url,
         type: urlObj.type,
         dataType: 'mock_data',
+        createTime: dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
         response,
       };
       await this.ctx.model.UrlResponse.create(mockData);
@@ -83,6 +85,13 @@ module.exports = class UrlResponseService extends egg.Service {
   async setPriority(body = {}) {
     let result = null;
     await this.ctx.model.UrlResponse.update({ _id: body._id }, { $set: { isPriority: body.isPriority } }, (msg) => {
+      result = msg;
+    });
+    return result;
+  }
+  async mockDataDeleteSingle(body = {}) {
+    let result = null;
+    await this.ctx.model.UrlResponse.remove({ _id: body._id }, (msg) => {
       result = msg;
     });
     return result;

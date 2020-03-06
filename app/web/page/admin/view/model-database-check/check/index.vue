@@ -20,6 +20,7 @@
       <el-table
           v-else
           border
+          size="mini"
           :data="dataList"
           :span-method="objectSpanMethod"
           :cell-style="cellStyleMethod">

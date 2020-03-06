@@ -165,6 +165,18 @@
       "POST"
     ],
     "paramNames": [],
+    "path": "/mock/api/url/mock/data/delete/single",
+    "regexp": "/^\\/mock\\/api\\/url\\/mock\\/data\\/delete\\/single(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
     "path": "/mock/api/url/response/add",
     "regexp": "/^\\/mock\\/api\\/url\\/response\\/add(?:\\/(?=$))?$/",
     "stack": [

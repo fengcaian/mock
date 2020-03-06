@@ -17,6 +17,7 @@
         </el-form>
         <el-table
             border
+            size="mini"
             :data="dataList"
             :row-style="rowStyle"
             v-loading="loading"
