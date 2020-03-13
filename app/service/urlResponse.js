@@ -96,6 +96,19 @@ module.exports = class UrlResponseService extends egg.Service {
     });
     return result;
   }
+  async mockDataDeleteBatch(body = {}) {
+    const queryParams = {
+      _id: {
+        $in: body.idList,
+      },
+    };
+    let result = null;
+    console.log(queryParams);
+    await this.ctx.model.UrlResponse.remove(queryParams, (msg) => {
+      result = msg;
+    });
+    return result;
+  }
   async getResponse(query = {}) {
     try {
       let result = await this.ctx.model.UrlResponse.find({ url: query.url, isPriority: true });

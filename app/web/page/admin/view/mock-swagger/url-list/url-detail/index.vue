@@ -16,7 +16,13 @@
             <el-button type="success" size="mini" @click="addUrlResponseByHand">手动添加</el-button>
             <el-button type="primary" size="mini" disabled @click="doRequest">发送请求</el-button>
         </el-form>
-        <el-table border size="mini" :data="dataList" style="width: 100%">
+        <el-table
+            border
+            size="mini"
+            :data="dataList"
+            @selection-change="batchSelect"
+            style="width: 100%">
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="类型" width="180" align="center">
                 <template slot-scope="scope">
                     <span>{{scope.row.dataType === 'mock_data' ? 'mock数据' : '后端数据'}}</span>
@@ -47,16 +53,29 @@
                 </template>
             </el-table-column>
         </el-table>
-        <div style="margin-top: 16px; text-align: center">
-            <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="searchParam.currentPage"
-                :page-sizes="[10, 15, 20, 50]"
-                :page-size="searchParam.pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total">
-            </el-pagination>
+        <div style="margin-top: 16px">
+            <div style="float:left">
+                <el-button
+                    type="danger"
+                    icon="delete"
+                    size="small"
+                    :disabled="batchSelectArray.length === 0"
+                    @click="batchDel"
+                    slot="handler">
+                    <span>批量删除</span>
+                </el-button>
+            </div>
+            <div style="float:right">
+                <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="searchParam.currentPage"
+                    :page-sizes="[10, 15, 20, 50]"
+                    :page-size="searchParam.pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+                </el-pagination>
+            </div>
         </div>
         <dialog-url-response-detail
             v-if="isShowUrlResponseDetailDialog"
@@ -102,6 +121,7 @@ export default {
         type: '',
       },
       dataList: [],
+      batchSelectArray: [],
       total: 0,
       id: '',
       urlResponseData: {},
@@ -145,6 +165,10 @@ export default {
     handleCurrentChange(val) {
       this.searchParam.currentPage = val;
       this.getDataList();
+    },
+    //批量选择
+    batchSelect(val) {
+      this.batchSelectArray = val;
     },
     generateMockData() {
       request.post('/mock/api/url/mock/data', { _id: this.$route.query._id, url: this.$store.state.shareData.url })
@@ -213,6 +237,26 @@ export default {
         .then(() => {
           this.$message({
             message: '删除成功！',
+            showClose: true,
+            type: 'success',
+          });
+          this.getDataList();
+        });
+    },
+    batchDel() {
+      if (!this.batchSelectArray.length) {
+        this.$message({
+          message: '请选择！',
+          showClose: true,
+          type: 'warning',
+        });
+        return;
+      }
+      const idList = this.batchSelectArray.map(item => item._id).join(',');
+      request.post('/mock/api/url/mock/data/delete/batch', idList)
+        .then(() => {
+          this.$message({
+            message: '批量删除成功！',
             showClose: true,
             type: 'success',
           });

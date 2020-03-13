@@ -2,6 +2,7 @@
 
 const egg = require('egg');
 const Response = require('../util/Response');
+const { dateFormat } = require('../util/common');
 
 module.exports = class UrlController extends egg.Controller {
   async forward(ctx) {
@@ -32,7 +33,6 @@ module.exports = class UrlController extends egg.Controller {
             }
           ];
         } else {
-          console.log(params);
           result = await Promise.all([
             ctx.doCurl(`${ctx.request.headers['x-scheme']}://${ipAddress}${port ? `:${port}`: ''}${ctx.url}`, {
               data: params,
@@ -45,6 +45,7 @@ module.exports = class UrlController extends egg.Controller {
             url: urlObj.url,
             type: urlObj.type,
             dataType: 'backend_data',
+            createTime: dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
             response: result[0].data,
           };
           await this.ctx.model.UrlResponse.create(urlResponse);

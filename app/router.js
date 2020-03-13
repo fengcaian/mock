@@ -15,6 +15,7 @@ module.exports = app => {
   router.post('/mock/api/url/response/edit', controller.urlResponseManage.editUrlResponse);
   router.post('/mock/api/url/response/set/priority', controller.urlResponseManage.setPriority);
   router.post('/mock/api/url/mock/data/delete/single', controller.urlResponseManage.mockDataDeleteSingle);
+  router.post('/mock/api/url/mock/data/delete/batch', controller.urlResponseManage.mockDataDeleteBatch);
   router.post('/mock/api/url/response/add', controller.urlResponseManage.add);
   router.get('/mock/api/system/list', controller.systemManage.list);
   router.post('/mock/api/system/add', controller.systemManage.add);
