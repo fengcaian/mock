@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tool-bar v-if="isShowToolBar" @graphSelect="graphSelect"></tool-bar>
+    <tool-bar v-if="isShowToolBar" @graphSelect="graphSelect" @dragStart="dragStart"></tool-bar>
     <div class="svg-container" :style="`transform: scale(${scaleX}, ${scaleY})`">
       <svg
           id="svg-chain"
@@ -180,6 +180,7 @@ export default {
       this.isActive = false;
       this.activeSvg = graphId;
     },
+    dragStart() {},
     installSvg() {
       if (this.activeSvg) {
         this.chainArray.push(this.getGraph(this.activeSvg));
