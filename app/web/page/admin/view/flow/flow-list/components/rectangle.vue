@@ -1,6 +1,6 @@
 <template>
   <g class="pointer" @click="clickRectangle">
-    <rect class="rect" :x="position.x" :y="position.y" :width="size.width" :height="size.height"></rect>
+    <rect :id="id" class="rect" :stroke="stroke" :x="position.x" :y="position.y" :width="size.width" :height="size.height"></rect>
   </g>
 </template>
 
@@ -21,6 +21,14 @@ export default {
         height: 60,
       })
     },
+    stroke: {
+      type: String,
+      default: 'rgb(79, 136, 186)',
+    },
+    id: {
+      type: String,
+      default: `rect-${Math.random()}`,
+    },
   },
   data() {
     return {};
@@ -39,7 +47,6 @@ export default {
   }
   .rect {
     fill: white;
-    stroke: rgb(79, 136, 186);
     stroke-width: 1;
     rx: 10;
     ry: 10;

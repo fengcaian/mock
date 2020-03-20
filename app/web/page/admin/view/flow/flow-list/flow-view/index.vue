@@ -1,6 +1,9 @@
 <template>
   <div>
-    <tool-bar v-if="isShowToolBar" @graphSelect="graphSelect" @dragStart="dragStart"></tool-bar>
+    <tool-bar
+        v-if="isShowToolBar"
+        @graphSelect="graphSelect">
+    </tool-bar>
     <div class="svg-container" :style="`transform: scale(${scaleX}, ${scaleY})`">
       <svg
           id="svg-chain"
@@ -11,7 +14,7 @@
           style="width: 100%; height: 100vh"
           @contextmenu="preventRightClick"
           @mousemove="!isActive && mousemoveSvg($event)"
-          @click="installSvg">
+          @click="svgClick">
           <defs>
             <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
               <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#CCCCCC" stroke-width="0.5"/>
@@ -21,23 +24,25 @@
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
-        <!--<svg-line :position="{x: 250, y: 250}" :length="50" direction="right" :arrow="true"></svg-line>-->
-        <!--<svg-line :position="{x: 250, y: 250}" :length="150" direction="left" :arrow="true"></svg-line>-->
-        <!--<svg-line :position="{x: 250, y: 250}" :length="150" direction="up" :arrow="true"></svg-line>-->
-        <!--<svg-line :position="{x: 250, y: 250}" :length="150" direction="down" :arrow="true"></svg-line>-->
-        <!--<svg-rect :position="{x: 250, y: 250}"></svg-rect>-->
-        <g v-for="(svg, index) in chainArray" :key="index">
-          <svg-line v-if="svg.type === 'line'" :position="svg.data.position" :length="svg.data.length" :direction="svg.data.direction" :arrow="svg.data.arrow"></svg-line>
-          <svg-rect v-else-if="svg.type === 'rect'" :position="svg.data.position" :size="svg.data.size"></svg-rect>
+        <g v-for="(svg, index) in chainArray" :key="index" @click.stop="selectShape(svg, index)">
+          <svg-line v-if="svg.type === 'line'" :position="svg.data.position" :length="svg.data.length" :stroke="svg.data.stroke" :direction="svg.data.direction" :arrow="svg.data.arrow"></svg-line>
+          <svg-rect v-else-if="svg.type === 'rect'" :id="svg.id" :position="svg.data.position" :stroke="svg.data.stroke" :size="svg.data.size"></svg-rect>
         </g>
         <g @click="inductorClick">
           <svg-inductor v-if="isShowInductor" :cycle="inductorArea"></svg-inductor>
         </g>
         <g>
-          <svg-line v-if="activeSvg === 'line-up'" :position="mousePosition" :length="40" direction="up" :arrow="true"></svg-line>
-          <svg-line v-if="activeSvg === 'line-right'" :position="mousePosition" :length="40" direction="right" :arrow="true"></svg-line>
-          <svg-line v-if="activeSvg === 'line-down'" :position="mousePosition" :length="40" direction="down" :arrow="true"></svg-line>
-          <svg-line v-if="activeSvg === 'line-left'" :position="mousePosition" :length="40" direction="left" :arrow="true"></svg-line>
+          <div>
+            <text x="0" y="15" fill="red">I love SVG</text>
+          </div>
+          <path :x1="cursor.x1" :y1="cursor.y1" :x2="cursor.x2" :y2="cursor.y2" strok-width="1"></path>
+        </g>
+        <g>
+          <svg-line v-if="tempSvgInfo.type === 'line-up'" :position="mousePosition" :length="70" direction="up" :arrow="true"></svg-line>
+          <svg-line v-if="tempSvgInfo.type === 'line-right'" :position="mousePosition" :length="70" direction="right" :arrow="true"></svg-line>
+          <svg-line v-if="tempSvgInfo.type === 'line-down'" :position="mousePosition" :length="70" direction="down" :arrow="true"></svg-line>
+          <svg-line v-if="tempSvgInfo.type === 'line-left'" :position="mousePosition" :length="70" direction="left" :arrow="true"></svg-line>
+          <svg-rect v-if="tempSvgInfo.type === 'rect'" :position="mousePosition" :size="{width: 100, height: 60}"></svg-rect>
         </g>
       </svg>
     </div>
@@ -72,13 +77,16 @@ export default {
       scaleX: 1,
       scaleY: 1,
       svgHeight: 1,
-      activeSvg: '',
+      tempSvgInfo: {},
+      movingNode: null,
+      movingNodeId: null,
       mousePosition: {
         x: 0,
         y: 0,
       },
       chainArray: [
         {
+          id: `line-${Math.random()}`,
           type: 'line',
           data: {
             position: {
@@ -91,6 +99,7 @@ export default {
           },
         },
         {
+          id: `rect-${Math.random()}`,
           type: 'rect',
           data: {
             position: {
@@ -106,6 +115,7 @@ export default {
       ],
       graphics: {
         line: {
+          id: `line-${Math.random()}`,
           type: 'line',
           data: {
             position: {
@@ -118,6 +128,7 @@ export default {
           },
         },
         rect: {
+          id: `rect-${Math.random()}`,
           type: 'rect',
           data: {
             position: {
@@ -143,6 +154,15 @@ export default {
           }
         ],
       },
+      activeInductorPos: null,
+      selectedShape: null,
+      selectedShapeIndex: null,
+      cursor: {
+        x1: 0,
+        y1: 0,
+        x2: 10,
+        y2: 10,
+      },
     };
   },
   watch: {
@@ -153,6 +173,15 @@ export default {
   created() {
     this.inductorArea.positionList = this.getInductorAreaList(this.chainArray);
     console.log(this.inductorArea);
+  },
+  mounted() {
+    document.addEventListener('keydown', (e) => {
+      if (e.keyCode === 8 && this.selectedShape && this.selectedShapeIndex) {
+        this.chainArray.splice(this.selectedShapeIndex, 1);
+        this.selectedShape = null;
+        this.selectedShapeIndex = null;
+      }
+    }, false);
   },
   methods: {
     mousemoveSvg(e) {
@@ -165,6 +194,10 @@ export default {
         this.isShowInductor = true;
         this.inductorArea.x = inductorArea.x;
         this.inductorArea.y = inductorArea.y;
+        this.activeInductorPos = {
+          x: inductorArea.x,
+          y: inductorArea.y,
+        };
         console.log(`i am in inductor area,x:${inductorArea.x},y:${inductorArea.y}`);
       } else {
         this.isShowInductor = false;
@@ -178,24 +211,69 @@ export default {
     graphSelect(graphId) {
       // this.isShowToolBar = false;
       this.isActive = false;
-      this.activeSvg = graphId;
+      this.tempSvgInfo = {
+        type: graphId,
+      };
+      console.log(graphId);
     },
-    dragStart() {},
-    installSvg() {
-      if (this.activeSvg) {
-        this.chainArray.push(this.getGraph(this.activeSvg));
+    selectShape(shape, i) {
+      if (this.selectedShape && this.selectedShapeIndex) {
+        this.selectedShape.data.stroke = 'rgb(79, 136, 186)';
+        this.$set(this.chainArray, this.selectedShapeIndex, this.selectedShape);
       }
-      console.log(this.chainArray);
+      shape.data.stroke = 'red';
+      this.selectedShape = shape;
+      this.selectedShapeIndex = i;
+      this.$set(this.chainArray, i, shape);
+    },
+    dragStart() {
+      console.log(11);
+    },
+    mouseDown(node, type) {
+      this.movingNode = node;
+      node.id = `${type}-${Math.random()}`;
+      this.movingNodeId = `${type}-${Math.random()}`;
+      this.$refs['svg-chain'].appendChild(node);
+    },
+    mouseMove(e) {
+      this.movingNode = document.getElementById(this.movingNodeId);
+      this.movingNode.x = e.offsetX;
+      this.movingNode.y = e.offsetY;
+    },
+    svgClick(e) {
+      if (this.tempSvgInfo.type) {
+        let svg = this.getGraph(this.tempSvgInfo);
+        if (svg.type === 'rect') {
+          svg.data.position = {
+            x: e.offsetX,
+            y: e.offsetY,
+          };
+        } else {
+          svg.data.position = this.activeInductorPos;
+        }
+        this.chainArray.push(svg);
+        this.tempSvgInfo = {};
+        this.activeInductorPos = null;
+      }
+      if (this.selectedShape) {
+        this.selectedShape.data.stroke = 'rgb(79, 136, 186)';
+        this.$set(this.chainArray, this.selectedShapeIndex, this.selectedShape);
+        this.selectedShape = null;
+        this.selectedShapeIndex = null;
+      }
     },
     getGraph(params) {
       let type = '';
-      if (/^(line).*/.test(params)) {
+      let direction = '';
+      if (/^(line).*/.test(params.type)) {
         type = 'line';
+        direction = params.type.split('-')[1] || 'down';
       }
-      if (/^(rect).*/.test(params)) {
+      if (/^(rect).*/.test(params.type)) {
         type = 'rect';
       }
       const graph = JSON.parse(JSON.stringify(this.graphics[type]));
+      graph.data.direction = direction;
       return graph;
     },
     getInductorArea(x, y) {
@@ -238,7 +316,7 @@ export default {
     },
     preventRightClick(e) {
       e.preventDefault();
-      this.activeSvg = '';
+      this.tempSvgInfo = {};
     },
     zoomIn() {
       this.scaleX /= 0.9;

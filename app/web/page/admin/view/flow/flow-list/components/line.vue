@@ -1,7 +1,7 @@
 <template>
   <g class="pointer">
-    <path class="line" :d="lineAttr"/>
-    <path class="arrow" v-if="arrow" :d="arrowAttr"/>
+    <path class="line" :stroke="stroke" :d="lineAttr"/>
+    <path :stroke="stroke" :fill="stroke" v-if="arrow" :d="arrowAttr"/>
   </g>
 </template>
 
@@ -22,6 +22,10 @@ export default {
         x: 0,
         y: 0,
       })
+    },
+    stroke: {
+      type: String,
+      default: 'rgb(79, 136, 186)',
     },
     arrow: {
       type: Boolean,
@@ -82,7 +86,7 @@ export default {
   }
   .line {
     fill: transparent;
-    stroke: rgb(79, 136, 186);
+    /*stroke: rgb(79, 136, 186);*/
     stroke-width: 0.5;
   }
   .arrow {
