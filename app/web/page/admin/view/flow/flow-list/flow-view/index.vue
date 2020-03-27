@@ -271,7 +271,7 @@ export default {
     },
     mouseUp() {
       if (this.penDrawing) {
-        this.penDrawingStart = false;
+        this.penDrawingStart = false; // test
         this.penDrawingPathId = null;
         this.penDrawingPath = null;
       }
