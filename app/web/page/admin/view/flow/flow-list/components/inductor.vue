@@ -1,8 +1,8 @@
 <template>
   <g class="pointer">
     <circle :cx="cycle.x" :cy="cycle.y" :r="cycle.r" class="cycle" />
-    <line :x1="`${cycle.x - (cycle.r - 1)}`" :y1="cycle.y" :x2="`${cycle.x + cycle.r}`" :y2="cycle.y" class="line"/>
-    <line :x1="cycle.x" :y1="`${cycle.y - (cycle.r - 1)}`" :x2="cycle.x" :y2="`${cycle.y + cycle.r}`" class="line"/>
+    <line :x1="`${cycle.x - cycle.r}`" :y1="cycle.y" :x2="`${cycle.x + cycle.r}`" :y2="cycle.y" class="line"/>
+    <line :x1="cycle.x" :y1="`${cycle.y - cycle.r}`" :x2="cycle.x" :y2="`${cycle.y + cycle.r}`" class="line"/>
   </g>
 </template>
 

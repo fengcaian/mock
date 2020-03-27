@@ -8,7 +8,9 @@ module.exports = app => {
   };
 
   exports.static = {
-    maxAge: 0 // maxAge 缓存，默认 1 年
+    maxAge: 0, // maxAge 缓存，默认 1 年
+    prefix: '/static', // 不配置这个，图片引用不到
+    dynamic: true, // 如果当前访问的静态资源没有缓存，则缓存静态文件，和`preload`配合使用；
   };
 
   exports.development = {

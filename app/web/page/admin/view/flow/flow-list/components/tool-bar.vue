@@ -28,17 +28,20 @@
         <svg-rect :position="{x: 30, y: 200}" :size="{width: 60, height: 40}"></svg-rect>
       </g>
     </svg>
+    <svg-pen></svg-pen>
   </div>
 </template>
 
 <script>
 import svgLine from './line';
 import svgRect from './rectangle';
+import svgPen from './pen';
 
 export default {
   components: {
     svgLine,
     svgRect,
+    svgPen,
   },
   date() {
     return {
@@ -70,6 +73,9 @@ export default {
       }
     },
     mouseUp(e, type) {},
+    draw() {
+      this.$emit('penDraw');
+    },
   },
 }
 </script>

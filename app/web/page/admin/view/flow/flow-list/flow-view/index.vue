@@ -1,9 +1,13 @@
 <template>
   <div>
-    <tool-bar
+    <!--<tool-bar-->
+        <!--v-if="isShowToolBar"-->
+        <!--@graphSelect="graphSelect">-->
+    <!--</tool-bar>-->
+    <tool-bar-t
         v-if="isShowToolBar"
         @graphSelect="graphSelect">
-    </tool-bar>
+    </tool-bar-t>
     <div class="svg-container" :style="`transform: scale(${scaleX}, ${scaleY})`">
       <svg
           id="svg-chain"
@@ -11,9 +15,12 @@
           version="1.1"
           baseProfile="full"
           xmlns="http://www.w3.org/2000/svg"
-          style="width: 100%; height: 100vh"
+          style="width: 100%; height: 100vh;"
+          :style="{cursor: penDrawing ? `url(${getOrigin()}/static/image/pen.png), default` : ''}"
           @contextmenu="preventRightClick"
+          @mousedown="mouseDown($event)"
           @mousemove="!isActive && mousemoveSvg($event)"
+          @mouseup="mouseUp($event)"
           @click="svgClick">
           <defs>
             <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
@@ -27,15 +34,14 @@
         <g v-for="(svg, index) in chainArray" :key="index" @click.stop="selectShape(svg, index)">
           <svg-line v-if="svg.type === 'line'" :position="svg.data.position" :length="svg.data.length" :stroke="svg.data.stroke" :direction="svg.data.direction" :arrow="svg.data.arrow"></svg-line>
           <svg-rect v-else-if="svg.type === 'rect'" :id="svg.id" :position="svg.data.position" :stroke="svg.data.stroke" :size="svg.data.size"></svg-rect>
+          <path v-else-if="svg.type === 'path' && svg.data.d !== 'M'" :d="svg.data.d" stroke="blue" stroke-width="1" fill="none"></path>
         </g>
         <g @click="inductorClick">
           <svg-inductor v-if="isShowInductor" :cycle="inductorArea"></svg-inductor>
         </g>
         <g>
-          <div>
-            <text x="0" y="15" fill="red">I love SVG</text>
-          </div>
-          <path :x1="cursor.x1" :y1="cursor.y1" :x2="cursor.x2" :y2="cursor.y2" strok-width="1"></path>
+          <text x="0" y="15" fill="red">I love SVG</text>
+          <line :x1="cursor.x1" :y1="cursor.y1" :x2="cursor.x2" :y2="cursor.y2" strok-width="1"></line>
         </g>
         <g>
           <svg-line v-if="tempSvgInfo.type === 'line-up'" :position="mousePosition" :length="70" direction="up" :arrow="true"></svg-line>
@@ -61,6 +67,7 @@ import svgRect from '../components/rectangle';
 import svgInductor from '../components/inductor';
 
 import toolBar from '../components/tool-bar';
+import toolBarT from '../components/tool-bar-2';
 
 export default {
   components: {
@@ -68,6 +75,7 @@ export default {
     svgRect,
     svgInductor,
     toolBar,
+    toolBarT,
   },
   data() {
     return {
@@ -140,7 +148,14 @@ export default {
               height: 60,
             }
           },
-        }
+        },
+        path: {
+          id: `path-${Math.random()}`,
+          type: 'path',
+          data: {
+            d: 'M',
+          },
+        },
       },
       inductorArea: {
         type: 'cycle',
@@ -163,6 +178,11 @@ export default {
         x2: 10,
         y2: 10,
       },
+      penDrawing: false,
+      penDrawingStart: false,
+      penDrawingPathId: null,
+      penDrawingPath: null,
+      timer: null,
     };
   },
   watch: {
@@ -202,6 +222,12 @@ export default {
       } else {
         this.isShowInductor = false;
       }
+      if (this.penDrawingStart) {
+        if (this.penDrawingPath === null) {
+          this.penDrawingPath = this.chainArray.find(item => item.id === this.penDrawingPathId);
+        }
+        this.penDrawingPath.data.d += ` ${this.mousePosition.x}, ${this.mousePosition.y}`;
+      }
     },
     inductorClick() {
       // this.isShowToolBar = true;
@@ -210,10 +236,14 @@ export default {
     },
     graphSelect(graphId) {
       // this.isShowToolBar = false;
-      this.isActive = false;
-      this.tempSvgInfo = {
-        type: graphId,
-      };
+      if (graphId === 'pen') {
+        this.penDrawing = true;
+      } else {
+        this.isActive = false;
+        this.tempSvgInfo = {
+          type: graphId,
+        };
+      }
       console.log(graphId);
     },
     selectShape(shape, i) {
@@ -229,11 +259,22 @@ export default {
     dragStart() {
       console.log(11);
     },
-    mouseDown(node, type) {
-      this.movingNode = node;
-      node.id = `${type}-${Math.random()}`;
-      this.movingNodeId = `${type}-${Math.random()}`;
-      this.$refs['svg-chain'].appendChild(node);
+    mouseDown() {
+      if (this.penDrawing) {
+        this.penDrawingStart = true;
+        const svg = this.getGraph({ type: 'path' });
+        this.penDrawingPathId = svg.id;
+        this.chainArray.push(svg);
+        console.log('down');
+        console.log(svg);
+      }
+    },
+    mouseUp() {
+      if (this.penDrawing) {
+        this.penDrawingStart = false;
+        this.penDrawingPathId = null;
+        this.penDrawingPath = null;
+      }
     },
     mouseMove(e) {
       this.movingNode = document.getElementById(this.movingNodeId);
@@ -262,6 +303,7 @@ export default {
         this.selectedShapeIndex = null;
       }
     },
+    penDraw() {},
     getGraph(params) {
       let type = '';
       let direction = '';
@@ -272,8 +314,12 @@ export default {
       if (/^(rect).*/.test(params.type)) {
         type = 'rect';
       }
+      if (params.type === 'path') {
+        type = 'path';
+      }
       const graph = JSON.parse(JSON.stringify(this.graphics[type]));
       graph.data.direction = direction;
+      graph.id = `${type}-${Math.random()}`;
       return graph;
     },
     getInductorArea(x, y) {
@@ -317,6 +363,11 @@ export default {
     preventRightClick(e) {
       e.preventDefault();
       this.tempSvgInfo = {};
+      this.penDrawing = false;
+      this.penDrawingStart = false;
+    },
+    getOrigin() {
+      return window.location.origin;
     },
     zoomIn() {
       this.scaleX /= 0.9;
@@ -327,6 +378,22 @@ export default {
       this.scaleX *= 0.9;
       this.scaleY *= 0.9;
       this.svgHeight *= 0.9;
+    },
+    debounce(fn, delay) {
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+      this.timer = setTimeout(fn, delay);
+    },
+    throttle(fn, delay) {
+      let startTime = new Date();
+      return () => {
+        const endTime = new Date();
+        if (endTime - startTime > delay) {
+          fn.apply(this);
+          startTime = endTime;
+        }
+      };
     },
   },
 }
@@ -340,5 +407,8 @@ export default {
     position: absolute;
     right: 5%;
     bottom: 75px;
+  }
+  .pen-cursor {
+    cursor: url("https://static.szlcsc.com/ecp/public/static/images/cursor_left.ico"), default;
   }
 </style>
