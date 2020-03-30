@@ -100,10 +100,14 @@ module.exports = class UrlService extends egg.Service {
   async getUrlList(query = {}) {
     const params = {};
     if (query.url) {
-      params.url = query.url;
+      params.url = {
+        $regex: query.url,
+      };
     }
     if (query.system) {
-      params.host = query.system;
+      params.host = {
+        $regex: query.system,
+      };
     }
     if (query.summary) {
       params.summary = new RegExp(query.summary, 'i');
