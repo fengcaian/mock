@@ -22,7 +22,7 @@
         <el-col class="th" :span="14">Name</el-col>
         <el-col class="th" :span="10">Description</el-col>
       </el-row>
-      <el-form ref="form" label-width="140px" :model="form">
+      <el-form ref="form" label-width="160px" :model="form">
         <el-row v-for="parameter in parameterList" :key="parameter.name">
           <el-col :span="14">
             <el-form-item  :label="parameter.name" :prop="parameter.name" :rules="[

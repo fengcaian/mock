@@ -7,6 +7,15 @@ const { dateFormat } = require('../util/common');
 module.exports = class UrlController extends egg.Controller {
   async forward(ctx) {
     try {
+      if (ctx.request.headers.origin == 'https://deverp.szlcsc.com' || ctx.request.headers.origin == 'https://devpda.szlcsc.com') {
+        ctx.set('Access-Control-Expose-Headers', 'Set-Cookie');
+        ctx.set('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Referer,User-Agent,TOKEN');
+        ctx.set('Access-Control-Allow-Credentials', 'true');
+        ctx.set('Access-Control-Allow-Methods', '*');
+        ctx.set('Access-Control-Allow-Origin', ctx.request.headers.origin);
+      } else {
+        ctx.body = new Response(402, '该系统不支持跨域', null);
+      }
       const url = ctx.url.split('?')[0];
       let params, result = {};
       let ipAddress = '';
@@ -54,11 +63,6 @@ module.exports = class UrlController extends egg.Controller {
       if (urlObj.requestTarget === 'mock') {
         result = await ctx.service.urlResponse.getResponse(urlObj);
       }
-      ctx.set('Access-Control-Expose-Headers', 'Set-Cookie');
-      ctx.set('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Referer,User-Agent,TOKEN');
-      ctx.set('Access-Control-Allow-Credentials', 'true');
-      ctx.set('Access-Control-Allow-Methods', '*');
-      ctx.set('Access-Control-Allow-Origin', 'https://deverp.szlcsc.com');
       if (Array.isArray(result)) {
         ctx.body = result[0].data;
       } else {

@@ -16,7 +16,9 @@
       <div class="left border-r border-b border-l" @click="select('pen')">
         <svg-icon class="icon" icon-class="pen"></svg-icon>
       </div>
-      <div class="right border-r border-b"></div>
+      <div class="right border-r border-b" @click="select('rect')">
+        <svg-icon class="icon" icon-class="rectangle"></svg-icon>
+      </div>
     </div>
   </div>
 </template>

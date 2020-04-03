@@ -165,17 +165,19 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
-      }).then(() => request.post('/mock/api/url/swagger', row), () => {})
+      }).then(() => request.post('/mock/api/url/swagger', row), () => Promise.reject('cancel'))
         .then(() => {
           this.$message({
             message: '已加载该系统swagger接口！',
             type: 'success',
           });
         }, (e) => {
-          this.$message({
-            message: e || '该系统swagger服务可能未启动，更新失败！',
-            type: 'warning',
-          });
+          if (e !== 'cancel') {
+            this.$message({
+              message: e || '该系统swagger服务可能未启动，更新失败！',
+              type: 'warning',
+            });
+          }
         });
     },
     showSystemIpMap(row) {

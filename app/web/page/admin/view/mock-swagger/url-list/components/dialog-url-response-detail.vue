@@ -4,7 +4,7 @@
         width="500px"
         :visible.sync="dialogShow"
         :before-close="close">
-        <pre class="dialog-height" v-high-light>
+        <pre v-high-light>
           <code class="json" spellcheck="false">{{response}}</code>
         </pre>
     </el-dialog>

@@ -87,6 +87,11 @@ module.exports = class UrlResponseService extends egg.Service {
     await this.ctx.model.UrlResponse.update({ _id: body._id }, { $set: { isPriority: body.isPriority } }, (msg) => {
       result = msg;
     });
+    if (body.isPriority) { // 将其他UrlResponse的isPriority设为false
+      await this.ctx.model.UrlResponse.updateMany({ _id: { $ne: body._id } }, { $set: { isPriority: false } }, (msg) => {
+        result = msg;
+      });
+    }
     return result;
   }
   async mockDataDeleteSingle(body = {}) {
@@ -129,5 +134,9 @@ module.exports = class UrlResponseService extends egg.Service {
     } catch (e) {
       this.ctx.logger.error(e);
     }
+  }
+  async insertResponse(body = {}) {
+    const query = body;
+    let result = await this.ctx.model.UrlResponse.findOneAndUpdate({ query });
   }
 };

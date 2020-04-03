@@ -54,6 +54,9 @@
     </div>
     <div class="zoom">
       <el-button-group>
+        <el-button type="primary" size="mini" @click="withdraw">
+          <svg-icon class="icon" icon-class="withdraw"></svg-icon>
+        </el-button>
         <el-button type="primary" size="mini" icon="el-icon-zoom-in" @click="zoomIn"></el-button>
         <el-button type="primary" size="mini" icon="el-icon-zoom-out" @click="zoomOut"></el-button>
       </el-button-group>
@@ -369,6 +372,7 @@ export default {
     getOrigin() {
       return window.location.origin;
     },
+    withdraw() {},
     zoomIn() {
       this.scaleX /= 0.9;
       this.scaleY /= 0.9;
