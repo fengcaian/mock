@@ -34,6 +34,13 @@
                 </template>
             </el-table-column>
             <el-table-column prop="createTime" label="生成时间" align="center" width="140"></el-table-column>
+            <el-table-column label="备注" align="center" width="140">
+                <template slot-scope="scope">
+                    <el-input size="mini" class="width-110 pointer" readonly v-model="scope.row.remark">
+                        <i class="el-icon-edit icon-button" slot="suffix" @click="editRemark(scope.row)"></i>
+                    </el-input>
+                </template>
+            </el-table-column>
             <el-table-column label="是否设为优先数据" align="center" width="140">
                 <template slot-scope="scope">
                     <el-switch
@@ -95,6 +102,13 @@
             :urlObject="urlObject"
             @addUrlResponseByHandDialogCb="addUrlResponseByHandDialogCb">
         </dialog-url-response-add-by-hand>
+        <dialog-url-response-remark-edit
+            v-if="isShowUrlResponseRemarkEditDialog"
+            :urlResponseRemarkEditDialogVisible="isShowUrlResponseRemarkEditDialog"
+            :_id="_id"
+            :remark="remark"
+            @urlResponseRemarkEditDialogCb="urlResponseRemarkEditDialogCb">
+        </dialog-url-response-remark-edit>
     </div>
 </template>
 
@@ -103,12 +117,14 @@ import request from '@/app/web/framework/network/request';
 import dialogUrlResponseDetail from '../components/dialog-url-response-detail';
 import dialogEditUrlResponse from '../components/dialog-edit-url-response';
 import dialogUrlResponseAddByHand from '../components/dialog-url-response-add-by-hand';
+import dialogUrlResponseRemarkEdit from '../components/dialog-url-response-remark-edit';
 
 export default {
   components: {
     dialogUrlResponseDetail,
     dialogEditUrlResponse,
     dialogUrlResponseAddByHand,
+    dialogUrlResponseRemarkEdit,
   },
   data() {
     return {
@@ -123,11 +139,13 @@ export default {
       dataList: [],
       batchSelectArray: [],
       total: 0,
-      id: '',
+      _id: '',
+      remark: '',
       urlResponseData: {},
       isShowUrlResponseDetailDialog: false,
       isShowUrlResponseEditDialog: false,
       isShowUrlResponseAddByHandDialog: false,
+      isShowUrlResponseRemarkEditDialog: false,
       urlObject: {},
     };
   },
@@ -226,6 +244,17 @@ export default {
         this.getDataList();
       }
     },
+    editRemark(row) {
+      this._id = row._id;
+      this.remark = row.remark;
+      this.isShowUrlResponseRemarkEditDialog = true;
+    },
+    urlResponseRemarkEditDialogCb(obj) {
+      if (obj.isRefresh) {
+        this.getDataList();
+      }
+      this.isShowUrlResponseRemarkEditDialog = false;
+    },
     setPriority(row) {
       request.post('/mock/api/url/response/set/priority', row)
         .then(() => {
@@ -273,5 +302,11 @@ export default {
 <style scoped>
 .width-percent-100 {
     width: 100%;
+}
+.width-110 {
+    width: 110px;
+}
+.pointer {
+    cursor: pointer;
 }
 </style>

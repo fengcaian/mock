@@ -137,6 +137,24 @@ module.exports = class UrlResponseService extends egg.Service {
   }
   async insertResponse(body = {}) {
     const query = body;
-    let result = await this.ctx.model.UrlResponse.findOneAndUpdate({ query });
+    try {
+      await this.ctx.model.UrlResponse.findOneAndUpdate(query, { $set: query });
+      return null;
+    } catch (e) {
+      this.ctx.logger.error(e);
+    }
+  }
+  async editUrlResponseRemark(body = {}) {
+    const query = {
+      _id: body._id,
+    };
+    console.log(11);
+    console.log(body);
+    try {
+      await this.ctx.model.UrlResponse.findOneAndUpdate(query, { $set: { remark: body.remark } });
+      return null;
+    } catch (e) {
+      this.ctx.logger.error(e);
+    }
   }
 };

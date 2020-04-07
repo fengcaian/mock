@@ -13,6 +13,7 @@ module.exports = app => {
   router.get('/mock/api/url/response/list', controller.urlResponseManage.getUrlResponseList);
   router.get('/mock/api/url/response/by/params', controller.urlResponseManage.getUrlResponseByParams);
   router.post('/mock/api/url/response/edit', controller.urlResponseManage.editUrlResponse);
+  router.post('/mock/api/url/response/remark/edit', controller.urlResponseManage.editUrlResponseRemark);
   router.post('/mock/api/url/response/set/priority', controller.urlResponseManage.setPriority);
   router.post('/mock/api/url/mock/data/delete/single', controller.urlResponseManage.mockDataDeleteSingle);
   router.post('/mock/api/url/mock/data/delete/batch', controller.urlResponseManage.mockDataDeleteBatch);

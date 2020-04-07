@@ -153,6 +153,18 @@
       "POST"
     ],
     "paramNames": [],
+    "path": "/mock/api/url/response/remark/edit",
+    "regexp": "/^\\/mock\\/api\\/url\\/response\\/remark\\/edit(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
     "path": "/mock/api/url/response/set/priority",
     "regexp": "/^\\/mock\\/api\\/url\\/response\\/set\\/priority(?:\\/(?=$))?$/",
     "stack": [

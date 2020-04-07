@@ -4,7 +4,7 @@
         width="500px"
         :visible.sync="dialogShow"
         :before-close="close">
-        <el-input type="textarea" :rows="20" :autosize="{ minRows: 4 }" v-model="response"></el-input>
+        <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 15}" v-model="response"></el-input>
         <span slot="footer" class="dialog-footer">
             <el-button size="mini" @click="close">取 消</el-button>
             <el-button size="mini" type="primary" @click="confirm">保 存</el-button>

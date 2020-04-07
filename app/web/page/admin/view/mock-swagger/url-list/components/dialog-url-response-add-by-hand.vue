@@ -4,9 +4,9 @@
       width="500px"
       :visible.sync="dialogShow"
       :before-close="close">
-    <el-form ref="form" label-width="100px" :model="form" :rules="rules">
+    <el-form ref="form" label-width="100px" size="mini" label-position="top" :model="form" :rules="rules">
       <el-form-item label="接口返回值:" prop="response">
-        <el-input type="textarea" :rows="20" :autosize="{ minRows: 10 }" v-model="form.response"></el-input>
+        <el-input type="textarea" :rows="20" :autosize="{ minRows: 10, maxRows: 15}" v-model="form.response"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">

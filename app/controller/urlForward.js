@@ -7,7 +7,7 @@ const { dateFormat } = require('../util/common');
 module.exports = class UrlController extends egg.Controller {
   async forward(ctx) {
     try {
-      if (ctx.request.headers.origin == 'https://deverp.szlcsc.com' || ctx.request.headers.origin == 'https://devpda.szlcsc.com') {
+      if (ctx.request.headers.origin === 'https://deverp.szlcsc.com' || ctx.request.headers.origin === 'https://devpda.szlcsc.com') {
         ctx.set('Access-Control-Expose-Headers', 'Set-Cookie');
         ctx.set('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Referer,User-Agent,TOKEN');
         ctx.set('Access-Control-Allow-Credentials', 'true');
@@ -57,7 +57,7 @@ module.exports = class UrlController extends egg.Controller {
             createTime: dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
             response: result[0].data,
           };
-          await this.ctx.model.UrlResponse.create(urlResponse);
+          await this.ctx.service.UrlResponse.insertResponse(urlResponse);
         }
       }
       if (urlObj.requestTarget === 'mock') {

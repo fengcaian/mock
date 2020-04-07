@@ -70,4 +70,12 @@ module.exports = class UrlResponseManageController extends egg.Controller {
       ctx.logger.error(e);
     }
   }
+  async editUrlResponseRemark(ctx) {
+    try {
+      const result  = await ctx.service.urlResponse.editUrlResponseRemark(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
 };

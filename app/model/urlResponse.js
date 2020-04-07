@@ -21,6 +21,9 @@ module.exports = app => {
     createTime: {
       type: String,
     },
+    remark: {
+      type: String,
+    },
     response: {},
   });
   return mongoose.model('UrlResponse', UrlResponseSchema);
