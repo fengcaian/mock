@@ -4,7 +4,7 @@
         width="500px"
         :visible.sync="dialogShow"
         :before-close="close">
-        <pre v-high-light>
+        <pre v-high-light class="wrap">
           <code class="json" spellcheck="false">{{response}}</code>
         </pre>
     </el-dialog>
@@ -33,5 +33,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .wrap {
+    max-height: 500px;
+    z-index: 1000;
+  }
 </style>
