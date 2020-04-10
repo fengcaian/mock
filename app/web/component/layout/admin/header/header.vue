@@ -7,11 +7,11 @@
       <span class="header-btn" @click="sidebarToggle"><i class="el-icon-menu"></i></span>
       <div class="right">
         <span class="header-btn">
-          <a v-bind:href="$t('lang.href')"><i class="el-icon-message"></i></a>
+          <a v-bind:href="getMenu('lang.href')"><i class="el-icon-message"></i></a>
         </span>
         <el-dropdown>
           <span class="header-btn">
-              {{$t('lang.text')}}<i class="el-icon-arrow-down el-icon--right"></i>
+              {{getMenu('lang.text')}}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="switchLang('en')">英文</el-dropdown-item>
@@ -31,9 +31,8 @@
               Mock<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>{{$t('header.profile')}}</el-dropdown-item>
-            <el-dropdown-item @click.native="logout">{{$t('header.logout')}}</el-dropdown-item>
-            <!--<el-dropdown-item @click.native="refreshSwagger">{{$t('header.refreshSwagger')}}</el-dropdown-item>-->
+            <el-dropdown-item>{{getMenu('header.profile')}}</el-dropdown-item>
+            <el-dropdown-item @click.native="logout">{{getMenu('header.logout')}}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -44,6 +43,7 @@
 <style></style>
 <script type="jsx">
 import request from '../../../../framework/network/request';
+import { menuInfo } from '@/app/web/framework/constants';
 import "./header.css";
 import LeftMenu from "../menu/index.vue";
 export default {
@@ -60,7 +60,30 @@ export default {
     };
   },
   computed: {},
+  mounted: function() {
+    if (!this.collapse) {
+      document.body.classList.remove("sidebar-hidden");
+    } else {
+      document.body.classList.add("sidebar-hidden");
+    }
+  },
   methods: {
+    getMenu(prop) {
+      if (prop.indexOf('.') !== -1) {
+        const l = prop.split('.');
+        return recursive(l, menuInfo);
+      } else {
+        return menuInfo[prop] || prop;
+      }
+      function recursive(list, obj) {
+        if (list.length === 1) {
+          return obj[list[0]] || list[0];
+        } else {
+          const key = list.shift();
+          recursive(list, obj[key]);
+        }
+      }
+    },
     sidebarToggle(e) {
       e.preventDefault();
       if (this.collapse) {
@@ -84,12 +107,5 @@ export default {
         });
     },
   },
-  mounted: function() {
-    if (!this.collapse) {
-      document.body.classList.remove("sidebar-hidden");
-    } else {
-      document.body.classList.add("sidebar-hidden");
-    }
-  }
 };
 </script>

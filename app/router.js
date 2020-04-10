@@ -1,7 +1,7 @@
-'use strict';
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/', controller.admin.home);
+  router.get('/', controller.home.client);
+  router.get('/server', app.controller.home.server);
   router.post('/mock/api/url/swagger', controller.urlManage.swaggerUrlList);
   router.post('/mock/api/url/delete', controller.urlManage.delete);
   router.post('/mock/api/url/update', controller.urlManage.update);
@@ -26,7 +26,7 @@ module.exports = app => {
   router.post('/mock/api/system/delete', controller.systemManage.delete);
   router.post('/mock/api/system/enable', controller.systemManage.enableSwitch);
   router.post('/model/file/analyse', controller.fileManage.analyse);
-  router.get('/mock(/.+)?', controller.admin.frontRouterForward); // 前端路由刷新进入该控制器，要求所有前端路由必须以mock开头，不能与后端api重名
+  router.get('/mock(/.+)?', controller.home.frontRouterForward); // 前端路由刷新进入该控制器，要求所有前端路由必须以mock开头，不能与后端api重名
   router.get(/([a-z]+)/, controller.urlForward.forward);
   router.options(/([a-z]+)/, controller.urlForward.forward);
   router.post(/([a-z]+)/, controller.urlForward.forward);

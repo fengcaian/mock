@@ -1,14 +1,9 @@
 {
-  "presets": [["env", {
-    "modules": false,
-    "targets": {
-      "browsers": ["last 2 versions", "safari >= 7"]
-    }
-  }]],
+  "presets": [["env",{ "modules": false }]],
   "plugins": [
     "transform-object-rest-spread",
     "syntax-dynamic-import",
     "transform-object-assign"
   ],
-  "comments":false
+  "comments": false
 }

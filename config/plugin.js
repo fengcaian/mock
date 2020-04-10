@@ -5,5 +5,5 @@ exports.vuessr = {
 
 exports.mongoose = {
   enable: true,
-  package: 'egg-mongoose',
+  package: 'egg-mongoose'
 };

@@ -136,9 +136,10 @@ module.exports = class UrlResponseService extends egg.Service {
     }
   }
   async insertResponse(body = {}) {
-    const query = body;
+    const query = JSON.parse(JSON.stringify(body));
+    delete query.createTime;
     try {
-      await this.ctx.model.UrlResponse.findOneAndUpdate(query, { $set: query });
+      await this.ctx.model.UrlResponse.findOneAndUpdate(query, { $set: body }, { upsert: true });
       return null;
     } catch (e) {
       this.ctx.logger.error(e);
@@ -148,10 +149,8 @@ module.exports = class UrlResponseService extends egg.Service {
     const query = {
       _id: body._id,
     };
-    console.log(11);
-    console.log(body);
     try {
-      await this.ctx.model.UrlResponse.findOneAndUpdate(query, { $set: { remark: body.remark } });
+      await this.ctx.model.UrlResponse.findOneAndUpdate(query, { $set: { remark: body.remark } }, { upsert: true });
       return null;
     } catch (e) {
       this.ctx.logger.error(e);
