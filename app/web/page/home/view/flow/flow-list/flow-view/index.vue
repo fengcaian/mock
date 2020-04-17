@@ -16,7 +16,7 @@
           baseProfile="full"
           xmlns="http://www.w3.org/2000/svg"
           style="width: 100%; height: 100vh;"
-          :style="{cursor: penDrawing ? `url(${getOrigin()}/static/image/pen.png), default` : ''}"
+          :style="{cursor: customDrawing ? cursor[customDrawType] : ''}"
           @contextmenu="preventRightClick"
           @mousedown="mouseDown($event)"
           @mousemove="!isActive && mousemoveSvg($event)"
@@ -35,13 +35,13 @@
           <svg-line v-if="svg.type === 'line'" :position="svg.data.position" :length="svg.data.length" :stroke="svg.data.stroke" :direction="svg.data.direction" :arrow="svg.data.arrow"></svg-line>
           <svg-rect v-else-if="svg.type === 'rect'" :id="svg.id" :position="svg.data.position" :stroke="svg.data.stroke" :size="svg.data.size"></svg-rect>
           <path v-else-if="svg.type === 'path' && svg.data.d !== 'M'" :d="svg.data.d" stroke="blue" stroke-width="1" fill="none"></path>
+          <polyline v-else-if="svg.type === 'polyline'" :points="svg.data.points" stroke="blue" stroke-width="0.5" fill="none"></polyline>
         </g>
         <g @click="inductorClick">
           <svg-inductor v-if="isShowInductor" :cycle="inductorArea"></svg-inductor>
         </g>
         <g>
           <text x="0" y="15" fill="red">I love SVG</text>
-          <line :x1="cursor.x1" :y1="cursor.y1" :x2="cursor.x2" :y2="cursor.y2" strok-width="1"></line>
         </g>
         <g>
           <svg-line v-if="tempSvgInfo.type === 'line-up'" :position="mousePosition" :length="70" direction="up" :arrow="true"></svg-line>
@@ -54,11 +54,17 @@
     </div>
     <div class="zoom">
       <el-button-group>
-        <el-button type="primary" size="mini" @click="withdraw">
-          <svg-icon class="icon" icon-class="withdraw"></svg-icon>
-        </el-button>
-        <el-button type="primary" size="mini" icon="el-icon-zoom-in" @click="zoomIn"></el-button>
-        <el-button type="primary" size="mini" icon="el-icon-zoom-out" @click="zoomOut"></el-button>
+        <el-tooltip content="撤销" placement="top" effect="light">
+          <el-button type="primary" size="mini" @click="withdraw">
+            <svg-icon class="icon" icon-class="withdraw"></svg-icon>
+          </el-button>
+        </el-tooltip>
+        <el-tooltip content="放大" placement="top" effect="light">
+          <el-button type="primary" size="mini" icon="el-icon-zoom-in" @click="zoomIn"></el-button>
+        </el-tooltip>
+        <el-tooltip content="缩小" placement="top" effect="light">
+          <el-button type="primary" size="mini" icon="el-icon-zoom-out" @click="zoomOut"></el-button>
+        </el-tooltip>
       </el-button-group>
     </div>
   </div>
@@ -159,6 +165,16 @@ export default {
             d: 'M',
           },
         },
+        polyline: {
+          id: `path-${Math.random()}`,
+          type: 'polyline',
+          data: {
+            startPos: {},
+            endPos: {},
+            direction: '',
+            points: '',
+          },
+        },
       },
       inductorArea: {
         type: 'cycle',
@@ -167,6 +183,8 @@ export default {
         y: 6,
         positionList: [
           {
+            subSvgId: '', // 所属图形
+            inductionAbilityDirection: '', // 能够连线的方向，如rect右边上的感应器，能够连接的方向就是左
             x: 10,
             y: 10,
           }
@@ -176,15 +194,15 @@ export default {
       selectedShape: null,
       selectedShapeIndex: null,
       cursor: {
-        x1: 0,
-        y1: 0,
-        x2: 10,
-        y2: 10,
+        'pen': `url(${window.location.origin}/static/image/pen.png) 2 14, default`,
+        'line-link': 'crosshair',
       },
       penDrawing: false,
-      penDrawingStart: false,
-      penDrawingPathId: null,
-      penDrawingPath: null,
+      customDrawing: false,
+      customDrawingStart: false,
+      customDrawingPathId: null,
+      customDrawingPath: null,
+      customDrawType: '',
       timer: null,
     };
   },
@@ -225,11 +243,18 @@ export default {
       } else {
         this.isShowInductor = false;
       }
-      if (this.penDrawingStart) {
-        if (this.penDrawingPath === null) {
-          this.penDrawingPath = this.chainArray.find(item => item.id === this.penDrawingPathId);
+      if (this.customDrawingStart) {
+        if (this.customDrawingPath === null) {
+          this.customDrawingPath = this.chainArray.find(item => item.id === this.customDrawingPathId);
         }
-        this.penDrawingPath.data.d += ` ${this.mousePosition.x}, ${this.mousePosition.y}`;
+        if (this.customDrawType === 'pen') {
+          this.customDrawingPath.data.d += ` ${this.mousePosition.x}, ${this.mousePosition.y}`;
+        }
+        if (this.customDrawType === 'line-link') {
+          this.customDrawingPath.data.endPos = this.mousePosition;
+          this.drawPloyLine(inductorArea, this.customDrawingPath.data);
+          console.log(this.customDrawingPath.data);
+        }
       }
     },
     inductorClick() {
@@ -239,9 +264,11 @@ export default {
     },
     graphSelect(graphId) {
       // this.isShowToolBar = false;
-      if (graphId === 'pen') {
-        this.penDrawing = true;
+      if (graphId === 'pen' || graphId === 'line-link') {
+        this.customDrawing = true;
+        this.customDrawType = graphId;
       } else {
+        this.customDrawing = false;
         this.isActive = false;
         this.tempSvgInfo = {
           type: graphId,
@@ -262,21 +289,37 @@ export default {
     dragStart() {
       console.log(11);
     },
-    mouseDown() {
-      if (this.penDrawing) {
-        this.penDrawingStart = true;
-        const svg = this.getGraph({ type: 'path' });
-        this.penDrawingPathId = svg.id;
+    mouseDown(e) {
+      if (this.customDrawing) {
+        let type = '';
+        this.customDrawingStart = true;
+        switch (this.customDrawType) {
+          case 'pen':
+            type = 'path';
+            break;
+          case 'line-link':
+            type = 'polyline';
+            break;
+          default:
+            break;
+        }
+        const svg = this.getGraph({ type });
+        this.customDrawingPathId = svg.id;
+        if (type = 'polyline') {
+          svg.data.startPos = {
+            x: e.offsetX,
+            y: e.offsetY,
+          };
+        }
         this.chainArray.push(svg);
-        console.log('down');
         console.log(svg);
       }
     },
     mouseUp() {
-      if (this.penDrawing) {
-        this.penDrawingStart = false;
-        this.penDrawingPathId = null;
-        this.penDrawingPath = null;
+      if (this.customDrawing) {
+        this.customDrawingStart = false;
+        this.customDrawingPathId = null;
+        this.customDrawingPath = null;
       }
     },
     mouseMove(e) {
@@ -307,6 +350,73 @@ export default {
       }
     },
     penDraw() {},
+    drawPloyLine(inductorData, polyLineData) {
+      const startPos = polyLineData.startPos;
+      const endPos = polyLineData.endPos;
+      const width = endPos.x - startPos.x;
+      const height = endPos.y - startPos.y;
+      let direction = '';
+      if (width > 0 && height > 0) { // 第一象限
+        if (width >= height) {
+          direction = 'right';
+        } else {
+          direction = 'up';
+        }
+      } else if (width < 0 && height > 0) { // 第二象限
+        if (Math.abs(width) >= height) {
+          direction = 'left';
+        } else {
+          direction = 'up';
+        }
+      } else if (width < 0 && height < 0) { // 第三象限
+        if (Math.abs(width) >= Math.abs(height)) {
+          direction = 'left';
+        } else {
+          direction = 'down';
+        }
+      } else { // 第四象限
+        if (width >= Math.abs(height)) {
+          direction = 'right';
+        } else {
+          direction = 'down';
+        }
+      }
+      let startPoint = '';
+      let lastPoint = '';
+      if (inductorData) {
+        // startPoint = this.getTempEndPos(inductorData.inductionAbilityDirection, startPos);
+        lastPoint = this.getTempEndPos(inductorData.inductionAbilityDirection, endPos);
+      }
+      polyLineData.direction = direction;
+      let points = `${startPos.x},${startPos.y}`;
+      if (direction === 'left' || direction === 'right') {
+        points += ` ${startPos.x + (width / 2)},${startPos.y} ${startPos.x + (width / 2)},${endPos.y} ${endPos.x},${endPos.y}`;
+      } else {
+        points += ` ${startPos.x},${startPos.y + (height / 2)} ${endPos.x},${startPos.y + (height / 2)} ${endPos.x},${endPos.y}`;
+      }
+      polyLineData.points = `${startPoint} ${points} ${lastPoint}`;
+    },
+    getTempEndPos(inductionAbilityDirection, endPos) {
+      const tempEndPosDistance = 50;
+      let lastPoint = `${endPos.x},${endPos.y}`;
+      switch (inductionAbilityDirection) {
+        case 'up':
+          endPos.y += tempEndPosDistance;
+          break;
+        case 'right':
+          endPos.x -= tempEndPosDistance;
+          break;
+        case 'down':
+          endPos.y -= tempEndPosDistance;
+          break;
+        case 'left':
+          endPos.x += tempEndPosDistance;
+          break;
+        default:
+          break;
+      }
+      return lastPoint;
+    },
     getGraph(params) {
       let type = '';
       let direction = '';
@@ -320,12 +430,15 @@ export default {
       if (params.type === 'path') {
         type = 'path';
       }
+      if (params.type === 'polyline') {
+        type = 'polyline';
+      }
       const graph = JSON.parse(JSON.stringify(this.graphics[type]));
       graph.data.direction = direction;
       graph.id = `${type}-${Math.random()}`;
       return graph;
     },
-    getInductorArea(x, y) {
+    getInductorArea(x, y) { // 判断鼠标是否靠近感应区，返回感应区信息
       if (!this.inductorArea.positionList.length) {
         return undefined;
       }
@@ -343,18 +456,26 @@ export default {
           data = item.data;
           list.push(
             {
+              subSvgId: item.id,
+              inductionAbilityDirection: 'down',
               x: data.position.x + (data.size.width / 2),
               y: data.position.y,
             },
             {
+              subSvgId: item.id,
+              inductionAbilityDirection: 'left',
               x: data.position.x + data.size.width,
               y: data.position.y + (data.size.height / 2),
             },
             {
+              subSvgId: item.id,
+              inductionAbilityDirection: 'up',
               x: data.position.x + (data.size.width / 2),
               y: data.position.y + data.size.height,
             },
             {
+              subSvgId: item.id,
+              inductionAbilityDirection: 'right',
               x: data.position.x,
               y: data.position.y + (data.size.height / 2),
             }
@@ -366,13 +487,15 @@ export default {
     preventRightClick(e) {
       e.preventDefault();
       this.tempSvgInfo = {};
-      this.penDrawing = false;
-      this.penDrawingStart = false;
+      this.customDrawing = false;
+      this.customDrawingStart = false;
     },
     getOrigin() {
       return window.location.origin;
     },
-    withdraw() {},
+    withdraw() {
+      this.chainArray.pop();
+    },
     zoomIn() {
       this.scaleX /= 0.9;
       this.scaleY /= 0.9;
@@ -412,7 +535,8 @@ export default {
     right: 5%;
     bottom: 75px;
   }
-  .pen-cursor {
-    cursor: url("https://static.szlcsc.com/ecp/public/static/images/cursor_left.ico"), default;
+  .icon {
+    height: 10px !important;
+    vertical-align: 0 !important;
   }
 </style>

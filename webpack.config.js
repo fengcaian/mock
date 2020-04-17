@@ -14,6 +14,8 @@ module.exports = {
     exclude: ['app/web/page/[a-z]+/component'],
   },
   cssExtract: true,
+  devtool: 'source-map',
+  productionSourceMap: false,
   alias: {
     '@': __dirname,
     asset: 'app/web/asset',

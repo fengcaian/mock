@@ -88,7 +88,7 @@ module.exports = class UrlResponseService extends egg.Service {
       result = msg;
     });
     if (body.isPriority) { // 将其他UrlResponse的isPriority设为false
-      await this.ctx.model.UrlResponse.updateMany({ _id: { $ne: body._id } }, { $set: { isPriority: false } }, (msg) => {
+      await this.ctx.model.UrlResponse.updateMany({ _id: { $ne: body._id }, url: body.url }, { $set: { isPriority: false } }, (msg) => {
         result = msg;
       });
     }
