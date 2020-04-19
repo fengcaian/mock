@@ -16,4 +16,11 @@ module.exports = class FlowManageController extends egg.Controller {
       ctx.logger.error(e);
     }
   }
+  async flowSave(ctx) {
+    try {
+      const result = await ctx.service.flow.folwSave(ctx.request.body);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
 }
