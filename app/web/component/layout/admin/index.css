@@ -1,8 +1,7 @@
 .main {
   display: flex;
-  margin-top: -80px;
-  padding: 80px 0 120px;
   box-sizing: border-box;
+  height: 100%;
 }
 .main .el-menu:not(.el-menu--collapse) {
   width: 230px;

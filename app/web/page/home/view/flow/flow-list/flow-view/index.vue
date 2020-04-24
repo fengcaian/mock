@@ -15,6 +15,7 @@
           version="1.1"
           baseProfile="full"
           xmlns="http://www.w3.org/2000/svg"
+          pointer-events="visible"
           style="width: 100%; height: 100vh;"
           :style="{cursor: customDrawing ? cursor[customDrawType] : ''}"
           @contextmenu="preventRightClick"
@@ -23,11 +24,11 @@
           @mouseup="mouseUp($event)"
           @click="svgClick">
           <defs>
-            <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
-              <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#CCCCCC" stroke-width="0.5"/>
+            <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#CCCCCC" stroke-width="0.5"/>
             </pattern>
-            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
-              <rect width="80" height="80" fill="url(#smallGrid)"/>
+            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <rect width="100" height="100" fill="url(#smallGrid)"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -35,7 +36,10 @@
           <svg-line v-if="svg.type === 'line'" :position="svg.data.position" :length="svg.data.length" :stroke="svg.data.stroke" :direction="svg.data.direction" :arrow="svg.data.arrow"></svg-line>
           <svg-rect v-else-if="svg.type === 'rect'" :id="svg.id" :position="svg.data.position" :stroke="svg.data.stroke" :size="svg.data.size"></svg-rect>
           <path v-else-if="svg.type === 'path' && svg.data.d !== 'M'" :d="svg.data.d" stroke="blue" stroke-width="1" fill="none"></path>
-          <polyline v-else-if="svg.type === 'polyline'" :points="svg.data.points" stroke="blue" stroke-width="0.5" fill="none"></polyline>
+          <g v-else-if="svg.type === 'polyline'">
+            <polyline :points="svg.data.points" stroke="blue" stroke-width="0.5" fill="none"></polyline>
+            <path stroke="blue" fill="blue"  :d="arrowAttr(svg.data)"/>
+          </g>
         </g>
         <g @click="inductorClick">
           <svg-inductor v-if="isShowInductor" :cycle="inductorArea"></svg-inductor>
@@ -213,7 +217,6 @@ export default {
   },
   created() {
     this.inductorArea.positionList = this.getInductorAreaList(this.chainArray);
-    console.log(this.inductorArea);
   },
   mounted() {
     document.addEventListener('keydown', (e) => {
@@ -253,7 +256,6 @@ export default {
         if (this.customDrawType === 'line-link') {
           this.customDrawingPath.data.endPos = this.mousePosition;
           this.drawPloyLine(inductorArea, this.customDrawingPath.data);
-          console.log(this.customDrawingPath.data);
         }
       }
     },
@@ -274,7 +276,6 @@ export default {
           type: graphId,
         };
       }
-      console.log(graphId);
     },
     selectShape(shape, i) {
       if (this.selectedShape && this.selectedShapeIndex) {
@@ -287,7 +288,6 @@ export default {
       this.$set(this.chainArray, i, shape);
     },
     dragStart() {
-      console.log(11);
     },
     mouseDown(e) {
       if (this.customDrawing) {
@@ -306,13 +306,18 @@ export default {
         const svg = this.getGraph({ type });
         this.customDrawingPathId = svg.id;
         if (type = 'polyline') {
-          svg.data.startPos = {
-            x: e.offsetX,
-            y: e.offsetY,
-          };
+          const inductorArea = this.getInductorArea(e.offsetX, e.offsetY); // 判断该点位置是否位于感应区
+          if (inductorArea) {
+            svg.data.startPos = inductorArea;
+            svg.data.startPos.isInInductorArea = true;
+          } else {
+            svg.data.startPos = {
+              x: e.offsetX,
+              y: e.offsetY,
+            };
+          }
         }
         this.chainArray.push(svg);
-        console.log(svg);
       }
     },
     mouseUp() {
@@ -351,42 +356,21 @@ export default {
     },
     penDraw() {},
     drawPloyLine(inductorData, polyLineData) {
-      const startPos = polyLineData.startPos;
-      const endPos = polyLineData.endPos;
+      let startPos = polyLineData.startPos;
+      let endPos = polyLineData.endPos;
       const width = endPos.x - startPos.x;
       const height = endPos.y - startPos.y;
-      let direction = '';
-      if (width > 0 && height > 0) { // 第一象限
-        if (width >= height) {
-          direction = 'right';
-        } else {
-          direction = 'up';
-        }
-      } else if (width < 0 && height > 0) { // 第二象限
-        if (Math.abs(width) >= height) {
-          direction = 'left';
-        } else {
-          direction = 'up';
-        }
-      } else if (width < 0 && height < 0) { // 第三象限
-        if (Math.abs(width) >= Math.abs(height)) {
-          direction = 'left';
-        } else {
-          direction = 'down';
-        }
-      } else { // 第四象限
-        if (width >= Math.abs(height)) {
-          direction = 'right';
-        } else {
-          direction = 'down';
-        }
-      }
+      const direction = this.judgeLineDirection(startPos, endPos);
       let startPoint = '';
       let lastPoint = '';
-      if (inductorData) {
-        // startPoint = this.getTempEndPos(inductorData.inductionAbilityDirection, startPos);
-        lastPoint = this.getTempEndPos(inductorData.inductionAbilityDirection, endPos);
+      if (startPos.isInInductorArea) { // 开始的点位于感应区
+        ({ pos: startPos, point: startPoint } = this.getTempEndPos(startPos.inductionAbilityDirection, startPos));
+        console.log(startPoint);
       }
+      if (inductorData) { // 结束的点位于感应区
+        ({ pos: endPos, point: lastPoint } = this.getTempEndPos(inductorData.inductionAbilityDirection, endPos));
+      }
+      console.log(direction);
       polyLineData.direction = direction;
       let points = `${startPos.x},${startPos.y}`;
       if (direction === 'left' || direction === 'right') {
@@ -394,28 +378,32 @@ export default {
       } else {
         points += ` ${startPos.x},${startPos.y + (height / 2)} ${endPos.x},${startPos.y + (height / 2)} ${endPos.x},${endPos.y}`;
       }
-      polyLineData.points = `${startPoint} ${points} ${lastPoint}`;
+      polyLineData.points = `${startPoint} ${points} ${lastPoint}`.trim();
     },
-    getTempEndPos(inductionAbilityDirection, endPos) {
+    getTempEndPos(inductionAbilityDirection, pos) {
       const tempEndPosDistance = 50;
-      let lastPoint = `${endPos.x},${endPos.y}`;
+      const obj = JSON.parse(JSON.stringify(pos));
+      let point = `${pos.x},${pos.y}`;
       switch (inductionAbilityDirection) {
         case 'up':
-          endPos.y += tempEndPosDistance;
+          obj.y += tempEndPosDistance;
           break;
         case 'right':
-          endPos.x -= tempEndPosDistance;
+          obj.x -= tempEndPosDistance;
           break;
         case 'down':
-          endPos.y -= tempEndPosDistance;
+          obj.y -= tempEndPosDistance;
           break;
         case 'left':
-          endPos.x += tempEndPosDistance;
+          obj.x += tempEndPosDistance;
           break;
         default:
           break;
       }
-      return lastPoint;
+      return {
+        point,
+        pos: obj,
+      };
     },
     getGraph(params) {
       let type = '';
@@ -483,6 +471,77 @@ export default {
         }
       });
       return list;
+    },
+    arrowAttr({ points, endPos }) { // 从points里面拿到最后两个左边，判断箭头方向
+      const position = endPos;
+      let direction = '';
+      let startPos = {
+        x: 0,
+        y: 0,
+      };
+      const coordinates = points.split(' ');
+      if (coordinates.length > 1) {
+        [startPos.x, startPos.y] = coordinates[coordinates.length - 2].split(',');
+        direction = this.judgeLineDirection(startPos, endPos);
+      }
+      let arrowAttribute = '';
+      switch (direction) {
+        case 'right':
+          arrowAttribute = `M${position.x - 5} ${position.y - 5} l5 5 l-5 5 Z `;
+          break;
+        case 'left':
+          arrowAttribute = `M${position.x + 5} ${position.y + 5} l-5 -5 l5 -5 Z`;
+          break;
+        case 'up':
+          arrowAttribute = `M${position.x - 5} ${position.y + 5} l5 -5 l5 5 Z`;
+          break;
+        case 'down':
+          arrowAttribute = `M${position.x - 5} ${position.y  - 5} l5 5 l5 -5 Z`;
+          break;
+        default:
+          arrowAttribute = '';
+      }
+      return arrowAttribute;
+    },
+    judgeLineDirection(p1 = {x: 0, y: 0}, p2 = {x: 0, y: 0}) { // svg的起始点在左上角，y轴数值与数学象限正好相反
+      const width = p2.x - p1.x;
+      const height = p2.y - p1.y;
+      console.log(`width=${width}`,`height=${height}`);
+      let direction = '';
+      if (width === 0 && height > 0) {
+        direction = 'down';
+      } else if (width === 0 && height < 0) {
+        direction = 'up';
+      } else if (height === 0 && width > 0) {
+        direction = 'right';
+      } else if (height === 0 && width < 0) {
+        direction = 'left';
+      } else if (width > 0 && height < 0) { // 第一象限
+        if (width >= Math.abs(height)) {
+          direction = 'right';
+        } else {
+          direction = 'up';
+        }
+      } else if (width < 0 && height < 0) { // 第二象限
+        if (Math.abs(width) >= Math.abs(height)) {
+          direction = 'left';
+        } else {
+          direction = 'up';
+        }
+      } else if (width < 0 && height > 0) { // 第三象限
+        if (width >= height) {
+          direction = 'left';
+        } else {
+          direction = 'down';
+        }
+      } else { // 第四象限
+        if (width >= Math.abs(height)) {
+          direction = 'right';
+        } else {
+          direction = 'down';
+        }
+      }
+      return direction;
     },
     preventRightClick(e) {
       e.preventDefault();
