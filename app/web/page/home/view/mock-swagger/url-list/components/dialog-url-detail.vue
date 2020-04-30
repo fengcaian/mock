@@ -149,18 +149,21 @@ export default {
       }
     },
     execute() {
-      this.$refs.form.validate((valid) => {
-        if (valid) {
-          request.post(this.urlObject.url, this.form)
-            .then(() => {
-              this.$message({
-                message: '执行成功',
-                showClose: true,
-                type: 'success',
-              });
-            });
-        }
-      });
+      // this.$refs.form.validate((valid) => {
+      //   if (valid) {
+      //     request.post(this.urlObject.url, this.form)
+      //       .then(() => {
+      //         this.$message({
+      //           message: '执行成功',
+      //           showClose: true,
+      //           type: 'success',
+      //         });
+      //       });
+      //   }
+      // });
+      const image = new Image();
+      image.src = 'https://member.szlcsc.com/portal/getCrossAuth?callback=jQuery33106426947101682376_1588045956802&_=1588045956803';
+      document.body.appendChild(image);
     },
     close() {
       this.$emit('urlDetailDialogCb');
