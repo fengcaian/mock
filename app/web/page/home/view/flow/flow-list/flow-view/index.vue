@@ -34,7 +34,15 @@
           <rect width="100%" height="100%" fill="url(#grid)" />
         <g v-for="(svg, index) in chainArray" :key="index" @click.stop="selectShape(svg, index)">
           <svg-line v-if="svg.type === 'line'" :position="svg.data.position" :length="svg.data.length" :stroke="svg.data.stroke" :direction="svg.data.direction" :arrow="svg.data.arrow"></svg-line>
-          <svg-rect v-else-if="svg.type === 'rect'" :id="svg.id" :position="svg.data.position" :stroke="svg.data.stroke" :size="svg.data.size"></svg-rect>
+          <svg-rect
+              v-else-if="svg.type === 'rect'"
+              :id="svg.id"
+              :position="svg.data.position"
+              :stroke="svg.data.stroke"
+              :size="svg.data.size"
+              @mousemove="mousemoveSvg"
+              @click="svgClick">
+          </svg-rect>
           <path v-else-if="svg.type === 'path' && svg.data.d !== 'M'" :d="svg.data.d" stroke="blue" stroke-width="1" fill="none"></path>
           <g v-else-if="svg.type === 'polyline'">
             <polyline :points="svg.data.points" stroke="blue" stroke-width="0.5" fill="none"></polyline>
@@ -128,8 +136,8 @@ export default {
               y: 170,
             },
             size: {
-              width: 100,
-              height: 60,
+              width: 200,
+              height: 160,
             }
           },
         }
@@ -333,6 +341,7 @@ export default {
       this.movingNode.y = e.offsetY;
     },
     svgClick(e) {
+      console.log(e);
       if (this.tempSvgInfo.type) {
         let svg = this.getGraph(this.tempSvgInfo);
         if (svg.type === 'rect') {
