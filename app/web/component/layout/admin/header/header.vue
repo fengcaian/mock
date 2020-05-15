@@ -9,6 +9,11 @@
         <span class="header-btn">
           <a v-bind:href="getMenu('lang.href')"><i class="el-icon-message"></i></a>
         </span>
+        <el-tooltip effect="dark" content="刷新" placement="bottom">
+          <el-button type="text" @click="refresh">
+            <i class="refresh"></i>
+          </el-button>
+        </el-tooltip>
         <el-dropdown>
           <span class="header-btn">
               {{getMenu('lang.text')}}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -106,6 +111,7 @@ export default {
             console.log(data);
         });
     },
+    refresh() {}
   },
 };
 </script>
