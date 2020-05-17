@@ -37,7 +37,7 @@ export const menuInfo = {
     systemmanage: '系统管理',
     systemquery: '系统查询',
     synthesizemanage: '综合管理',
-    synthesizeset: '综合设置',
+    synthesizeConfig: '综合配置',
     modelDatabaseCheck: '建模-数据库核查',
     checkList: '核查列表',
     check: '核查',

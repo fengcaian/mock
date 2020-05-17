@@ -6,7 +6,7 @@ import UrlList from '../view/mock-swagger/url-list';
 import UrlDetail from '../view/mock-swagger/url-list/url-detail';
 import AddUrlByHand from '../view/mock-swagger/url-list/add-url-by-hand';
 import SystemList from '../view/mock-swagger/system-list';
-import SynthesizeSet from '../view/mock-swagger/system-list';
+import SynthesizeConfig from '../view/mock-swagger/system-list';
 import CheckList from '../view/model-database-check/check-list';
 import Check from '../view/model-database-check/check';
 import FlowList from '../view/flow/flow-list';
@@ -49,9 +49,9 @@ export default function createRouter() { // 所有前端路由必须以mock开�
         component: SystemList
       },
       {
-        path: '/mock/synthesize/set',
-        meta: { title: '综合设置' },
-        component: SynthesizeSet
+        path: '/mock/synthesize/config',
+        meta: { title: '综合配置' },
+        component: SynthesizeConfig
       },
       {
         path: '/mock/model/database/check/list',

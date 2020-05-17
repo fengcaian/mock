@@ -19,9 +19,9 @@ const menu = {
         path: '/mock/system/list'
       },
       {
-        name: 'menu.synthesizeset',
+        name: 'menu.synthesizeConfig',
         icon: 'el-icon-edit-outline',
-        path: '/mock/synthesize/set'
+        path: '/mock/synthesize/config'
       }
     ],
   },
