@@ -26,6 +26,9 @@ module.exports = app => {
   router.post('/mock/api/system/delete', controller.systemManage.delete);
   router.post('/mock/api/system/enable', controller.systemManage.enableSwitch);
   router.post('/model/file/analyse', controller.fileManage.analyse);
+  router.get('/mock/api/synthesize/config/list', controller.synthesizeConfig.getList);
+  router.post('/mock/api/synthesize/config/add', controller.synthesizeConfig.save);
+  router.post('/mock/api/synthesize/config/modify', controller.synthesizeConfig.modify);
   router.get('/mock(/.+)?', controller.home.frontRouterForward); // 前端路由刷新进入该控制器，要求所有前端路由必须以mock开头，不能与后端api重名
   router.get(/([a-z]+)/, controller.urlForward.forward);
   router.options(/([a-z]+)/, controller.urlForward.forward);

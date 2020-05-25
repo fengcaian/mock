@@ -6,7 +6,7 @@ import UrlList from '../view/mock-swagger/url-list';
 import UrlDetail from '../view/mock-swagger/url-list/url-detail';
 import AddUrlByHand from '../view/mock-swagger/url-list/add-url-by-hand';
 import SystemList from '../view/mock-swagger/system-list';
-import SynthesizeConfig from '../view/mock-swagger/system-list';
+import SynthesizeConfig from '../view/mock-swagger/synthesize-config';
 import CheckList from '../view/model-database-check/check-list';
 import Check from '../view/model-database-check/check';
 import FlowList from '../view/flow/flow-list';

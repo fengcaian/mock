@@ -175,13 +175,14 @@ module.exports = class UrlService extends egg.Service {
     }
   }
   async urlAddByHand(body = {}) {
+    console.log(body);
     const url = {
       requestTarget: 'mock',
       source: 'byHand',
     };
     Object.assign(url, body);
     try {
-      await this.ctx.model.Url.create(url);
+      return await this.ctx.model.Url.create(url);
     } catch (e) {
       this.ctx.logger.error(e);
     }
