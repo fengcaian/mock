@@ -18,18 +18,11 @@ module.exports = class UrlController extends egg.Controller {
       }
       let port = ctx.request.headers['x-forwarded-port'];
       let { host } = ctx.request.headers;
+      const scheme = ctx.request.headers['x-scheme'];
       const proxySystem = this.app.proxySystemList.find((item => item.tempHost === host));
       if (proxySystem) { // 不是通过swagger获取的url
         host = proxySystem.tempHost.replace(proxySystem.prefix, '');
-        const result = this.ctx.service.urlForward.goToBackend({
-          url: `${ctx.request.headers['x-scheme']}://${host}${port ? `:${port}`: ''}${ctx.url}`,
-          params: {
-            data: ctx.request.headers['x-content-type'] === 'application/json;charset=UTF-8' ? JSON.stringify(ctx.request.body) : ctx.request.body,
-            method: ctx.request.method,
-            contentType: ctx.request.headers['x-content-type'],
-          }
-        });
-        await this.ctx.service.Url.urlAddByHand({
+        await this.ctx.service.url.urlAddByHand({
           host,
           hostIp: '127.0.0.1',
           summary: host,
@@ -37,6 +30,14 @@ module.exports = class UrlController extends egg.Controller {
           url: ctx.url,
           requestTarget: 'backend',
           source: 'byAutoProxy',
+        });
+        const result = this.ctx.service.urlForward.goToBackend({
+          url: `${ctx.request.headers['x-scheme']}://${host}${port ? `:${port}`: ''}${ctx.url}`,
+          params: {
+            data: ctx.request.headers['x-content-type'] === 'application/json;charset=UTF-8' ? JSON.stringify(ctx.request.body) : ctx.request.body,
+            method: ctx.request.method,
+            contentType: ctx.request.headers['x-content-type'],
+          }
         });
         if (result) {
           await this.ctx.service.urlForward.backUpBackendData({ // 将后端返回的数据备份下来

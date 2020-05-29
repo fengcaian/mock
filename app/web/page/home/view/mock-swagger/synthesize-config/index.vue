@@ -15,7 +15,7 @@
         :data="proxySystemList">
       <el-table-column type="index" align="center"></el-table-column>
       <el-table-column prop="system" label="系统URL" align="center"></el-table-column>
-      <el-table-column prop="prefix" label="自定义前缀" align="center"></el-table-column>
+      <el-table-column prop="realPort" label="真实端口" align="center"></el-table-column>
       <el-table-column>
         <template slot-scope="scope">
           <el-button type="primary" size="mini" icon="el-icon-edit-outline" @click="edit(scope.row)">修改</el-button>

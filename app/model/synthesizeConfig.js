@@ -10,6 +10,9 @@ module.exports = app => {
     prefix: {
       type: String,
     },
+    realPort: {
+      type: String,
+    },
     isProxy: {
       type: Boolean,
     },

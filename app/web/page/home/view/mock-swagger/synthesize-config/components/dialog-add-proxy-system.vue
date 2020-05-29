@@ -6,22 +6,23 @@
       :visible.sync="dialogShow"
       :before-close="close">
     <el-form ref="form" size="mini" label-width="120px" :model="form">
+      <el-input class="width-200" v-model="form.system"></el-input>
       <el-row v-for="(item, index) in form.list" :key="`${Math.random()}`">
         <el-col :span="11">
           <el-form-item label="系统URL" :prop="'list.' + index + '.system'" :rules="[
-            { required: true, message: '请输入系统URL', trigger: 'blur' },
+            { required: false, message: '请输入系统URL', trigger: 'blur' },
           ]">
             <el-input class="width-200" v-model="item.system"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="9">
-          <el-form-item label="自定义前缀">
-            <el-input class="width-100" v-model="item.prefix"></el-input>
+          <el-form-item label="真实端口">
+            <el-input class="width-100" v-model="item.realPort"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="4">
           <el-button primary="success" size="mini" icon="el-icon-plus" @click="addItem(index)"></el-button>
-          <el-button primary="danger" size="mini" icon="el-icon-minus" @click="deleteItem(index)"></el-button>
+          <el-button primary="danger" size="mini" icon="el-icon-minus" @click="deleteItem(item)"></el-button>
         </el-col>
       </el-row>
     </el-form>
@@ -41,19 +42,12 @@ export default {
     return {
       dialogShow: false,
       form: {
+        system: '',
         list: [
           {
             system: '',
-            prefix: '',
+            realPort: '',
           }
-        ],
-      },
-      rules: {
-        key: [
-          { required: true, message: '请输入Key值', trigger: 'blur' },
-        ],
-        value: [
-          { required: true, message: '请输入Value值', trigger: 'blur' },
         ],
       },
     };
@@ -65,14 +59,15 @@ export default {
     addItem() {
       this.form.list.push({
         system: '',
-        prefix: '',
+        realPort: '',
       });
     },
-    deleteItem(i) {
-      if (i === 0) {
-        this.$message({
-
-        });
+    deleteItem(row) {
+      if (this.form.list.length === 1) {
+        row.system = '';
+        row.realPort = '';
+      } else {
+        this.form.list.splice(i, 1);
       }
     },
     close() {

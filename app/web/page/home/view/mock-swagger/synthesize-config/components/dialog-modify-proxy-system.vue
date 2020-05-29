@@ -15,8 +15,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="10">
-          <el-form-item label="自定义前缀">
-            <el-input class="width-100" v-model="form.prefix"></el-input>
+          <el-form-item label="真实端口">
+            <el-input class="width-100" v-model="form.realPort"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -38,15 +38,7 @@ export default {
       dialogShow: false,
       form: {
         system: '',
-        prefix: '',
-      },
-      rules: {
-        key: [
-          { required: true, message: '请输入Key值', trigger: 'blur' },
-        ],
-        value: [
-          { required: true, message: '请输入Value值', trigger: 'blur' },
-        ],
+        realPort: '',
       },
     };
   },
@@ -58,15 +50,8 @@ export default {
     addItem() {
       this.form.list.push({
         system: '',
-        prefix: '',
+        realPort: '',
       });
-    },
-    deleteItem(i) {
-      if (i === 0) {
-        this.$message({
-
-        });
-      }
     },
     close() {
       this.$emit('modifyProxySystemDialogCb', { isRefresh: false });

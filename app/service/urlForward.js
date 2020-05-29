@@ -23,6 +23,6 @@ module.exports = class UrlForward extends egg.Service {
       createTime: dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       response: body.data,
     };
-    await this.ctx.service.UrlResponse.insertResponse(urlResponse);
+    await this.ctx.service.urlResponse.insertResponse(urlResponse);
   }
 };
