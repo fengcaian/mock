@@ -7,14 +7,14 @@
       :before-close="close">
     <el-form ref="form" size="mini" label-width="120px" :model="form">
       <el-row>
-        <el-col :span="14">
+        <el-col :span="12">
           <el-form-item label="系统URL" prop="system" :rules="[
             { required: true, message: '请输入系统URL', trigger: 'blur' },
           ]">
             <el-input class="width-200" v-model="form.system"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="10">
+        <el-col :span="12">
           <el-form-item label="真实端口">
             <el-input class="width-100" v-model="form.realPort"></el-input>
           </el-form-item>
@@ -47,12 +47,6 @@ export default {
     this.dialogShow = this.modifyProxySystemDialogVisible;
   },
   methods: {
-    addItem() {
-      this.form.list.push({
-        system: '',
-        realPort: '',
-      });
-    },
     close() {
       this.$emit('modifyProxySystemDialogCb', { isRefresh: false });
     },

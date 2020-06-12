@@ -281,8 +281,8 @@ export default {
         });
         return;
       }
-      const idList = this.batchSelectArray.map(item => item._id).join(',');
-      request.post('/mock/api/url/mock/data/delete/batch', idList)
+      const ids = this.batchSelectArray.map(item => item._id).join(',');
+      request.post('/mock/api/url/mock/data/delete/batch', { ids })
         .then(() => {
           this.$message({
             message: '批量删除成功！',

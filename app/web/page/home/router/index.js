@@ -11,6 +11,7 @@ import CheckList from '../view/model-database-check/check-list';
 import Check from '../view/model-database-check/check';
 import FlowList from '../view/flow/flow-list';
 import FlowView from '../view/flow/flow-list/flow-view';
+import MxGraph from '../view/flow/mx-graph';
 
 Vue.use(VueRouter);
 
@@ -71,8 +72,13 @@ export default function createRouter() { // 所有前端路由必须以mock开�
       {
         path: '/mock/flow/view',
         meta: { title: '流程' },
-        component: FlowView,
-      }
+        component: MxGraph,
+      },
+      {
+        path: '/mock/flow/mx-graph',
+        meta: { title: 'mxGraph' },
+        component: MxGraph,
+      },
     ]
   });
   router.beforeEach((to, from, next) => {

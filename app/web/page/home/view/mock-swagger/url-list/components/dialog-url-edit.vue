@@ -5,7 +5,12 @@
       :visible.sync="dialogShow"
       :before-close="close">
     <el-form ref="form" label-width="140px" size="mini" :model="form">
-      <el-form-item label="url:">{{form.url}}</el-form-item>
+      <el-form-item label="url:">
+        <el-input class="width-200" v-model="form.url"></el-input>
+      </el-form-item>
+      <el-form-item label="host:">
+        <el-input class="width-200" v-model="form.host"></el-input>
+      </el-form-item>
       <el-form-item label="ip地址:">
         <ip-address-input :value="form.hostIp" :inline="true" @ipAddressInputCb="ipAddressInputCb"></ip-address-input>
       </el-form-item>
@@ -32,14 +37,18 @@ export default {
       form: {
         _id: '',
         url: '',
+        host: '',
         hostIp: '',
       },
     };
   },
   created() {
-    this.form._id = this.urlData._id;
-    this.form.url = this.urlData.url;
-    this.form.hostIp = this.urlData.hostIp;
+    this.form = {
+      _id: this.urlData._id,
+      host: this.urlData.host,
+      url: this.urlData.url,
+      hostIp: this.urlData.hostIp
+    };
     this.dialogShow = this.dialogVisible;
   },
   methods: {
@@ -69,5 +78,7 @@ export default {
 </script>
 
 <style scoped>
-
+.width-200 {
+  width: 200px;
+}
 </style>

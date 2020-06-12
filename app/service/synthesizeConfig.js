@@ -23,10 +23,8 @@ module.exports = class SynthesizeConfig extends egg.Service {
   }
   async add(body) {
     try {
-      if (Array.isArray(body)) {
-        body.forEach((item) => {
-          item.isProxy = true;
-        });
+      if (body) {
+        body.isProxy = true;
       }
       return await this.ctx.model.SynthesizeConfig.create(body);
     } catch (err) {

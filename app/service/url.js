@@ -150,7 +150,10 @@ module.exports = class UrlService extends egg.Service {
   }
   async batchDelete(body = {}) {
     let result = null;
-    await this.ctx.model.Url.remove(null, (msg) => {
+    console.log(body);
+    console.log(body._ids);
+    const ids = body.ids.split(',');
+    await this.ctx.model.Url.deleteMany({ _id: { $in: ids }}, (msg) => {
       console.log(msg);
       result = msg;
     });

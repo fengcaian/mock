@@ -19,9 +19,8 @@ module.exports = class UrlController extends egg.Controller {
       let port = ctx.request.headers['x-forwarded-port'];
       let { host } = ctx.request.headers;
       const scheme = ctx.request.headers['x-scheme'];
-      const proxySystem = this.app.proxySystemList.find((item => item.tempHost === host));
-      if (proxySystem) { // 不是通过swagger获取的url
-        host = proxySystem.tempHost.replace(proxySystem.prefix, '');
+      const system = this.app.proxySystemList.find((item => item.system === host));
+      if (system) { // 不是通过swagger获取的url
         await this.ctx.service.url.urlAddByHand({
           host,
           hostIp: '127.0.0.1',
@@ -32,7 +31,7 @@ module.exports = class UrlController extends egg.Controller {
           source: 'byAutoProxy',
         });
         const result = this.ctx.service.urlForward.goToBackend({
-          url: `${ctx.request.headers['x-scheme']}://${host}${port ? `:${port}`: ''}${ctx.url}`,
+          url: `${scheme}://${host}${port ? `:${port}`: ''}${ctx.url}`,
           params: {
             data: ctx.request.headers['x-content-type'] === 'application/json;charset=UTF-8' ? JSON.stringify(ctx.request.body) : ctx.request.body,
             method: ctx.request.method,
@@ -57,7 +56,7 @@ module.exports = class UrlController extends egg.Controller {
           params = ctx.request.headers['x-content-type'] === 'application/json;charset=UTF-8' ? JSON.stringify(ctx.request.body) : ctx.request.body;
         }
         const urlObj = await ctx.service.url.getUrlSingle(
-          `${ctx.request.headers['x-scheme']}://${ctx.request.headers.host}`,
+          `${scheme}://${ctx.request.headers.host}`,
           url,
           ctx.request.method.toLowerCase() === 'options' ? 'post': ctx.request.method.toLowerCase(),
         );
@@ -74,7 +73,7 @@ module.exports = class UrlController extends egg.Controller {
             ];
           } else {
             result = this.ctx.service.urlForward.goToBackend({
-              url: `${ctx.request.headers['x-scheme']}://${ipAddress}${port ? `:${port}`: ''}${ctx.url}`,
+              url: `${scheme}://${ipAddress}${port ? `:${port}`: ''}${ctx.url}`,
               params: {
                 data: params,
                 method: ctx.request.method,

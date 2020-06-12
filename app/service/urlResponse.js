@@ -104,7 +104,7 @@ module.exports = class UrlResponseService extends egg.Service {
   async mockDataDeleteBatch(body = {}) {
     const queryParams = {
       _id: {
-        $in: body.idList,
+        $in: body.ids.split(','),
       },
     };
     let result = null;

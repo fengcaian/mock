@@ -197,13 +197,20 @@ export default {
     },
     //批量删除
     batchDel() {
+      if (!this.batchSelectArray.length) {
+        this.$message({
+          message: '请选择！',
+          type: 'warning',
+        });
+        return;
+      }
       this.$confirm('将批量删除选择url, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         this.loading = true;
-        request.post('/mock/api/url/batch/delete')
+        request.post('/mock/api/url/batch/delete', { _ids: this.batchSelectArray.map(item => item._id).join(',')})
           .then(() => {
             this.$message({
               message: '批量删除成功！',
