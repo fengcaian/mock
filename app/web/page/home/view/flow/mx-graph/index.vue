@@ -1,12 +1,18 @@
 <template>
   <div>
+    <toolbar></toolbar>
     <div id="graphContainer"></div>
   </div>
 </template>
 
 <script>
 import mxgraph from '../../../../../../web/framework/utils/common/mx-graph';
+import toolbar from './components/toolbar';
+
 export default {
+  components: {
+    toolbar
+  },
   data() {
     return {
       mxGraph: null,
@@ -33,7 +39,7 @@ export default {
         var parent = graph.getDefaultParent();
         graph.getModel().beginUpdate();
         try {
-          var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 200, 80, 30);
+          var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 200, 80, 30, 'ROUNDED;strokeColor=red;fillColor=green');
           var v2 = graph.insertVertex(parent, null, 'World', 200, 150, 80, 30);
           var v3 = graph.insertVertex(parent, null, 'everyBody!', 300, 350, 60, 60);
           graph.insertEdge(parent, null, '', v1, v2);
@@ -50,6 +56,7 @@ export default {
         this.getXml = this.mxGraph.mxUtils.getXml(xx);
       }
     },
+    util(node) {}
   },
 }
 </script>

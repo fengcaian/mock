@@ -43,6 +43,7 @@ export const menuInfo = {
     check: '核查',
     flowmanage: '流程管理',
     flowList: '流程',
+    mxGraph: 'mxGraph',
   },
   lang: {
     text: '中文'

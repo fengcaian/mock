@@ -50,6 +50,11 @@ const menu = {
         icon: 'el-icon-edit-outline',
         path: '/mock/flow/list',
       },
+      {
+        name: 'menu.mxGraph',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/flow/mx-graph',
+      }
     ],
   },
 };

@@ -5,8 +5,16 @@
       :visible.sync="dialogShow"
       :before-close="close">
     <el-form ref="form" label-width="140px" size="mini" :model="form">
+      <el-form-item label="url名称:" prop="summary">
+        <el-input class="width-200" v-model="form.summary"></el-input>
+      </el-form-item>
       <el-form-item label="url:">
         <el-input class="width-200" v-model="form.url"></el-input>
+      </el-form-item>
+      <el-form-item label="类型:">
+        <el-select v-model="form.type" placeholder="请选择">
+          <el-option v-for="item in urlType" :key="item" :label="item" :value="item"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="host:">
         <el-input class="width-200" v-model="form.host"></el-input>
@@ -25,6 +33,7 @@
 <script>
 import request from '@/app/web/framework/network/request';
 import ipAddressInput from '@/app/web/component/ip-address-input';
+import * as constants from '@/app/web/framework/constants';
 
 export default {
   props: ['dialogVisible', 'urlData'],
@@ -36,15 +45,20 @@ export default {
       dialogShow: false,
       form: {
         _id: '',
+        summary: '',
+        type: '',
         url: '',
         host: '',
         hostIp: '',
       },
+      urlType: constants.httpMethods,
     };
   },
   created() {
     this.form = {
       _id: this.urlData._id,
+      type: this.urlData.type,
+      summary: this.urlData.summary,
       host: this.urlData.host,
       url: this.urlData.url,
       hostIp: this.urlData.hostIp

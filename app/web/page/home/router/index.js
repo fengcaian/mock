@@ -72,7 +72,7 @@ export default function createRouter() { // 所有前端路由必须以mock开�
       {
         path: '/mock/flow/view',
         meta: { title: '流程' },
-        component: MxGraph,
+        component: FlowView,
       },
       {
         path: '/mock/flow/mx-graph',

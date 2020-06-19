@@ -3,6 +3,9 @@
   margin-left: 230px;
   -webkit-transition: margin-left 0.35s;
   transition: margin-left 0.35s;
+  position: relative;
+  left: 0;
+  top: 0;
 }
 .main .main-container {
   margin-top: 50px;
