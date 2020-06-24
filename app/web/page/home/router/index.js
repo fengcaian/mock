@@ -12,6 +12,7 @@ import Check from '../view/model-database-check/check';
 import FlowList from '../view/flow/flow-list';
 import FlowView from '../view/flow/flow-list/flow-view';
 import MxGraph from '../view/flow/mx-graph';
+import MxGraphTest from '../view/flow/mx-graph-test';
 
 Vue.use(VueRouter);
 

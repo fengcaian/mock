@@ -23,20 +23,12 @@ export default {
   methods: {
     init() {
       this.mxGraph.mxConnectionHandler.prototype.connectImage = new this.mxGraph.mxImage(require('../../../../../../../web/asset/images/connector.gif'), 16, 16);
-
-      // Checks if browser is supported
       if (!this.mxGraph.mxClient.isBrowserSupported()) {
-        // Displays an error message if the browser is
-        // not supported.
         this.mxGraph.mxUtils.error('Browser is not supported!', 200, false);
       } else {
         const tbContainer = document.getElementById('toolbar');
-
-        // Creates new toolbar without event processing
         var toolbar = new this.mxGraph.mxToolbar(tbContainer);
         toolbar.enabled = false
-
-        // Creates the div for the graph
         const container = document.getElementById('wrap');
         // Workaround for Internet Explorer ignoring certain styles
         if (this.mxGraph.mxClient.IS_QUIRKS) {
@@ -44,9 +36,6 @@ export default {
           new this.mxGraph.mxDivResizer(tbContainer);
           new this.mxGraph.mxDivResizer(container);
         }
-
-        // Creates the model and the graph inside the container
-        // using the fastest rendering available on the browser
         var model = new this.mxGraph.mxGraphModel();
         var graph = new this.mxGraph.mxGraph(container, model);
         graph.dropEnabled = true;
@@ -66,6 +55,16 @@ export default {
         // Enables new connections in the graph
         graph.setConnectable(true);
         graph.setMultigraph(false);
+
+        graph.addListener('click', () => {
+          console.log(111);
+          console.log(this);
+        });
+
+        graph.dblClick = function() {
+          console.log(33);
+          console.log(this);
+        };
 
         // Stops editing on enter or escape keypress
         var keyHandler = new this.mxGraph.mxKeyHandler(graph);
@@ -128,6 +127,7 @@ export default {
         var vertex = graph.getModel().cloneCell(prototype);
         vertex.geometry.x = pt.x;
         vertex.geometry.y = pt.y;
+        console.log(pt);
 
         graph.setSelectionCells(graph.importCells([vertex], 0, 0, cell));
       }

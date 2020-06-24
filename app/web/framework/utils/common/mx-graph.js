@@ -12,5 +12,7 @@ window.mxDefaultKeyHandler = mxgraph.mxDefaultKeyHandler;
 window.mxDefaultPopupMenu = mxgraph.mxDefaultPopupMenu;
 window.mxStylesheet = mxgraph.mxStylesheet;
 window.mxDefaultToolbar = mxgraph.mxDefaultToolbar;
+window.mxConnectionHandler = mxgraph.mxConnectionHandler;
+window.mxImage = mxgraph.mxImage;
 
 export default mxgraph;

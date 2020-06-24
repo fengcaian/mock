@@ -22,7 +22,7 @@ export default {
     this.mxGraph = mxgraph;
   },
   mounted() {
-    this.draw();
+    // this.draw();
   },
   methods: {
     draw() {
