@@ -56,10 +56,10 @@ export default {
         graph.setConnectable(true);
         graph.setMultigraph(false);
 
-        graph.addListener('click', () => {
-          console.log(111);
-          console.log(this);
-        });
+        // graph.addListener('click', () => {
+        //   console.log(111);
+        //   console.log(this);
+        // });
 
         graph.dblClick = function() {
           console.log(33);
@@ -86,6 +86,13 @@ export default {
         addVertex(require('../../../../../../../web/asset/images/cylinder.gif'), 40, 40, 'shape=cylinder');
         addVertex(require('../../../../../../../web/asset/images/actor.gif'), 30, 40, 'shape=actor');
         toolbar.addLine();
+        toolbar.addListener('click', function () {
+          console.log(555);
+        });
+        toolbar.addListener('drag', function () {
+          console.log(123);
+        });
+        toolbar.addLis
 
         var button = this.mxGraph.mxUtils.button('Create toolbar entry from selection', (evt) => {
           if (!graph.isSelectionEmpty()) {

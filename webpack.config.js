@@ -32,6 +32,10 @@ module.exports = {
     eslint: false,
     urlimage: {
       test: /\.(png|jpe?g|gif)(\?.*)?$/, // 去掉url-loader对svg文件的处理
+      options: {
+        limit: 1024,
+        esModule: false // 解决img图像src变成"[object Module]"无法正确加载
+      }
     },
     svg: {
       test: /\.svg$/,

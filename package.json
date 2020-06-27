@@ -43,6 +43,7 @@
     "egg-webpack": "^4.5.2",
     "egg-webpack-vue": "^2.0.2",
     "imagemin-webpack-plugin": "^2.4.2",
-    "svg-sprite-loader": "^4.2.3"
+    "svg-sprite-loader": "^4.2.3",
+    "url-loader": "^4.1.0"
   }
 }
