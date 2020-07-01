@@ -85,14 +85,13 @@ export default {
         addVertex(require('../../../../../../../web/asset/images/triangle.gif'), 40, 40, 'shape=triangle');
         addVertex(require('../../../../../../../web/asset/images/cylinder.gif'), 40, 40, 'shape=cylinder');
         addVertex(require('../../../../../../../web/asset/images/actor.gif'), 30, 40, 'shape=actor');
-        toolbar.addLine();
+        // toolbar.addLine();
         toolbar.addListener('click', function () {
           console.log(555);
         });
         toolbar.addListener('drag', function () {
           console.log(123);
         });
-        toolbar.addLis
 
         var button = this.mxGraph.mxUtils.button('Create toolbar entry from selection', (evt) => {
           if (!graph.isSelectionEmpty()) {
@@ -140,7 +139,10 @@ export default {
       }
 
       // Creates the image which is used as the drag icon (preview)
-      var img = toolbar.addMode(null, image, funct);
+      var img = toolbar.addMode(null, image, funct, '', '', function() {
+        console.log(33333);
+        console.log(this);
+      });
       this.mxGraph.mxUtils.makeDraggable(img, graph, funct);
     },
   },

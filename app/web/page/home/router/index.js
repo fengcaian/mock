@@ -13,6 +13,7 @@ import FlowList from '../view/flow/flow-list';
 import FlowView from '../view/flow/flow-list/flow-view';
 import MxGraph from '../view/flow/mx-graph';
 import MxGraphTest from '../view/flow/mx-graph-test';
+import G6 from '../view/flow/g6';
 
 Vue.use(VueRouter);
 
@@ -79,6 +80,11 @@ export default function createRouter() { // 所有前端路由必须以mock开�
         path: '/mock/flow/mx-graph',
         meta: { title: 'mxGraph' },
         component: MxGraph,
+      },
+      {
+        path: '/mock/flow/g6',
+        meta: { title: 'g6' },
+        component: G6,
       },
     ]
   });

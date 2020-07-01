@@ -54,6 +54,11 @@ const menu = {
         name: 'menu.mxGraph',
         icon: 'el-icon-edit-outline',
         path: '/mock/flow/mx-graph',
+      },
+      {
+        name: 'menu.g6',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/flow/g6',
       }
     ],
   },
