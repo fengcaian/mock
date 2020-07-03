@@ -74,21 +74,21 @@ export default {
                     child.attr("opacity", "0")
                 }
                 if (child.attrs.isOutPoint) {
-                    child.attr("opacity", "0")
+                    child.attr("opacity", "0");
                     child.attr("fill", "#fff")
                 }
             })
-        })
+        });
         if (startItem) {
             this.graph.setItemState(startItem, 'hover', false);
         }
 
-        this.graph.paint()
-        startPoint = null
-        startItem = null
-        endPoint = {}
-        activeItem = null
-        curInPoint = null
+        this.graph.paint();
+        startPoint = null;
+        startItem = null;
+        endPoint = {};
+        activeItem = null;
+        curInPoint = null;
         this.graph.setMode('default')
     },
     onMousemove(e) {

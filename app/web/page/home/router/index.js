@@ -14,6 +14,7 @@ import FlowView from '../view/flow/flow-list/flow-view';
 import MxGraph from '../view/flow/mx-graph';
 import MxGraphTest from '../view/flow/mx-graph-test';
 import G6 from '../view/flow/g6';
+import G6Test from '../view/flow/g6-test';
 
 Vue.use(VueRouter);
 
@@ -85,6 +86,11 @@ export default function createRouter() { // 所有前端路由必须以mock开�
         path: '/mock/flow/g6',
         meta: { title: 'g6' },
         component: G6,
+      },
+      {
+        path: '/mock/flow/g6-test',
+        meta: { title: 'g6Test' },
+        component: G6Test,
       },
     ]
   });

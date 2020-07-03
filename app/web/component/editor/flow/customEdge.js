@@ -37,7 +37,7 @@ const customEdge = {
           }
         }
         if (!cfg.source.x) {
-          sourceNode = cfg.source.getModel()
+          sourceNode = cfg.source._cfg.model;
           start = { x: sourceNode.x + cfg.start.x, y: sourceNode.y + cfg.start.y }
         } else {
           start = cfg.source
@@ -47,7 +47,7 @@ const customEdge = {
         }
         if (!cfg.target.x) {
 
-          targetNode = cfg.target.getModel()
+          targetNode = cfg.source._cfg.model;
           end = { x: targetNode.x + cfg.end.x, y: targetNode.y +  cfg.end.y }
         } else {
           end = cfg.target
@@ -118,7 +118,7 @@ const customEdge = {
         return keyShape
       },
       afterDraw(cfg, group) {
-        if (cfg.source.getModel().isDoingStart && cfg.target.getModel().isDoingEnd) {
+        if (cfg.source._cfg.model.isDoingStart && cfg.target._cfg.model.isDoingEnd) {
           const shape = group.get('children')[0];
           const length = shape.getTotalLength(); // G 增加了 totalLength 的接口
           let totalArray = [];
@@ -164,13 +164,13 @@ const customEdge = {
       draw(cfg, group) {
         let sourceNode, targetNode, start, end
         if (!cfg.source.x) {
-          sourceNode = cfg.source.getModel()
+          sourceNode = cfg.source._cfg.model;
           start = { x: sourceNode.x + cfg.start.x, y: sourceNode.y + cfg.start.y }
         } else {
           start = cfg.source
         }
         if (!cfg.target.x) {
-          targetNode = cfg.target.getModel()
+          targetNode = cfg.source._cfg.model;
           end = { x: targetNode.x + cfg.end.x, y: targetNode.y + cfg.end.y }
         } else {
           end = cfg.target

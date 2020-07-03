@@ -59,6 +59,11 @@ const menu = {
         name: 'menu.g6',
         icon: 'el-icon-edit-outline',
         path: '/mock/flow/g6',
+      },
+      {
+        name: 'menu.g6Test',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/flow/g6-test',
       }
     ],
   },

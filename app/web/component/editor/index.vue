@@ -13,7 +13,7 @@
         <!--miniMap-->
         <minimap />
         <!--page-->
-        <page :height="height" :width="width"  :data="data" />
+        <page :height="height" :width="width" :data="data" />
       </div>
     </div>
     <Flow />

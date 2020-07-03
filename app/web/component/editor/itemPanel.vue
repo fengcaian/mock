@@ -32,15 +32,16 @@ export default {
 .itempannel {
   height: 100%;
   position: absolute;
-  left: 0px;
+  left: 0;
   z-index: 2;
   background: #f7f9fb;
   width: 200px;
   padding-top: 8px;
+  font-size: 12px;
   border-right: 1px solid #e6e9ed;
 }
 .itempannel ul {
-  padding: 0px;
+  padding: 0;
   padding-left: 16px;
 }
 .itempannel li {
