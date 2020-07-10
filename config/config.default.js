@@ -45,5 +45,10 @@ module.exports = app => {
       },
     }
   };
+
+  exports.bodyParser = {
+    jsonLimit: '5mb',
+    formLimit: '6mb',
+  };
   return exports;
 };

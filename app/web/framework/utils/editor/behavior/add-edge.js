@@ -28,7 +28,7 @@ export default {
                 })
                 curInPoint = e.target
             } else if (e.target.attrs.isInPointOut) {
-                activeItem = e.target
+                activeItem = e.target;
                 const children = group.cfg.children
                 children.map(child => {
                     if (child.attrs.isInPoint && child.attrs.id === e.target.attrs.parent) {
@@ -132,7 +132,8 @@ export default {
         const item = e.item;
         if (item && item.getType() === 'node') {
             if (e.target.attrs.isInPointOut && !this.hasTran) {
-                this.hasTran = true
+                this.hasTran = true;
+                console.log(Object.getPrototypeOf(e.target));
                 e.target.transform([
                     ['t', 0, 3],
                     ['s', 1.2, 1.2],

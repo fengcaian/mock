@@ -1,6 +1,7 @@
 
-import * as Util from '@antv/util';
+// import * as Util from '@antv/util';
 import eventBus from './../../../../framework/utils/common/eventBus';
+const Util = require('@antv/util');
 export default {
     getEvents() {
         return {

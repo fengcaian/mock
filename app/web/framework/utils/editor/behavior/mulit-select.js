@@ -1,7 +1,8 @@
-import * as Util from '@antv/util';
+// import * as Util from '@antv/util';
 import eventBus from './../../../../framework/utils/common/eventBus';
 import { uniqueId, getBox } from './../../common';
 import config from './../../common/global';
+const Util = require('@antv/util');
 export default {
     getDefaultCfg() {
         return {

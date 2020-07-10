@@ -20,7 +20,7 @@ const customEdge = {
     const interval = 9;
     G6.registerEdge('customEdge', {
       draw(cfg, group) {
-        let sourceNode, targetNode, start, end
+        let sourceNode, targetNode;
         if (typeof (cfg.source) === 'string') {
           cfg.source = cfg.sourceNode
         }
@@ -36,59 +36,54 @@ const customEdge = {
             y:-17
           }
         }
+        const startPoint = cfg.startPoint;
+        const endPoint = cfg.endPoint;
         if (!cfg.source.x) {
-          sourceNode = cfg.source._cfg.model;
-          start = { x: sourceNode.x + cfg.start.x, y: sourceNode.y + cfg.start.y }
-        } else {
-          start = cfg.source
+          sourceNode = cfg.sourceNode.getModel();
         }
         if (typeof (cfg.target) === 'string') {
           cfg.target = cfg.targetNode
         }
         if (!cfg.target.x) {
-
-          targetNode = cfg.source._cfg.model;
-          end = { x: targetNode.x + cfg.end.x, y: targetNode.y +  cfg.end.y }
-        } else {
-          end = cfg.target
+          targetNode = cfg.sourceNode.getModel();
         }
 
         let path = []
-        let hgap = Math.abs(end.x - start.x)
-        if (end.x > start.x) {
+        let hgap = Math.abs(end.x - startPoint.x)
+        if (endPoint.x > startPoint.x) {
           path = [
-            ['M', start.x, start.y],
+            ['M', startPoint.x, startPoint.y],
             [
               'C',
-              start.x,
-              start.y + hgap / (hgap / 50),
-              end.x,
-              end.y - hgap / (hgap / 50),
-              end.x,
-              end.y - 4
+              startPoint.x,
+              startPoint.y + hgap / (hgap / 50),
+              endPoint.x,
+              endPoint.y - hgap / (hgap / 50),
+              endPoint.x,
+              endPoint.y - 4
             ],
             [
               'L',
-              end.x,
-              end.y
+              endPoint.x,
+              endPoint.y
             ]
           ]
         } else {
           path = [
-            ['M', start.x, start.y],
+            ['M', startPoint.x, startPoint.y],
             [
               'C',
-              start.x,
-              start.y + hgap / (hgap / 50),
-              end.x,
-              end.y - hgap / (hgap / 50),
-              end.x,
-              end.y - 4
+              startPoint.x,
+              startPoint.y + hgap / (hgap / 50),
+              endPoint.x,
+              endPoint.y - hgap / (hgap / 50),
+              endPoint.x,
+              endPoint.y - 4
             ],
             [
               'L',
-              end.x,
-              end.y
+              endPoint.x,
+              endPoint.y
             ]
           ]
         }
@@ -118,7 +113,7 @@ const customEdge = {
         return keyShape
       },
       afterDraw(cfg, group) {
-        if (cfg.source._cfg.model.isDoingStart && cfg.target._cfg.model.isDoingEnd) {
+        if (cfg.sourceNode.getModel().isDoingStart && cfg.sourceNode.getModel().isDoingEnd) {
           const shape = group.get('children')[0];
           const length = shape.getTotalLength(); // G 增加了 totalLength 的接口
           let totalArray = [];
@@ -162,25 +157,13 @@ const customEdge = {
     });
     G6.registerEdge('link-edge', {
       draw(cfg, group) {
-        let sourceNode, targetNode, start, end
-        if (!cfg.source.x) {
-          sourceNode = cfg.source._cfg.model;
-          start = { x: sourceNode.x + cfg.start.x, y: sourceNode.y + cfg.start.y }
-        } else {
-          start = cfg.source
-        }
-        if (!cfg.target.x) {
-          targetNode = cfg.source._cfg.model;
-          end = { x: targetNode.x + cfg.end.x, y: targetNode.y + cfg.end.y }
-        } else {
-          end = cfg.target
-        }
-
-        let path = []
+        const startPoint = cfg.startPoint;
+        const endPoint = cfg.endPoint;
+        let path = [];
         path = [
-          ['M', start.x, start.y],
-          ['L', end.x, end.y]
-        ]
+          ['M', startPoint.x, startPoint.y],
+          ['L', endPoint.x, endPoint.y]
+        ];
         const keyShape = group.addShape('path', {
           attrs: {
             id: 'edge' + uniqueId(),
