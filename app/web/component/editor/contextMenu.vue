@@ -25,15 +25,17 @@ export default {
   methods: {
     init() {},
     bindEvent() {
+      const _this = this;
       eventBus.$on("contextmenuClick", e => {
-        const menu = this.$refs.contextMenu;
+        const menu = _this.$refs.contextMenu;
         menu.style.left = e.clientX + "px";
         menu.style.top = e.clientY + "px";
         menu.style.display = "block";
       });
       eventBus.$on("mousedown", () => {
         console.log(this);
-        const menu = this.$refs.contextMenu;
+        console.log(_this);
+        const menu = _this.$refs.contextMenu;
         menu.style.display = "none";
       });
     },

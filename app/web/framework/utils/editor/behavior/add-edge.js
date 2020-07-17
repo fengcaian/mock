@@ -1,4 +1,4 @@
-
+import { transform } from '@antv/matrix-util';
 import eventBus from './../../../../framework/utils/common/eventBus';
 import { uniqueId } from './../../common';
 let startPoint = null
@@ -132,12 +132,16 @@ export default {
         const item = e.item;
         if (item && item.getType() === 'node') {
             if (e.target.attrs.isInPointOut && !this.hasTran) {
-                this.hasTran = true;
-                console.log(Object.getPrototypeOf(e.target));
-                e.target.transform([
-                    ['t', 0, 3],
-                    ['s', 1.2, 1.2],
-                ])
+              this.hasTran = true;
+              console.log(Object.getPrototypeOf(e.target));
+              transform(e.target, [
+                ['t', 0, 3],
+                ['s', 1.2, 1.2],
+              ]);
+              // e.target.transform([
+              //     ['t', 0, 3],
+              //     ['s', 1.2, 1.2],
+              // ])
             }
             this.graph.paint()
         }

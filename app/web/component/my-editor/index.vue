@@ -1,0 +1,73 @@
+<template>
+  <div id="mountNode" :style="{width: width}">
+    <div class="editor">
+      <toolbar></toolbar>
+      <div style="height: 42px;"></div>
+      <div class="bottom-container">
+        <item-panel></item-panel>
+        <page :height="height" :width="width" :data="data"></page>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Editor from './../../framework/utils/my-editor/Editor';
+import Command from './../../framework/utils/my-editor/Command';
+import toolbar from './toolbar';
+import itemPanel from './itemPanel';
+import page from './page';
+import customShape from './../../framework/utils/my-editor/customShape';
+
+export default {
+  components: {
+    toolbar,
+    itemPanel,
+    page,
+  },
+  props: {
+    width: {
+      type: Number,
+      default: document.documentElement.clientWidth
+    },
+    height: {
+      type: Number,
+      default: document.documentElement.clientHeight
+    },
+    data: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data() {
+    return {
+      editor: {},
+      command: null,
+    };
+  },
+  created() {
+    this.init();
+    customShape();
+  },
+  methods: {
+    init() {
+      this.editor = new Editor(this);
+      this.command = new Command(this.editor);
+    }
+  },
+};
+</script>
+
+<style scoped>
+  .editor {
+    position: relative;
+    width: 100%;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  .bottom-container {
+    position: relative;
+  }
+</style>

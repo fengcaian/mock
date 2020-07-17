@@ -131,6 +131,20 @@ const customEdge = {
             },
             repeat: true
           }, 3000);
+          // shape.animate(
+          //   () => {
+          //     // 计算线的lineDash
+          //     const cfg = {
+          //       lineDash: dashArray[index].concat(totalArray),
+          //     };
+          //     index = (index + 1) % interval;
+          //     return cfg;
+          //   },
+          //   {
+          //     repeat: true,
+          //     duration: 3000
+          //   }
+          // );
         }
       },
       setState(name, value, item) {

@@ -14,6 +14,10 @@ export default function createStore(initState) {
     articleList: [],
     article: {},
     shareData: {},
+    afterAddPage: {
+      event: '',
+      params: null,
+    },
     ...initState
   };
   return new Vuex.Store({

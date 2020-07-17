@@ -67,7 +67,7 @@ export default {
         self.page = page;
         self.graph = self.page.graph;
         eventBus.$on("nodeselectchange", item => {
-          if (item.select === true && item.target.getType() === "node") {
+          if (item.select === true && item.target.getType() === "customNode") {
             self.status = "node-selected";
             self.item = item.target;
             self.node = item.target.getModel();

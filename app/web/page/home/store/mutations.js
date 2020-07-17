@@ -10,6 +10,9 @@ import {
 const mutations = {
   SET_SHARE_DATA(state, shareData) {
     state.shareData = shareData;
+  },
+  SET_AFTER_ADD_PAGE(state, afterAddPage) {
+    state.afterAddPage = afterAddPage;
   }
 };
 export default mutations;

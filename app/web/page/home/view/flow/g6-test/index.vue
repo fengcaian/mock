@@ -1,11 +1,17 @@
 <template>
-  <div id="g6Container"></div>
+  <div>
+    <editor></editor>
+  </div>
 </template>
 
 <script>
 import G6 from '@antv/g6';
+import editor from './../../../.././../component/my-editor';
 
 export default {
+  components: {
+    editor,
+  },
   data() {
     return {
       g6Data: {
@@ -57,7 +63,7 @@ export default {
     };
   },
   mounted() {
-    this.init();
+    // this.init();
   },
   methods: {
     init() {
