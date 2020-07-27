@@ -35,6 +35,11 @@ export default class Command {
       list.push(model);
       this.doCommand(key, model);
     });
+    this.undoList.push({ key, datas: list });
+    if (key === 'delete') {
+      this.redoList =[];
+    }
+    this.editor.emit(key, { undoList: this.undoList, redoList: this.redoList });
   }
 
   doCommand(key, data) {
@@ -45,7 +50,7 @@ export default class Command {
       case 'update':
         this.update(data.item, data.newModel);
         break;
-      case 'remove':
+      case 'delete':
         this.remove(data);
         break;
     }

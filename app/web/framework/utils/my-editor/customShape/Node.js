@@ -71,13 +71,9 @@ export default class CustomNode {
           for (let i = 0; i < cfg.inPoints.length; i += 1) {
             let x, y = 0;
             //0为顶 1为底
-            if (cfg.inPoints[i][0] === 0) {
-              y = 0;
-            } else {
-              y = height;
-            }
             x = width * cfg.inPoints[i][1];
-            const id = 'circle' + uniqueId()
+            y = height * cfg.inPoints[i][0];
+            const id = 'circle' + uniqueId();
             group.addShape('circle', {
               attrs: {
                 id: 'circle' + uniqueId(),
@@ -107,14 +103,10 @@ export default class CustomNode {
         if (cfg.outPoints) {
           for (let i = 0; i < cfg.outPoints.length; i += 1) {
             let x, y = 0;
-            //0为顶 1为底
-            if (cfg.outPoints[i][0] === 0) {
-              y = 0;
-            } else {
-              y = height;
-            }
+            // 0为顶 1为底
             x = width * cfg.outPoints[i][1];
-            const id = 'circle' + uniqueId()
+            y = height * cfg.outPoints[i][0];
+            const id = 'circle' + uniqueId();
             group.addShape('circle', {
               attrs: {
                 id: 'circle' + uniqueId(),

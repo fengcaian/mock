@@ -27,7 +27,7 @@ export default {
           }
           if (g.attrs.id === e.target.attrs.id) {
             g.attr('fill', '#1890ff');
-            g.attr('opacity', 1)
+            g.attr('opacity', 1);
           }
         }
       });

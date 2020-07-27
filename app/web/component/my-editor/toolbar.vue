@@ -7,12 +7,13 @@
     <i
       class="command iconfont icon-undo"
       title="撤销"
-      :class="undoList.length>0?'':'disable'">
+      :class="undoList.length > 0 ? '' : 'disable'"
+      @click="handleUndo">
     </i>
     <i
       class="command iconfont icon-redo"
       title="重做"
-      :class="redoList.length>0?'':'disable'"
+      :class="redoList.length > 0 ? '' : 'disable'"
       @click="handleRedo">
     </i>
     <span class="separator"></span>
@@ -20,7 +21,7 @@
       data-command="delete"
       class="command iconfont icon-delete-o"
       title="删除"
-      :class="selectedItem?'':'disable'"
+      :class="selectedItem && selectedItem.length ? '' : 'disable'"
       @click="handleDelete">
     </i>
     <span class="separator"></span>
@@ -52,14 +53,14 @@
     <i
       data-command="toBack"
       class="command iconfont icon-to-back"
-      :class="selectedItem?'':'disable'"
+      :class="selectedItem && selectedItem.length ? '' : 'disable'"
       title="层级后置"
       @click="handleToBack">
     </i>
     <i
       data-command="toFront"
       class="command iconfont icon-to-front"
-      :class="selectedItem?'':'disable'"
+      :class="selectedItem && selectedItem.length ? '' : 'disable'"
       title="层级前置"
       @click="handleToFront">
     </i>
@@ -68,7 +69,7 @@
     <i
       data-command="multiSelect"
       class="command iconfont icon-select"
-      :class="multiSelect?'disable':''"
+      :class="multiSelect ? 'disable' : ''"
       title="多选"
       @click="handleMultiSelect">
     </i>
@@ -76,7 +77,7 @@
       data-command="addGroup"
       class="command iconfont icon-group"
       title="成组"
-      :class="addGroup?'':'disable'"
+      :class="addGroup ? '' : 'disable'"
       @click="handleAddGroup">
     </i>
     <i data-command="unGroup" class="command iconfont icon-ungroup disable" title="解组"></i>
@@ -112,6 +113,17 @@ export default {
     this.init();
     this.bindEvent();
   },
+  destroyed() {
+    eventBus.$off('afterAddPage');
+    eventBus.$off('add');
+    eventBus.$off('update');
+    eventBus.$off('delete');
+    eventBus.$off('updateItem');
+    eventBus.$off('addItem');
+    eventBus.$off('nodeSelectChange');
+    eventBus.$off('deleteItem');
+    eventBus.$off('multiSelectEnd');
+  },
   methods: {
     init() {
       const { editor, command } = this.$parent;
@@ -125,35 +137,36 @@ export default {
         self.graph = self.page.graph;
       });
       eventBus.$on('add', data => {
-        this.redoList = data.redoList;
-        this.undoList = data.undoList;
+        self.redoList = data.redoList;
+        self.undoList = data.undoList;
       });
       eventBus.$on('update', data => {
-        this.redoList = data.redoList;
-        this.undoList = data.undoList;
+        self.redoList = data.redoList;
+        self.undoList = data.undoList;
       });
       eventBus.$on('delete', data => {
-        this.redoList = data.redoList;
-        this.undoList = data.undoList;
+        self.redoList = data.redoList;
+        self.undoList = data.undoList;
       });
       eventBus.$on('updateItem', item => {
-        this.command.executeCommand("update", [item]);
+        self.command.executeCommand('update', [item]);
       });
       eventBus.$on('addItem', item => {
-        this.command.executeCommand("add", [item]);
+        self.command.executeCommand('add', [item]);
       });
       eventBus.$on('nodeSelectChange', () => {
-        this.selectedItem = this.graph.findAllByState('node', 'selected');
-        this.selectedItem = this.selectedItem.concat(
-          ...this.graph.findAllByState('edge', 'selected')
+        self.selectedItem = self.graph.findAllByState('node', 'selected');
+        self.selectedItem = self.selectedItem.concat(
+          ...self.graph.findAllByState('edge', 'selected')
         );
+        console.log(self.selectedItem);
       });
       eventBus.$on('deleteItem', () => {
-        this.handleDelete();
+        self.handleDelete();
       });
       eventBus.$on('multiSelectEnd', () => {
-        this.multiSelect = false;
-        this.selectedItem = this.graph.findAllByState('node', 'selected');
+        self.multiSelect = false;
+        self.selectedItem = self.graph.findAllByState('node', 'selected');
       });
     },
     handleUndo() {

@@ -1,6 +1,6 @@
-import { transform } from '@antv/matrix-util';
 import eventBus from './../../../../framework/utils/common/eventBus';
 import { uniqueId } from './../../common';
+import G6 from "@antv/g6";
 let startPoint = null
 let startItem = null
 let endPoint = {}
@@ -46,8 +46,8 @@ export default {
                         id: 'edge' + uniqueId(),
                         source: startItem,
                         target: item,
-                        sourceId: startItem.cfg.id,
-                        targetId: item.cfg.id,
+                        sourceId: startItem._cfg.id,
+                        targetId: item._cfg.id,
                         start: startPoint,
                         end: endPoint,
                         shape: 'customEdge',
@@ -133,15 +133,15 @@ export default {
         if (item && item.getType() === 'node') {
             if (e.target.attrs.isInPointOut && !this.hasTran) {
               this.hasTran = true;
-              console.log(Object.getPrototypeOf(e.target));
-              transform(e.target, [
+              let matrix = e.target.getMatrix();
+              if (!matrix) {
+                matrix = G6.Util.mat3.create();
+              }
+              matrix = G6.Util.transform(matrix, [
                 ['t', 0, 3],
-                ['s', 1.2, 1.2],
+                ['s', 1.2, 1.2]
               ]);
-              // e.target.transform([
-              //     ['t', 0, 3],
-              //     ['s', 1.2, 1.2],
-              // ])
+              e.target.setMatrix(matrix);
             }
             this.graph.paint()
         }

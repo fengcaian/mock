@@ -19,8 +19,12 @@ export default {
       menus: [{ key: 1, name: "菜单1" }, { key: 2, name: "菜单2" }]
     };
   },
-  created() {
+  mounted() {
     this.bindEvent();
+  },
+  destroyed() {
+    eventBus.$off('contextmenuClick');
+    eventBus.$off('mousedown');
   },
   methods: {
     init() {},
@@ -33,8 +37,6 @@ export default {
         menu.style.display = "block";
       });
       eventBus.$on("mousedown", () => {
-        console.log(this);
-        console.log(_this);
         const menu = _this.$refs.contextMenu;
         menu.style.display = "none";
       });

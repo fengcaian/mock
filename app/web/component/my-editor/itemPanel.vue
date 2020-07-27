@@ -21,11 +21,15 @@ export default {
   created() {
     this.bindEvent();
   },
+  destroyed() {
+    eventBus.$off('afterAddPage');
+  },
   methods: {
     bindEvent() {
+      const self = this;
       eventBus.$on('afterAddPage', page => {
-        this.page = page;
-      })
+        self.page = page;
+      });
     },
   },
 };

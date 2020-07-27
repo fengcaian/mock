@@ -60,7 +60,8 @@ export default {
           multiSelect: ['multi-select'],
           addEdge: ['add-edge'],
           moveNode:[ 'drag-item']
-        }
+        },
+        // renderer: 'svg'
       });
       const { editor, command } = this.$parent;
       editor.emit('afterAddPage', { graph: this.graph, command });

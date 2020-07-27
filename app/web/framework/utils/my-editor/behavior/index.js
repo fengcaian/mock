@@ -16,7 +16,7 @@ const behaviors = {
   'hover-edge': hoverEdge,
   'keyboard':keyboard,
   'multi-select': multiSelect,
-  // 'add-menu': addMenu,
+  'add-menu': addMenu,
 };
 
 export function initBehaviors() {

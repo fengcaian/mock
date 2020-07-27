@@ -11,10 +11,10 @@
 
 <script>
 import Vue from 'vue';
-import '@/app/web/framework/network';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'highlight.js/styles/default.css';
+import '@/app/web/framework/network';
 import hljs from './directive/highlight';
 import layout from 'component/layout/admin/index.vue';
 import LayoutHeader from '../../component/layout/admin/header/header';

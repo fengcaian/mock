@@ -1,10 +1,13 @@
 <template>
   <div id="mountNode" :style="{width: width}">
     <div class="editor">
+      <context-menu></context-menu>
       <toolbar></toolbar>
       <div style="height: 42px;"></div>
       <div class="bottom-container">
         <item-panel></item-panel>
+        <detail-panel></detail-panel>
+        <mini-map></mini-map>
         <page :height="height" :width="width" :data="data"></page>
       </div>
     </div>
@@ -14,15 +17,21 @@
 <script>
 import Editor from './../../framework/utils/my-editor/Editor';
 import Command from './../../framework/utils/my-editor/Command';
+import contextMenu from './contextMenu';
 import toolbar from './toolbar';
 import itemPanel from './itemPanel';
+import detailPanel from './detailPanel';
+import miniMap from './miniMap';
 import page from './page';
 import customShape from './../../framework/utils/my-editor/customShape';
 
 export default {
   components: {
+    contextMenu,
     toolbar,
     itemPanel,
+    detailPanel,
+    miniMap,
     page,
   },
   props: {

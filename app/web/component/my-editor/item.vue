@@ -112,8 +112,8 @@ export default {
           color: '#1890ff',
           image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
           stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]],
+          inPoints: [[0, 0.5], [0.5, 0]],
+          outPoints: [[1, 0.5], [0.5, 1]],
           isDoingEnd: true
         }
       ],
@@ -121,6 +121,9 @@ export default {
   },
   created() {
     this.bindEvent();
+  },
+  destroyed() {
+    eventBus.$off('afterAddPage');
   },
   methods: {
     handleDragStart(e) {
@@ -141,9 +144,10 @@ export default {
       }
     },
     bindEvent() {
+      const self = this;
       eventBus.$on('afterAddPage', page => {
-        this.page = page;
-        this.command = page.command;
+        self.page = page;
+        self.command = page.command;
       });
     }
   },

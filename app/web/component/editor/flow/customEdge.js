@@ -20,7 +20,7 @@ const customEdge = {
     const interval = 9;
     G6.registerEdge('customEdge', {
       draw(cfg, group) {
-        let sourceNode, targetNode;
+        let sourceNode, targetNode, start, end
         if (typeof (cfg.source) === 'string') {
           cfg.source = cfg.sourceNode
         }
@@ -36,54 +36,59 @@ const customEdge = {
             y:-17
           }
         }
-        const startPoint = cfg.startPoint;
-        const endPoint = cfg.endPoint;
         if (!cfg.source.x) {
-          sourceNode = cfg.sourceNode.getModel();
+          sourceNode = cfg.source.getModel()
+          start = { x: sourceNode.x + cfg.start.x, y: sourceNode.y + cfg.start.y }
+        } else {
+          start = cfg.source
         }
         if (typeof (cfg.target) === 'string') {
           cfg.target = cfg.targetNode
         }
         if (!cfg.target.x) {
-          targetNode = cfg.sourceNode.getModel();
+
+          targetNode = cfg.target.getModel()
+          end = { x: targetNode.x + cfg.end.x, y: targetNode.y +  cfg.end.y }
+        } else {
+          end = cfg.target
         }
 
         let path = []
-        let hgap = Math.abs(end.x - startPoint.x)
-        if (endPoint.x > startPoint.x) {
+        let hgap = Math.abs(end.x - start.x)
+        if (end.x > start.x) {
           path = [
-            ['M', startPoint.x, startPoint.y],
+            ['M', start.x, start.y],
             [
               'C',
-              startPoint.x,
-              startPoint.y + hgap / (hgap / 50),
-              endPoint.x,
-              endPoint.y - hgap / (hgap / 50),
-              endPoint.x,
-              endPoint.y - 4
+              start.x,
+              start.y + hgap / (hgap / 50),
+              end.x,
+              end.y - hgap / (hgap / 50),
+              end.x,
+              end.y - 4
             ],
             [
               'L',
-              endPoint.x,
-              endPoint.y
+              end.x,
+              end.y
             ]
           ]
         } else {
           path = [
-            ['M', startPoint.x, startPoint.y],
+            ['M', start.x, start.y],
             [
               'C',
-              startPoint.x,
-              startPoint.y + hgap / (hgap / 50),
-              endPoint.x,
-              endPoint.y - hgap / (hgap / 50),
-              endPoint.x,
-              endPoint.y - 4
+              start.x,
+              start.y + hgap / (hgap / 50),
+              end.x,
+              end.y - hgap / (hgap / 50),
+              end.x,
+              end.y - 4
             ],
             [
               'L',
-              endPoint.x,
-              endPoint.y
+              end.x,
+              end.y
             ]
           ]
         }
