@@ -18,11 +18,17 @@
         <div class="panel-title">边详情</div>
         <div class="block-container">
           <el-form size="mini" label-position="right" label-width="75px" :model="edge">
+            <el-form-item label="展示圆圈">
+              <el-radio-group v-model="edge.lineCircle.isShow" @change="handleChangeName('edge')">
+                <el-radio class="margin-r-0" :label="true">是</el-radio>
+                <el-radio class="margin-r-0" :label="false">否</el-radio>
+              </el-radio-group>
+            </el-form-item>
             <el-form-item label="圆内文字">
               <el-input size="mini" class="width-100" v-model="edge.lineCircle.text" @change="handleChangeName('edge')"></el-input>
             </el-form-item>
             <el-form-item label="背景颜色">
-              <el-input size="mini" class="width-100" v-model="edge.lineCircle.background" @change="handleChangeName('edge')"></el-input>
+              <el-color-picker v-model="edge.lineCircle.background" show-alpha :predefine="predefineColors" @change="handleChangeName('edge')"></el-color-picker>
             </el-form-item>
           </el-form>
         </div>
@@ -53,11 +59,28 @@ export default {
       },
       edge: {
         lineCircle: {
+          isShow: true,
           text: '',
           background: '',
         },
       },
-      grid: null
+      grid: null,
+      predefineColors: [
+        '#ff4500',
+        '#ff8c00',
+        '#ffd700',
+        '#90ee90',
+        '#00ced1',
+        '#1e90ff',
+        '#c71585',
+        'rgba(255, 69, 0, 0.68)',
+        'rgb(255, 120, 0)',
+        'hsv(51, 100, 98)',
+        'hsva(120, 40, 94, 0.5)',
+        'hsl(181, 100%, 37%)',
+        'hsla(209, 100%, 56%, 0.73)',
+        '#c7158577'
+      ]
     };
   },
   computed: {
@@ -145,5 +168,8 @@ export default {
   }
   .width-100 {
     width: 100px;
+  }
+  .margin-r-0 {
+    margin-right: 0;
   }
 </style>

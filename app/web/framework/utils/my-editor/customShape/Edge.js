@@ -133,11 +133,11 @@ export default class Edge {
         group.addShape('circle', {
           attrs: {
             parent: mainId,
-            x: startPoint.x + 15,
-            y: startPoint.y + 15,
+            x: startPoint.x + (end.x - startPoint.x)/2,
+            y: startPoint.y + (end.y - startPoint.y)/2,
             fill: cfg.lineCircle.background,
             r: 10,
-            opacity: 1,
+            opacity: cfg.lineCircle.isShow ? 1 : 0,
             stroke: cfg.lineCircle.border,
           },
           name: 'circle-shape',
@@ -146,12 +146,13 @@ export default class Edge {
           attrs: {
             id: 'label' + uniqueId(),
             parent: mainId,
-            x: startPoint.x + 15,
-            y: startPoint.y + 15,
+            x: startPoint.x + (end.x - startPoint.x)/2,
+            y: startPoint.y + (end.y - startPoint.y)/2,
             textAlign: 'center',
             textBaseline: 'middle',
             text: cfg.lineCircle.text,
-            fill: cfg.lineCircle.border
+            fill: cfg.lineCircle.border,
+            opacity: cfg.lineCircle.isShow ? 1 : 0,
           }
         });
         return keyShape;

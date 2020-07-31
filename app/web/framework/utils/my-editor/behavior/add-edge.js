@@ -101,7 +101,8 @@ export default {
               lineCircle: {
                 text: '0',
                 background: '#ffffff',
-                border: '#1890ff'
+                border: '#1890ff',
+                isShow: false,
               },
             };
             eventBus.$emit('addItem', model);
