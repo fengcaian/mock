@@ -2,14 +2,27 @@
   <div class="detail-panel">
     <div>
       <div v-if="status === 'node-selected'" class="panel">
-        <div class="panel-title">模型详情</div>
+        <div class="panel-title">节点详情</div>
         <div class="block-container">
           <el-form size="mini" label-position="right" label-width="75px" :model="node">
             <el-form-item label="名称">
-              <el-input size="mini" class="width-100" v-model="node.label" @change="handleChangeName"></el-input>
+              <el-input size="mini" class="width-100" v-model="node.label" @change="handleChangeName('node')"></el-input>
             </el-form-item>
             <el-form-item label="核查链ID">
               <el-input size="mini" class="width-100" v-model="node.checkId"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
+      <div v-if="status === 'edge-selected'">
+        <div class="panel-title">边详情</div>
+        <div class="block-container">
+          <el-form size="mini" label-position="right" label-width="75px" :model="edge">
+            <el-form-item label="圆内文字">
+              <el-input size="mini" class="width-100" v-model="edge.lineCircle.text" @change="handleChangeName('edge')"></el-input>
+            </el-form-item>
+            <el-form-item label="背景颜色">
+              <el-input size="mini" class="width-100" v-model="edge.lineCircle.background" @change="handleChangeName('edge')"></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -33,15 +46,27 @@ export default {
     return {
       status: 'canvas-selected',
       showGrid: false,
-      page: {},
-      graph: {},
       item: {},
       node: {
         label: '',
         checkId: ''
       },
+      edge: {
+        lineCircle: {
+          text: '',
+          background: '',
+        },
+      },
       grid: null
     };
+  },
+  computed: {
+    page() {
+      return this.$store.state.g6Editor;
+    },
+    graph() {
+      return this.$store.state.g6Editor.graph;
+    }
   },
   created() {
     this.bindEvent();
@@ -56,23 +81,32 @@ export default {
       eventBus.$on('afterAddPage', page => {
         self.page = page;
         self.graph = self.page.graph;
-        eventBus.$on('nodeSelectChange', item => {
-          if (item.select === true && item.target.getType() === 'node') {
-            self.status = 'node-selected';
-            self.item = item.target;
-            self.node = item.target.getModel();
-          } else {
-            self.status = 'canvas-selected';
-            self.item = null;
-            self.node = null;
-          }
-        });
+      });
+      eventBus.$on('nodeSelectChange', item => {
+        if (item.select === true && item.target.getType() === 'node') {
+          self.status = 'node-selected';
+          self.item = item.target;
+          self.node = item.target.getModel();
+        } else if (item.select === true && item.target.getType() === 'edge') {
+          self.status = 'edge-selected';
+          self.item = item.target;
+          self.edge = item.target.getModel();
+        } else {
+          self.status = 'canvas-selected';
+          self.item = null;
+          self.node = null;
+          self.edge = null;
+        }
       });
     },
-    handleChangeName(e) {
-      const model = {
-        label: e
-      };
+    handleChangeName(type) {
+      let model = {};
+      if (type === 'node') {
+        model = this.node;
+      }
+      if (type === 'edge') {
+        model = this.edge;
+      }
       this.graph.update(this.item, model);
     },
     changeGridState(value) {

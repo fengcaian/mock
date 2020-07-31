@@ -23,8 +23,6 @@ import bgImg from './../../asset/images/bg.jpg';
 export default {
   data() {
     return {
-      page: null,
-      command: null,
       offsetX: 0,
       offsetY: 0,
       list: [
@@ -118,6 +116,14 @@ export default {
         }
       ],
     };
+  },
+  computed: {
+    page() {
+      return this.$store.state.g6Editor;
+    },
+    command() {
+      return this.$store.state.g6Editor.command;
+    }
   },
   created() {
     this.bindEvent();

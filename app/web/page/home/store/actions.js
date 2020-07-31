@@ -11,8 +11,8 @@ const actions = {
   SetShareData: (context, shareData) => {
     context.commit('SET_SHARE_DATA', shareData);
   },
-  SetAfterAddPage: (context, afterAddPage) => {
-    context.commit('SET_AFTER_ADD_PAGE', afterAddPage);
+  SetG6Editor: (context, g6Editor) => {
+    context.commit('SET_G6_EDITOR', g6Editor);
   }
 };
 

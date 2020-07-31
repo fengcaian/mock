@@ -111,9 +111,10 @@ export default class Edge {
         const width = lineWidth * 10 / 3;
         const halfHeight = lineWidth * 4 / 3;
         const endArrowPath = `M 0,0 L ${width},${halfHeight} L ${width},${-halfHeight} Z`;
+        const mainId = 'edge' + uniqueId();
         const keyShape = group.addShape('path', {
           attrs: {
-            id: 'edge' + uniqueId(),
+            id: mainId,
             path: path,
             stroke: '#b8c3ce',
             lineAppendWidth: 10,
@@ -121,6 +122,36 @@ export default class Edge {
               path: endArrowPath,
               fill: '#b8c3ce'
             }
+          }
+        });
+        const shape = group.get('children')[0];
+        // the start position of the edge's path
+        const startPoint = shape.getPoint(0);
+
+        console.log(cfg);
+        // add red circle shape
+        group.addShape('circle', {
+          attrs: {
+            parent: mainId,
+            x: startPoint.x + 15,
+            y: startPoint.y + 15,
+            fill: cfg.lineCircle.background,
+            r: 10,
+            opacity: 1,
+            stroke: cfg.lineCircle.border,
+          },
+          name: 'circle-shape',
+        });
+        group.addShape('text', {
+          attrs: {
+            id: 'label' + uniqueId(),
+            parent: mainId,
+            x: startPoint.x + 15,
+            y: startPoint.y + 15,
+            textAlign: 'center',
+            textBaseline: 'middle',
+            text: cfg.lineCircle.text,
+            fill: cfg.lineCircle.border
           }
         });
         return keyShape;
@@ -146,6 +177,10 @@ export default class Edge {
           }, 3000);
         }
       },
+      // update(cfg, item) {
+      //   console.log(cfg);
+      //   console.log(item);
+      // },
       setState(name, value, item) {
         const group = item.getContainer();
         const shape = group.get('children')[0];
@@ -154,6 +189,9 @@ export default class Edge {
         };
         const unSelectStyles = () => {
           shape.attr('stroke', '#b8c3ce');
+        };
+        const showCircle = () => {
+          shape.attr('opacity', 1);
         };
 
         switch (name) {
@@ -165,6 +203,8 @@ export default class Edge {
               unSelectStyles();
             }
             break;
+          case 'showCircle':
+            showCircle();
         }
       }
     });

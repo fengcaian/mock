@@ -82,6 +82,8 @@
     </i>
     <i data-command="unGroup" class="command iconfont icon-ungroup disable" title="解组"></i>
     <el-button size="mini" @click="consoleData" type="primary">控制台输出数据</el-button>
+    <el-button size="mini" @click="outOfEditModel" type="primary">退出编辑模式</el-button>
+    <el-button size="mini" @click="inOfEditModel" type="primary">进入编辑模式</el-button>
   </div>
 </template>
 
@@ -288,7 +290,18 @@ export default {
 
     consoleData() {
       console.log(this.graph.save());
-    }
+      console.log('consoleData = ' + this.graph.getCurrentMode());
+    },
+    outOfEditModel() {
+      this.graph.setMode('default');
+      console.log('outOfEditModel = ' + this.graph.getCurrentMode());
+      this.$emit('editorModeChange', { mode: 'default' });
+    },
+    inOfEditModel() {
+      this.graph.setMode('edit');
+      console.log('inOfEditModel = ' + this.graph.getCurrentMode());
+      this.$emit('editorModeChange', { mode: 'edit' });
+    },
   },
 };
 </script>

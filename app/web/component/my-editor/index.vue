@@ -2,11 +2,11 @@
   <div id="mountNode" :style="{width: width}">
     <div class="editor">
       <context-menu></context-menu>
-      <toolbar></toolbar>
+      <toolbar @editorModeChange="editorModeChange"></toolbar>
       <div style="height: 42px;"></div>
       <div class="bottom-container">
-        <item-panel></item-panel>
-        <detail-panel></detail-panel>
+        <item-panel v-if="initMode === 'edit'"></item-panel>
+        <detail-panel v-if="initMode === 'edit'"></detail-panel>
         <mini-map></mini-map>
         <page :height="height" :width="width" :data="data"></page>
       </div>
@@ -46,15 +46,21 @@ export default {
     data: {
       type: Object,
       default: () => {}
-    }
+    },
+    model: {
+      type: String,
+      default: 'default'
+    },
   },
   data() {
     return {
       editor: {},
       command: null,
+      initMode: '',
     };
   },
   created() {
+    this.initMode = this.mode;
     this.init();
     customShape();
   },
@@ -62,7 +68,10 @@ export default {
     init() {
       this.editor = new Editor(this);
       this.command = new Command(this.editor);
-    }
+    },
+    editorModeChange(obj) {
+      this.initMode = obj.mode;
+    },
   },
 };
 </script>

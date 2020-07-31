@@ -62,6 +62,12 @@ export default {
     Util.each(selectedEdges, edge => {
       graph.setItemState(edge, 'selected', false);
       eventBus.$emit('nodeSelectChange', { target: edge, select: false });
+      const data = {};
+      data.item = edge;
+      data.customerProps = {
+        isAddCircle: true,
+      };
+      eventBus.$emit('updateItem', data);
     });
     graph.paint();
     graph.setAutoPaint(autoPaint);

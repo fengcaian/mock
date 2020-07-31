@@ -13,10 +13,15 @@ export default {
     item,
   },
   data() {
-    return {
-      page: null,
-      command:null
-    };
+    return {};
+  },
+  computed: {
+    page() {
+      return this.$store.state.g6Editor;
+    },
+    command() {
+      return this.$store.state.g6Editor.command;
+    }
   },
   created() {
     this.bindEvent();

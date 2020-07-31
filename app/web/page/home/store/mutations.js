@@ -11,8 +11,8 @@ const mutations = {
   SET_SHARE_DATA(state, shareData) {
     state.shareData = shareData;
   },
-  SET_AFTER_ADD_PAGE(state, afterAddPage) {
-    state.afterAddPage = afterAddPage;
+  SET_G6_EDITOR(state, g6Editor) {
+    state.g6Editor = g6Editor;
   }
 };
 export default mutations;

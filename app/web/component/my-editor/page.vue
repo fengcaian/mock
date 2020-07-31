@@ -65,6 +65,7 @@ export default {
       });
       const { editor, command } = this.$parent;
       editor.emit('afterAddPage', { graph: this.graph, command });
+      this.$store.dispatch('SetG6Editor', { graph: this.graph, command });
 
       this.readData();
     },

@@ -1,5 +1,5 @@
 .main .main-content {
-  width: 100%;
+  width: calc(100% - 230px);
   margin-left: 230px;
   -webkit-transition: margin-left 0.35s;
   transition: margin-left 0.35s;

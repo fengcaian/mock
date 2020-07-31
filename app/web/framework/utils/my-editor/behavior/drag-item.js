@@ -74,6 +74,11 @@ export default {
     this.point = {};
     this.originPoint = {};
   },
+  onMouseDown(e) {
+    this.isDrag = true;
+    this.target = e.item;
+    console.log(e);
+  },
   onMouseMove(e) {
     if (!this.origin) {
       this.getNode(e)

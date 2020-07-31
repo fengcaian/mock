@@ -14,8 +14,8 @@ export default function createStore(initState) {
     articleList: [],
     article: {},
     shareData: {},
-    afterAddPage: {
-      event: '',
+    g6Editor: {
+      page: '',
       params: null,
     },
     ...initState
