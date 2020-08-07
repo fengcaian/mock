@@ -60,6 +60,7 @@ export default {
     if (e.target.attrs.isOutPoint || e.target.attrs.isOutPointOut) {
       this.graph.setMode('addEdge');
     } else {
+      console.log('in moveNode mode');
       this.graph.setMode('moveNode');
     }
   },

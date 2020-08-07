@@ -6,7 +6,7 @@ const delegateStyle = {
   stroke: '#1890FF',
   strokeOpacity: 0.9,
   lineDash: [5, 5]
-}
+};
 const body = document.body;
 
 export default {
@@ -28,6 +28,7 @@ export default {
     };
   },
   getNode(e) {
+    console.log(this.shouldBegin.call(this, e));
     if (!this.shouldBegin.call(this, e)) {
       return;
     }
@@ -52,8 +53,9 @@ export default {
     });
     // 只拖动当前节点
     if (dragNodes.length === 0) {
+      console.log(item);
       if (!item) {
-        debugger;
+        return;
       }
       this.target = item || graph.findById(currentNodeId);
     } else {
@@ -77,9 +79,9 @@ export default {
   onMouseDown(e) {
     this.isDrag = true;
     this.target = e.item;
-    console.log(e);
   },
   onMouseMove(e) {
+    console.log('i am moving');
     if (!this.origin) {
       this.getNode(e)
     }
@@ -162,6 +164,7 @@ export default {
       body.addEventListener('mouseup', fn, false);
     }
   },
+  onDragEnd() {},
   _update(item, e, nodeEvent, force) {
     const origin = this.origin;
     const model = item.get('model');
@@ -186,6 +189,7 @@ export default {
     if (this.get('updateEdge')) {
       this.graph.updateItem(item, pos);
     } else {
+      console.log(pos);
       item.updatePosition(pos);
       this.graph.paint();
     }

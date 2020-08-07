@@ -86,6 +86,116 @@ export default class Edge {
         //   ['L', end.x / 3 + (2 / 3) * start.x, end.y], // 三分之二处
         //   ['L', end.x, end.y],
         // ];
+        const direction = _judgeLineDirection(start, end);
+        const pathWidth = end.x - start.x;
+        const pathHeight = end.y - start.y;
+        const radius = 5;
+        switch (direction) {
+          case 'left':
+            if (pathHeight > 0) {
+              path = path = [
+                ['M', start.x, start.y],
+                ['L', start.x + (pathWidth / 2) + radius, start.y],
+                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y + radius],
+                ['L', start.x + (pathWidth / 2), end.y - radius],
+                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) - radius, end.y],
+                ['L', end.x, end.y]
+              ];
+            } else if (pathHeight < 0) {
+              path = path = [
+                ['M', start.x, start.y],
+                ['L', start.x + (pathWidth / 2) + radius, start.y],
+                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y - radius],
+                ['L', start.x + (pathWidth / 2), end.y + radius],
+                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) - radius, end.y],
+                ['L', end.x, end.y]
+              ];
+            } else {
+              path = path = [
+                ['M', start.x, start.y],
+                ['L', end.x, end.y]
+              ];
+            }
+            break;
+          case 'right':
+            if (pathHeight > 0) {
+              path = [
+                ['M', start.x, start.y],
+                ['L', start.x + (pathWidth / 2) - radius, start.y],
+                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y + radius],
+                ['L', start.x + (pathWidth / 2), end.y - radius],
+                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) + radius, end.y],
+                ['L', end.x, end.y]
+              ];
+            } else if (pathHeight < 0) {
+              path = [
+                ['M', start.x, start.y],
+                ['L', start.x + (pathWidth / 2) - radius, start.y],
+                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y - radius],
+                ['L', start.x + (pathWidth / 2), end.y + radius],
+                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) + radius, end.y],
+                ['L', end.x, end.y]
+              ];
+            } else {
+              path = path = [
+                ['M', start.x, start.y],
+                ['L', end.x, end.y]
+              ];
+            }
+            break;
+          case 'up':
+            if (pathWidth > 0) {
+              path = [
+                ['M', start.x, start.y],
+                ['L', start.x, start.y + (pathHeight / 2) + radius],
+                ['Q', start.x, start.y + (pathHeight / 2), start.x + radius, start.y + (pathHeight / 2)],
+                ['L', end.x - radius, start.y + (pathHeight / 2)],
+                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) - radius],
+                ['L', end.x, end.y]
+              ];
+            } else if (pathWidth < 0) {
+              path = [
+                ['M', start.x, start.y],
+                ['L', start.x, start.y + (pathHeight / 2) + radius],
+                ['Q', start.x, start.y + (pathHeight / 2), start.x - radius, start.y + (pathHeight / 2)],
+                ['L', end.x + radius, start.y + (pathHeight / 2)],
+                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) - radius],
+                ['L', end.x, end.y]
+              ];
+            } else {
+              path = path = [
+                ['M', start.x, start.y],
+                ['L', end.x, end.y]
+              ];
+            }
+            break;
+          case 'down':
+            if (pathWidth > 0) {
+              path = [
+                ['M', start.x, start.y],
+                ['L', start.x, start.y + (pathHeight / 2) -radius],
+                ['Q', start.x, start.y + (pathHeight / 2), start.x + radius, start.y + (pathHeight / 2)],
+                ['L', end.x - radius, start.y + (pathHeight / 2)],
+                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) + radius],
+                ['L', end.x, end.y]
+              ];
+            } else if (pathWidth < 0) {
+              path = [
+                ['M', start.x, start.y],
+                ['L', start.x, start.y + (pathHeight / 2) -radius],
+                ['Q', start.x, start.y + (pathHeight / 2), start.x - radius, start.y + (pathHeight / 2)],
+                ['L', end.x + radius, start.y + (pathHeight / 2)],
+                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) + radius],
+                ['L', end.x, end.y]
+              ];
+            } else {
+              path = path = [
+                ['M', start.x, start.y],
+                ['L', end.x, end.y]
+              ];
+            }
+            break;
+        }
         if (sourceNode.id === targetNode.id) { // 连接到自身
           if (start.x > end.x && start.y > end.y && sourceNode.y < start.y) { // 底->左
             path = [
@@ -155,6 +265,117 @@ export default class Edge {
             opacity: cfg.lineCircle.isShow ? 1 : 0,
           }
         });
+        console.log(path);
+        const edgeControlPoint = _getEdgeControlPoint(JSON.parse(JSON.stringify(path)));
+        console.log(edgeControlPoint);
+        edgeControlPoint.forEach((item) => {
+          group.addShape('circle', {
+            attrs: {
+              parent: mainId,
+              x: item.x,
+              y: item.y,
+              fill: '#29B6F2',
+              r: 4,
+              opacity: 1,
+              stroke: '#29B6F2',
+            },
+            name: 'circle-shape',
+          });
+        });
+        function _judgeLineDirection(p1 = {x: 0, y: 0}, p2 = {x: 0, y: 0}) {
+          const width = p2.x - p1.x;
+          const height = p2.y - p1.y;
+          console.log(`width=${width}`,`height=${height}`);
+          let direction = '';
+          if (width === 0 && height > 0) {
+            direction = 'down';
+          } else if (width === 0 && height < 0) {
+            direction = 'up';
+          } else if (height === 0 && width > 0) {
+            direction = 'right';
+          } else if (height === 0 && width < 0) {
+            direction = 'left';
+          } else if (width > 0 && height < 0) { // 第一象限
+            if (width >= Math.abs(height)) {
+              direction = 'right';
+            } else {
+              direction = 'up';
+            }
+          } else if (width < 0 && height < 0) { // 第二象限
+            if (Math.abs(width) >= Math.abs(height)) {
+              direction = 'left';
+            } else {
+              direction = 'up';
+            }
+          } else if (width < 0 && height > 0) { // 第三象限
+            if (width >= height) {
+              direction = 'left';
+            } else {
+              direction = 'down';
+            }
+          } else { // 第四象限
+            if (width >= Math.abs(height)) {
+              direction = 'right';
+            } else {
+              direction = 'down';
+            }
+          }
+          return direction;
+        }
+        function _getEdgeControlPoint(pathArray) { // 三个线段M->Q,Q->Q,Q->L
+          const list = [];
+          if (Array.isArray(pathArray)) {
+            pathArray.forEach((item) => {
+              item.shift();
+              while (item.length > 1) {
+                list.push([item.shift(), item.shift()]);
+              }
+            });
+          }
+          const lineArray = [];
+          let line = {
+            start: null,
+            end: null,
+          };
+          while (list.length) {
+            const xy = list.shift();
+            if (!line.start) {
+              line.start = {
+                x: xy[0],
+                y: xy[1],
+              };
+            } else if (!line.end) {
+              line.end = {
+                x: xy[0],
+                y: xy[1],
+              };
+            } else if (line.start.x === line.end.x && line.end.x === xy[0]) {
+              line.end.y =  xy[1];
+            } else if (line.start.y === line.end.y && line.end.y === xy[1]) {
+              line.end.x = xy[0];
+            } else {
+              lineArray.push(line);
+              line = {
+                start: lineArray[lineArray.length - 1].end,
+                end: {
+                  x: xy[0],
+                  y: xy[1],
+                },
+              };
+            }
+            if (!list.length) {
+              line.end = {
+                x: xy[0],
+                y: xy[1],
+              };
+              lineArray.push(line);
+            }
+          }
+          return lineArray.map(item => ({
+            x: item.start.x + (item.end.x - item.start.x)/2,
+            y: item.end.y + (item.end.y - item.start.y)/2,
+          }));
+        }
         return keyShape;
       },
       afterDraw(cfg, group) {

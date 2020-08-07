@@ -41,6 +41,8 @@ export default {
     init() {
       const height =  this.height - 42;
       const width =  this.width - 400;
+      console.log(height);
+      console.log(width);
       this.graph = new G6.Graph({
         container: 'graph-container',
         height: height,

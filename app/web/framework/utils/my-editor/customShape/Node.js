@@ -148,7 +148,9 @@ export default class CustomNode {
           shape.attr('fill', '#f3f9ff');
           shape.attr('stroke', '#6ab7ff');
           shape.attr('cursor', 'move');
+          console.log(children.length);
           children.forEach(child => {
+            console.log(1);
             child.attr('cursor', 'move');
           });
           circles.forEach(circle => {

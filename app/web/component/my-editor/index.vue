@@ -63,6 +63,7 @@ export default {
     this.initMode = this.mode;
     this.init();
     customShape();
+    console.log(document.documentElement.clientWidth);
   },
   methods: {
     init() {
