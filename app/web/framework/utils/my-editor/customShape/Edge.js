@@ -373,7 +373,7 @@ export default class Edge {
           }
           return lineArray.map(item => ({
             x: item.start.x + (item.end.x - item.start.x)/2,
-            y: item.end.y + (item.end.y - item.start.y)/2,
+            y: item.start.y + (item.end.y - item.start.y)/2,
           }));
         }
         return keyShape;
