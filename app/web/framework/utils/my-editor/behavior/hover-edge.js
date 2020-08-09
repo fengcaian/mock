@@ -28,7 +28,7 @@ export default {
     const { graph } = self;
     const group = item.getContainer();
     group.find(g => {
-      if (g.attrs.isInPoint || g.attrs.isOutPoint) {
+      if (g.attrs.isInAnchor || g.attrs.isOutAnchor || g.attrs.isBothWayAnchor) {
         g.attr('fill', '#fff');
       }
     });

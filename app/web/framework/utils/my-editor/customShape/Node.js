@@ -67,71 +67,78 @@ export default class CustomNode {
             }
           });
         }
-        if (cfg.inPoints) {
-          for (let i = 0; i < cfg.inPoints.length; i += 1) {
+        let { inPoints, outPoints } = cfg;
+        outPoints = JSON.parse(JSON.stringify(outPoints));
+        if (inPoints) {
+          for (let i = 0; i < inPoints.length; i += 1) {
             let x, y = 0;
             //0为顶 1为底
-            x = width * cfg.inPoints[i][1];
-            y = height * cfg.inPoints[i][0];
-            const id = 'circle' + uniqueId();
-            group.addShape('circle', {
-              attrs: {
-                id: 'circle' + uniqueId(),
-                parent: id,
-                x: x + offsetX,
-                y: y + offsetY,
-                r: 10,
-                isInPointOut: true,
-                fill: color,
-                opacity: 0
-              }
-            });
-            group.addShape('circle', {
-              attrs: {
-                id: id,
-                x: x + offsetX,
-                y: y + offsetY,
-                r: 3,
-                isInPoint: true,
-                fill: '#fff',
-                stroke: color,
-                opacity: 0
-              }
+            x = width * inPoints[i][1];
+            y = height * inPoints[i][0];
+            const samePosIndex = outPoints.findIndex(item => item[1] === inPoints[i][1] && item[0] === inPoints[i][0]);
+            if (samePosIndex !== -1) { // 存在in和out重合的情况,进出双向锚点
+              _drawAnchor(group,{
+                isBothWayAnchor: true,
+                x: width * inPoints[i][1] + offsetX,
+                y: height * inPoints[i][0] + offsetY,
+              }, {
+                isBothWayAnchorOut: true,
+                x: width * inPoints[i][1] + offsetX,
+                y: height * inPoints[i][0] + offsetY,
+              });
+              outPoints.splice(samePosIndex, 1);
+            } else { // 进锚点
+              _drawAnchor(group,{
+                isInAnchor: true,
+                x: width * inPoints[i][1] + offsetX,
+                y: height * inPoints[i][0] + offsetY,
+              }, {
+                isInAnchorOut: true,
+                x: width * inPoints[i][1] + offsetX,
+                y: height * inPoints[i][0] + offsetY,
+              });
+            }
+          }
+        }
+        if (outPoints) { // 出锚点
+          for (let i = 0; i < outPoints.length; i += 1) {
+            let x, y = 0;
+            // 0为顶 1为底
+            x = width * outPoints[i][1];
+            y = height * outPoints[i][0];
+            _drawAnchor(group, {
+              isOutAnchor: true,
+              x: width * outPoints[i][1] + offsetX,
+              y: height * outPoints[i][0] + offsetY,
+            }, {
+              isOutAnchorOut: true,
+              x: width * inPoints[i][1] + offsetX,
+              y: height * inPoints[i][0] + offsetY,
             });
           }
         }
-        if (cfg.outPoints) {
-          for (let i = 0; i < cfg.outPoints.length; i += 1) {
-            let x, y = 0;
-            // 0为顶 1为底
-            x = width * cfg.outPoints[i][1];
-            y = height * cfg.outPoints[i][0];
-            const id = 'circle' + uniqueId();
-            group.addShape('circle', {
-              attrs: {
-                id: 'circle' + uniqueId(),
-                parent: id,
-                x: x + offsetX,
-                y: y + offsetY,
-                r: 10,
-                isOutPointOut: true,
-                fill: color,
-                opacity: 0 //默認0 需要時改成0.3
-              }
-            });
-            group.addShape('circle', {
-              attrs: {
-                id: id,
-                x: x + offsetX,
-                y: y + offsetY,
-                r: 3,
-                isOutPoint: true,
-                fill: '#fff',
-                stroke: color,
-                opacity: 0
-              }
-            });
-          }
+        function _drawAnchor(group, _anchorAttrs, _anchorOutAttrs) {
+          const id = 'circle' + uniqueId();
+          group.addShape('circle', {
+            attrs: {
+              ..._anchorOutAttrs,
+              id: 'circle' + uniqueId(),
+              parent: id,
+              r: 10,
+              fill: color,
+              opacity: 0 //默認0 需要時改成0.3
+            }
+          });
+          group.addShape('circle', {
+            attrs: {
+              ..._anchorAttrs,
+              id: id,
+              r: 3,
+              fill: '#fff',
+              stroke: color,
+              opacity: 0
+            }
+          });
         }
         return shape;
       },
@@ -142,7 +149,7 @@ export default class CustomNode {
           return g.attrs.parent === shape.attrs.id;
         });
         const circles = group.findAll(circle => {
-          return circle.attrs.isInPoint || circle.attrs.isOutPoint;
+          return circle.attrs.isInAnchor || circle.attrs.isOutAnchor || circle.attrs.isBothWayAnchor;
         });
         const selectStyles = () => {
           shape.attr('fill', '#f3f9ff');

@@ -110,8 +110,8 @@ export default {
           color: '#1890ff',
           image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
           stateImage: okSvg,
-          inPoints: [[0, 0.5], [0.5, 0]],
-          outPoints: [[1, 0.5], [0.5, 1]],
+          inPoints: [[0, 0.5], [0.5, 0], [1, 0.5], [0.5, 1]],
+          outPoints: [[1, 0.5], [0.5, 1], [0, 0.5], [0.5, 0]],
           isDoingEnd: true
         }
       ],

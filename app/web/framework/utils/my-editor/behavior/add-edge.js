@@ -24,10 +24,10 @@ export default {
         const group = node.get('group');
         const { children } = group.cfg;
         children.map(child => {
-          if (child.attrs.isInPointOut) {
+          if (child.attrs.isInAnchorOut || child.attrs.isBothWayAnchorOut) {
             child.attr('opacity', '0.3');
           }
-          if (child.attrs.isInPoint) {
+          if (child.attrs.isInAnchor || child.attrs.isBothWayAnchor) {
             child.attr('opacity', '1');
           }
         });
@@ -60,19 +60,19 @@ export default {
     const { item } = e;
     if (item && item.getType() === 'node') {
       const group = item.getContainer();
-      if (e.target.attrs.isInPoint) {
+      if (e.target.attrs.isInAnchor || e.target.attrs.isBothWayAnchor) {
         const children = group.cfg.children;
         children.map(child => {
-          if (child.attrs.isInPointOut && child.attrs.parent === e.target.attrs.id) {
+          if ((child.attrs.isInAnchorOut || child.attrs.isBothWayAnchorOut) && child.attrs.parent === e.target.attrs.id) {
             activeItem = child;
           }
         });
         curInPoint = e.target;
-      } else if (e.target.attrs.isInPointOut) {
+      } else if (e.target.attrs.isInAnchorOut || e.target.attrs.isBothWayAnchorOut) {
         activeItem = e.target;
         const children = group.cfg.children;
         children.map(child => {
-          if (child.attrs.isInPoint && child.attrs.id === e.target.attrs.parent) {
+          if ((child.attrs.isInAnchor || child.attrs.isBothWayAnchor) && child.attrs.id === e.target.attrs.parent) {
             curInPoint = child;
           }
         });
@@ -120,13 +120,10 @@ export default {
       const group = node.get('group');
       const children = group.cfg.children;
       children.map(child => {
-        if (child.attrs.isInPointOut) {
+        if (child.attrs.isInAnchorOut || child.attrs.isInAnchor || child.attrs.isBothWayAnchorOut) {
           child.attr('opacity', '0');
         }
-        if (child.attrs.isInPoint) {
-          child.attr('opacity', '0');
-        }
-        if (child.attrs.isOutPoint) {
+        if (child.attrs.isOutAnchor || child.attrs.isBothWayAnchor) {
           child.attr('opacity', '0');
           child.attr('fill', '#fff');
         }
@@ -146,7 +143,7 @@ export default {
   onMouseOver(e) {
     const { item } = e;
     if (item && item.getType() === 'node') {
-      if (e.target.attrs.isInPointOut && !this.hasTran) {
+      if ((e.target.attrs.isOutAnchorOut || e.target.attrs.isBothWayAnchorOut) && !this.hasTran) {
         this.hasTran = true;
         let matrix = e.target.getMatrix();
         if (!matrix) {
@@ -166,7 +163,7 @@ export default {
       const group = node.get('group');
       const children = group.cfg.children;
       children.map(child => {
-        if (child.attrs.isInPointOut) {
+        if (child.attrs.isInAnchorOut || child.attrs.isBothWayAnchorOut) {
           child.resetMatrix();
         }
       })

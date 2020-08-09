@@ -11,12 +11,12 @@ export default {
     const item = e.item;
     const graph = self.graph;
     const group = item.getContainer();
-    if (e.target.attrs.isOutPointOut || e.target.attrs.isOutPoint) {
+    if (e.target.attrs.isOutAnchorOut || e.target.attrs.isOutAnchor || e.target.attrs.isBothWayAnchorOut || e.target.attrs.isBothWayAnchor) {
       group.find(g => {
-        if (g.attrs.isInPoint || g.attrs.isOutPoint) {
+        if (g.attrs.isInAnchor || g.attrs.isOutAnchor || g.attrs.isBothWayAnchor) {
           g.attr('fill', '#fff');
         }
-        if (g.attrs.isOutPoint) {
+        if (g.attrs.isOutAnchor || g.attrs.isBothWayAnchor) {
           if (g.attrs.id === e.target.attrs.parent) {
             group.find(gr => {
               if (gr.attrs.id === g.attrs.id) {
@@ -47,7 +47,7 @@ export default {
     const graph = self.graph;
     const group = item.getContainer();
     group.find(g => {
-      if (g.attrs.isInPoint || g.attrs.isOutPoint) {
+      if (g.attrs.isInAnchor || g.attrs.isOutAnchor || g.attrs.isBothWayAnchor) {
         g.attr('fill', '#fff');
       }
     });
@@ -57,7 +57,7 @@ export default {
     graph.paint();
   },
   onMouseDown(e) {
-    if (e.target.attrs.isOutPoint || e.target.attrs.isOutPointOut) {
+    if (e.target.attrs.isOutAnchorOut || e.target.attrs.isOutAnchor || e.target.attrs.isBothWayAnchorOut || e.target.attrs.isBothWayAnchor) {
       this.graph.setMode('addEdge');
     } else {
       console.log('in moveNode mode');
