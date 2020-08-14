@@ -7,6 +7,7 @@ let startItem = null;
 let endPoint = {};
 let activeItem = null;
 let curInPoint = null;
+let outAnchorAttr = null;
 
 export default {
   getEvents() {
@@ -32,6 +33,7 @@ export default {
           }
         });
       });
+      outAnchorAttr = e.target.attrs;
       const startX = parseInt(e.target.attrs.x);
       const startY = parseInt(e.target.attrs.y);
       startPoint = {x: startX, y: startY};
@@ -98,6 +100,10 @@ export default {
               end: endPoint,
               type: 'edge',
               shape: 'customEdge',
+              anchorAttr: {
+                inAnchor: curInPoint.attrs,
+                outAnchor: outAnchorAttr
+              },
               lineCircle: {
                 text: '0',
                 background: '#ffffff',

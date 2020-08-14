@@ -2,6 +2,7 @@ import G6 from '@antv/g6';
 import hoverNode from './hover-node';
 import addEdge from './add-edge';
 import dragItem from './drag-item';
+import dragEdge from './drag-edge';
 import selectNode from './select-node';
 import hoverEdge from './hover-edge';
 import keyboard from './keyboard';
@@ -12,6 +13,7 @@ const behaviors = {
   'hover-node': hoverNode,
   'add-edge': addEdge,
   'drag-item': dragItem,
+  'drag-edge': dragEdge,
   'select-node': selectNode,
   'hover-edge': hoverEdge,
   'keyboard':keyboard,

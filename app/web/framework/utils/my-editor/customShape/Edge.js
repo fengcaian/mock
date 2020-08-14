@@ -41,191 +41,23 @@ export default class Edge {
         } else {
           end = cfg.target;
         }
-        let path = [];
-        let hgap = Math.abs(end.x - start.x);
-        if (end.x > start.x) {
-          path = [
-            ['M', start.x, start.y],
-            [
-              'C',
-              start.x,
-              start.y + hgap / (hgap / 50),
-              end.x,
-              end.y - hgap / (hgap / 50),
-              end.x,
-              end.y - 4
-            ],
-            [
-              'L',
-              end.x,
-              end.y
-            ]
-          ];
-        } else {
-          path = [
-            ['M', start.x, start.y],
-            [
-              'C',
-              start.x,
-              start.y + hgap / (hgap / 50),
-              end.x,
-              end.y - hgap / (hgap / 50),
-              end.x,
-              end.y - 4
-            ],
-            [
-              'L',
-              end.x,
-              end.y
-            ]
-          ]
-        }
-        // path = [
-        //   ['M', start.x, start.y],
-        //   ['L', end.x / 3 + (2 / 3) * start.x, start.y], // 三分之一处
-        //   ['L', end.x / 3 + (2 / 3) * start.x, end.y], // 三分之二处
-        //   ['L', end.x, end.y],
-        // ];
+        const anchorAttr = cfg.anchorAttr;
+        let path = _calculatePath(anchorAttr, start, end);
         const direction = _judgeLineDirection(start, end);
-        const pathWidth = end.x - start.x;
-        const pathHeight = end.y - start.y;
         const radius = 5;
-        switch (direction) {
-          case 'left':
-            if (pathHeight > 0) {
-              path = path = [
-                ['M', start.x, start.y],
-                ['L', start.x + (pathWidth / 2) + radius, start.y],
-                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y + radius],
-                ['L', start.x + (pathWidth / 2), end.y - radius],
-                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) - radius, end.y],
-                ['L', end.x, end.y]
-              ];
-            } else if (pathHeight < 0) {
-              path = path = [
-                ['M', start.x, start.y],
-                ['L', start.x + (pathWidth / 2) + radius, start.y],
-                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y - radius],
-                ['L', start.x + (pathWidth / 2), end.y + radius],
-                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) - radius, end.y],
-                ['L', end.x, end.y]
-              ];
-            } else {
-              path = path = [
-                ['M', start.x, start.y],
-                ['L', end.x, end.y]
-              ];
-            }
-            break;
-          case 'right':
-            if (pathHeight > 0) {
-              path = [
-                ['M', start.x, start.y],
-                ['L', start.x + (pathWidth / 2) - radius, start.y],
-                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y + radius],
-                ['L', start.x + (pathWidth / 2), end.y - radius],
-                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) + radius, end.y],
-                ['L', end.x, end.y]
-              ];
-            } else if (pathHeight < 0) {
-              path = [
-                ['M', start.x, start.y],
-                ['L', start.x + (pathWidth / 2) - radius, start.y],
-                ['Q', start.x + (pathWidth / 2), start.y, start.x + (pathWidth / 2), start.y - radius],
-                ['L', start.x + (pathWidth / 2), end.y + radius],
-                ['Q', start.x + (pathWidth / 2), end.y, start.x + (pathWidth / 2) + radius, end.y],
-                ['L', end.x, end.y]
-              ];
-            } else {
-              path = path = [
-                ['M', start.x, start.y],
-                ['L', end.x, end.y]
-              ];
-            }
-            break;
-          case 'up':
-            if (pathWidth > 0) {
-              path = [
-                ['M', start.x, start.y],
-                ['L', start.x, start.y + (pathHeight / 2) + radius],
-                ['Q', start.x, start.y + (pathHeight / 2), start.x + radius, start.y + (pathHeight / 2)],
-                ['L', end.x - radius, start.y + (pathHeight / 2)],
-                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) - radius],
-                ['L', end.x, end.y]
-              ];
-            } else if (pathWidth < 0) {
-              path = [
-                ['M', start.x, start.y],
-                ['L', start.x, start.y + (pathHeight / 2) + radius],
-                ['Q', start.x, start.y + (pathHeight / 2), start.x - radius, start.y + (pathHeight / 2)],
-                ['L', end.x + radius, start.y + (pathHeight / 2)],
-                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) - radius],
-                ['L', end.x, end.y]
-              ];
-            } else {
-              path = path = [
-                ['M', start.x, start.y],
-                ['L', end.x, end.y]
-              ];
-            }
-            break;
-          case 'down':
-            if (pathWidth > 0) {
-              path = [
-                ['M', start.x, start.y],
-                ['L', start.x, start.y + (pathHeight / 2) -radius],
-                ['Q', start.x, start.y + (pathHeight / 2), start.x + radius, start.y + (pathHeight / 2)],
-                ['L', end.x - radius, start.y + (pathHeight / 2)],
-                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) + radius],
-                ['L', end.x, end.y]
-              ];
-            } else if (pathWidth < 0) {
-              path = [
-                ['M', start.x, start.y],
-                ['L', start.x, start.y + (pathHeight / 2) -radius],
-                ['Q', start.x, start.y + (pathHeight / 2), start.x - radius, start.y + (pathHeight / 2)],
-                ['L', end.x + radius, start.y + (pathHeight / 2)],
-                ['Q', end.x, start.y + (pathHeight / 2), end.x, start.y + (pathHeight / 2) + radius],
-                ['L', end.x, end.y]
-              ];
-            } else {
-              path = path = [
-                ['M', start.x, start.y],
-                ['L', end.x, end.y]
-              ];
-            }
-            break;
-        }
-        if (sourceNode.id === targetNode.id) { // 连接到自身
-          if (start.x > end.x && start.y > end.y && sourceNode.y < start.y) { // 底->左
-            path = [
-              ['M', start.x, start.y],
-              ['L', start.x, start.y + 15],
-              ['L', end.x - 15, start.y + 15],
-              ['L', end.x - 15, end.y],
-              ['L', end.x, end.y]
-            ];
-          }
-          if (start.x > end.x && start.y > end.y && sourceNode.y > end.y) { // 右->上
-            path = [
-              ['M', start.x, start.y],
-              ['L', start.x + 15, start.y],
-              ['L', start.x + 15, end.y - 15],
-              ['L', end.x, end.y - 15],
-              ['L', end.x, end.y]
-            ];
-          }
-        }
         let lineWidth = 1;
         lineWidth = lineWidth > MIN_ARROW_SIZE ? lineWidth : MIN_ARROW_SIZE;
         const width = lineWidth * 10 / 3;
         const halfHeight = lineWidth * 4 / 3;
         const endArrowPath = `M 0,0 L ${width},${halfHeight} L ${width},${-halfHeight} Z`;
         const mainId = 'edge' + uniqueId();
+        const { lineSegment, lineCenterPoint } = _getEdgeControlPoint(JSON.parse(JSON.stringify(path)));
         const keyShape = group.addShape('path', {
           attrs: {
             id: mainId,
             path: path,
+            lineSegment,
+            turningPoint: lineSegment,
             stroke: '#b8c3ce',
             lineAppendWidth: 10,
             endArrow: {
@@ -266,20 +98,20 @@ export default class Edge {
           }
         });
         console.log(path);
-        const edgeControlPoint = _getEdgeControlPoint(JSON.parse(JSON.stringify(path)));
-        console.log(edgeControlPoint);
-        edgeControlPoint.forEach((item) => {
+        console.log(lineCenterPoint);
+        lineCenterPoint.forEach((item) => {
           group.addShape('circle', {
             attrs: {
+              id: 'edgeControlPoint' + uniqueId(),
               parent: mainId,
               x: item.x,
               y: item.y,
               fill: '#29B6F2',
               r: 4,
-              opacity: 1,
+              opacity: 0,
               stroke: '#29B6F2',
             },
-            name: 'circle-shape',
+            name: 'edge-control-circle',
           });
         });
         function _judgeLineDirection(p1 = {x: 0, y: 0}, p2 = {x: 0, y: 0}) {
@@ -371,10 +203,105 @@ export default class Edge {
               lineArray.push(line);
             }
           }
-          return lineArray.map(item => ({
-            x: item.start.x + (item.end.x - item.start.x)/2,
-            y: item.start.y + (item.end.y - item.start.y)/2,
-          }));
+          return {
+            lineSegment: lineArray,
+            lineCenterPoint: lineArray.map(item => ({
+              x: item.start.x + (item.end.x - item.start.x)/2,
+              y: item.start.y + (item.end.y - item.start.y)/2,
+            }))
+          };
+        }
+        function _calculatePath(anchorAttr, startPoint, endPoint, extendLength = 20) {
+          let ds = anchorAttr.outAnchor.dOut[0]; // 起点方向
+          let de = anchorAttr.inAnchor.dIn[0]; // 终点方向
+          const dx = endPoint.x - startPoint.x > 0 ? 2 : -2; // 起始与终点之间连线在x轴的方向(right=2,left=-2)
+          const dy = endPoint.y - startPoint.y > 0 ? -1 : 1; // 起始与终点之间连线在y轴的方向(up=1,down=-1)
+          let path = [['M', startPoint.x, startPoint.y]];
+          let path2 = [['L', endPoint.x, endPoint.y]];
+          let newStartPoint = JSON.parse(JSON.stringify(startPoint));
+          let newEndPoint = JSON.parse(JSON.stringify(endPoint));
+          while (!(newStartPoint.x === newEndPoint.x && newStartPoint.y === newEndPoint.y)) {
+            if (de !== dx && de !== dy) { // 需要转向，同时更新newEndPoint坐标
+              if (Math.abs(de) === 1) { // y轴方向
+                newEndPoint.y += extendLength*(de > 0 ? 1 : -1);
+                de = dx;
+              } else { // x轴方向
+                newEndPoint.x += extendLength*(de > 0 ? -2 : 2)/2;
+                de = dy;
+              }
+              path2.unshift(['L', newEndPoint.x, newEndPoint.y]);
+            }
+            if (ds !== dx && ds !== dy) { // 需要转向，同时更新newStartPoint坐标
+              if (Math.abs(ds) === 1) { // y轴方向
+                newStartPoint.y += extendLength*(ds > 0 ? -1 : 1);
+                ds = dx;
+              } else { // x轴方向
+                newStartPoint.x += extendLength*(ds > 0 ? 2 : -2)/2;
+                ds = dy;
+              }
+              path.push(['L', newStartPoint.x, newStartPoint.y]);
+            } else {
+              if (_isParallel(ds, de)) { // 平行的需要转折两次
+                switch (ds) {
+                  case 1:
+                    newStartPoint.y = newStartPoint.y - Math.abs(newEndPoint.y - newStartPoint.y)/2;
+                    ds = dx;
+                    break;
+                  case 2:
+                    newStartPoint.x = newStartPoint.x + Math.abs(newEndPoint.x - newStartPoint.x)/2;
+                    ds = dy;
+                    break;
+                  case -1:
+                    newStartPoint.y = newStartPoint.y + Math.abs(newEndPoint.y - newStartPoint.y)/2;
+                    ds = dx;
+                    break;
+                  case -2:
+                    newStartPoint.x = newStartPoint.x - Math.abs(newEndPoint.x - newStartPoint.x)/2;
+                    ds = dy;
+                    break;
+                }
+                path.push(['L', newStartPoint.x, newStartPoint.y]);
+                switch (ds) {
+                  case 1:
+                    newStartPoint.y = newEndPoint.y;
+                    break;
+                  case 2:
+                    newStartPoint.x = newEndPoint.x;
+                    break;
+                  case -1:
+                    newStartPoint.y = newEndPoint.y;
+                    break;
+                  case -2:
+                    newStartPoint.x = newEndPoint.x;
+                    break;
+                }
+                path.push(['L', newStartPoint.x, newStartPoint.y]);
+                newStartPoint = newEndPoint;
+              } else { // 垂直的需要转折一次
+                switch (ds) {
+                  case 1:
+                    newStartPoint.y = newEndPoint.y;
+                    break;
+                  case 2:
+                    newStartPoint.x = newEndPoint.x;
+                    break;
+                  case -1:
+                    newStartPoint.y = newEndPoint.y;
+                    break;
+                  case -2:
+                    newStartPoint.x = newEndPoint.x;
+                    break;
+                }
+                path.push(['L', newStartPoint.x, newStartPoint.y]);
+                newStartPoint = newEndPoint;
+              }
+            }
+          }
+          path = path.concat(path2);
+          return path;
+        }
+        function _isParallel(d1, d2) { // 判断是否平行， params(方向): d1,d2;return:true(平行),false(垂直)
+          return Math.abs(d1) === Math.abs(d2);
         }
         return keyShape;
       },
@@ -406,11 +333,18 @@ export default class Edge {
       setState(name, value, item) {
         const group = item.getContainer();
         const shape = group.get('children')[0];
+        const edgeControlCircles = group.findAllByName('edge-control-circle');
         const selectStyles = () => {
           shape.attr('stroke', '#6ab7ff');
+          edgeControlCircles.forEach((circle) => {
+            circle.attr('opacity', 1);
+          });
         };
         const unSelectStyles = () => {
           shape.attr('stroke', '#b8c3ce');
+          edgeControlCircles.forEach((circle) => {
+            circle.attr('opacity', 0);
+          });
         };
         const showCircle = () => {
           shape.attr('opacity', 1);
@@ -418,6 +352,7 @@ export default class Edge {
 
         switch (name) {
           case 'selected':
+            break;
           case 'hover':
             if (value) {
               selectStyles();

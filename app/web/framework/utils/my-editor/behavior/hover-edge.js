@@ -7,6 +7,7 @@ export default {
       'edge:mouseover': 'onMouseOver',
       'edge:mouseleave': 'onMouseLeave',
       'edge:click': 'onClick',
+      'edge:mousedown': 'onMouseDown',
     };
   },
   onMouseOver(e) {
@@ -57,18 +58,25 @@ export default {
         }
       });
     }
-    if (item.hasState('selected')) {
-      if (self.shouldUpdate.call(self, e)) {
-        graph.setItemState(item, 'selected', false);
+    if (!e.target.attrs.id.startsWith('edgeControlPoint')) {
+      if (item.hasState('selected')) {
+        if (self.shouldUpdate.call(self, e)) {
+          graph.setItemState(item, 'selected', false);
+        }
+        eventBus.$emit('nodeSelectChange', { target: item, select: false });
+      } else {
+        if (self.shouldUpdate.call(self, e)) {
+          graph.setItemState(item, 'selected', true);
+        }
+        eventBus.$emit('nodeSelectChange', { target: item, select: true });
       }
-      eventBus.$emit('nodeSelectChange', { target: item, select: false });
-    } else {
-      if (self.shouldUpdate.call(self, e)) {
-        graph.setItemState(item, 'selected', true);
-      }
-      eventBus.$emit('nodeSelectChange', { target: item, select: true });
+      graph.setAutoPaint(autoPaint);
+      graph.paint();
     }
-    graph.setAutoPaint(autoPaint);
-    graph.paint();
+  },
+  onMouseDown(e) {
+    if (e.target.attrs.id.startsWith('edgeControlPoint')) {
+      this.graph.setMode('moveEdge');
+    }
   },
 }

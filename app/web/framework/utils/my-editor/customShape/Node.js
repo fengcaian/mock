@@ -73,29 +73,35 @@ export default class CustomNode {
           for (let i = 0; i < inPoints.length; i += 1) {
             let x, y = 0;
             //0为顶 1为底
-            x = width * inPoints[i][1];
-            y = height * inPoints[i][0];
+            x = width * inPoints[i][0];
+            y = height * inPoints[i][1];
             const samePosIndex = outPoints.findIndex(item => item[1] === inPoints[i][1] && item[0] === inPoints[i][0]);
             if (samePosIndex !== -1) { // 存在in和out重合的情况,进出双向锚点
               _drawAnchor(group,{
                 isBothWayAnchor: true,
-                x: width * inPoints[i][1] + offsetX,
-                y: height * inPoints[i][0] + offsetY,
+                x: width * inPoints[i][0] + offsetX,
+                y: height * inPoints[i][1] + offsetY,
+                dIn: _calculateAnchorDir('in', inPoints[i]),
+                dOut: _calculateAnchorDir('out', inPoints[i]),
               }, {
                 isBothWayAnchorOut: true,
-                x: width * inPoints[i][1] + offsetX,
-                y: height * inPoints[i][0] + offsetY,
+                x: width * inPoints[i][0] + offsetX,
+                y: height * inPoints[i][1] + offsetY,
+                dIn: _calculateAnchorDir('in', inPoints[i]),
+                dOut: _calculateAnchorDir('out', inPoints[i]),
               });
               outPoints.splice(samePosIndex, 1);
             } else { // 进锚点
               _drawAnchor(group,{
                 isInAnchor: true,
-                x: width * inPoints[i][1] + offsetX,
-                y: height * inPoints[i][0] + offsetY,
+                x: width * inPoints[i][0] + offsetX,
+                y: height * inPoints[i][1] + offsetY,
+                dIn: _calculateAnchorDir('in', inPoints[i]),
               }, {
                 isInAnchorOut: true,
-                x: width * inPoints[i][1] + offsetX,
-                y: height * inPoints[i][0] + offsetY,
+                x: width * inPoints[i][0] + offsetX,
+                y: height * inPoints[i][1] + offsetY,
+                dIn: _calculateAnchorDir('in', inPoints[i]),
               });
             }
           }
@@ -104,30 +110,34 @@ export default class CustomNode {
           for (let i = 0; i < outPoints.length; i += 1) {
             let x, y = 0;
             // 0为顶 1为底
-            x = width * outPoints[i][1];
-            y = height * outPoints[i][0];
+            x = width * outPoints[i][0];
+            y = height * outPoints[i][1];
             _drawAnchor(group, {
               isOutAnchor: true,
-              x: width * outPoints[i][1] + offsetX,
-              y: height * outPoints[i][0] + offsetY,
+              x: width * outPoints[i][0] + offsetX,
+              y: height * outPoints[i][1] + offsetY,
+              dOut: _calculateAnchorDir('out', inPoints[i]),
             }, {
               isOutAnchorOut: true,
-              x: width * inPoints[i][1] + offsetX,
-              y: height * inPoints[i][0] + offsetY,
+              x: width * inPoints[i][0] + offsetX,
+              y: height * inPoints[i][1] + offsetY,
+              dOut: _calculateAnchorDir('out', inPoints[i]),
             });
           }
         }
         function _drawAnchor(group, _anchorAttrs, _anchorOutAttrs) {
-          const id = 'circle' + uniqueId();
+          const id = 'small-anchor-' + uniqueId();
+          console.log(id);
           group.addShape('circle', {
             attrs: {
               ..._anchorOutAttrs,
-              id: 'circle' + uniqueId(),
+              id: 'big-anchor-' + uniqueId(),
               parent: id,
               r: 10,
               fill: color,
               opacity: 0 //默認0 需要時改成0.3
-            }
+            },
+            name: 'big-anchor'
           });
           group.addShape('circle', {
             attrs: {
@@ -137,8 +147,37 @@ export default class CustomNode {
               fill: '#fff',
               stroke: color,
               opacity: 0
-            }
+            },
+            name: 'small-anchor'
           });
+        }
+        function _calculateAnchorDir(type, point) { // 计算接入接出点的方向；params: 接入/接出,点坐标
+          // 预定义：up,right,down,left分别为up=1，right=2，down=-1，left=-2以方便计算
+          if ((point[0] + point[1]) % 1 === 0) {// 判断是否是在顶点上
+            if (point[0] === 0 && point[1] === 0) {
+              return type === 'in' ? [2, -1] : [-2, 1];
+            } else if (point[0] === 1 && point[1] === 1) {
+              return type === 'in' ? [-2, 1] : [2, -1];
+            } else if (point[0] === 0 && point[1] === 1) {
+              return type === 'in' ? [2, 1] : [-2, -1];
+            } else if (point[0] === 1 && point[1] === 0) {
+              return type === 'in' ? [-2, -1] : [2, 1];
+            } else {
+              return [1, 2, -1, -2];
+            }
+          } else { // 判断是在棱上
+            if (point[0] === 0) { // 左棱
+              return type === 'in' ? [2] : [-2];
+            } else if (point[0] === 1) { // 右棱
+              return type === 'in' ? [-2] : [2];
+            } else if (point[1] === 0) { // 上棱
+              return type === 'in' ? [-1] : [1];
+            } else if (point[1] === 1) { // 下棱
+              return type === 'in' ? [1] : [-1];
+            } else {
+              return [1, 2, -1, -2];
+            }
+          }
         }
         return shape;
       },

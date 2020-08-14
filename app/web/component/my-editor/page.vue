@@ -61,7 +61,8 @@ export default {
           ],
           multiSelect: ['multi-select'],
           addEdge: ['add-edge'],
-          moveNode:[ 'drag-item']
+          moveNode:[ 'drag-item'],
+          moveEdge:[ 'drag-edge']
         },
         // renderer: 'svg'
       });
