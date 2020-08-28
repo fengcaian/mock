@@ -9,7 +9,10 @@ module.exports = app => {
       createTime: {
         type: String,
       },
-      data: {},
+      combos: [],
+      groups: [],
+      nodes: [],
+      edges: [],
     });
     return mongoose.model('Flow', flowSchema);
 };

@@ -2,7 +2,7 @@
   <div id="mountNode" :style="{width: width}">
     <div class="editor">
       <context-menu></context-menu>
-      <toolbar @editorModeChange="editorModeChange"></toolbar>
+      <toolbar @editorModeChange="editorModeChange" @saveG6GraphData="saveG6GraphData"></toolbar>
       <div style="height: 42px;"></div>
       <div class="bottom-container">
         <item-panel v-if="initMode === 'edit'"></item-panel>
@@ -72,6 +72,9 @@ export default {
     },
     editorModeChange(obj) {
       this.initMode = obj.mode;
+    },
+    saveG6GraphData(data) {
+      this.$emit('saveG6GraphData', data);
     },
   },
 };

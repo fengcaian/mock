@@ -1,26 +1,31 @@
-'use strict'
+'use strict';
 
 const egg = require('egg');
 const Response = require('../util/Response');
 
 module.exports = class FlowManageController extends egg.Controller {
-  async flowList(ctx) {
+  async getList(ctx) {
     try {
-      const result = await ctx.service.url.getUrlAllList(ctx.request.body);
-      if (Array.isArray(result)) {
-        this.ctx.body = new Response(200, null, result);
-      } else {
-        this.ctx.body = new Response(402, result, null);
-      }
+      const result = await ctx.service.flow.getFlowList(ctx.query);
+      this.ctx.body = new Response(200, null, result.dataList, result.totalRow, ctx.query.pageSize, ctx.query.currentPage);
     } catch (e) {
       ctx.logger.error(e);
     }
   }
-  async flowSave(ctx) {
+  async save(ctx) {
     try {
-      const result = await ctx.service.flow.folwSave(ctx.request.body);
+      const result = await ctx.service.flow.save(ctx.request.body);
+      this.ctx.body = new Response(200, null, result);
     } catch (e) {
       ctx.logger.error(e);
     }
   }
-}
+  async getFlow(ctx) {
+    try{
+      const result = await ctx.service.flow.getFlow(ctx.query);
+      this.ctx.body = new Response(200, null, result);
+    } catch (e) {
+      ctx.logger.error(e);
+    }
+  }
+};

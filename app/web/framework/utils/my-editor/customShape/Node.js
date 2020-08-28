@@ -181,6 +181,10 @@ export default class CustomNode {
         }
         return shape;
       },
+      afterDraw(cfg, group) {
+        console.log(3355);
+        console.log(cfg);
+      },
       setState(name, value, item) {
         const group = item.getContainer();
         const shape = group.get('children')[0]; // 顺序根据 draw 时确定

@@ -46,7 +46,7 @@ module.exports = class UrlResponseService extends egg.Service {
     const result = await Promise.all([
       this.ctx.model.UrlResponse.count(queryParams),
       this.ctx.model.UrlResponse
-        .find(queryParams)
+        .find({_id: query._id})
         .sort({ id: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
         .limit(Number(query.pageSize)),

@@ -4,12 +4,18 @@
       <div v-if="status === 'node-selected'" class="panel">
         <div class="panel-title">节点详情</div>
         <div class="block-container">
-          <el-form size="mini" label-position="right" label-width="75px" :model="node">
+          <el-form size="mini" label-position="right" label-width="75px" :model="nodeModelForm">
             <el-form-item label="名称">
-              <el-input size="mini" class="width-100" v-model="node.label" @change="handleChangeName('node')"></el-input>
+              <el-input size="mini" class="width-100" v-model="nodeModelForm.label" @change="handleChangeName('node')"></el-input>
             </el-form-item>
             <el-form-item label="核查链ID">
-              <el-input size="mini" class="width-100" v-model="node.checkId"></el-input>
+              <el-input size="mini" class="width-100" v-model="nodeModelForm.checkId" @change="handleChangeName('node')"></el-input>
+            </el-form-item>
+            <el-form-item label="宽">
+              <el-input-number size="mini" class="width-100" :min="20" :max="200" v-model="nodeModelForm.width" label="宽" @change="handleChangeName('node')"></el-input-number>
+            </el-form-item>
+            <el-form-item label="高">
+              <el-input-number size="mini" class="width-100" :min="20" :max="200" v-model="nodeModelForm.height" label="高" @change="handleChangeName('node')"></el-input-number>
             </el-form-item>
           </el-form>
         </div>
@@ -33,18 +39,11 @@
           </el-form>
         </div>
       </div>
-      <div v-if="status === 'canvas-selected'" class="panel">
-        <div class="panel-title">画布</div>
-        <div class="block-container">
-          <el-checkbox v-model="showGrid" @change="changeGridState">网格对齐</el-checkbox>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Grid } from '@antv/g6';
 import eventBus from './../../framework/utils/common/eventBus';
 
 export default {
@@ -53,10 +52,13 @@ export default {
       status: 'canvas-selected',
       showGrid: false,
       item: {},
-      node: {
+      nodeModelForm: {
         label: '',
-        checkId: ''
+        checkId: '',
+        width: '',
+        height: '',
       },
+      nodeModel: null,
       edge: {
         lineCircle: {
           isShow: true,
@@ -109,7 +111,14 @@ export default {
         if (item.select === true && item.target.getType() === 'node') {
           self.status = 'node-selected';
           self.item = item.target;
-          self.node = item.target.getModel();
+          self.nodeModel = item.target.getModel();
+          self.nodeModelForm = {
+            label: self.nodeModel.label,
+            checkId: self.nodeModel.checkId,
+            width: self.nodeModel.size[0],
+            height: self.nodeModel.size[1],
+          };
+          console.log(self.nodeModelForm);
         } else if (item.select === true && item.target.getType() === 'edge') {
           self.status = 'edge-selected';
           self.item = item.target;
@@ -117,7 +126,8 @@ export default {
         } else {
           self.status = 'canvas-selected';
           self.item = null;
-          self.node = null;
+          self.nodeModel = null;
+          self.nodeModelForm = null;
           self.edge = null;
         }
       });
@@ -125,21 +135,25 @@ export default {
     handleChangeName(type) {
       let model = {};
       if (type === 'node') {
-        model = this.node;
+        model = JSON.parse(JSON.stringify(this.nodeModel));
+        model.label = this.nodeModelForm.label;
+        model.checkId = this.nodeModelForm.checkId;
+        const size = [];
+        size[0] = this.nodeModelForm.width || model.size[0];
+        size[1] = this.nodeModelForm.height || model.size[1];
+        model.size = size;
       }
       if (type === 'edge') {
         model = this.edge;
       }
+      console.log(this.item._cfg.edges);
+      this.item._cfg.edges.forEach((edge) => {
+        const model = edge.getModel();
+        console.log(model);
+      });
       this.graph.update(this.item, model);
     },
-    changeGridState(value) {
-      if (value) {
-        this.grid = new Grid();
-        this.graph.addPlugin(this.grid);
-      } else {
-        this.graph.removePlugin(this.grid);
-      }
-    }
+    calculateEdge() {},
   },
 }
 </script>

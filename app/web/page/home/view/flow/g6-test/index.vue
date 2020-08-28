@@ -1,11 +1,12 @@
 <template>
   <div>
-    <editor></editor>
+    <editor @saveG6GraphData="saveG6GraphData"></editor>
   </div>
 </template>
 
 <script>
 import G6 from '@antv/g6';
+import request from '@/app/web/framework/network/request';
 import editor from './../../../.././../component/my-editor';
 
 export default {
@@ -227,7 +228,17 @@ export default {
           });
         }
       });
-    }
+    },
+    saveG6GraphData(data) {
+      console.log(data);
+      request.post('/mock/api/flow/g6/save', data)
+        .then((res) => {
+          this.$message({
+            message: res.msg || '保存成功！',
+            type: 'success',
+          });
+        });
+    },
   },
 }
 </script>

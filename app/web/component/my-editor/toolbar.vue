@@ -84,10 +84,12 @@
     <el-button size="mini" @click="consoleData" type="primary">控制台输出数据</el-button>
     <el-button size="mini" @click="outOfEditModel" type="primary">退出编辑模式</el-button>
     <el-button size="mini" @click="inOfEditModel" type="primary">进入编辑模式</el-button>
+    <el-button size="mini" @click="saveGraph" type="primary">保存</el-button>
   </div>
 </template>
 
 <script>
+import { Grid } from '@antv/g6';
 import Util from '@antv/g6/es/util';
 import eventBus from './../../framework/utils/common/eventBus';
 import { uniqueId, getBox } from './../../framework/utils/common';
@@ -97,6 +99,7 @@ export default {
     return {
       page: {},
       graph: {},
+      grid: null,
       redoList: [],
       undoList: [],
       editor: null,
@@ -112,6 +115,7 @@ export default {
     }
   },
   created() {
+    this.grid = new Grid();
     this.init();
     this.bindEvent();
   },
@@ -294,13 +298,18 @@ export default {
     },
     outOfEditModel() {
       this.graph.setMode('default');
+      this.graph.removePlugin(this.grid);
       console.log('outOfEditModel = ' + this.graph.getCurrentMode());
       this.$emit('editorModeChange', { mode: 'default' });
     },
     inOfEditModel() {
       this.graph.setMode('edit');
+      this.graph.addPlugin(this.grid);
       console.log('inOfEditModel = ' + this.graph.getCurrentMode());
       this.$emit('editorModeChange', { mode: 'edit' });
+    },
+    saveGraph() {
+      this.$emit('saveG6GraphData', this.graph.save());
     },
   },
 };

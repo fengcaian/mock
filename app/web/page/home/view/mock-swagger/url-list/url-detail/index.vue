@@ -135,6 +135,7 @@ export default {
         system: '',
         url: '',
         type: '',
+        _id: '',
       },
       dataList: [],
       batchSelectArray: [],
@@ -154,6 +155,7 @@ export default {
     this.searchParam.system = this.urlObject.host;
     this.searchParam.url = this.urlObject.url;
     this.searchParam.type = this.urlObject.type;
+    this.searchParam._id = this.$route.query._id;
     console.log(this.urlObject);
     this.getDataList();
   },
