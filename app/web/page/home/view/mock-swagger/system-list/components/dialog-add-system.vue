@@ -25,6 +25,9 @@
       <el-form-item label="ip地址">
         <ip-address-input :value="form.ipAddress" :inline="true" @ipAddressInputCb="ipAddressInputCb"></ip-address-input>
       </el-form-item>
+      <el-form-item label="端口" prop="port">
+        <el-input class="width-200" v-model="form.port"></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button size="mini" @click="close">取 消</el-button>
@@ -52,6 +55,7 @@ export default {
         systemApi: '/v2/api-docs',
         isEnabled: false,
         ipAddress: '',
+        port: '443',
       },
       rules: {
         systemName: [
@@ -59,6 +63,10 @@ export default {
         ],
         systemUrl: [
           { required: true, message: '请填写系统url', trigger: 'blur' },
+        ],
+        port: [
+          { required: false, message: '请填写端口', trigger: 'blur' },
+          { pattern: /^\d{1,4}$/, message: '只能输入1-4位数字', trigger: 'blur' }
         ],
       },
     };
@@ -77,6 +85,7 @@ export default {
             systemName: this.form.systemName,
             systemUrl: this.form.systemUrl,
             systemApi: this.form.systemApi,
+            port: this.form.port,
             isEnabled: false,
             ipAddressList: [{ label: 'IP地址1', value: this.form.ipAddress }],
           };

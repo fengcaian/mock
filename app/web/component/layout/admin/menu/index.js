@@ -69,6 +69,11 @@ const menu = {
         name: 'menu.g6List',
         icon: 'el-icon-edit-outline',
         path: '/mock/flow/g6-list',
+      },
+      {
+        name: 'menu.x6Editor',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/flow/x6-editor',
       }
     ],
   },

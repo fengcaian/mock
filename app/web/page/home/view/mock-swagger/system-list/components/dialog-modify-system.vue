@@ -25,6 +25,9 @@
       <el-form-item label="ip地址">
         <ip-address-input :value="form.ipAddress" :inline="true" @ipAddressInputCb="ipAddressInputCb"></ip-address-input>
       </el-form-item>
+      <el-form-item label="端口" prop="port">
+        <el-input class="width-200" v-model="form.port"></el-input>
+      </el-form-item>
       <el-form-item label="是否应用到url">
         <el-radio-group v-model="form.isUpdateUrlIp">
           <el-radio :label="true">是</el-radio>
@@ -60,6 +63,7 @@ export default {
         systemApi: '',
         isEnabled: false,
         ipAddress: '',
+        port: '',
         isUpdateUrlIp: false,
       },
       rules: {
@@ -72,6 +76,10 @@ export default {
         systemApi: [
           { required: true, message: '请填写系统api', trigger: 'blur' },
         ],
+        port: [
+          { required: false, message: '请填写端口', trigger: 'blur' },
+          { pattern: /^\d{1,4}$/, message: '只能输入1-4位数字', trigger: 'blur' }
+        ],
       },
     };
   },
@@ -81,6 +89,7 @@ export default {
     this.form.systemUrl = this.system.systemUrl;
     this.form.systemApi = this.system.systemApi;
     this.form.isEnabled = this.system.isEnabled;
+    this.form.port = this.system.port;
     this.form.ipAddress = this.system.ipAddressList.length ? this.system.ipAddressList[0].value : '';
     this.dialogShow = this.modifySystemDialogVisible;
   },
@@ -104,6 +113,7 @@ export default {
             systemName: this.form.systemName,
             systemUrl: this.form.systemUrl,
             systemApi: this.form.systemApi,
+            port: this.form.port,
             isEnabled: false,
             isUpdateUrlIp: this.form.isUpdateUrlIp,
             ipAddressList: [{ label: 'IP地址1', value: this.form.ipAddress }],

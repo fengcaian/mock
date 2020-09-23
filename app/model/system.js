@@ -16,6 +16,9 @@ module.exports = app => {
       type: Boolean,
     },
     ipAddressList: [],
+    port: {
+      type: String,
+    },
   });
   return mongoose.model('System', SystemSchema);
 };

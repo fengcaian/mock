@@ -1,7 +1,7 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.client);
-  router.get('/server', app.controller.home.server);
+  // router.get('/server', app.controller.home.server);
   router.post('/mock/api/url/swagger', controller.urlManage.swaggerUrlList);
   router.post('/mock/api/url/delete', controller.urlManage.delete);
   router.post('/mock/api/url/update', controller.urlManage.update);

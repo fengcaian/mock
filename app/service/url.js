@@ -19,12 +19,13 @@ module.exports = class UrlService extends egg.Service {
       port = portList[0];
     }
     // const result = await Promise.all([this.ctx.doCurl(`${protocol}://${ip}${port ? `:${port}` : ''}${body.systemApi}`, { method: 'GET' })]);
-    const result = await Promise.all([this.ctx.doCurl(`${body.systemUrl}${body.systemApi}`, { method: 'GET' })]);
+    const result = await Promise.all([this.ctx.doCurl(`${protocol}://${ip}${port ? `:${port}` : ''}${body.systemApi}`, { method: 'GET' })]);
     if (!result.length) {
       return;
     }
     console.log(`${body.systemUrl}${body.systemApi}`);
     console.log(`${protocol}://${ip}${body.systemApi}`);
+    console.log(body.port);
     console.log(result);
     const dataList = [];
     if (!result[0].data) {

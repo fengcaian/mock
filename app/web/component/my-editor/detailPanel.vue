@@ -151,9 +151,10 @@ export default {
         const model = edge.getModel();
         console.log(model);
       });
-      this.graph.update(this.item, model);
+      this.graph.update(this.item, model, () => {
+        console.log('i am update');
+      });
     },
-    calculateEdge() {},
   },
 }
 </script>

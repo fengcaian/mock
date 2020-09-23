@@ -17,6 +17,7 @@ import G6 from '../view/flow/g6';
 import G6Test from '../view/flow/g6-test';
 import G6List from '../view/flow/g6-list';
 import FlowEdit from '../view/flow/g6-list/flow-edit';
+import X6Editor from '../view/flow/x6-editor';
 
 Vue.use(VueRouter);
 
@@ -103,6 +104,11 @@ export default function createRouter() { // 所有前端路由必须以mock开�
         path: '/mock/flow/flow-edit',
         meta: { title: 'flow-edit' },
         component: FlowEdit,
+      },
+      {
+        path: '/mock/flow/x6-editor',
+        meta: { title: 'x6-editor' },
+        component: X6Editor,
       },
     ]
   });

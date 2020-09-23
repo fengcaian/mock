@@ -85,6 +85,7 @@
     <el-button size="mini" @click="outOfEditModel" type="primary">退出编辑模式</el-button>
     <el-button size="mini" @click="inOfEditModel" type="primary">进入编辑模式</el-button>
     <el-button size="mini" @click="saveGraph" type="primary">保存</el-button>
+    <el-button size="mini" @click="getData" type="primary">getData</el-button>
   </div>
 </template>
 
@@ -311,6 +312,9 @@ export default {
     saveGraph() {
       this.$emit('saveG6GraphData', this.graph.save());
     },
+    getData() {
+      window.g6Data = this.graph.save();
+    }
   },
 };
 </script>
