@@ -27,80 +27,8 @@ export default {
       offsetY: 0,
       list: [
         {
-          name: '测试节点',
-          label: '测试节点',
-          size: '170*34',
-          type: 'node',
-          shape: 'customNode',
-          x: 0,
-          y: 0,
-          color: '#1890ff',
-          image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
-          stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]]
-        },
-        {
-          name: '背景图片节点',
-          label: '背景图片节点',
-          size: '170*34',
-          type: 'node',
-          shape: 'customNode',
-          x: 0,
-          y: 0,
-          color: '#1890ff',
-          image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
-          stateImage: okSvg,
-          backImage: bgImg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]]
-        },
-        {
-          name: '双输出节点',
-          label: '双输出节点',
-          size: '170*34',
-          type: 'node',
-          shape: 'customNode',
-          x: 0,
-          y: 0,
-          color: '#1890ff',
-          image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
-          stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.4], [1, 0.6]]
-        },
-        {
-          name: '大型节点',
-          label: '大型节点',
-          size: '340*34',
-          type: 'node',
-          shape: 'customNode',
-          x: 0,
-          y: 0,
-          color: '#1890ff',
-          image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
-          stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]]
-        },
-        {
-          name: '动画开始节点',
-          label: '动画开始',
-          size: '170*34',
-          type: 'node',
-          shape: 'customNode',
-          x: 0,
-          y: 0,
-          color: '#1890ff',
-          image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
-          stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]],
-          isDoingStart: true
-        },
-        {
-          name: '动画结束节点',
-          label: '动画结束',
+          name: '节点名称',
+          label: '节点名称',
           innerCycleLabel: '1',
           size: '94*75',
           type: 'node',
@@ -128,7 +56,7 @@ export default {
   created() {
     this.bindEvent();
   },
-  destroyed() {
+  beforeDestroy() {
     eventBus.$off('afterAddPage');
   },
   methods: {
@@ -152,6 +80,7 @@ export default {
     bindEvent() {
       const self = this;
       eventBus.$on('afterAddPage', page => {
+        console.log('i am item,afterAddPage');
         self.page = page;
         self.command = page.command;
       });

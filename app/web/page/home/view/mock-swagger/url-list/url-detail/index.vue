@@ -156,7 +156,6 @@ export default {
     this.searchParam.url = this.urlObject.url;
     this.searchParam.type = this.urlObject.type;
     this.searchParam._id = this.$route.query._id;
-    console.log(this.urlObject);
     this.getDataList();
   },
   methods: {
@@ -193,7 +192,6 @@ export default {
     generateMockData() {
       request.post('/mock/api/url/mock/data', { _id: this.$route.query._id, url: this.$store.state.shareData.url })
         .then((res) => {
-          console.log(res);
           this.getDataList();
         });
     },
@@ -230,7 +228,6 @@ export default {
     },
     showDetail(row) {
       this.urlResponseData = row;
-      console.log(row);
       this.isShowUrlResponseDetailDialog = true;
     },
     urlResponseDetailDialogCb() {

@@ -148,7 +148,9 @@ export default {
     }
     this.isDrag = false;
     this.nodeEvent = null;
-    this.graph.setMode('default');
+    console.log('drag-node-end');
+    console.log(this.graph.getCurrentMode());
+    this.graph.setMode('edit');
   },
   // 若在拖拽时，鼠标移出画布区域，此时放开鼠标无法终止 drag 行为。在画布外监听 mouseup 事件，放开则终止
   onOutOfRange(e) {

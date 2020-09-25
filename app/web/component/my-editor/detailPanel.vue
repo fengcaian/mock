@@ -96,7 +96,7 @@ export default {
   created() {
     this.bindEvent();
   },
-  destroyed() {
+  beforeDestroy() {
     eventBus.$off('afterAddPage');
     eventBus.$off('nodeSelectChange');
   },
@@ -104,6 +104,7 @@ export default {
     bindEvent() {
       let self = this;
       eventBus.$on('afterAddPage', page => {
+        console.log('i am detailPanel,afterAddPage');
         self.page = page;
         self.graph = self.page.graph;
       });
@@ -146,11 +147,6 @@ export default {
       if (type === 'edge') {
         model = this.edge;
       }
-      console.log(this.item._cfg.edges);
-      this.item._cfg.edges.forEach((edge) => {
-        const model = edge.getModel();
-        console.log(model);
-      });
       this.graph.update(this.item, model, () => {
         console.log('i am update');
       });

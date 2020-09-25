@@ -9,6 +9,9 @@ module.exports = app => {
     url: {
       type: String,
     },
+    urlId: {
+      type: String,
+    },
     type: {
       type: String,
     },

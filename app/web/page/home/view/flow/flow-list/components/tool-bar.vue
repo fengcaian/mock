@@ -56,14 +56,10 @@ export default {
       this.$emit('graphSelect', type);
     },
     dragStart(e, type) {
-      console.log(33);
-      e.dataTransfer.setData("Text", e.target.id);
+      e.dataTransfer.setData('Text', e.target.id);
       this.$emit('dragStart', type);
     },
     mouseDown(e, type) {
-      console.log(e.target);
-      console.log(e.currentTarget);
-      console.log(type);
       this.currentTarget = e.currentTarget;
       this.$emit('mouseDown', this.currentTarget.cloneNode(true), type);
     },

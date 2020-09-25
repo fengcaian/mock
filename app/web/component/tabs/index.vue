@@ -43,8 +43,6 @@ export default {
     if (this.tabs.length) {
       this.active_tab = this.tabs[0].label;
     }
-    console.log(this.activeTabStyle);
-    console.log(this.tabScrollStyle);
   },
   methods: {
     customerActiveTabStyle(t) {

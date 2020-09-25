@@ -26,13 +26,14 @@ export default {
   created() {
     this.bindEvent();
   },
-  destroyed() {
+  beforeDestroy() {
     eventBus.$off('afterAddPage');
   },
   methods: {
     bindEvent() {
       const self = this;
       eventBus.$on('afterAddPage', page => {
+        console.log('i am itemPanel,afterAddPage');
         self.page = page;
       });
     },

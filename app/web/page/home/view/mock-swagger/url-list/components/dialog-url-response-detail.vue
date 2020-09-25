@@ -4,9 +4,7 @@
         width="500px"
         :visible.sync="dialogShow"
         :before-close="close">
-        <pre v-high-light class="wrap">
-          <code class="json" spellcheck="false">{{response}}</code>
-        </pre>
+        <pre v-high-light class="wrap"><code class="json" spellcheck="false">{{response}}</code></pre>
     </el-dialog>
 </template>
 
@@ -20,7 +18,6 @@ export default {
     };
   },
   created() {
-    console.log(this.urlResponseData.response);
     this.dialogShow = this.urlResponseDetailDialogVisible;
     this.response = this.urlResponseData.response;
   },

@@ -8,6 +8,7 @@ import hoverEdge from './hover-edge';
 import keyboard from './keyboard';
 import multiSelect from './multi-select';
 import addMenu from './add-menu';
+import clickNode from './click-node';
 
 const behaviors = {
   'hover-node': hoverNode,
@@ -19,6 +20,7 @@ const behaviors = {
   'keyboard':keyboard,
   'multi-select': multiSelect,
   'add-menu': addMenu,
+  'click-node': clickNode,
 };
 
 export function initBehaviors() {

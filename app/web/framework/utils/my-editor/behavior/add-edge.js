@@ -144,7 +144,7 @@ export default {
     endPoint = {};
     activeItem = null;
     curInPoint = null;
-    this.graph.setMode('default');
+    this.graph.setMode('edit');
   },
   onMouseOver(e) {
     const { item } = e;

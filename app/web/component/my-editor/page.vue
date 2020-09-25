@@ -41,8 +41,6 @@ export default {
     init() {
       const height =  this.height - 42;
       const width =  this.width - 400;
-      console.log(height);
-      console.log(width);
       this.graph = new G6.Graph({
         container: 'graph-container',
         height: height,
@@ -52,9 +50,7 @@ export default {
           default: [
             'drag-canvas',
             'zoom-canvas',
-            'hover-node',
-            'select-node',
-            'hover-edge',
+            'click-node',
             'keyboard',
             'customer-events',
             'add-menu'
@@ -62,14 +58,14 @@ export default {
           multiSelect: ['multi-select'],
           addEdge: ['add-edge'],
           moveNode:[ 'drag-item'],
-          moveEdge:[ 'drag-edge']
+          moveEdge:[ 'drag-edge'],
+          edit: ['hover-node', 'select-node', 'hover-edge', 'select-edge'],
         },
         // renderer: 'svg'
       });
       const { editor, command } = this.$parent;
       editor.emit('afterAddPage', { graph: this.graph, command });
       this.$store.dispatch('SetG6Editor', { graph: this.graph, command });
-
       this.readData();
     },
     readData() {

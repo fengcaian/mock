@@ -24,7 +24,7 @@ export default {
       this.initMiniMap();
     });
   },
-  destroyed() {
+  beforeDestroy() {
     eventBus.$off('afterAddPage');
   },
   methods: {
@@ -37,6 +37,7 @@ export default {
     bindEvent() {
       const self = this;
       eventBus.$on('afterAddPage', page => {
+        console.log('i am minimap,afterAddPage');
         self.graph = page.graph;
         self.bindPage();
       });

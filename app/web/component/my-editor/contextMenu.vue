@@ -24,7 +24,8 @@ export default {
   mounted() {
     this.bindEvent();
   },
-  destroyed() {
+  beforeDestroy() {
+    console.log('contextmenu is destroyed');
     eventBus.$off('contextmenuClick');
     eventBus.$off('mousedown');
   },

@@ -86,6 +86,11 @@
     <el-button size="mini" @click="inOfEditModel" type="primary">进入编辑模式</el-button>
     <el-button size="mini" @click="saveGraph" type="primary">保存</el-button>
     <el-button size="mini" @click="getData" type="primary">getData</el-button>
+    <dialog-node-detail
+      v-if="isShowNodeDetailDialog"
+      :nodeDetailDialogVisible="isShowNodeDetailDialog"
+      @dialogNodeDetailCb="dialogNodeDetailCb">
+    </dialog-node-detail>
   </div>
 </template>
 
@@ -95,7 +100,12 @@ import Util from '@antv/g6/es/util';
 import eventBus from './../../framework/utils/common/eventBus';
 import { uniqueId, getBox } from './../../framework/utils/common';
 
+import dialogNodeDetail from './cpmponents/dialog-node-detail';
+
 export default {
+  components: {
+    dialogNodeDetail,
+  },
   data() {
     return {
       page: {},
@@ -107,7 +117,8 @@ export default {
       command: null,
       selectedItem: null,
       multiSelect: false,
-      addGroup: false
+      addGroup: false,
+      isShowNodeDetailDialog: false,
     };
   },
   watch: {
@@ -118,9 +129,11 @@ export default {
   created() {
     this.grid = new Grid();
     this.init();
+  },
+  mounted() {
     this.bindEvent();
   },
-  destroyed() {
+  beforeDestroy() {
     eventBus.$off('afterAddPage');
     eventBus.$off('add');
     eventBus.$off('update');
@@ -140,8 +153,9 @@ export default {
     bindEvent() {
       let self = this;
       eventBus.$on('afterAddPage', page => {
+        console.log('toolbar-afterAddPage');
         self.page = page;
-        self.graph = self.page.graph;
+        self.graph = page.graph;
       });
       eventBus.$on('add', data => {
         self.redoList = data.redoList;
@@ -166,7 +180,6 @@ export default {
         self.selectedItem = self.selectedItem.concat(
           ...self.graph.findAllByState('edge', 'selected')
         );
-        console.log(self.selectedItem);
       });
       eventBus.$on('deleteItem', () => {
         self.handleDelete();
@@ -174,6 +187,11 @@ export default {
       eventBus.$on('multiSelectEnd', () => {
         self.multiSelect = false;
         self.selectedItem = self.graph.findAllByState('node', 'selected');
+      });
+      eventBus.$on('nodeClick', (data) => {
+        console.log(data.node._cfg);
+        console.log(self.graph.getCurrentMode());
+        self.isShowNodeDetailDialog = true;
       });
     },
     handleUndo() {
@@ -300,7 +318,6 @@ export default {
     outOfEditModel() {
       this.graph.setMode('default');
       this.graph.removePlugin(this.grid);
-      console.log('outOfEditModel = ' + this.graph.getCurrentMode());
       this.$emit('editorModeChange', { mode: 'default' });
     },
     inOfEditModel() {
@@ -314,7 +331,10 @@ export default {
     },
     getData() {
       window.g6Data = this.graph.save();
-    }
+    },
+    dialogNodeDetailCb() {
+      this.isShowNodeDetailDialog = false;
+    },
   },
 };
 </script>

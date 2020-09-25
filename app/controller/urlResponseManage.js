@@ -2,6 +2,7 @@
 
 const egg = require('egg');
 const Response = require('../util/Response');
+const { dateFormat } = require('../util/common');
 
 module.exports = class UrlResponseManageController extends egg.Controller {
   async mockData(ctx) {
@@ -64,7 +65,9 @@ module.exports = class UrlResponseManageController extends egg.Controller {
     try {
       console.log(ctx.request.body);
       console.log(typeof ctx.request.body);
-      const result  = await ctx.model.UrlResponse.create(ctx.request.body);
+      const createTime = dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss');
+      console.log(createTime);
+      const result  = await ctx.model.UrlResponse.create(Object.assign({ createTime }, ctx.request.body));
       this.ctx.body = new Response(200, null, result);
     } catch (e) {
       ctx.logger.error(e);

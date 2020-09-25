@@ -35,7 +35,6 @@ export default {
         });
     },
     saveG6GraphData(data) {
-      console.log(data);
       request.post('/mock/api/flow/g6/save', data)
         .then((res) => {
           this.$message({

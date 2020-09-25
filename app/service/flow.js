@@ -11,7 +11,7 @@ module.exports = class FlowService extends egg.Service {
   async getFlowList(query) {
     const params = {};
     const list = await Promise.all([
-      this.ctx.model.Flow.count(params),
+      this.ctx.model.Flow.countDocuments(params),
       this.ctx.model.Flow.find(params)
         .sort({ createTime: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))

@@ -5,7 +5,7 @@ const egg = require('egg');
 module.exports = class systemService extends egg.Service {
   async getSystemList(query = {}) {
     const result = await Promise.all([
-      this.ctx.model.System.count(true),
+      this.ctx.model.System.countDocuments(true),
       this.ctx.model.System.find()
         .sort({ id: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))

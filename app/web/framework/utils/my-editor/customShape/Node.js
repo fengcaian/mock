@@ -61,7 +61,15 @@ export default class CustomNode {
               y: offsetY + height / 2,
               textAlign: 'center',
               textBaseline: 'middle',
-              text: cfg.label,
+              text: ((label) => {
+                let result = '';
+                while (label.length > 6) {
+                  result = result.concat(label.slice(0, 6)).concat('\n');
+                  label = label.slice(6, label.length);
+                }
+                result = result.concat(label);
+                return result;
+              })(cfg.label),
               parent: mainId,
               fill: color
             }
@@ -127,7 +135,6 @@ export default class CustomNode {
         }
         function _drawAnchor(group, _anchorAttrs, _anchorOutAttrs) {
           const id = 'small-anchor-' + uniqueId();
-          console.log(id);
           group.addShape('circle', {
             attrs: {
               ..._anchorOutAttrs,
@@ -181,10 +188,6 @@ export default class CustomNode {
         }
         return shape;
       },
-      afterDraw(cfg, group) {
-        console.log(3355);
-        console.log(cfg);
-      },
       setState(name, value, item) {
         const group = item.getContainer();
         const shape = group.get('children')[0]; // 顺序根据 draw 时确定
@@ -198,9 +201,7 @@ export default class CustomNode {
           shape.attr('fill', '#f3f9ff');
           shape.attr('stroke', '#6ab7ff');
           shape.attr('cursor', 'move');
-          console.log(children.length);
           children.forEach(child => {
-            console.log(1);
             child.attr('cursor', 'move');
           });
           circles.forEach(circle => {

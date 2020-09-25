@@ -19,10 +19,11 @@ module.exports = class UrlService extends egg.Service {
       port = portList[0];
     }
     // const result = await Promise.all([this.ctx.doCurl(`${protocol}://${ip}${port ? `:${port}` : ''}${body.systemApi}`, { method: 'GET' })]);
-    const result = await Promise.all([this.ctx.doCurl(`${protocol}://${ip}${port ? `:${port}` : ''}${body.systemApi}`, { method: 'GET' })]);
+    const result = await Promise.all([this.ctx.doCurl(`${body.systemUrl}${body.systemApi}`, { method: 'GET' })]);
     if (!result.length) {
       return;
     }
+    console.log(`${protocol}://${ip}${port ? `:${port}` : ''}${body.systemApi}`);
     console.log(`${body.systemUrl}${body.systemApi}`);
     console.log(`${protocol}://${ip}${body.systemApi}`);
     console.log(body.port);
@@ -106,15 +107,13 @@ module.exports = class UrlService extends egg.Service {
       };
     }
     if (query.system) {
-      params.host = {
-
-      };
+      params.host = query.system;
     }
     if (query.summary) {
       params.summary = new RegExp(query.summary, 'i');
     }
     const list = await Promise.all([
-      this.ctx.model.Url.count(params),
+      this.ctx.model.Url.countDocuments(params),
       this.ctx.model.Url.find(params)
         .sort({ createTime: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))

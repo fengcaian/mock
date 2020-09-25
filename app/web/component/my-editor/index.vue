@@ -1,8 +1,8 @@
 <template>
-  <div id="mountNode" :style="{width: width}">
+  <div :style="{width: width}">
     <div class="editor">
       <context-menu></context-menu>
-      <toolbar @editorModeChange="editorModeChange" @saveG6GraphData="saveG6GraphData"></toolbar>
+      <toolbar :id="editorId" @editorModeChange="editorModeChange" @saveG6GraphData="saveG6GraphData"></toolbar>
       <div style="height: 42px;"></div>
       <div class="bottom-container">
         <item-panel v-if="initMode === 'edit'"></item-panel>
@@ -57,13 +57,13 @@ export default {
       editor: {},
       command: null,
       initMode: '',
+      editorId: Math.random(),
     };
   },
   created() {
     this.initMode = this.mode;
     this.init();
     customShape();
-    console.log(document.documentElement.clientWidth);
   },
   methods: {
     init() {

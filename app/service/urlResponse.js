@@ -1,6 +1,7 @@
 'use strict';
 
 const egg = require('egg');
+const ObjectID = require('mongodb').ObjectID;
 const Mock = require('../util/Mock');
 const { DATA_TYPE, URL_RESPONSE_MONGODB_PROP } = require('../util/constant');
 const { dateFormat } = require('../util/common');
@@ -19,6 +20,7 @@ module.exports = class UrlResponseService extends egg.Service {
       const mockData = {
         system: urlObj.host,
         url: urlObj.url,
+        urlId: body._id,
         type: urlObj.type,
         dataType: 'mock_data',
         createTime: dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
@@ -42,11 +44,10 @@ module.exports = class UrlResponseService extends egg.Service {
         $in: dataType.map(dt => DATA_TYPE.find(item => item.name === dt).code),
       };
     }
-    console.log(queryParams);
     const result = await Promise.all([
-      this.ctx.model.UrlResponse.count(queryParams),
+      this.ctx.model.UrlResponse.countDocuments(queryParams),
       this.ctx.model.UrlResponse
-        .find({_id: query._id})
+        .find({urlId: query._id})
         .sort({ id: -1 })
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
         .limit(Number(query.pageSize)),
@@ -64,6 +65,7 @@ module.exports = class UrlResponseService extends egg.Service {
     const urlObj = await this.ctx.model.Url.findOne({ _id: query._id });
     if (urlObj) {
       const mockData = new Mock().mock(urlObj.responses['200']);
+      mockData.urlId = query._id;
       await this.ctx.model.UrlResponse.create(mockData);
       return mockData;
     }

@@ -55,6 +55,7 @@ export default {
           const params = {
             system: this.urlObject.host,
             url: this.urlObject.url,
+            urlId: this.urlObject._id,
             type: this.urlObject.type,
             dataType: 'mock_data',
             response: JSON.parse(this.form.response),

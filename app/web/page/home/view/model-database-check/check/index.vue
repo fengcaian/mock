@@ -127,7 +127,6 @@ export default {
         .catch(_ => {});
     },
     onSuccess(data) {
-      console.log(data);
       let list = [];
       if (data.result) {
         let temp = Object.create(null);

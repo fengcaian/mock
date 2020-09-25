@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <editor></editor>
-  </div>
+  <div></div>
 </template>
 
 <script>
 // import G6 from '@antv/g6';
-import editor from './../../../.././../component/editor';
 
 export default {
-  components: {
-    editor,
-  },
   data() {
     return {
       graphData: {

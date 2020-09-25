@@ -61,7 +61,9 @@ export default {
       this.graph.setMode('addEdge');
     } else {
       console.log('in moveNode mode');
+      console.log(this.graph.getCurrentMode());
       this.graph.setMode('moveNode');
+      console.log(this.graph.getCurrentMode());
     }
   },
 };

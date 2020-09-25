@@ -51,9 +51,7 @@
           <el-col :span="4">{{response.code}}</el-col>
           <el-col :span="20">
             <div>
-              <pre style="background: initial" class="dialog-height" v-high-light>
-                <code class="json" spellcheck="false">{{response}}</code>
-              </pre>
+              <pre style="background: initial" class="dialog-height" v-high-light><code class="json" spellcheck="false">{{response}}</code></pre>
             </div>
           </el-col>
         </el-row>

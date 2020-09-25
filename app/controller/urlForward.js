@@ -42,6 +42,7 @@ module.exports = class UrlController extends egg.Controller {
           await this.ctx.service.urlForward.backUpBackendData({ // 将后端返回的数据备份下来
             host: urlObj.host,
             url: urlObj.url,
+            urlId: urlObj._id,
             type: urlObj.type,
             data: result.data,
           });
@@ -84,6 +85,7 @@ module.exports = class UrlController extends egg.Controller {
               await this.ctx.service.urlForward.backUpBackendData({
                 host: urlObj.host,
                 url: urlObj.url,
+                urlId: urlObj._id,
                 type: urlObj.type,
                 data: result.data,
               });
