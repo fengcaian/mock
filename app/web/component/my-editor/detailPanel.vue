@@ -93,18 +93,16 @@ export default {
       return this.$store.state.g6Editor.graph;
     }
   },
-  created() {
+  mounted() {
     this.bindEvent();
   },
   beforeDestroy() {
     eventBus.$off('afterAddPage');
-    eventBus.$off('nodeSelectChange');
   },
   methods: {
     bindEvent() {
       let self = this;
       eventBus.$on('afterAddPage', page => {
-        console.log('i am detailPanel,afterAddPage');
         self.page = page;
         self.graph = self.page.graph;
       });
@@ -119,7 +117,6 @@ export default {
             width: self.nodeModel.size[0],
             height: self.nodeModel.size[1],
           };
-          console.log(self.nodeModelForm);
         } else if (item.select === true && item.target.getType() === 'edge') {
           self.status = 'edge-selected';
           self.item = item.target;

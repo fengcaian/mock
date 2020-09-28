@@ -30,7 +30,7 @@ export default {
           name: '节点名称',
           label: '节点名称',
           innerCycleLabel: '1',
-          size: '94*75',
+          size: '120*100',
           type: 'node',
           shape: 'customNode',
           x: 0,
@@ -96,16 +96,16 @@ export default {
   .item-panel li {
     color: rgba(0, 0, 0, 0.65);
     border-radius: 4px;
-    width: 160px;
-    height: 28px;
-    line-height: 26px;
+    width: 120px;
+    height: 100px;
+    line-height: 100px;
     padding-left: 8px;
-    border: 1px solid rgba(0, 0, 0, 0);
+    border: 2px solid lightskyblue;
     list-style-type: none;
   }
   .item-panel li:hover {
     background: white;
-    border: 1px solid #ced4d9;
+    border: 2px solid #ced4d9;
     cursor: move;
   }
 

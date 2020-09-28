@@ -11,6 +11,7 @@ export default {
     console.log(e.item);
     console.log(e.target);
     console.log(e.item.getModel());
+    console.log('drag-dege, onMouseDown');
     this.item = e.item;
     this.target = e.target;
   },
@@ -18,6 +19,7 @@ export default {
     this.item = e.item;
     this.target = e.target;
     console.log(e.target);
+    console.log('drag-dege, onMouseMove');
     if (this.target && this.item) {
       this._updateEdge(e);
     }
@@ -28,6 +30,7 @@ export default {
     console.log('i am up2');
     this.graph.setMode('default');
     console.log('i am up2');
+    console.log('drag-dege, onMouseUp');
     // console.log(e);
     // console.log(e.item);
   },

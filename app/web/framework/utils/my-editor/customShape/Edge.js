@@ -326,10 +326,6 @@ export default class Edge {
           }, 3000);
         }
       },
-      // update(cfg, item) {
-      //   console.log(cfg);
-      //   console.log(item);
-      // },
       setState(name, value, item) {
         const group = item.getContainer();
         const shape = group.get('children')[0];

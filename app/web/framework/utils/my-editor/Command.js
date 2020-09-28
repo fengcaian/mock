@@ -58,6 +58,7 @@ export default class Command {
 
   add(type, item) {
     this.editor.add(type, item);
+    console.log(item === item);
   }
 
   update(item, model) {
@@ -112,7 +113,7 @@ export default class Command {
     const redoData = this.redoList.pop();
     const list = [];
     const edgeList = [];
-    for (let i = 0; redoData.datas.length; i += 1) {
+    for (let i = 0; i < redoData.datas.length; i += 1) {
       const data = redoData.datas[i];
       if (data.type === 'edge') {
         edgeList.push(data);

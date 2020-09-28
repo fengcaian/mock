@@ -64,23 +64,6 @@
       title="层级前置"
       @click="handleToFront">
     </i>
-    <span class="separator"></span>
-    <span class="separator"></span>
-    <i
-      data-command="multiSelect"
-      class="command iconfont icon-select"
-      :class="multiSelect ? 'disable' : ''"
-      title="多选"
-      @click="handleMultiSelect">
-    </i>
-    <i
-      data-command="addGroup"
-      class="command iconfont icon-group"
-      title="成组"
-      :class="addGroup ? '' : 'disable'"
-      @click="handleAddGroup">
-    </i>
-    <i data-command="unGroup" class="command iconfont icon-ungroup disable" title="解组"></i>
     <el-button size="mini" @click="consoleData" type="primary">控制台输出数据</el-button>
     <el-button size="mini" @click="outOfEditModel" type="primary">退出编辑模式</el-button>
     <el-button size="mini" @click="inOfEditModel" type="primary">进入编辑模式</el-button>
@@ -176,6 +159,7 @@ export default {
         self.command.executeCommand('add', [item]);
       });
       eventBus.$on('nodeSelectChange', () => {
+        console.log('i am toolbar nodeSelectChange');
         self.selectedItem = self.graph.findAllByState('node', 'selected');
         self.selectedItem = self.selectedItem.concat(
           ...self.graph.findAllByState('edge', 'selected')
@@ -203,6 +187,7 @@ export default {
     handleDelete() {
       if (this.selectedItem.length > 0) {
         this.command.executeCommand('delete', this.selectedItem);
+        eventBus.$emit('nodeSelectChange', { target: this.selectedItem[0], select: false });
         this.selectedItem = null;
       }
     },
@@ -257,11 +242,6 @@ export default {
     handleResetZoom() {
       this.graph.zoomTo(1, this.getViewCenter());
     },
-    handleMultiSelect() {
-      this.multiSelect = true;
-      this.graph.setMode('multiSelect');
-    },
-    handleAddGroup() {},
     getPosition(items) {
       const boxList = [];
       items.forEach(item => {
@@ -310,7 +290,6 @@ export default {
       };
       this.command.executeCommand('add', model);
     },
-
     consoleData() {
       console.log(this.graph.save());
       console.log('consoleData = ' + this.graph.getCurrentMode());
@@ -318,10 +297,18 @@ export default {
     outOfEditModel() {
       this.graph.setMode('default');
       this.graph.removePlugin(this.grid);
+      (this.selectedItem || []).forEach(item => {
+        this.graph.setItemState(item, 'hover', false);
+        eventBus.$emit('nodeSelectChange', { target: item, select: false });
+      });
+      this.selectedItem = null;
       this.$emit('editorModeChange', { mode: 'default' });
     },
     inOfEditModel() {
       this.graph.setMode('edit');
+      if (!this.grid.cfg) {
+        this.grid = new Grid();
+      }
       this.graph.addPlugin(this.grid);
       console.log('inOfEditModel = ' + this.graph.getCurrentMode());
       this.$emit('editorModeChange', { mode: 'edit' });

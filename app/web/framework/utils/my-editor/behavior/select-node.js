@@ -39,11 +39,13 @@ export default {
       if (self.shouldUpdate.call(self, e)) {
         graph.setItemState(item, 'selected', false);
       }
+      console.log('node unselected');
       eventBus.$emit('nodeSelectChange', { target: item, select: false });
     } else {
       if (self.shouldUpdate.call(self, e)) {
         graph.setItemState(item, 'selected', true);
       }
+      console.log('node selected');
       eventBus.$emit('nodeSelectChange', { target: item, select: true });
     }
     graph.setAutoPaint(autoPaint);
@@ -53,8 +55,8 @@ export default {
     const { graph } = this;
     const autoPaint = graph.get('autoPaint');
     graph.setAutoPaint(false);
-    const selected = graph.findAllByState('node', 'selected');
-    Util.each(selected, node => {
+    const selectedNodes = graph.findAllByState('node', 'selected');
+    Util.each(selectedNodes, node => {
       graph.setItemState(node, 'selected', false);
       eventBus.$emit('nodeSelectChange', { target: node, select: false });
     });
@@ -62,12 +64,13 @@ export default {
     Util.each(selectedEdges, edge => {
       graph.setItemState(edge, 'selected', false);
       eventBus.$emit('nodeSelectChange', { target: edge, select: false });
-      const data = {};
-      data.item = edge;
-      data.customerProps = {
-        isAddCircle: true,
-      };
-      eventBus.$emit('updateItem', data);
+      graph.setItemState(edge, 'hover', false);
+      // const data = {};
+      // data.item = edge;
+      // data.customerProps = {
+      //   isAddCircle: true,
+      // };
+      // eventBus.$emit('updateItem', data);
     });
     graph.paint();
     graph.setAutoPaint(autoPaint);
