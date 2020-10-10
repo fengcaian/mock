@@ -1,7 +1,10 @@
 <template>
   <div class='main-content'>
       <div class='main-container'>
-        <router-view></router-view>
+        <transition name="custom-classes-transition" enter-active-class="animated tada"
+                    leave-active-class="animated bounceOutRight">
+          <router-view></router-view>
+        </transition>
       </div>
   </div>
 </template>

@@ -5,6 +5,7 @@ export default class CustomNode {
   init() {
     G6.registerNode('customNode', {
       draw(cfg, group) {
+        console.log('draw');
         let { size } = cfg;
         if (!size) {
           size = [170, 34];
@@ -189,6 +190,7 @@ export default class CustomNode {
         return shape;
       },
       setState(name, value, item) {
+        console.log('setstate');
         const group = item.getContainer();
         const shape = group.get('children')[0]; // 顺序根据 draw 时确定
         const children = group.findAll(g => {

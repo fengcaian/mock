@@ -22,8 +22,6 @@ export default {
       }
     }
     graph.paint();
-    console.log(graph.getCurrentMode());
-    console.log('edge onMouseOver');
   },
   onMouseLeave(e) {
     const self = this;
@@ -41,8 +39,6 @@ export default {
       }
     }
     graph.paint();
-    console.log(graph.getCurrentMode());
-    console.log('edge onMouseLeave');
   },
   onClick(e) {
     const self = this;

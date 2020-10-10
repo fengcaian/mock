@@ -18,7 +18,6 @@
 <script>
 import eventBus from './../../framework/utils/common/eventBus';
 import okSvg from './../../asset/svg/ok.svg';
-import bgImg from './../../asset/images/bg.jpg';
 
 export default {
   data() {
@@ -37,7 +36,6 @@ export default {
           y: 0,
           color: '#1890ff',
           image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
-          stateImage: okSvg,
           inPoints: [[0, 0.5], [0.5, 0], [1, 0.5], [0.5, 1]],
           outPoints: [[1, 0.5], [0.5, 1], [0, 0.5], [0.5, 0]],
           isDoingEnd: true

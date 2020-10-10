@@ -33,6 +33,11 @@ export default {
       });
       e.target.attr('cursor', 'crosshair');
       this.graph.paint();
+    } else {
+      console.log('cursor');
+      console.log(e.target.attr('cursor'));
+      e.target.attr('cursor', 'initial');
+      this.graph.paint();
     }
     if (item.hasState('selected')) {
       return;
