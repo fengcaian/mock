@@ -21,14 +21,13 @@ export default {
   },
   getEvents() {
     return {
-      'node:mousedown': 'onMouseDown',
-      'mousemove': 'onMouseMove',
-      'mouseup': 'onMouseUp',
+      'node:dragstart': 'dragStart',
+      'node:drag': 'drag',
+      'node:dragend': 'dragEnd',
       'canvas:mouseleave': 'onOutOfRange'
     };
   },
   getNode(e) {
-    console.log(this.shouldBegin.call(this, e));
     if (!this.shouldBegin.call(this, e)) {
       return;
     }
@@ -53,7 +52,6 @@ export default {
     });
     // 只拖动当前节点
     if (dragNodes.length === 0) {
-      console.log(item);
       if (!item) {
         return;
       }
@@ -76,12 +74,11 @@ export default {
     this.point = {};
     this.originPoint = {};
   },
-  onMouseDown(e) {
+  dragStart(e) {
     this.isDrag = true;
     this.target = e.item;
   },
-  onMouseMove(e) {
-    console.log('i am moving');
+  drag(e) {
     if (!this.origin) {
       this.getNode(e)
     }
@@ -99,7 +96,7 @@ export default {
       this._update(this.target, e, this.nodeEvent, true);
     }
   },
-  onMouseUp(e) {
+  dragEnd(e) {
     if (this.shape) {
       this.shape.remove();
       this.shape = null;
@@ -148,8 +145,6 @@ export default {
     }
     this.isDrag = false;
     this.nodeEvent = null;
-    console.log('drag-node-end');
-    console.log(this.graph.getCurrentMode());
     this.graph.setMode('edit');
   },
   // 若在拖拽时，鼠标移出画布区域，此时放开鼠标无法终止 drag 行为。在画布外监听 mouseup 事件，放开则终止
@@ -191,7 +186,6 @@ export default {
     if (this.get('updateEdge')) {
       this.graph.updateItem(item, pos);
     } else {
-      console.log(pos);
       item.updatePosition(pos);
       this.graph.paint();
     }

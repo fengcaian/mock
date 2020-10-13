@@ -54,6 +54,16 @@ export default class CustomNode {
             }
           });
         }
+        group.addShape('image', {
+          attrs: {
+            x: 10,
+            y: 10,
+            width: 16,
+            height: 16,
+            parent: mainId,
+            img: cfg.stateImage
+          }
+        });
         if (cfg.label) {
           group.addShape('text', {
             attrs: {

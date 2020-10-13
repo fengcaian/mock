@@ -39,11 +39,22 @@ module.exports = {
     },
     svg: {
       test: /\.svg$/,
-      loader: 'svg-sprite-loader',
-      options: {
-        symbolId: 'icon-[name]',
-      },
-      include: resolve('app/web/asset/svg'),
+      rules: [
+        {
+          loader: 'svg-sprite-loader',
+          options: {
+            symbolId: 'icon-[name]',
+          },
+          include: resolve('app/web/asset/svg'),
+        },
+        {
+          loader: 'url-loader',
+          include: resolve('app/web/asset/images'),
+          options: {
+            limit: 2,
+          }
+        }
+      ],
     },
   },
   plugins: {},

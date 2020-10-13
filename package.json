@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@antv/g6": "^3.7.3",
+    "@antv/g6": "^3.8.1",
     "@antv/x6": "^0.10.68",
     "axios": "^0.19.2",
     "egg": "^2.26.0",
