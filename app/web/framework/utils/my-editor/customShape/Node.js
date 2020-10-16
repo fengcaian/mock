@@ -5,7 +5,6 @@ export default class CustomNode {
   init() {
     G6.registerNode('customNode', {
       draw(cfg, group) {
-        console.log('draw');
         let { size } = cfg;
         if (!size) {
           size = [170, 34];
@@ -25,8 +24,9 @@ export default class CustomNode {
             height: height,
             stroke: color,
             fill: '#fff', //此处必须有fill 不然不能触发事件
-            radius: 4
-          }
+            radius: 4,
+          },
+          draggable: true,
         });
         group.addShape('circle', {
           attrs: {
@@ -38,7 +38,8 @@ export default class CustomNode {
             stroke: '#e6a23c',
             opacity: 1,
             parent: mainId
-          }
+          },
+          draggable: true,
         });
         if (cfg.innerCycleLabel) {
           group.addShape('text', {
@@ -50,8 +51,9 @@ export default class CustomNode {
               textBaseline: 'middle',
               text: cfg.innerCycleLabel,
               parent: mainId,
-              fill: color
-            }
+              fill: color,
+            },
+            draggable: true,
           });
         }
         group.addShape('image', {
@@ -62,7 +64,8 @@ export default class CustomNode {
             height: 16,
             parent: mainId,
             img: cfg.stateImage
-          }
+          },
+          draggable: true,
         });
         if (cfg.label) {
           group.addShape('text', {
@@ -82,8 +85,9 @@ export default class CustomNode {
                 return result;
               })(cfg.label),
               parent: mainId,
-              fill: color
-            }
+              fill: color,
+            },
+            draggable: true
           });
         }
         let { inPoints, outPoints } = cfg;
@@ -200,7 +204,6 @@ export default class CustomNode {
         return shape;
       },
       setState(name, value, item) {
-        console.log('setstate');
         const group = item.getContainer();
         const shape = group.get('children')[0]; // 顺序根据 draw 时确定
         const children = group.findAll(g => {

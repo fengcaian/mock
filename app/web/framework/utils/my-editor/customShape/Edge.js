@@ -44,14 +44,13 @@ export default class Edge {
         const anchorAttr = cfg.anchorAttr;
         let path = _calculatePath(anchorAttr, start, end);
         const direction = _judgeLineDirection(start, end);
-        const radius = 5;
         let lineWidth = 1;
         lineWidth = lineWidth > MIN_ARROW_SIZE ? lineWidth : MIN_ARROW_SIZE;
         const width = lineWidth * 10 / 3;
         const halfHeight = lineWidth * 4 / 3;
         const endArrowPath = `M 0,0 L ${width},${halfHeight} L ${width},${-halfHeight} Z`;
         const mainId = 'edge' + uniqueId();
-        const { lineSegment, lineCenterPoint } = _getEdgeControlPoint(JSON.parse(JSON.stringify(path)));
+        const { lineSegment, lineCenterPoint, centerCirclePoint } = _getEdgeControlPoint(JSON.parse(JSON.stringify(path)));
         const keyShape = group.addShape('path', {
           attrs: {
             id: mainId,
@@ -69,55 +68,52 @@ export default class Edge {
         const shape = group.get('children')[0];
         // the start position of the edge's path
         const startPoint = shape.getPoint(0);
-
-        console.log(cfg);
         // add red circle shape
         group.addShape('circle', {
           attrs: {
             parent: mainId,
-            x: startPoint.x + (end.x - startPoint.x)/2,
-            y: startPoint.y + (end.y - startPoint.y)/2,
+            x: centerCirclePoint.x,
+            y: centerCirclePoint.y,
             fill: cfg.lineCircle.background,
             r: 10,
             opacity: cfg.lineCircle.isShow ? 1 : 0,
             stroke: cfg.lineCircle.border,
           },
           name: 'circle-shape',
+          draggable: true,
         });
         group.addShape('text', {
           attrs: {
             id: 'label' + uniqueId(),
             parent: mainId,
-            x: startPoint.x + (end.x - startPoint.x)/2,
-            y: startPoint.y + (end.y - startPoint.y)/2,
+            x: centerCirclePoint.x,
+            y: centerCirclePoint.y,
             textAlign: 'center',
             textBaseline: 'middle',
             text: cfg.lineCircle.text,
             fill: cfg.lineCircle.border,
             opacity: cfg.lineCircle.isShow ? 1 : 0,
-          }
+          },
+          draggable: true,
         });
-        console.log(path);
-        console.log(lineCenterPoint);
-        lineCenterPoint.forEach((item) => {
-          group.addShape('circle', {
-            attrs: {
-              id: 'edgeControlPoint' + uniqueId(),
-              parent: mainId,
-              x: item.x,
-              y: item.y,
-              fill: '#29B6F2',
-              r: 4,
-              opacity: 0,
-              stroke: '#29B6F2',
-            },
-            name: 'edge-control-circle',
-          });
-        });
+        // lineCenterPoint.forEach((item) => {
+        //   group.addShape('circle', {
+        //     attrs: {
+        //       id: 'edgeControlPoint' + uniqueId(),
+        //       parent: mainId,
+        //       x: item.x,
+        //       y: item.y,
+        //       fill: '#29B6F2',
+        //       r: 4,
+        //       opacity: 0,
+        //       stroke: '#29B6F2',
+        //     },
+        //     name: 'edge-control-circle',
+        //   });
+        // });
         function _judgeLineDirection(p1 = {x: 0, y: 0}, p2 = {x: 0, y: 0}) {
           const width = p2.x - p1.x;
           const height = p2.y - p1.y;
-          console.log(`width=${width}`,`height=${height}`);
           let direction = '';
           if (width === 0 && height > 0) {
             direction = 'down';
@@ -169,6 +165,7 @@ export default class Edge {
             start: null,
             end: null,
           };
+          const copyList = JSON.parse(JSON.stringify(list));
           while (list.length) {
             const xy = list.shift();
             if (!line.start) {
@@ -203,12 +200,24 @@ export default class Edge {
               lineArray.push(line);
             }
           }
+          const lineCenterPoint = lineArray.map(item => ({
+            x: item.start.x + (item.end.x - item.start.x)/2,
+            y: item.start.y + (item.end.y - item.start.y)/2,
+          }));
+          let centerCirclePoint = {};
+          if (lineCenterPoint.length % 2 === 0) {
+            const p = copyList[(copyList.length - 1)/2];
+            centerCirclePoint = {
+              x: p[0],
+              y: p[1],
+            };
+          } else {
+            centerCirclePoint = lineCenterPoint[(lineCenterPoint.length - 1)/2];
+          }
           return {
             lineSegment: lineArray,
-            lineCenterPoint: lineArray.map(item => ({
-              x: item.start.x + (item.end.x - item.start.x)/2,
-              y: item.start.y + (item.end.y - item.start.y)/2,
-            }))
+            lineCenterPoint,
+            centerCirclePoint,
           };
         }
         function _calculatePath(anchorAttr, startPoint, endPoint, extendLength = 20) {
@@ -298,6 +307,16 @@ export default class Edge {
             }
           }
           path = path.concat(path2);
+          path = path.reduce((result, p) => { // 去掉重复的节点
+            const index = result.findIndex(item => item[1] === p[1] && item[2] === p[2]);
+            if (index === -1) {
+              result.push(p);
+            }
+            return result;
+          }, []);
+          if (path[0][1] === path[path.length - 1][1] || path[0][2] === path[path.length - 1][2] && path.length > 2) { // 去掉重复的节点
+            path = [path[0], path[path.length - 1]];
+          }
           return path;
         }
         function _isParallel(d1, d2) { // 判断是否平行， params(方向): d1,d2;return:true(平行),false(垂直)

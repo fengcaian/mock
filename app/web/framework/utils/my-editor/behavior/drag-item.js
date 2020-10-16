@@ -1,5 +1,6 @@
 import { merge, isString } from 'lodash';
 import eventBus from './../../../../framework/utils/common/eventBus';
+const Util = require('@antv/util');
 const delegateStyle = {
   fill: '#F3F9FF',
   fillOpacity: 0.5,
@@ -24,6 +25,7 @@ export default {
       'node:dragstart': 'dragStart',
       'node:drag': 'drag',
       'node:dragend': 'dragEnd',
+      'node:mouseup': 'mouseUp',
       'canvas:mouseleave': 'onOutOfRange'
     };
   },
@@ -79,6 +81,7 @@ export default {
     this.target = e.item;
   },
   drag(e) {
+    console.log('drag');
     if (!this.origin) {
       this.getNode(e)
     }
@@ -97,6 +100,7 @@ export default {
     }
   },
   dragEnd(e) {
+    console.log('drap-end');
     if (this.shape) {
       this.shape.remove();
       this.shape = null;
@@ -146,6 +150,11 @@ export default {
     this.isDrag = false;
     this.nodeEvent = null;
     this.graph.setMode('edit');
+  },
+  mouseUp() { // 区分drag事件
+    if (!this.shape) {
+      this.graph.setMode('edit');
+    }
   },
   // 若在拖拽时，鼠标移出画布区域，此时放开鼠标无法终止 drag 行为。在画布外监听 mouseup 事件，放开则终止
   onOutOfRange(e) {
