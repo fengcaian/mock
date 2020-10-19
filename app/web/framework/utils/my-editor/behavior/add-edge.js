@@ -1,4 +1,4 @@
-import G6 from '@antv/g6';
+import { transform, mat3 } from '@antv/matrix-util';
 import _ from 'lodash';
 import { uniqueId } from './../../common';
 import eventBus from './../../../../framework/utils/common/eventBus';
@@ -153,13 +153,14 @@ export default {
         this.hasTran = true;
         let matrix = e.target.getMatrix();
         if (!matrix) {
-          matrix = G6.Util.mat3.create();
+          matrix = mat3.create();
         }
-        matrix = G6.Util.transform(matrix, [
-          ['t', 0, 3],
-          ['s', 1.2, 1.2]
+        const newMatrix = transform(matrix, [
+          ['t', 10, 10], // x 方向平移 10, y 方向平移 10
+          ['s', 1.2, 1.2], // 缩放 1.2 倍
+          ['r', Math.PI / 4], // 旋转 45 度
         ]);
-        e.target.setMatrix(matrix);
+        e.target.setMatrix(newMatrix);
       }
       this.graph.paint();
     }

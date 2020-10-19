@@ -52,6 +52,9 @@ export default {
     });
     if (!self.keydown || !self.multiple) {
       const selected = graph.findAllByState('edge', 'selected');
+      if (selected.length) {
+        console.log(selected[0]._cfg.model.lineCircle.text);
+      }
       Util.each(selected, edge => {
         if (edge !== item) {
           graph.setItemState(edge, 'selected', false);

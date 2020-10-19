@@ -57,17 +57,15 @@ export default class Edge {
             path: path,
             lineSegment,
             turningPoint: lineSegment,
-            stroke: '#b8c3ce',
+            stroke: '#42A1D0',
+            lineWidth: 1,
             lineAppendWidth: 10,
             endArrow: {
               path: endArrowPath,
-              fill: '#b8c3ce'
+              fill: '#42A1D0'
             }
           }
         });
-        const shape = group.get('children')[0];
-        // the start position of the edge's path
-        const startPoint = shape.getPoint(0);
         // add red circle shape
         group.addShape('circle', {
           attrs: {
@@ -356,17 +354,18 @@ export default class Edge {
           });
         };
         const unSelectStyles = () => {
-          shape.attr('stroke', '#b8c3ce');
+          shape.attr('stroke', '#42A1D0');
           edgeControlCircles.forEach((circle) => {
             circle.attr('opacity', 0);
           });
         };
-        const showCircle = () => {
-          shape.attr('opacity', 1);
-        };
-
         switch (name) {
           case 'selected':
+            if (value) {
+              selectStyles();
+            } else {
+              unSelectStyles();
+            }
             break;
           case 'hover':
             if (value) {
@@ -375,8 +374,6 @@ export default class Edge {
               unSelectStyles();
             }
             break;
-          case 'showCircle':
-            showCircle();
         }
       }
     });
