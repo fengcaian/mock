@@ -4,7 +4,7 @@ const egg = require('egg');
 const ObjectID = require('mongodb').ObjectID;
 const Mock = require('../util/Mock');
 const { DATA_TYPE, URL_RESPONSE_MONGODB_PROP } = require('../util/constant');
-const { dateFormat } = require('../util/common');
+const { dateFormat, deepCopy } = require('../util/common');
 
 module.exports = class UrlResponseService extends egg.Service {
   constructor(ctx) {
@@ -138,7 +138,7 @@ module.exports = class UrlResponseService extends egg.Service {
     }
   }
   async insertResponse(body = {}) {
-    const query = JSON.parse(JSON.stringify(body));
+    const query = deepCopy(body);
     delete query.createTime;
     try {
       await this.ctx.model.UrlResponse.findOneAndUpdate(query, { $set: body }, { upsert: true });

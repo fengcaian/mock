@@ -64,11 +64,11 @@
       title="层级前置"
       @click="handleToFront">
     </i>
-    <el-button size="mini" @click="consoleData" type="primary">控制台输出数据</el-button>
-    <el-button size="mini" @click="outOfEditModel" type="primary">退出编辑模式</el-button>
-    <el-button size="mini" @click="inOfEditModel" type="primary">进入编辑模式</el-button>
-    <el-button size="mini" @click="saveGraph" type="primary">保存</el-button>
-    <el-button size="mini" @click="getData" type="primary">getData</el-button>
+    <el-button size="mini" class="middle" type="primary" @click="consoleData">控制台输出数据</el-button>
+    <el-button size="mini" class="middle" type="primary" @click="outOfEditModel">退出编辑模式</el-button>
+    <el-button size="mini" class="middle" type="primary" @click="inOfEditModel">进入编辑模式</el-button>
+    <el-button size="mini" class="middle" type="primary" @click="saveGraph">保存</el-button>
+    <el-button size="mini" class="middle" type="primary" @click="getData">getData</el-button>
     <dialog-node-detail
       v-if="isShowNodeDetailDialog"
       :nodeDetailDialogVisible="isShowNodeDetailDialog"
@@ -332,7 +332,7 @@ export default {
     width: 100%;
     border: 1px solid #e9e9e9;
     height: 42px;
-    padding: 8px 0;
+    line-height: 42px;
     z-index: 3;
     box-shadow: 0 8px 12px 0 rgba(0, 52, 107, 0.04);
     position: absolute;
@@ -343,7 +343,8 @@ export default {
   .toolbar .command {
     box-sizing: border-box;
     width: 27px;
-    height: 27px;
+    height: 42px;
+    line-height: 42px;
     margin: 0 6px;
     border-radius: 2px;
     padding-left: 4px;
@@ -360,5 +361,8 @@ export default {
   .toolbar .separator {
     margin: 4px;
     border-left: 1px solid #e9e9e9;
+  }
+  .middle {
+    vertical-align: 5px;
   }
 </style>

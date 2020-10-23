@@ -1,6 +1,6 @@
 'use strict';
 const egg = require('egg');
-const { type } = require('../util/common');
+const { type, deepCopy } = require('../util/common');
 
 module.exports = class UrlService extends egg.Service {
   constructor(ctx) {
@@ -65,12 +65,13 @@ module.exports = class UrlService extends egg.Service {
       });
     });
 
-    function recursiveObject(o, definitions) {
+    function recursiveObject(o, definitions, parent = null) {
       let result = {};
       if (!o) {
         return result;
       }
       let object = o;
+      let _parent = parent;
       const { $ref } = o;
       if (type($ref) === 'String' && definitions[$ref.slice(14)]) {
         object = definitions[$ref.slice(14)].properties;
@@ -78,11 +79,22 @@ module.exports = class UrlService extends egg.Service {
       if (!object) {
         return;
       }
+      while (_parent) {
+        if (_parent.originParent === o) {
+          // return _parent.currentParent;
+          return {};
+        }
+        _parent = _parent.parent;
+      }
       Object.keys(object).forEach((key) => {
         let value = object[key];
         if (type(value) === 'Object') {
           if (value.type === 'array') {
-            result[key] = [recursiveObject(value.items || {}, definitions)];
+            result[key] = [recursiveObject(value.items || {}, definitions, {
+              originParent: o,
+              currentParent: result,
+              parent,
+            })];
           } else {
             result[key] = recursiveObject(value, definitions);
           }
@@ -119,7 +131,7 @@ module.exports = class UrlService extends egg.Service {
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
         .limit(Number(query.pageSize)),
     ]);
-    let result = JSON.parse(JSON.stringify(list));
+    let result = deepCopy(list);
     result[1].forEach((item) => {
       delete item.produces;
       delete item.operationId;
@@ -140,7 +152,7 @@ module.exports = class UrlService extends egg.Service {
   }
   async update(body = {}) {
     let result = null;
-    const params = JSON.parse(JSON.stringify(body));
+    const params = deepCopy(body);
     delete params._id;
     console.log(params);
     await this.ctx.model.Url.update({ _id: body._id }, { $set: params }, (msg) => {

@@ -39,6 +39,25 @@ export default {
   },
   methods: {
     init() {
+      const defaultLayout = {
+        type: 'compactBox',
+        direction: 'TB',
+        getId: function getId(d) {
+          return d.id;
+        },
+        getHeight: function getHeight() {
+          return 16;
+        },
+        getWidth: function getWidth() {
+          return 16;
+        },
+        getVGap: function getVGap() {
+          return 40;
+        },
+        getHGap: function getHGap() {
+          return 70;
+        },
+      };
       const height =  this.height - 42;
       const width =  this.width - 400;
       this.graph = new G6.Graph({
@@ -59,8 +78,9 @@ export default {
           addEdge: ['add-edge'],
           moveNode:[ 'drag-item'],
           moveEdge:[ 'drag-edge'],
-          edit: ['hover-node', 'select-node', 'hover-edge', 'select-edge'],
+          edit: ['hover-node', 'select-node', 'hover-edge', 'select-edge', 'drag-canvas'],
         },
+        layout: defaultLayout
         // renderer: 'svg'
       });
       const { editor, command } = this.$parent;

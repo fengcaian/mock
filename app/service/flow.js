@@ -1,7 +1,7 @@
 'use strict';
 
 const egg  = require('egg');
-const { dateFormat } = require('../util/common');
+const { dateFormat, deepCopy } = require('../util/common');
 
 module.exports = class FlowService extends egg.Service {
   constructor(ctx) {
@@ -17,7 +17,7 @@ module.exports = class FlowService extends egg.Service {
         .skip((Number(query.currentPage) - 1) * Number(query.pageSize))
         .limit(Number(query.pageSize)),
     ]);
-    let result = JSON.parse(JSON.stringify(list));
+    let result = deepCopy(list);
     result[1].forEach((item) => {
       delete item.produces;
       delete item.operationId;
@@ -30,7 +30,7 @@ module.exports = class FlowService extends egg.Service {
     };
   }
   async save(body = {}) {
-    const query = JSON.parse(JSON.stringify(body));
+    const query = deepCopy(body);
     body.createTime = dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss');
     body.flowName = 'flowName';
     delete query.createTime;

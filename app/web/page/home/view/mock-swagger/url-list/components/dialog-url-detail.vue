@@ -19,12 +19,12 @@
     </el-row>
     <div class="request" :style="{background: httpMethodColor.lightColor, border: `1px solid ${httpMethodColor.color}`}">
       <el-row class="tbody" type="flex" justify="center">
-        <el-col class="th" :span="14">Name</el-col>
-        <el-col class="th" :span="10">Description</el-col>
+        <el-col class="th" :span="15">Name</el-col>
+        <el-col class="th" :span="9">Description</el-col>
       </el-row>
-      <el-form ref="form" label-width="160px" :model="form">
+      <el-form ref="form" label-width="230px" :model="form">
         <el-row v-for="parameter in parameterList" :key="parameter.name">
-          <el-col :span="14">
+          <el-col :span="15">
             <el-form-item  :label="parameter.name" :prop="parameter.name" :rules="[
               { required: parameter.required, message: '请输入有效值', trigger: 'blur' }
             ]">
@@ -33,7 +33,7 @@
               <span class="red" v-if="parameter.required">*required</span>
             </el-form-item>
           </el-col>
-          <el-col class="th" :span="10">{{parameter.description}}</el-col>
+          <el-col class="th" :span="9">{{parameter.description}}</el-col>
         </el-row>
       </el-form>
     </div>
