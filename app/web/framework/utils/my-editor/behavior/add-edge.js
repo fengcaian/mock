@@ -156,9 +156,8 @@ export default {
           matrix = mat3.create();
         }
         const newMatrix = transform(matrix, [
-          ['t', 10, 10], // x 方向平移 10, y 方向平移 10
+          ['t', 1, 1], // x 方向平移 10, y 方向平移 10
           ['s', 1.2, 1.2], // 缩放 1.2 倍
-          ['r', Math.PI / 4], // 旋转 45 度
         ]);
         e.target.setMatrix(newMatrix);
       }

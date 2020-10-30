@@ -98,6 +98,7 @@ export default {
   },
   beforeDestroy() {
     eventBus.$off('afterAddPage');
+    eventBus.$off('nodeSelectChange');
   },
   methods: {
     bindEvent() {

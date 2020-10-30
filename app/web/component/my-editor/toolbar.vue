@@ -25,18 +25,22 @@
       @click="handleDelete">
     </i>
     <span class="separator"></span>
-    <i
-      data-command="zoomIn"
-      class="command iconfont icon-zoom-in-o"
-      title="放大"
-      @click="handleZoomIn">
-    </i>
-    <i
-      data-command="zoomOut"
-      class="command iconfont icon-zoom-out-o"
-      title="缩小"
-      @click="handleZoomOut">
-    </i>
+    <el-tooltip class="item" effect="light" :content="currentZoom" placement="top-start">
+      <i
+          data-command="zoomIn"
+          class="command iconfont icon-zoom-in-o"
+          title="放大"
+          @click="handleZoomIn">
+      </i>
+    </el-tooltip>
+    <el-tooltip class="item" effect="light" :content="currentZoom" placement="top-start">
+      <i
+          data-command="zoomOut"
+          class="command iconfont icon-zoom-out-o"
+          title="缩小"
+          @click="handleZoomOut">
+      </i>
+    </el-tooltip>
     <i
       data-command="autoZoom"
       class="command iconfont icon-fit"
@@ -102,6 +106,7 @@ export default {
       multiSelect: false,
       addGroup: false,
       isShowNodeDetailDialog: false,
+      currentZoom: '100%',
     };
   },
   watch: {
@@ -206,11 +211,13 @@ export default {
     },
     handleZoomIn() {
       const currentZoom = this.graph.getZoom();
-      this.graph.zoomTo(currentZoom + 0.5, this.getViewCenter());
+      this.currentZoom = `${Math.round((currentZoom + 0.1) * 100)}%`;
+      this.graph.zoomTo(currentZoom + 0.1, this.getViewCenter());
     },
     handleZoomOut() {
       const currentZoom = this.graph.getZoom();
-      this.graph.zoomTo(currentZoom - 0.5, this.getViewCenter());
+      this.currentZoom = `${Math.round((currentZoom - 0.1) * 100)}%`;
+      this.graph.zoomTo(currentZoom - 0.1, this.getViewCenter());
     },
     handleToBack() {
       if (this.selectedItem && this.selectedItem.length > 0) {

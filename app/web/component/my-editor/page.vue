@@ -37,6 +37,10 @@ export default {
       this.init();
     });
   },
+  beforeDestroy() {
+    this.graph.clear();
+    this.graph.destroy();
+  },
   methods: {
     init() {
       const defaultLayout = {
