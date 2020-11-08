@@ -323,7 +323,7 @@ export default class Edge {
         return keyShape;
       },
       afterDraw(cfg, group) {
-        if (cfg.sourceNode.getModel().isDoingStart && cfg.sourceNode.getModel().isDoingEnd) {
+        if (cfg.sourceNode.getModel().isDoingStart && cfg.targetNode.getModel().isDoingEnd) {
           const shape = group.get('children')[0];
           const length = shape.getTotalLength(); // G 增加了 totalLength 的接口
           let totalArray = [];

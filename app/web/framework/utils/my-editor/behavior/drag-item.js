@@ -106,6 +106,16 @@ export default {
       this.shape = null;
     }
 
+    if (this.auxiliaryLineH) {
+      this.auxiliaryLineH.remove();
+      this.auxiliaryLineH = null;
+    }
+
+    if (this.auxiliaryLineV) {
+      this.auxiliaryLineV.remove();
+      this.auxiliaryLineV = null;
+    }
+
     if (this.target) {
       const delegateShape = this.target.get('delegateShape');
       if (delegateShape) {
@@ -207,6 +217,7 @@ export default {
    * @param {number} y 拖动单个元素时候的y坐标
    */
   _updateDelegate(e, nodeEvent, x, y) {
+    console.log('move');
     const bbox = nodeEvent.item.get('keyShape').getBBox();
     if (!this.shape) {
       // 拖动多个
@@ -236,8 +247,36 @@ export default {
           }
         });
         this.target.set('delegateShape', this.shape);
+        if (!this.auxiliaryLineH) { // 水平辅助线
+          this.auxiliaryLineH = parent.addShape('path', {
+            attrs: {
+              path: [
+                ['M', x - 200, y],
+                ['L', x + bbox.width + 100, y],
+              ],
+              stroke: '#000',
+              lineWidth: 1,
+              lineDash: [4, 2, 1, 2],
+            },
+          });
+        }
+        if (!this.auxiliaryLineV) { // 水平辅助线
+          this.auxiliaryLineV = parent.addShape('path', {
+            attrs: {
+              path: [
+                ['M', x, y - 200],
+                ['L', x, y + bbox.height + 100],
+              ],
+              stroke: '#000',
+              lineWidth: 1,
+              lineDash: [4, 2, 1, 2],
+            },
+          });
+        }
       }
       this.shape.set('capture', false);
+      this.auxiliaryLineH.set('capture', false);
+      this.auxiliaryLineV.set('capture', false);
     }
 
     if (this.targets.length > 0) {
@@ -251,6 +290,18 @@ export default {
       this.shape.attr({
         x: x - bbox.width / 2,
         y: y - bbox.height / 2
+      });
+      this.auxiliaryLineH.attr({
+        path: [
+          ['M', x - 200, y],
+          ['L', x + bbox.width + 100, y],
+        ],
+      });
+      this.auxiliaryLineV.attr({
+        path: [
+          ['M', x, y - 200],
+          ['L', x, y + bbox.height + 100],
+        ],
       });
     }
     this.graph.paint();
