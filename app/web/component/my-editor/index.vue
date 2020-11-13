@@ -17,6 +17,7 @@
 <script>
 import Editor from './../../framework/utils/my-editor/Editor';
 import Command from './../../framework/utils/my-editor/Command';
+import eventBus from './../../framework/utils/common/eventBus';
 import contextMenu from './contextMenu';
 import toolbar from './toolbar';
 import itemPanel from './itemPanel';
@@ -64,6 +65,15 @@ export default {
     this.initMode = this.mode;
     this.init();
     customShape();
+  },
+  mounted() {
+    const self = this;
+    eventBus.$on('nodeClick', (node) => {
+      self.$emit('nodeClick', node);
+    });
+  },
+  beforeDestroy() {
+    eventBus.$off('nodeClick');
   },
   methods: {
     init() {

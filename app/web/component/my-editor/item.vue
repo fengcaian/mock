@@ -34,7 +34,7 @@ export default {
           shape: 'customNode',
           x: 0,
           y: 0,
-          color: '#1890ff',
+          color: '#261E47',
           image: 'https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg',
           stateImage: okSvg,
           inPoints: [[0, 0.5], [0.5, 0], [1, 0.5], [0.5, 1]],
@@ -99,7 +99,7 @@ export default {
     height: 100px;
     line-height: 100px;
     padding-left: 8px;
-    border: 2px solid lightskyblue;
+    border: 2px solid #261E47;
     list-style-type: none;
   }
   .item-panel li:hover {

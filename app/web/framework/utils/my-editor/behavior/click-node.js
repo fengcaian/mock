@@ -7,8 +7,6 @@ export default {
     };
   },
   onClick(e) {
-    console.log('node-click');
     eventBus.$emit('nodeClick', { node: e.item });
-    eventBus.$emit('test', { node: e.item });
   },
 }

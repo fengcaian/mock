@@ -100,6 +100,7 @@ export default {
               end: endPoint,
               type: 'edge',
               shape: 'customEdge',
+              stroke: '#261E47',
               anchorAttr: {
                 inAnchor: curInPoint.attrs,
                 outAnchor: outAnchorAttr
@@ -107,7 +108,7 @@ export default {
               lineCircle: {
                 text: '0',
                 background: '#ffffff',
-                border: '#1890ff',
+                border: '#261E47',
                 isShow: false,
               },
             };

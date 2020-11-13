@@ -251,25 +251,25 @@ export default {
           this.auxiliaryLineH = parent.addShape('path', {
             attrs: {
               path: [
-                ['M', x - 200, y],
-                ['L', x + bbox.width + 100, y],
+                ['M', x - 400, y],
+                ['L', x + bbox.width + 300, y],
               ],
               stroke: '#000',
               lineWidth: 1,
-              lineDash: [4, 2, 1, 2],
+              lineDash: [5, 5],
             },
           });
         }
-        if (!this.auxiliaryLineV) { // 水平辅助线
+        if (!this.auxiliaryLineV) { // 垂直辅助线
           this.auxiliaryLineV = parent.addShape('path', {
             attrs: {
               path: [
-                ['M', x, y - 200],
-                ['L', x, y + bbox.height + 100],
+                ['M', x, y - 400],
+                ['L', x, y + bbox.height + 300],
               ],
               stroke: '#000',
               lineWidth: 1,
-              lineDash: [4, 2, 1, 2],
+              lineDash: [5, 5],
             },
           });
         }
@@ -293,14 +293,14 @@ export default {
       });
       this.auxiliaryLineH.attr({
         path: [
-          ['M', x - 200, y],
-          ['L', x + bbox.width + 100, y],
+          ['M', x - 400, y],
+          ['L', x + bbox.width + 300, y],
         ],
       });
       this.auxiliaryLineV.attr({
         path: [
-          ['M', x, y - 200],
-          ['L', x, y + bbox.height + 100],
+          ['M', x, y - 400],
+          ['L', x, y + bbox.height + 300],
         ],
       });
     }

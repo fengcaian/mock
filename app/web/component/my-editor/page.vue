@@ -65,13 +65,13 @@ export default {
       const height =  this.height - 42;
       const width =  this.width - 400;
       this.graph = new G6.Graph({
+        id: '123',
         container: 'graph-container',
         height: height,
         width: width,
         modes: {
           // 支持的 behavior
           default: [
-            'drag-canvas',
             'zoom-canvas',
             'click-node',
             'keyboard',
@@ -97,6 +97,7 @@ export default {
       let data = this.data;
       if (data) {
         this.graph.read(data);
+        // this.graph.get('canvas').set('localRefresh', false); // 解决拖拽的残影问题
       }
     },
   },

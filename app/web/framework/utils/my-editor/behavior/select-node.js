@@ -22,6 +22,7 @@ export default {
     const { item } = e;
     const { graph } = self;
     const autoPaint = graph.get('autoPaint');
+    this.target = item;
     graph.setAutoPaint(false);
     const selectedEdges = graph.findAllByState('edge', 'selected');
     Util.each(selectedEdges, edge => {
@@ -53,6 +54,7 @@ export default {
   },
   onCanvasClick() {
     const { graph } = this;
+    this.target = null;
     const autoPaint = graph.get('autoPaint');
     graph.setAutoPaint(false);
     const selectedNodes = graph.findAllByState('node', 'selected');
@@ -65,12 +67,6 @@ export default {
       graph.setItemState(edge, 'selected', false);
       eventBus.$emit('nodeSelectChange', { target: edge, select: false });
       graph.setItemState(edge, 'hover', false);
-      // const data = {};
-      // data.item = edge;
-      // data.customerProps = {
-      //   isAddCircle: true,
-      // };
-      // eventBus.$emit('updateItem', data);
     });
     graph.paint();
     graph.setAutoPaint(autoPaint);
@@ -83,7 +79,30 @@ export default {
     const code = e.keyCode || e.which;
     this.keydown = code === this.keyCode;
   },
-  onKeyDown() {
+  onKeyDown(e) {
     this.keydown = false;
+    if (this.target) {
+      const model = this.target.get('model');
+      const pos = {
+        x: model.x,
+        y: model.y,
+      };
+      const code = e.keyCode || e.which;
+      switch (code) {
+        case 37:
+          --pos.x;
+          break;
+        case 38:
+          --pos.y;
+          break;
+        case 39:
+          ++pos.x;
+          break;
+        case 40:
+          ++pos.y;
+          break;
+      }
+      this.graph.update(this.target, pos);
+    }
   },
 };

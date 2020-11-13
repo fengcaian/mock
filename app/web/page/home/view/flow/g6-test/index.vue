@@ -1,6 +1,11 @@
 <template>
   <div>
-    <editor @saveG6GraphData="saveG6GraphData"></editor>
+    <editor @saveG6GraphData="saveG6GraphData" @nodeClick="nodeClick"></editor>
+    <dialog-node-detail
+        v-if="isShowNodeDetailDialog"
+        :nodeDetailDialogVisible="isShowNodeDetailDialog"
+        @dialogNodeDetailCb="dialogNodeDetailCb">
+    </dialog-node-detail>
   </div>
 </template>
 
@@ -8,10 +13,12 @@
 import G6 from '@antv/g6';
 import request from '@/app/web/framework/network/request';
 import editor from './../../../.././../component/my-editor';
+import dialogNodeDetail from './cpmponents/dialog-node-detail';
 
 export default {
   components: {
     editor,
+    dialogNodeDetail,
   },
   data() {
     return {
@@ -60,7 +67,8 @@ export default {
             }
           },
         ],
-      }
+      },
+      isShowNodeDetailDialog: false,
     };
   },
   mounted() {
@@ -238,6 +246,12 @@ export default {
             type: 'success',
           });
         });
+    },
+    nodeClick() {
+      this.isShowNodeDetailDialog = true;
+    },
+    dialogNodeDetailCb() {
+      this.isShowNodeDetailDialog = false;
     },
   },
 }

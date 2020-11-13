@@ -57,12 +57,12 @@ export default class Edge {
             path: path,
             lineSegment,
             turningPoint: lineSegment,
-            stroke: '#42A1D0',
+            stroke: cfg.stroke || '#42A1D0',
             lineWidth: 1,
             lineAppendWidth: 10,
             endArrow: {
               path: endArrowPath,
-              fill: '#42A1D0'
+              fill: cfg.stroke || '#42A1D0'
             }
           }
         });

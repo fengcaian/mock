@@ -73,11 +73,6 @@
     <el-button size="mini" class="middle" type="primary" @click="inOfEditModel">进入编辑模式</el-button>
     <el-button size="mini" class="middle" type="primary" @click="saveGraph">保存</el-button>
     <el-button size="mini" class="middle" type="primary" @click="getData">getData</el-button>
-    <dialog-node-detail
-      v-if="isShowNodeDetailDialog"
-      :nodeDetailDialogVisible="isShowNodeDetailDialog"
-      @dialogNodeDetailCb="dialogNodeDetailCb">
-    </dialog-node-detail>
   </div>
 </template>
 
@@ -87,12 +82,7 @@ import Util from '@antv/g6/es/util';
 import eventBus from './../../framework/utils/common/eventBus';
 import { uniqueId, getBox } from './../../framework/utils/common';
 
-import dialogNodeDetail from './cpmponents/dialog-node-detail';
-
 export default {
-  components: {
-    dialogNodeDetail,
-  },
   data() {
     return {
       page: {},
@@ -105,7 +95,6 @@ export default {
       selectedItem: null,
       multiSelect: false,
       addGroup: false,
-      isShowNodeDetailDialog: false,
       currentZoom: '100%',
     };
   },
@@ -176,11 +165,6 @@ export default {
       eventBus.$on('multiSelectEnd', () => {
         self.multiSelect = false;
         self.selectedItem = self.graph.findAllByState('node', 'selected');
-      });
-      eventBus.$on('nodeClick', (data) => {
-        console.log(data.node._cfg);
-        console.log(self.graph.getCurrentMode());
-        self.isShowNodeDetailDialog = true;
       });
     },
     handleUndo() {

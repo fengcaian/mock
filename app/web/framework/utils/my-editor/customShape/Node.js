@@ -217,7 +217,7 @@ export default class CustomNode {
         });
         const selectStyles = () => {
           shape.attr('fill', '#f3f9ff');
-          shape.attr('stroke', '#6ab7ff');
+          shape.attr('stroke', '#1890ff');
           shape.attr('cursor', 'move');
           children.forEach(child => {
             child.attr('cursor', 'move');
@@ -228,7 +228,7 @@ export default class CustomNode {
         };
         const unSelectStyles = () => {
           shape.attr('fill', '#fff');
-          shape.attr('stroke', '#1890ff');
+          shape.attr('stroke', '#261E47');
           circles.forEach(circle => {
             circle.attr('opacity', 0);
           })
