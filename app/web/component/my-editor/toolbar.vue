@@ -95,7 +95,7 @@ export default {
       selectedItem: null,
       multiSelect: false,
       addGroup: false,
-      currentZoom: '100%',
+      currentZoom: '80%',
     };
   },
   watch: {
@@ -130,7 +130,6 @@ export default {
     bindEvent() {
       let self = this;
       eventBus.$on('afterAddPage', page => {
-        console.log('toolbar-afterAddPage');
         self.page = page;
         self.graph = page.graph;
       });
@@ -153,7 +152,6 @@ export default {
         self.command.executeCommand('add', [item]);
       });
       eventBus.$on('nodeSelectChange', () => {
-        console.log('i am toolbar nodeSelectChange');
         self.selectedItem = self.graph.findAllByState('node', 'selected');
         self.selectedItem = self.selectedItem.concat(
           ...self.graph.findAllByState('edge', 'selected')
@@ -186,7 +184,7 @@ export default {
     getViewCenter() {
       const padding = this.getFormatPadding();
       const graph = this.graph;
-      const width = this.graph.get('width');
+      const width = graph.get('width');
       const height = graph.get('height');
       return {
         x: (width - padding[2] - padding[3]) / 2 + padding[3],
@@ -301,7 +299,6 @@ export default {
         this.grid = new Grid();
       }
       this.graph.addPlugin(this.grid);
-      console.log('inOfEditModel = ' + this.graph.getCurrentMode());
       this.$emit('editorModeChange', { mode: 'edit' });
     },
     saveGraph() {

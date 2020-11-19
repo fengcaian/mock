@@ -1,10 +1,10 @@
+const Util = require('@antv/util');
 import eventBus from './../../../../framework/utils/common/eventBus';
 
 export default {
   getDefaultCfg() {
     return {
-      backKeyCode: 8,
-      deleteKeyCode: 46
+      deleteKeyCode: 46,
     };
   },
   getEvents() {
@@ -17,12 +17,9 @@ export default {
     const code = e.keyCode || e.which;
     switch (code) {
       case this.deleteKeyCode:
-      case this.backKeyCode:
         eventBus.$emit('deleteItem');
         break;
     }
   },
-  onKeyUp() {
-    this.keydown = false;
-  }
+  onKeyUp() {},
 }

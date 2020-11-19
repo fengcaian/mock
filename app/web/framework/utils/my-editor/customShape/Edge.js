@@ -19,7 +19,7 @@ export default class Edge {
     const lineDash = [4, 2, 1, 2];
     const interval = 9;
     G6.registerEdge('customEdge', {
-      draw(cfg, group) {
+      draw(cfg, group) { // edge的start与end是相对于节点的正中心的相对位置坐标
         let sourceNode, targetNode, start, end;
         if (typeof (cfg.source) === 'string') {
           cfg.source = cfg.sourceNode;
@@ -354,7 +354,7 @@ export default class Edge {
           });
         };
         const unSelectStyles = () => {
-          shape.attr('stroke', '#42A1D0');
+          shape.attr('stroke', '#261E47');
           edgeControlCircles.forEach((circle) => {
             circle.attr('opacity', 0);
           });

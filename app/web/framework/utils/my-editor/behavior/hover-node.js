@@ -34,8 +34,6 @@ export default {
       e.target.attr('cursor', 'crosshair');
       this.graph.paint();
     } else {
-      console.log('cursor');
-      console.log(e.target.attr('cursor'));
       e.target.attr('cursor', 'initial');
       this.graph.paint();
     }
@@ -65,10 +63,7 @@ export default {
     if (e.target.attrs.isOutAnchorOut || e.target.attrs.isOutAnchor || e.target.attrs.isBothWayAnchorOut || e.target.attrs.isBothWayAnchor) {
       this.graph.setMode('addEdge');
     } else {
-      console.log('in moveNode mode');
-      console.log(this.graph.getCurrentMode());
       this.graph.setMode('moveNode');
-      console.log(this.graph.getCurrentMode());
     }
   },
 };

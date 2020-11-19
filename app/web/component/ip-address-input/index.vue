@@ -67,7 +67,6 @@ export default {
       }
     },
     emit(val) {
-      console.log(val);
       this.$emit('ipAddressInputCb', val, this.tag);
     },
   },

@@ -1,11 +1,10 @@
 import eventBus from './../../../../framework/utils/common/eventBus';
 const Util = require('@antv/util');
-
+let multiple = false;
 export default {
   getDefaultCfg() {
     return {
-      multiple: true,
-      keyCode: 16
+      shiftKeyCode: 16,
     };
   },
   getEvents() {
@@ -14,7 +13,7 @@ export default {
       'canvas:click': 'onCanvasClick',
       'canvas:mouseover': 'onCanvasMouseOver',
       keyup: 'onKeyUp',
-      keydown: 'onKeyDown'
+      keydown: 'onKeyDown',
     };
   },
   onClick(e) {
@@ -28,7 +27,7 @@ export default {
     Util.each(selectedEdges, edge => {
       graph.setItemState(edge, 'selected', false);
     });
-    if (!self.keydown || !self.multiple) {
+    if (!multiple) {
       const selected = graph.findAllByState('node', 'selected');
       Util.each(selected, node => {
         if (node !== item) {
@@ -40,13 +39,11 @@ export default {
       if (self.shouldUpdate.call(self, e)) {
         graph.setItemState(item, 'selected', false);
       }
-      console.log('node unselected');
       eventBus.$emit('nodeSelectChange', { target: item, select: false });
     } else {
       if (self.shouldUpdate.call(self, e)) {
         graph.setItemState(item, 'selected', true);
       }
-      console.log('node selected');
       eventBus.$emit('nodeSelectChange', { target: item, select: true });
     }
     graph.setAutoPaint(autoPaint);
@@ -77,17 +74,20 @@ export default {
   },
   onKeyUp(e) {
     const code = e.keyCode || e.which;
-    this.keydown = code === this.keyCode;
+    switch (code) {
+      case this.shiftKeyCode:
+        multiple = false;
+        break;
+    }
   },
   onKeyDown(e) {
-    this.keydown = false;
-    if (this.target) {
+    const code = e.keyCode || e.which;
+    if (this.target) { // 选中了某个节点或边
       const model = this.target.get('model');
       const pos = {
         x: model.x,
         y: model.y,
       };
-      const code = e.keyCode || e.which;
       switch (code) {
         case 37:
           --pos.x;
@@ -101,8 +101,17 @@ export default {
         case 40:
           ++pos.y;
           break;
+        case this.shiftKeyCode:
+          multiple = true;
+          break;
       }
       this.graph.update(this.target, pos);
+    } else {
+      switch (code) {
+        case this.shiftKeyCode:
+          multiple = true;
+          break;
+      }
     }
   },
 };

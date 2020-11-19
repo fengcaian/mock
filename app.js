@@ -9,7 +9,6 @@ class AppBootHook {
     // 从数据库加载需要代理的系统到内存缓存
     const proxySystem = await this.app.model.SynthesizeConfig.find();
     this.app.proxySystemList = proxySystem || [];
-    console.log(666);
     console.log(this.app.proxySystemList);
   }
 

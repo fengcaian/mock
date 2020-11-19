@@ -6,6 +6,7 @@
 
 <script>
 import G6 from '@antv/g6';
+import Util from '@antv/g6/es/util';
 import { initBehaviors } from './../../framework/utils/my-editor/behavior';
 
 export default {
@@ -40,6 +41,7 @@ export default {
   beforeDestroy() {
     this.graph.clear();
     this.graph.destroy();
+    this.graph = null;
   },
   methods: {
     init() {
@@ -65,7 +67,6 @@ export default {
       const height =  this.height - 42;
       const width =  this.width - 400;
       this.graph = new G6.Graph({
-        id: '123',
         container: 'graph-container',
         height: height,
         width: width,
@@ -74,15 +75,14 @@ export default {
           default: [
             'zoom-canvas',
             'click-node',
-            'keyboard',
             'customer-events',
             'add-menu'
           ],
           multiSelect: ['multi-select'],
           addEdge: ['add-edge'],
-          moveNode:[ 'drag-item'],
-          moveEdge:[ 'drag-edge'],
-          edit: ['hover-node', 'select-node', 'hover-edge', 'select-edge', 'drag-canvas'],
+          moveNode:['drag-item'],
+          moveEdge:['drag-edge'],
+          edit: ['hover-node', 'select-node', 'hover-edge', 'select-edge', 'drag-canvas', 'keyboard'],
         },
         layout: defaultLayout
         // renderer: 'svg'
@@ -93,12 +93,25 @@ export default {
       this.readData();
     },
     readData() {
-      console.log(this.data);
       let data = this.data;
       if (data) {
         this.graph.read(data);
-        // this.graph.get('canvas').set('localRefresh', false); // 解决拖拽的残影问题
       }
+      this.graph.zoomTo(0.8, this.getViewCenter());
+      this.graph.get('canvas').set('localRefresh', false); // 解决拖拽的残影问题
+    },
+    getFormatPadding() {
+      return Util.formatPadding(this.graph.get('fitViewPadding'));
+    },
+    getViewCenter() {
+      const padding = this.getFormatPadding();
+      const graph = this.graph;
+      const width = graph.get('width');
+      const height = graph.get('height');
+      return {
+        x: (width - padding[2] - padding[3]) / 2 + padding[3],
+        y: (height - padding[0] - padding[2]) / 2 + padding[0]
+      };
     },
   },
 };

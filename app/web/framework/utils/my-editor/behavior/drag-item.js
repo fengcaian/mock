@@ -38,34 +38,26 @@ export default {
     const { item, target } = e;
     const { graph } = this;
     this.targets = [];
+
     // 获取所有选中的元素
     const nodes = graph.findAllByState('node', 'selected');
-    let currentNodeId = '';
-    if (item) {
-      currentNodeId = item.get('id');
-    }
-    if (target) {
-      currentNodeId = e.target.attrs.id;
-    }
+    const currentNodeId = item.get('id');
     // 当前拖动的节点是否是选中的节点
     const dragNodes = nodes.filter(node => {
       const nodeId = node.get('id');
       return currentNodeId === nodeId;
     });
-    // 只拖动当前节点
-    if (dragNodes.length === 0) {
-      if (!item) {
-        return;
-      }
-      this.target = item || graph.findById(currentNodeId);
+
+    if (dragNodes.length === 0) { // 当前拖动的节点不在已选中的节点中只拖动当前节点
+      this.target = item;
     } else {
       // 拖动多个节点
-      if (nodes.length > 1) {
+      if (nodes.length > 1) { // 当前拖动的节点存在于已选中的节点中拖动所有选中的节点
         nodes.forEach(node => {
           this.targets.push(node);
         });
-      } else {
-        this.targets.push(item);
+      } else { // 没有选中的节点，只拖动当前节点
+        this.target = item;
       }
     }
     this.origin = {
@@ -79,9 +71,10 @@ export default {
   dragStart(e) {
     this.isDrag = true;
     this.target = e.item;
+    console.log(this.target);
+    console.log('dragStart');
   },
   drag(e) {
-    console.log('drag');
     if (!this.origin) {
       this.getNode(e)
     }
@@ -92,15 +85,18 @@ export default {
       return;
     }
     // 当targets中元素时，则说明拖动的是多个选中的元素
-    if (this.targets && this.targets.length > 0) {
+    console.log(this.targets.length);
+    console.log(this.target);
+    if (this.targets && this.targets.length > 1) {
       this._updateDelegate(e, this.nodeEvent);
     } else {
       // 只拖动单个元素
+      console.log(this.target);
+      console.log('drag');
       this._update(this.target, e, this.nodeEvent, true);
     }
   },
   dragEnd(e) {
-    console.log('drap-end');
     if (this.shape) {
       this.shape.remove();
       this.shape = null;
@@ -217,13 +213,12 @@ export default {
    * @param {number} y 拖动单个元素时候的y坐标
    */
   _updateDelegate(e, nodeEvent, x, y) {
-    console.log('move');
     const bbox = nodeEvent.item.get('keyShape').getBBox();
     if (!this.shape) {
       // 拖动多个
       const parent = this.graph.get('group');
       const attrs = merge({}, delegateStyle, this.delegateStyle);
-      if (this.targets.length > 0) {
+      if (this.targets.length > 1) { // 拖动多个节点的时候画个大框
         const { x, y, width, height, minX, minY } = this.calculationGroupPosition();
         this.originPoint = { x, y, width, height, minX, minY };
         // model上的x, y是相对于图形中心的，delegateShape是g实例，x,y是绝对坐标
@@ -273,10 +268,10 @@ export default {
             },
           });
         }
+        this.auxiliaryLineH.set('capture', false);
+        this.auxiliaryLineV.set('capture', false);
       }
       this.shape.set('capture', false);
-      this.auxiliaryLineH.set('capture', false);
-      this.auxiliaryLineV.set('capture', false);
     }
 
     if (this.targets.length > 0) {

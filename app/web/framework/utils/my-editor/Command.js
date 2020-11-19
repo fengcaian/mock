@@ -58,7 +58,6 @@ export default class Command {
 
   add(type, item) {
     this.editor.add(type, item);
-    console.log(item === item);
   }
 
   update(item, model) {
@@ -102,7 +101,7 @@ export default class Command {
         this.remove(data);
         break;
       case 'update':
-        this.update(data);
+        this.update(data.item, data.newModel);
         break;
       case 'remove':
         this.add(data);

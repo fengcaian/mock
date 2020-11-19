@@ -79,7 +79,6 @@ export default {
     bindEvent() {
       const self = this;
       eventBus.$on('afterAddPage', page => {
-        console.log('i am item,afterAddPage');
         self.page = page;
         self.command = page.command;
       });

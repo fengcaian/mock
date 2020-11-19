@@ -515,7 +515,6 @@ export default {
     judgeLineDirection(p1 = {x: 0, y: 0}, p2 = {x: 0, y: 0}) { // svg的起始点在左上角，y轴数值与数学象限正好相反
       const width = p2.x - p1.x;
       const height = p2.y - p1.y;
-      console.log(`width=${width}`,`height=${height}`);
       let direction = '';
       if (width === 0 && height > 0) {
         direction = 'down';

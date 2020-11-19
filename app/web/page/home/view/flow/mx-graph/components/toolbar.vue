@@ -61,10 +61,7 @@ export default {
         //   console.log(this);
         // });
 
-        graph.dblClick = function() {
-          console.log(33);
-          console.log(this);
-        };
+        graph.dblClick = function() {};
 
         // Stops editing on enter or escape keypress
         var keyHandler = new this.mxGraph.mxKeyHandler(graph);

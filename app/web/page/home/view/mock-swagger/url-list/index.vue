@@ -229,7 +229,6 @@ export default {
       this.isShowUrlDetailDialog = false;
     },
     goToDetail(row) {
-      console.log(row);
       this.$store.dispatch('SetShareData', row);
       this.$router.push(`/mock/url/detail?_id=${row._id}`);
     },
