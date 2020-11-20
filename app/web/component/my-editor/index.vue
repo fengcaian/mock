@@ -1,9 +1,7 @@
 <template>
   <div :style="{width: width}">
     <div class="editor">
-      <context-menu></context-menu>
       <toolbar :id="editorId" @editorModeChange="editorModeChange" @saveG6GraphData="saveG6GraphData"></toolbar>
-      <div style="height: 42px;"></div>
       <div class="bottom-container">
         <item-panel v-if="initMode === 'edit'"></item-panel>
         <detail-panel v-if="initMode === 'edit'"></detail-panel>

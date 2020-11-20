@@ -29,7 +29,7 @@ export default {
           name: '节点名称',
           label: '节点名称',
           innerCycleLabel: '1',
-          size: '120*100',
+          size: '170*130',
           type: 'node',
           shape: 'customNode',
           x: 0,

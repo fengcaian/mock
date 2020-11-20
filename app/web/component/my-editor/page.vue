@@ -64,8 +64,8 @@ export default {
           return 70;
         },
       };
-      const height =  this.height - 42;
-      const width =  this.width - 400;
+      const height =  this.height - 100;
+      const width =  this.width - 300;
       this.graph = new G6.Graph({
         container: 'graph-container',
         height: height,

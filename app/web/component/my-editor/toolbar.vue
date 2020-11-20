@@ -323,7 +323,6 @@ export default {
     line-height: 42px;
     z-index: 3;
     box-shadow: 0 8px 12px 0 rgba(0, 52, 107, 0.04);
-    position: absolute;
   }
   .toolbar .command:nth-of-type(1) {
     margin-left: 24px;

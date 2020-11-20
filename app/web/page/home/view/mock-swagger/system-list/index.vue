@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <el-table
       border
       size="mini"
@@ -195,5 +195,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .wrap {
+    padding: 10px;
+  }
 </style>

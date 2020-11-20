@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <el-row>
       <el-col :span="12">
         <h3>需要代理的系统配置（在没有swagger时使用）</h3>
@@ -90,6 +90,9 @@ export default {
 </script>
 
 <style scoped>
+  .wrap {
+    padding: 10px;
+  }
   .tar {
     text-align: right;
   }

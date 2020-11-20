@@ -300,6 +300,7 @@ export default {
 
 <style scoped>
 .width-percent-100 {
+    padding: 10px;
     width: 100%;
 }
 .width-110 {

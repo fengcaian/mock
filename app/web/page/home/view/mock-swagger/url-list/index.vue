@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrap">
         <el-form size="mini" :inline="true" :model="searchParams">
             <el-form-item label="系统：">
                 <el-input class="search-input" size="mini" clearable v-model="searchParams.system" placeholder="系统"></el-input>
@@ -250,3 +250,8 @@ export default {
   },
 };
 </script>
+<style scope>
+.wrap {
+    padding: 10px;
+}
+</style>

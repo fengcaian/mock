@@ -125,6 +125,7 @@ export default {
   }
   .width-percent-100 {
     width: 100%;
+    padding: 10px;
   }
   .width-200 {
     width: 200px;
