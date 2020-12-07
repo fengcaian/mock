@@ -1,7 +1,8 @@
 module.exports = app => {
   const { router, controller } = app;
+  const jsonp = app.jsonp();
   router.get('/', controller.home.client);
-  // router.get('/server', app.controller.home.server);
+  router.get('/server', app.controller.home.server);
   router.post('/mock/api/url/swagger', controller.urlManage.swaggerUrlList);
   router.post('/mock/api/url/delete', controller.urlManage.delete);
   router.post('/mock/api/url/update', controller.urlManage.update);
@@ -33,7 +34,7 @@ module.exports = app => {
   router.post('/mock/api/flow/g6/save', controller.flowManage.save);
   router.get('/mock/api/flow/g6/get', controller.flowManage.getFlow);
   router.get('/mock(/.+)?', controller.home.frontRouterForward); // 前端路由刷新进入该控制器，要求所有前端路由必须以mock开头，不能与后端api重名
-  router.get(/([a-z]+)/, controller.urlForward.forward);
+  router.get(/([a-z]+)/, jsonp, controller.urlForward.forward);
   router.options(/([a-z]+)/, controller.urlForward.forward);
   router.post(/([a-z]+)/, controller.urlForward.forward);
 };

@@ -1,9 +1,9 @@
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
-  async index() {
-    this.ctx.body = 'Hello world';
-  }
+  // async index() {
+  //   this.ctx.body = 'Hello world';
+  // }
   async server() {
     const { ctx } = this;
     // render 实现是服务端渲染 vue 组件
@@ -19,6 +19,11 @@ class HomeController extends Controller {
   async frontRouterForward(ctx) {
     const url = ctx.url.replace(/\/mock/, '');
     await ctx.renderClient('home/index.js', { ctx, url });
+  }
+
+  async index() {
+    const { ctx } = this;
+    await ctx.render('home/home.js', Model.getPage(1, 10));
   }
 }
 

@@ -7,3 +7,8 @@ exports.mongoose = {
   enable: true,
   package: 'egg-mongoose'
 };
+
+exports.jsonp = {
+  enable: true,
+  package: 'egg-jsonp',
+};

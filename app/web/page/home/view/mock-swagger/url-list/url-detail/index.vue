@@ -6,6 +6,9 @@
             </el-col>
         </el-row>
         <el-form size="mini" :inline="true" :model="searchParam">
+            <el-form-item label="url：">
+                <span>{{urlObject.url}}</span>
+            </el-form-item>
             <el-form-item label="类型：">
                 <el-checkbox-group v-model="searchParam.dataType" @change="checkboxChanged">
                     <el-checkbox label="mock数据"></el-checkbox>

@@ -15,6 +15,7 @@
     "@antv/x6": "^0.10.68",
     "axios": "^0.19.2",
     "egg": "^2.26.0",
+    "egg-jsonp": "^2.0.0",
     "egg-logger": "^2.4.1",
     "egg-mongoose": "^3.2.0",
     "egg-view-vue-ssr": "^3.3.2",
