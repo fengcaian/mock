@@ -119,7 +119,9 @@ module.exports = class UrlService extends egg.Service {
       };
     }
     if (query.system) {
-      params.host = query.system;
+      params.host = {
+        $regex: query.system,
+      };
     }
     if (query.summary) {
       params.summary = new RegExp(query.summary, 'i');
