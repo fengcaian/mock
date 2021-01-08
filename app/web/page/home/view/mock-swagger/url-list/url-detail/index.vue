@@ -135,9 +135,6 @@ export default {
         dataType: ['mock数据', '后端数据'],
         currentPage: 1,
         pageSize: 20,
-        system: '',
-        url: '',
-        type: '',
         _id: '',
       },
       dataList: [],
@@ -155,9 +152,6 @@ export default {
   },
   created() {
     this.urlObject = this.$store.state.shareData;
-    this.searchParam.system = this.urlObject.host;
-    this.searchParam.url = this.urlObject.url;
-    this.searchParam.type = this.urlObject.type;
     this.searchParam._id = this.$route.query._id;
     this.getDataList();
   },

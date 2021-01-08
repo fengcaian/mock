@@ -47,8 +47,13 @@ module.exports = app => {
   };
 
   exports.bodyParser = {
-    jsonLimit: '5mb',
+    jsonLimit: '10mb', // 异步请求参数的大小限制
     formLimit: '6mb',
+  };
+
+  exports.middleware = ['gzip',];
+  exports.gzip = {
+    threshold: 1024, // 小于 1k 的响应体不压缩
   };
   return exports;
 };

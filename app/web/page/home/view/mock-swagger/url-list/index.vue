@@ -245,7 +245,11 @@ export default {
       this.$router.push('/mock/url/add-url-by-hand');
     },
     rowStyle({ row }) {
-      return `background: ${constants.swaggerDefineHttpColor.find(item => item.code === row.type).lightColor}`;
+      const o = constants.swaggerDefineHttpColor.find(item => item.code === row.type);
+      if (o) {
+        return { background: o.lightColor};
+      }
+      return { background: 'white'};
     },
   },
 };

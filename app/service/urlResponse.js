@@ -71,6 +71,9 @@ module.exports = class UrlResponseService extends egg.Service {
     }
     return 'url不存在！';
   }
+  async updateUrlResponse(body) {
+
+  }
   async editUrlResponse(body = {}) {
     const post = {};
     Object.keys(body).forEach(key => {

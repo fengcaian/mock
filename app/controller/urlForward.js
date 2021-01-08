@@ -7,12 +7,13 @@ const { dateFormat } = require('../util/common');
 module.exports = class UrlController extends egg.Controller {
   async forward(ctx) {
     try {
+      const origin = ctx.request.headers.origin || '';
       if (ctx.request.headers.origin === 'https://deverp.szlcsc.com' || ctx.request.headers.origin === 'https://devpda.szlcsc.com') {
         ctx.set('Access-Control-Expose-Headers', 'Set-Cookie');
         ctx.set('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Referer,User-Agent,TOKEN');
         ctx.set('Access-Control-Allow-Credentials', 'true');
         ctx.set('Access-Control-Allow-Methods', '*');
-        ctx.set('Access-Control-Allow-Origin', ctx.request.headers.origin);
+        ctx.set('Access-Control-Allow-Origin', origin);
       } else {
         ctx.body = new Response(402, '该系统不支持跨域', null);
       }

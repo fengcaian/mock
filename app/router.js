@@ -11,7 +11,7 @@ module.exports = app => {
   router.get('/mock/api/url/list', controller.urlManage.list);
   router.post('/mock/api/url/add/by/hand', controller.urlManage.urlAddByHand);
   router.post('/mock/api/url/mock/data', controller.urlResponseManage.mockData);
-  router.get('/mock/api/url/response/list', controller.urlResponseManage.getUrlResponseList);
+  router.get('/mock/api/url/response/list',app.middleware.gzip(), controller.urlResponseManage.getUrlResponseList);
   router.get('/mock/api/url/response/by/params', controller.urlResponseManage.getUrlResponseByParams);
   router.post('/mock/api/url/response/edit', controller.urlResponseManage.editUrlResponse);
   router.post('/mock/api/url/response/remark/edit', controller.urlResponseManage.editUrlResponseRemark);
