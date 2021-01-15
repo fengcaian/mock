@@ -51,9 +51,19 @@ module.exports = app => {
     formLimit: '6mb',
   };
 
-  exports.middleware = ['gzip',];
-  exports.gzip = {
-    threshold: 1024, // 小于 1k 的响应体不压缩
-  };
+  // exports.middleware = ['compress']; // 对响应数据进行gzip压缩【性能不好，最好在nginx里面启用gzip压缩】
+  // exports.compress = {
+  //   // filter: function(content_type) { // 只有在请求的content-type中有gzip类型，我们才会考虑压缩，因为zlib是压缩成gzip类型的
+  //   //   return /json/i.test(content_type);
+  //   // },
+  //   threshold: 2048, // 小于 1k 的响应体不压缩
+  //   gzip: {
+  //     flush: require('zlib').constants.Z_SYNC_FLUSH
+  //   },
+  //   deflate: {
+  //     flush: require('zlib').constants.Z_SYNC_FLUSH,
+  //   },
+  //   br: false // disable brotli
+  // };
   return exports;
 };
