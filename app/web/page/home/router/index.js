@@ -18,6 +18,7 @@ import G6Test from '../view/flow/g6-test';
 import G6List from '../view/flow/g6-list';
 import FlowEdit from '../view/flow/g6-list/flow-edit';
 import X6Editor from '../view/flow/x6-editor';
+import objectFreeze from '../view/js/object-freeze';
 
 Vue.use(VueRouter);
 
@@ -110,6 +111,11 @@ export default function createRouter() { // 所有前端路由必须以mock开�
         meta: { title: 'x6-editor' },
         component: X6Editor,
       },
+      {
+        path: '/mock/js/object-freeze',
+        meta: { title: 'js-object-freeze' },
+        component: objectFreeze,
+      }
     ]
   });
   router.beforeEach((to, from, next) => {

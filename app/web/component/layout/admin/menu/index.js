@@ -77,6 +77,17 @@ const menu = {
       }
     ],
   },
+  js: {
+    name: 'menu.js',
+    icon: 'el-icon-document',
+    children: [
+      {
+        name: 'menu.object-freeze',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/js/object-freeze'
+      },
+    ],
+  }
 };
 
 export default menu;
