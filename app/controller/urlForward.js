@@ -31,8 +31,8 @@ module.exports = class UrlController extends egg.Controller {
           requestTarget: 'backend',
           source: 'byAutoProxy',
         });
-        const result = this.ctx.service.urlForward.goToBackend({
-          url: `${scheme}://${host}${port ? `:${port}`: ''}${ctx.url}`,
+        const result = await this.ctx.service.urlForward.goToBackend({
+          url: `${scheme}://${host}${ctx.url}`,
           params: {
             data: ctx.request.headers['x-content-type'] === 'application/json;charset=UTF-8' ? JSON.stringify(ctx.request.body) : ctx.request.body,
             method: ctx.request.method,
@@ -74,8 +74,9 @@ module.exports = class UrlController extends egg.Controller {
               }
             ];
           } else {
-            result = this.ctx.service.urlForward.goToBackend({
-              url: `${scheme}://${ipAddress}${port ? `:${port}`: ''}${ctx.url}`,
+            console.log(`${scheme}://${ipAddress}${port ? `:${port}`: ''}${ctx.url}`);
+            result = await this.ctx.service.urlForward.goToBackend({
+              url: `${scheme}://${host}${ctx.url}`,
               params: {
                 data: params,
                 method: ctx.request.method,

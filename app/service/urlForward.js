@@ -7,12 +7,11 @@ module.exports = class UrlForward extends egg.Service {
     super(ctx);
     this.ctx = ctx;
   }
-  goToMock() {}
   async goToBackend(body) {
-    const result = await Promise.resolve([
+    const result = await Promise.all([
       this.ctx.doCurl(body.url, body.params),
     ]);
-    return result || {};
+    return result || [];
   }
   async backUpBackendData(body) {
     const urlResponse = {
