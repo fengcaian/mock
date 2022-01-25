@@ -39,6 +39,11 @@ const menu = {
         icon: 'el-icon-edit-outline',
         path: '/mock/model/database/check'
       },
+      {
+        name: 'menu.imageExif',
+        icon: 'el-icon-edit-outline',
+        path: '/mock/model/database/imageExif'
+      },
     ],
   },
   flowManage: {

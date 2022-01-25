@@ -27,6 +27,7 @@ module.exports = app => {
   router.post('/mock/api/system/delete', controller.systemManage.delete);
   router.post('/mock/api/system/enable', controller.systemManage.enableSwitch);
   router.post('/model/file/analyse', controller.fileManage.analyse);
+  router.post('/model/image/analyse', controller.fileManage.imageExif);
   router.get('/mock/api/synthesize/config/list', controller.synthesizeConfig.getList);
   router.post('/mock/api/synthesize/config/add', controller.synthesizeConfig.save);
   router.post('/mock/api/synthesize/config/modify', controller.synthesizeConfig.modify);

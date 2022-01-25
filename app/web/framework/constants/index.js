@@ -41,6 +41,7 @@ export const menuInfo = {
     modelDatabaseCheck: '建模-数据库核查',
     checkList: '核查列表',
     check: '核查',
+    imageExif: '获取image数据',
     flowmanage: '流程管理',
     flowList: '流程',
     mxGraph: 'mxGraph',

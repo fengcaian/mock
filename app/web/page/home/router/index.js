@@ -9,6 +9,7 @@ import SystemList from '../view/mock-swagger/system-list';
 import SynthesizeConfig from '../view/mock-swagger/synthesize-config';
 import CheckList from '../view/model-database-check/check-list';
 import Check from '../view/model-database-check/check';
+import ImageExif from '../view/model-database-check/image-exif';
 import FlowList from '../view/flow/flow-list';
 import FlowView from '../view/flow/flow-list/flow-view';
 import MxGraph from '../view/flow/mx-graph';
@@ -70,6 +71,11 @@ export default function createRouter() { // 所有前端路由必须以mock开�
         path: '/mock/model/database/check',
         meta: { title: '核查' },
         component: Check,
+      },
+      {
+        path: '/mock/model/database/imageExif',
+        meta: { title: '获取image数据' },
+        component: ImageExif,
       },
       {
         path: '/mock/flow/list',

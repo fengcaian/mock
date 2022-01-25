@@ -20,6 +20,8 @@
     "egg-mongoose": "^3.2.0",
     "egg-view-vue-ssr": "^3.3.2",
     "element-ui": "^2.13.0",
+    "exif": "^0.6.0",
+    "exif-parser": "^0.1.12",
     "font-awesome": "^4.7.0",
     "highlight.js": "^9.18.1",
     "koa-compress": "^5.0.1",

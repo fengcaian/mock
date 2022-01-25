@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="test-class">
+        testttt
+        <span style="color: red">ttt</span>
+    </div>
+    {{test}}
+    <button @click="updateTest" v-show="show" style="display: inline-block; width: 150px;">update test data</button>{{test}}
+    <div v-for="(item, index) in list" :key=index>{{index}}：{{item}}</div>
+</div>
+</body>
+<script>
+new Vue({
+    el: '#app',
+    data() {
+        return {
+            test: 'test vue',
+            target: 'study',
+            show: true,
+            list: ['a', 'b', 'c']
+        };
+    },
+    created() {
+        console.log(this.test);
+    },
+    mounted() {
+        console.log(this.target);
+    },
+    computed: {
+        getTest() {
+            return this.test;
+        },
+    },
+    methods: {
+        updateTest() {
+            this.test = new Date();
+        },
+    },
+});
+</script>
+</html>
